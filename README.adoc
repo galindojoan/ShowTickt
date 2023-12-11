@@ -18,7 +18,7 @@ El nostre grup està compost per: Brian Tobias Arrua, Camilo Jumelle i Joan Gali
     ** [underline]#Tipografia:#  https://fonts.google.com/specimen/Nunito?query=nunito
     
 === Portafolis
-** [underline]#Brian Arrua:# https://github.com/BrianArrua96/BrianArrua96
+** [underline]#Brian Arrua:# https://github.com/BrianArrua96
 
 ** [underline]#Camilo Jumelle:# https://github.com/jumelleCL
 

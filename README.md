@@ -15,5 +15,7 @@ El nostre grup està compost per: Brian Tobias Arrua, Camilo Jumelle i Joan Gali
     
 === Portafolis
 ** [underline]#Brian Arrua:# https://github.com/BrianArrua96/BrianArrua96
+
 ** [underline]#Camilo Jumelle:# https://github.com/jumelleCL
+
 ** [underline]#Camilo Jumelle:# https://github.com/galindojoan

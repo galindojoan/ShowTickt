@@ -1,0 +1,41 @@
+= Memoria del proyecto
+
+== Introducción
+Los miembros del proyecto somos Brian Tobias Arrua, Galindo Palacio Joan y Camilo Jumelle. Este proyecto tratará de realizar una aplicación que 
+
+
+== Requisitos del proyecto
+
+=== Sprint 1
+
+== Seguimiento semanal
+// Actualizar cada viernes con descripción y valoración
+
+== Diseño
+
+=== Diseño de BD
+
+=== Sketching  
+
+
+=== Mockup de interfaces
+
+
+=== Guía de estilos
+
+
+== Confección del manual de instalación/distribución de la aplicación
+
+
+== Confección del manual de usuario integrado en la aplicación
+
+
+== Linias futuras
+
+== Concluciones 
+
+
+== Glosario
+
+
+== Presentación del proyecto

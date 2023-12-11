@@ -8,9 +8,13 @@ El nostre grup està compost per: Brian Tobias Arrua, Camilo Jumelle i Joan Gali
 
 
 === Webgrafía
+
     ** [underline]#Trello:# https://trello.com/b/KRmZQ1l0/equip6jumellegalindoarrua
-    ** [underline]#Mockups:#  https://www.figma.com/file/p4nYtE7912JssJxcB6YRH2/SLIDES?type=design&node-id=0%3A1&mode=design&t=nWSJBpeHDsghQSjJ-1
+
+    ** [underline]#Mockups:#  https://www.figma.com/file/v89vTGEz3PLNGicO3zc4dF/Grup6ArruaGalindoJumelle?type=design&node-id=0-1&mode=design&t=qFydBUGTWynfTcTP-0
+
     ** [underline]#Icones:#  https://www.flaticon.es/packs/online
+    
     ** [underline]#Tipografia:#  https://fonts.google.com/specimen/Nunito?query=nunito
     
 === Portafolis

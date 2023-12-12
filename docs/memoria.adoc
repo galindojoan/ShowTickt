@@ -39,6 +39,33 @@ image::imatges/BD/primerDiagrama.png[]
 
 === Guía de estilos
 
+Para la página seguimos elegimos la siguiente ** paleta de colores ** , hemos decidido estos ya que llaman la atención
+ y el contraste con el negro (que sera el color del texto) no obliga al usuario a forzar la vista. 
+
+image::imatges/GuiaEstils/paletaDeColores.png[]
+
+La ** tipografía ** elegida fue 'Nunito' se selecciono por su fácilidad lectora
+
+image::imatges/GuiaEstils/tipografia.png[]
+
+Los ** iconos ** elegidos son los siguientes: +
+
+El icono para busquedas
+
+image::imatges/GuiaEstils/iconoBusqueda.png[]
+
+El icono para filtrar
+
+image::imatges/GuiaEstils/iconoFiltro.png[]
+
+Los ** botones ** serán de este estilo: 
+
+image::imatges/GuiaEstils/botones.png[]
+
+Los ** enlaces ** serán de la siguiente forma: 
+
+image::imatges/GuiaEstils/enlaces.png[]
+
 
 == Confección del manual de instalación/distribución de la aplicación
 

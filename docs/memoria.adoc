@@ -14,6 +14,22 @@ Los miembros del proyecto somos Brian Tobias Arrua, Galindo Palacio Joan y Camil
 == Diseño
 
 === Diseño de BD
+**Este es el primer diseño de la base de datos**
+
+image::imatges/BD/primerDiagrama.png[]
+
+**Explicación de las tablas**
+
+** [underline]#Esdeveniment:# 
+** [underline]#Categoria:#
+** [underline]#Recinte:#
+** [underline]#Sessio:# 
+** [underline]#Tipus Entrada:# 
+** [underline]#Compra:# 
+** [underline]#Entrada:# 
+
+=== Diagrama per classes
+
 
 === Sketching  
 

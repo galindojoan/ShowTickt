@@ -1,0 +1,35 @@
+body{
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+header{
+background-color:#FF7118;
+height: 15%;
+}
+
+.divHeader{
+  display: grid;
+  grid-template-columns: 1fr 20% ;
+  height: 100%;
+  align-items: center;
+}
+.titulo{
+  text-align: center;
+}
+.logo{
+ width: 100%; 
+}
+
+footer{
+  background-color:#FF7118;
+  height: 10%;
+}
+
+@media screen and (min-width:376px){
+
+}

@@ -10,26 +10,25 @@ body{
 header{
 background-color:#FF7118;
 height: 15%;
-}
-
-.divHeader{
-  display: grid;
-  grid-template-columns: 1fr 20% ;
-  height: 100%;
+display: grid;
+  grid-template-columns: 1fr 0.1fr ;
+  grid-template-rows: 1fr;
   align-items: center;
 }
 .titulo{
-  text-align: center;
+  justify-self:center;
 }
-.logo{
- width: 100%; 
+.logo{ 
+  width: 100px;
+ justify-self:end;
 }
 
 footer{
   background-color:#FF7118;
   height: 10%;
+  text-align: center;
 }
 
-@media screen and (min-width:376px){
+/* @media screen and (min-width:376px){
 
-}
+} */

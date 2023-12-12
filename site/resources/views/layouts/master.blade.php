@@ -12,17 +12,14 @@
 
 <body class="w3-content">
   <header>
-    <div class="divHeader">
       <h1 class="titulo">ShowTickt</h1>
       <img class="logo" src="{{ asset('imagen/logo-definitivo.png') }}">
-    </div>
-    
   </header>
   <div>
     @yield('content') 
   </div>
   <footer>
-
+    <a href="{{ route('home') }}">HOME</a>
   </footer>
 </body>
 

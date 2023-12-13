@@ -15,6 +15,7 @@
         <p>Menor preu de les sessions: {{ $esdeveniment->preu }} €</p>
     </div>
 @endforeach
-    
+
+{{ $esdeveniments->links() }}
 
 @endsection

@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Esdeveniment;
+use Illuminate\Support\Facades\Config;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $esdeveniments = Esdeveniment::with(['recinte'])->get();
+        $pag = Config::get('app.items_per_page', 4);
+        $esdeveniments = Esdeveniment::with(['recinte'])->paginate($pag);
 
         return view('home', ['esdeveniments' => $esdeveniments]);
     }

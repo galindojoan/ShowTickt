@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $pag = Config::get('app.items_per_page', 4);
+        $pag = Config::get('app.items_per_page', 9);
         $esdeveniments = Esdeveniment::with(['recinte'])->paginate($pag);
 
         return view('home', ['esdeveniments' => $esdeveniments]);

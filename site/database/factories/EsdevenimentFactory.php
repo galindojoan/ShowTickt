@@ -22,7 +22,7 @@ class EsdevenimentFactory extends Factory
     public function definition()
     {
         return [
-            'nom' => $this->faker->sentence,
+            'nom' => $this->faker->name,
             'dia' => $this->faker->date,
             'imatge' => $this->faker->imageUrl(),
             'preu' => $this->faker->randomFloat(2, 10, 1000),

@@ -4,18 +4,24 @@
 
 @section('content')
 
-<h1>Llista de Esdeveniments</h1>
+@section('content')
+    <div class="container">
+        <h1>Eventos</h1>
 
-@foreach ($esdeveniments as $esdeveniment)
-    <div>
-        <h2>{{ $esdeveniment->nom }}</h2>
-        <img src="{{ $esdeveniment->imatge }}" alt="Imatge de l'esdeveniment">
-        <p>Data de l’esdeveniment: {{ $esdeveniment->dia }}</p>
-        <p>Lloc: {{ $esdeveniment->recinte->lloc }}</p>
-        <p>Menor preu de les sessions: {{ $esdeveniment->preu }} €</p>
+        <div class="event-cards">
+            @foreach ($esdeveniments as $esdeveniment)
+                <div class="event-card">
+                    <div class="event-details">
+                        <p>{{ $esdeveniment->nom }}</p>
+                        <p>{{ $esdeveniment->dia }}</p>
+                        <p>{{ $esdeveniment->recinte->lloc }}</p>
+                        <p>{{ $esdeveniment->preu }} €</p>
+                    </div>
+                    <img src="{{ $esdeveniment->imatge }}" alt="Imatge de l'esdeveniment">
+                </div>
+            @endforeach
+        </div>
+
+        {{ $esdeveniments->links() }}
     </div>
-@endforeach
-
-{{ $esdeveniments->links() }}
-
 @endsection

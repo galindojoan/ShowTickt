@@ -2,15 +2,14 @@
 :Author: Brian Tobias Arrua, Joan Galindo, Camilo Jumelle
 :doctype: book
 :encoding: utf-8
-:lang: es
-:toc: center
+:lang: ca
+:toc: right
 :numbered:
-
-
 
 = Memoria del proyecto
 
 == Introducción
+
 Los miembros del proyecto somos Brian Tobias Arrua, Galindo Palacio Joan y Camilo Jumelle. Este proyecto tratará de realizar una aplicación que 
 
 
@@ -22,10 +21,17 @@ Los miembros del proyecto somos Brian Tobias Arrua, Galindo Palacio Joan y Camil
 // Actualizar cada viernes con descripción y valoración
 
 == Diseño
+    
 
-=== Diseño de BD
-**Este es el primer diseño de la base de datos**
+=== Diagrama entitat relacio
+**La siguiente imagen es el primer diseño de la base de datos**
 
+image::images/diagramaEntidadRelacion.png[]
+
+=== Diagrama per classes
+**Este es el primer diagrama de la base de datos modelo por clases**
+
+////
 [plantuml,file="diagramaBD"]
 ....
 class esdeveniments{
@@ -71,8 +77,13 @@ sessio  "1"--"n"  compra
 compra "1"-"n" entrada:\t  
 
 ....
+////
 
-**Explicación de las tablas**
+
+image::images/diagramaBD.png[] 
+
+
+**Explicación de las clases**
 
 ** [underline]#Esdeveniment:# La tabla de esdeveniments es la tabla que nos guarda los diferentes eventos que tenemos en la pagina, donde guardamos el nombre,el dia,la imagen y el precio
 ** [underline]#Categoria:# En la tabla de categoria hemos decidido guardar las diferentes categoria de los events
@@ -81,9 +92,6 @@ compra "1"-"n" entrada:\t
 ** [underline]#Tipus Entrada:# 
 ** [underline]#Compra:# 
 ** [underline]#Entrada:# 
-
-=== Diagrama per classes
-
 
 === Sketching  
 
@@ -96,13 +104,7 @@ compra "1"-"n" entrada:\t
 Para la página seguimos elegimos la siguiente ** paleta de colores ** , hemos decidido estos ya que llaman la atención
  y el contraste con el negro (que sera el color del texto) no obliga al usuario a forzar la vista.
  
-image::images/diagramaBD.png[]  
-
 image::images/GuiaEstils/paletaDeColores.png[]
-
-image::images/diagramaBD.png[]
-
-image::images/a.jpg[]
 
 La ** tipografía ** elegida fue 'Nunito' se selecciono por su fácilidad lectora
 

@@ -34,6 +34,35 @@ footer {
 /* @media screen and (min-width:376px){
 
 } */
+.container {
+  margin-top: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+form {
+  margin: 20px;
+  text-align: center;
+}
+
+.input-group {
+  display: inline-block;
+  position: relative;
+}
+
+.form-control {
+  width: 400px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background-color: #EFEFEF;
+  padding: 8px;
+}
+
+.btn-primary {
+  background-color:white;
+  height: fit-content;
+  border-color:white;
+}
 
 .event-cards {
   display: grid;
@@ -89,4 +118,76 @@ footer {
   height: auto;
   object-fit: cover;
   padding: 20px;
+}
+
+.pagination .page-link.small {
+  font-size: 3em; /* Ajusta el tamaño del texto */
+  padding: 0.25rem 0.5rem; /* Ajusta el relleno para hacer más compacto */
+}
+
+/* Estilo para la paginación */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Estilo para los elementos de la paginación */
+.pagination li {
+  list-style: none;
+  margin: 0 5px;
+}
+
+/* Estilo para los enlaces de la paginación */
+.pagination a {
+  color: #3498db;
+  text-decoration: none;
+  padding: 8px 12px;
+  border: 1px solid #3498db;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+} 
+
+/* Estilo para los enlaces de la paginación al pasar el ratón */
+.pagination a:hover {
+  background-color: #3498db;
+  color: #fff;
+}
+
+/* Estilo para el enlace de la página activa */
+.pagination .active a,
+.pagination .active span {
+    background-color: #3498db;
+    color: #fff;
+    border-color: #3498db;
+    border-radius: 4px;
+}
+
+/* Estilo para los botones de cambio de página (anterior y siguiente) */
+.pagination .prev, .pagination .next {
+  color: #3498db;
+  text-decoration: none;
+  padding: 8px 12px;
+  border: 1px solid #3498db;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+/* Estilo para los botones de cambio de página al pasar el ratón */
+.pagination .prev:hover, .pagination .next:hover {
+  background-color: #3498db;
+  color: #fff;
+}
+
+/* Estilo para el texto de la paginación */
+.pagination span {
+  display: block;
+  padding: 8px 12px;
+}
+
+.pagination .disabled span,
+.pagination .disabled a {
+    color: #ddd;
+    pointer-events: none; /* Esto evita que se hagan clics en botones deshabilitados */
 }

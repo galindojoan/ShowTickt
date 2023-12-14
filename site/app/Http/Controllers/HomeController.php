@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Esdeveniment;
+use App\Models\Categoria;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -14,20 +15,34 @@ class HomeController extends Controller
     {
         $pag = Config::get('app.items_per_page', 9);
         $esdeveniments = Esdeveniment::with(['recinte'])->paginate($pag);
+        $categories = Categoria::all();
 
-        return view('home', ['esdeveniments' => $esdeveniments]);
+        return view('home', ['esdeveniments' => $esdeveniments, 'categories' => $categories]);
     }
 
     public function cerca(Request $request)
     {
         $cerca = $request->input('q');
+        $categoryId = $request->input('category');
 
-        $esdeveniments = Esdeveniment::whereRaw('LOWER(nom) LIKE ?', ["%" . strtolower($cerca) . "%"])
-            ->orWhereHas('recinte', function ($query) use ($cerca) {
-                $query->whereRaw('LOWER(lloc) LIKE ?', ["%" . strtolower($cerca) . "%"]);
-            })
-            ->paginate(config('app.items_per_page', 9)); // Paginación con el mismo número de elementos por página que en la página principal
+        $query = Esdeveniment::query();
 
-        return view('home', compact('esdeveniments'));
+        if ($cerca) {
+            $query->whereRaw('LOWER(nom) LIKE ?', ["%" . strtolower($cerca) . "%"])
+                ->orWhereHas('recinte', function ($query) use ($cerca) {
+                    $query->whereRaw('LOWER(lloc) LIKE ?', ["%" . strtolower($cerca) . "%"]);
+                });
+        }
+
+        // Verifica si la categoría seleccionada no es "Todas las categorías"
+        if ($categoryId !== '') {
+            $query->where('categoria_id', $categoryId);
+        }
+
+        $esdeveniments = $query->paginate(config('app.items_per_page', 9));
+
+        $categories = Categoria::all();
+
+        return view('home', compact('esdeveniments', 'categories', 'categoryId'));
     }
 }

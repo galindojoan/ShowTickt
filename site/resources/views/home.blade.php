@@ -4,6 +4,19 @@
 
 @section('content')
     <div class="container">
+
+        <form action="{{ route('cerca') }}" method="get" class="form">
+            <div class="input-group">
+                <select name="category" class="form-control" onchange="this.form.submit()">
+                    <option value="" {{ empty($categoryId) ? 'selected' : '' }}>Todas las categorías</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->tipus }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </form>
+        
+
         <!-- Formulario de búsqueda -->
         <form action="{{ route('cerca') }}" method="get" class="form">
             <div class="input-group">
@@ -26,6 +39,6 @@
                 @endforeach
         </div>
 
-        {{ $esdeveniments->links('pagination::bootstrap-4') }}
+        {{ $esdeveniments->links('pagination::bootstrap-5') }}
     </div>
 @endsection

@@ -112,7 +112,6 @@ form {
 }
 .event-card img {
   display: flex;
-  align-items: left;
   justify-content: left;
   max-width: 45%;
   height: auto;

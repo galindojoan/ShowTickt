@@ -12,7 +12,7 @@
 <body class="w3-content">
   <header>
       <h1 class="titulo">ShowTickt</h1>
-      <img class="logo" src="{{ asset('imagen/logo-definitivo.png') }}">
+      <img class="logo" alt="logoShowTickt" src="{{ asset('imagen/logo-definitivo.png') }}">
   </header>
   <div>
     @yield('content') 

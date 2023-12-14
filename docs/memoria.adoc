@@ -26,7 +26,14 @@ Los miembros del proyecto somos Brian Tobias Arrua, Galindo Palacio Joan y Camil
 === Diagrama entitat relacio
 **La siguiente imagen es el primer diseño de la base de datos**
 
-image::images/diagramaEntidadRelacion.png[]
+image::images/BD/primerDiagrama.png[] 
+
+
+**Esta imagen es un redieño del primer diagrama**
+
+Hicimos este cambio principalmente por que en el primero no especificamos cual era la tabla fuerte y la tabla debil en "Esdeveniment, categoria y recinte"
+
+image::images/BD/segonDiagrama.png[] 
 
 === Diagrama per classes
 **Este es el primer diagrama de la base de datos modelo por clases**

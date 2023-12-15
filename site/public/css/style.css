@@ -35,33 +35,70 @@ footer {
 
 } */
 .container {
-  margin-top: 20px;
-  margin-left: 5px;
-  margin-right: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: grid;
+  grid-template-areas: 
+    "a a b b b";
 }
 
 form {
-  margin: 20px;
-  text-align: center;
+  margin: 0px;
 }
-
+form[id="filtre"]{
+  grid-area: a;
+  text-align: end;
+}
+form[id="cerca"]{
+  grid-area: b;
+  text-align: start;
+}
 .input-group {
   display: inline-block;
   position: relative;
+  width: 100%;
 }
 
 .form-control {
-  width: 400px;
   border: 1px solid #000;
-  border-radius: 5px;
   background-color: #EFEFEF;
   padding: 8px;
 }
 
+select[class="form-control"]{
+  width: 40%;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+input[class="form-control"]{
+  width: 50%;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+@media screen and (max-width:500px){
+  select[class="form-control"]{
+    width: 90%;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+  }
+  input[class="form-control"]{
+    width: 80%;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+}
+
 .btn-primary {
-  background-color:white;
+  background-color:inherit;
   height: fit-content;
-  border-color:white;
+  border:0;
+  border-radius: 20%;
+  margin-left: -42px;
+  padding: 5px;
+  vertical-align: middle;
+  &:hover{
+    background-color: white;
+  }
 }
 
 .event-cards {
@@ -69,7 +106,8 @@ form {
   grid-template-columns: repeat(auto-fill, minmax(200px, 380px));
   /* Mínimo 300px, máximo 1 fracción del contenedor */
   justify-content: center;
-  gap: 30px;
+  gap: 5%;
+  overflow-y: auto;
   /* Espacio entre tarjetas */
 }
 

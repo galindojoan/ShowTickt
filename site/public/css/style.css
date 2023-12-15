@@ -190,3 +190,8 @@ form {
     color: #ddd;
     pointer-events: none; /* Esto evita que se hagan clics en botones deshabilitados */
 }
+
+.event-link {
+  color: black;
+  text-decoration: none;
+}

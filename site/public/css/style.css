@@ -1,4 +1,4 @@
-body{
+body {
   margin: 0;
   font-family: 'Nunito', sans-serif;
   display: flex;
@@ -7,29 +7,230 @@ body{
   height: 100vh;
 }
 
-header{
-background-color:#FF7118;
-height: 15%;
-}
-
-.divHeader{
+header {
+  background-color: #FF7118;
+  height: 15%;
   display: grid;
-  grid-template-columns: 1fr 20% ;
-  height: 100%;
+  grid-template-columns: 1fr 0.1fr;
+  grid-template-rows: 1fr;
   align-items: center;
 }
-.titulo{
+
+.titulo {
+  justify-self: center;
+}
+
+.logo {
+  width: 100px;
+  justify-self: end;
+}
+
+footer {
+  background-color: #FF7118;
+  height: 10%;
   text-align: center;
 }
-.logo{
- width: 100%; 
+
+/* @media screen and (min-width:376px){
+
+} */
+.container {
+  padding: 10px;
+  margin-bottom: 10px;
+  display: grid;
+  grid-template-areas: 
+    "a a b b b";
 }
 
-footer{
-  background-color:#FF7118;
-  height: 10%;
+form {
+  margin: 0px;
+}
+form[id="filtre"]{
+  grid-area: a;
+  text-align: end;
+}
+form[id="cerca"]{
+  grid-area: b;
+  text-align: start;
+}
+.input-group {
+  display: inline-block;
+  position: relative;
+  width: 100%;
 }
 
-@media screen and (min-width:376px){
+.form-control {
+  border: 1px solid #000;
+  background-color: #EFEFEF;
+  padding: 8px;
+}
 
+select[class="form-control"]{
+  width: 40%;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+input[class="form-control"]{
+  width: 50%;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+@media screen and (max-width:500px){
+  select[class="form-control"]{
+    width: 90%;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+  }
+  input[class="form-control"]{
+    width: 80%;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+}
+
+.btn-primary {
+  background-color:inherit;
+  height: fit-content;
+  border:0;
+  border-radius: 20%;
+  margin-left: -42px;
+  padding: 5px;
+  vertical-align: middle;
+  &:hover{
+    background-color: white;
+  }
+}
+
+.event-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 380px));
+  /* Mínimo 300px, máximo 1 fracción del contenedor */
+  justify-content: center;
+  gap: 5%;
+  /* Espacio entre tarjetas */
+  overflow-y: auto;
+  min-height: 350px;
+}
+
+.event-card {
+  display: flex;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: #F2AB7E;
+  /* Color de fondo */
+  border-radius: 10px;
+  /* Bordes redondeados */
+  height: 150px;
+}
+
+.event-details {
+  flex: 1;
+  padding: 15px;
+  height: 100%;
+}
+
+.event-details p:nth-of-type(1) {
+  font-weight: bolder;
+  font-size: 20px;
+  margin-top: 0;
+}
+
+.event-details p:nth-of-type(2) {
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.event-details p:nth-of-type(3) {
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.event-details p:nth-of-type(4) {
+  font-size: 14px;
+  font-weight: bold;
+}
+.event-card img {
+  display: flex;
+  justify-content: left;
+  max-width: 45%;
+  height: auto;
+  object-fit: cover;
+  padding: 20px;
+}
+
+.pagination .page-link.small {
+  font-size: 3em; /* Ajusta el tamaño del texto */
+  padding: 0.25rem 0.5rem; /* Ajusta el relleno para hacer más compacto */
+}
+
+/* Estilo para la paginación */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Estilo para los elementos de la paginación */
+.pagination li {
+  list-style: none;
+  margin: 0 5px;
+}
+
+/* Estilo para los enlaces de la paginación */
+.pagination a {
+  color: #3498db;
+  text-decoration: none;
+  padding: 8px 12px;
+  border: 1px solid #3498db;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+} 
+
+/* Estilo para los enlaces de la paginación al pasar el ratón */
+.pagination a:hover {
+  background-color: #3498db;
+  color: #fff;
+}
+
+/* Estilo para el enlace de la página activa */
+.pagination .active a,
+.pagination .active span {
+    background-color: #3498db;
+    color: #fff;
+    border-color: #3498db;
+    border-radius: 4px;
+}
+
+/* Estilo para los botones de cambio de página (anterior y siguiente) */
+.pagination .prev, .pagination .next {
+  color: #3498db;
+  text-decoration: none;
+  padding: 8px 12px;
+  border: 1px solid #3498db;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+/* Estilo para los botones de cambio de página al pasar el ratón */
+.pagination .prev:hover, .pagination .next:hover {
+  background-color: #3498db;
+  color: #fff;
+}
+
+/* Estilo para el texto de la paginación */
+.pagination span {
+  display: block;
+  padding: 8px 12px;
+}
+
+.pagination .disabled span,
+.pagination .disabled a {
+    color: #ddd;
+    pointer-events: none; /* Esto evita que se hagan clics en botones deshabilitados */
+}
+
+.event-link {
+  color: black;
+  text-decoration: none;
 }

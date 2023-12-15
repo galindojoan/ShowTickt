@@ -14,29 +14,61 @@ class HomeController extends Controller
     public function index()
     {
         $pag = Config::get('app.items_per_page', 9);
-        $esdeveniments = Esdeveniment::with(['recinte'])->paginate($pag);
+        $categoryId = ''; // Establece un valor predeterminado
+
+        $esdeveniments = Esdeveniment::with(['recinte'])
+            ->orderBy('dia', 'desc') // Ordenar por fecha descendente
+            ->paginate($pag);
+
         $categories = Categoria::all();
 
-        return view('home', ['esdeveniments' => $esdeveniments, 'categories' => $categories]);
+        return view('home', compact('esdeveniments', 'categories', 'categoryId'));
     }
+
+    public function quitarAcentos($cadena) {
+        $acentos = [
+            'á' => 'a', 'é' => 'e', 'í' => 'i', 'ó' => 'o', 'ú' => 'u',
+            'Á' => 'A', 'É' => 'E', 'Í' => 'I', 'Ó' => 'O', 'Ú' => 'U',
+            'ä' => 'a', 'ë' => 'e', 'ï' => 'i', 'ö' => 'o', 'ü' => 'u',
+            'Ä' => 'A', 'Ë' => 'E', 'Ï' => 'I', 'Ö' => 'O', 'Ü' => 'U',
+        ];
+    
+        return strtr($cadena, $acentos);
+    }
+
 
     public function cerca(Request $request)
     {
-        $cerca = $request->input('q');
+        $cerca = $this->quitarAcentos($request->input('q'));
         $categoryId = $request->input('category');
 
         $query = Esdeveniment::query();
 
-        if ($cerca) {
-            $query->whereRaw('LOWER(nom) LIKE ?', ["%" . strtolower($cerca) . "%"])
-                ->orWhereHas('recinte', function ($query) use ($cerca) {
-                    $query->whereRaw('LOWER(lloc) LIKE ?', ["%" . strtolower($cerca) . "%"]);
-                });
-        }
-
-        // Verifica si la categoría seleccionada no es "Todas las categorías"
-        if ($categoryId !== '') {
+        // Verifica si se ha seleccionado una categoría
+        if ($categoryId !== null) {
             $query->where('categoria_id', $categoryId);
+
+            // Aplica la búsqueda solo si hay una categoría seleccionada
+            if ($cerca) {
+                $query->where(function ($query) use ($cerca, $categoryId) {
+                    $query->whereRaw('LOWER(nom) LIKE ?', ["%" . strtolower($cerca) . "%"])
+                        ->where('categoria_id', $categoryId);
+                })
+                    ->orWhereHas('recinte', function ($query) use ($cerca, $categoryId) {
+                        $query->whereRaw('LOWER(lloc) LIKE ?', ["%" . strtolower($cerca) . "%"])
+                            ->where('categoria_id', $categoryId);
+                    });
+            }
+        } else {
+            // No hay categoría seleccionada, busca en todos los eventos
+            if ($cerca) {
+                $query->where(function ($query) use ($cerca) {
+                    $query->whereRaw('LOWER(nom) LIKE ?', ["%" . strtolower($cerca) . "%"])
+                        ->orWhereHas('recinte', function ($query) use ($cerca) {
+                            $query->whereRaw('LOWER(lloc) LIKE ?', ["%" . strtolower($cerca) . "%"]);
+                        });
+                });
+            }
         }
 
         $esdeveniments = $query->paginate(config('app.items_per_page', 9));

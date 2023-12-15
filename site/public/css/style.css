@@ -107,8 +107,9 @@ input[class="form-control"]{
   /* Mínimo 300px, máximo 1 fracción del contenedor */
   justify-content: center;
   gap: 5%;
-  overflow-y: auto;
   /* Espacio entre tarjetas */
+  overflow-y: auto;
+  min-height: 350px;
 }
 
 .event-card {

@@ -96,9 +96,9 @@ input[class="form-control"]{
   margin-left: -42px;
   padding: 5px;
   vertical-align: middle;
-  &:hover{
-    background-color: white;
-  }
+}
+.btn-primary:hover{
+  background-color: white;
 }
 
 .event-cards {
@@ -233,4 +233,8 @@ input[class="form-control"]{
 .event-link {
   color: black;
   text-decoration: none;
+}
+
+.pages{
+  overflow-x: auto;
 }

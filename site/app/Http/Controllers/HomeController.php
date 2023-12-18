@@ -42,7 +42,8 @@ class HomeController extends Controller
         $cerca = $this->quitarAcentos($request->input('q'));
         $categoryId = $request->input('category');
 
-        $query = Esdeveniment::query();
+        $query = Esdeveniment::with(['recinte'])
+        ->orderBy('dia', 'desc'); // Ordenar por fecha descendente
 
         // Verifica si se ha seleccionado una categoría
         if ($categoryId !== null) {

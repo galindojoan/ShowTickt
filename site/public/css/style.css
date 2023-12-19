@@ -11,9 +11,10 @@ header {
   background-color: #FF7118;
   height: 15%;
   display: grid;
-  grid-template-columns: 1fr 0.1fr;
+  grid-template-columns: 0.1fr 1fr;
   grid-template-rows: 1fr;
   align-items: center;
+  align-content: center;
 }
 
 .titulo {
@@ -31,6 +32,9 @@ footer {
   text-align: center;
 }
 
+/* #footerHome{
+
+} */
 /* @media screen and (min-width:376px){
 
 } */

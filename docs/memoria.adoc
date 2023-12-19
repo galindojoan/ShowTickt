@@ -127,12 +127,6 @@ El icono para busquedas
 image::images/GuiaEstils/iconoBusqueda.png[]
 
 
-El icono para filtrar
-
-
-image::images/GuiaEstils/iconoFiltro.png[]
-
-
 Los ** botones ** serán de este estilo: 
 
 

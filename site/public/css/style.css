@@ -19,11 +19,26 @@ header {
 
 .titulo {
   justify-self: center;
+  padding-right: 130px;
 }
 
 .logo {
   width: 100px;
   justify-self: end;
+}
+@media screen and (max-width:800px) {
+  .titulo{
+    padding-right: 0px;
+  }
+}
+@media screen and (max-width:300px) {
+  .titulo{
+    font-size: 25px;
+    padding-right: 0px;
+  }
+  .logo{
+    width: 60px;
+  }
 }
 
 footer {
@@ -80,19 +95,14 @@ input[class="form-control"]{
   border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
   box-shadow: 3px 2px 7px gray;
+  height: 17px;
 }
 @media screen and (max-width:1000px){
   select[class="form-control"]{
     width: 90%;
-    border-bottom-left-radius: 5px;
-    border-top-left-radius: 5px;
-    box-shadow: 3px 2px 7px gray;
   }
   input[class="form-control"]{
     width: 80%;
-    border-bottom-right-radius: 5px;
-    border-top-right-radius: 5px;
-    box-shadow: 3px 2px 7px gray;
   }
 }
 

@@ -1,0 +1,111 @@
+= Isard
+
+== Instalación del servidor
+
+Para poder utilizar la aplicación deberemos de tener instalado lo siguiente
+
+- GIT 
+- Composer 
+- Apache
+- PHP 
+- Docker
+
+=== Para instalar composer deberás de realizar los siguientes comandos
+
+[source, sh]
+----
+apt install git curl php-cli unzip
+
+curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
+
+HASH=`curl -sS https://composer.github.io/installer.sig`
+
+php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+
+# Deberá de salir 'Installer verified' si se instalo correctamente
+
+sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
+
+composer #Para saber que se instalo correctamente
+
+----
+
+=== Para instalar GIT, PHP y Apache
+
+[source, sh]
+----
+sudo apt-get install git php apache2 -y
+----
+
+=== Para instalar Docker
+
+[source, sh]
+----
+sudo apt-get update
+
+sudo apt-get install ca-certificates curl gnupg
+
+sudo install -m 0755 -d /etc/apt/keyrings
+
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+echo \ "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \ sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update
+----
+
+
+Con git se deberá de traer el repositorio con 
+
+[source, sh]
+----
+git clone 
+----
+
+Al tener ya el repositorio descargado en la carpeta de site deberás de ejecutar los siguientes comandos de **Composer**
+
+[source, sh]
+----
+composer install
+cp .env.example .env
+php artisan key:generate
+----
+
+Con esto ya funcionaria el laravel, y para tener la base de datos tendremos que tener docker
+
+[source, sh]
+----
+cd docker/
+docker compose up -d
+----
+
+Al ya tener el docker/bd, se debe de colocar los puertos, nombre de la bd y demás en el archivo **.env**, si no tocaste nada del docker el archivo estará correcto al copiarlo. 
+
+Luego deberás de configurar el apache con el directorio de la carpeta de la app
+
+[source, sh]
+----
+sudo nano /etc/apache2/sites-available/000-default.conf
+----
+
+[source, txt]
+----
+DocumentRoot /var/www/html/gr6-arrua-galindo-jumelle/site/public
+----
+
+También deberás de añadir el grupo www-data a los permisos de la carpeta, como grupo propietario ademas de otorgar permisos de escritura para grupos
+
+[source, sh]
+----
+chown :www-data site/
+chmod -R 775 site/
+----
+
+Al tener todo esto ya deberías de poder visualizar la página al reiniciar el apache con el siguiente comando 
+[source, sh]
+----
+sudo systemctl restart apache2
+----
+

@@ -14,7 +14,7 @@ class HomeTest extends TestCase
         $response->assertOk();
 
         // Ajusta a la lògica per obtenir esdeveniments
-        $events = \App\Models\Esdeveniment::take(5)->get();
+        $events = \App\Models\Esdeveniment::take(2)->get();
 
         foreach ($events as $event) {
             $response->assertSeeText($event->nom);

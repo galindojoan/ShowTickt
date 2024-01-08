@@ -26,11 +26,7 @@ header {
   width: 100px;
   justify-self: end;
 }
-@media screen and (max-width:800px) {
-  .titulo{
-    padding-right: 0px;
-  }
-}
+
 @media screen and (max-width:300px) {
   .titulo{
     font-size: 25px;
@@ -149,25 +145,26 @@ input[class="form-control"]{
   height: 100%;
 }
 
+.event-details p{
+  margin: 0;
+}
+
 .event-details p:nth-of-type(1) {
   font-weight: bolder;
   font-size: 20px;
-  margin-top: 0;
+  margin-bottom: 4%;
 }
 
 .event-details p:nth-of-type(2) {
-  font-size: 11px;
-  font-weight: bold;
+  font-size: 16px;
 }
 
 .event-details p:nth-of-type(3) {
-  font-size: 10px;
-  font-weight: bold;
+  font-size: 15px;
 }
 
 .event-details p:nth-of-type(4) {
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 19px;
 }
 .event-card img {
   display: flex;
@@ -178,6 +175,32 @@ input[class="form-control"]{
   margin: 20px;
   border: 1px solid black;
   border-radius: 5px;
+}
+
+@media screen and (max-width:800px) {
+  .titulo{
+    padding-right: 0px;
+  }
+  .event-details p{
+    margin: 0;
+  }
+  .event-details p:nth-of-type(1) {
+    font-weight: bolder;
+    font-size: 20px;
+    margin-bottom: 4%;
+  }
+  
+  .event-details p:nth-of-type(2) {
+    font-size: 19px;
+  }
+  
+  .event-details p:nth-of-type(3) {
+    font-size: 19px;
+  }
+  
+  .event-details p:nth-of-type(4) {
+    font-size: 19px;
+  }
 }
 
 .pagination .page-link.small {

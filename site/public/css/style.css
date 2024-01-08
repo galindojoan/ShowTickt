@@ -113,7 +113,6 @@ input[class="form-control"]{
   gap: 5%;
   /* Espacio entre tarjetas */
   overflow-y: auto;
-  min-height: 350px;
 }
 
 .event-card {
@@ -241,4 +240,22 @@ input[class="form-control"]{
 
 .pages{
   overflow-x: auto;
+}
+
+ul {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0px;
+}
+
+.pag{
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 20px;
+    margin-inline-end: 20px;
 }

@@ -96,6 +96,6 @@ class HomeController extends Controller
 
         $categoriesWithEventCount = $this->getCategoriesWithEventCount();
 
-        return view('home', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount'));
+        return view('resultados', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount'));
     }
 }

@@ -19,11 +19,26 @@ header {
 
 .titulo {
   justify-self: center;
+  padding-right: 130px;
 }
 
 .logo {
   width: 100px;
   justify-self: end;
+}
+@media screen and (max-width:800px) {
+  .titulo{
+    padding-right: 0px;
+  }
+}
+@media screen and (max-width:300px) {
+  .titulo{
+    font-size: 25px;
+    padding-right: 0px;
+  }
+  .logo{
+    width: 60px;
+  }
 }
 
 footer {
@@ -73,22 +88,21 @@ select[class="form-control"]{
   width: 40%;
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
+  box-shadow: 3px 2px 7px gray;
 }
 input[class="form-control"]{
   width: 50%;
   border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
+  box-shadow: 3px 2px 7px gray;
+  height: 17px;
 }
 @media screen and (max-width:1000px){
   select[class="form-control"]{
     width: 90%;
-    border-bottom-left-radius: 5px;
-    border-top-left-radius: 5px;
   }
   input[class="form-control"]{
     width: 80%;
-    border-bottom-right-radius: 5px;
-    border-top-right-radius: 5px;
   }
 }
 
@@ -124,6 +138,7 @@ input[class="form-control"]{
   border-radius: 10px;
   /* Bordes redondeados */
   height: 150px;
+  border: 1px solid black;
 }
 
 .event-details {
@@ -158,7 +173,9 @@ input[class="form-control"]{
   max-width: 45%;
   height: auto;
   object-fit: cover;
-  padding: 20px;
+  margin: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 .pagination .page-link.small {

@@ -146,6 +146,8 @@ input[class="form-control"] {
   gap: 5%;
   /* Espacio entre tarjetas */
   overflow-y: auto;
+  height: 65%;
+  padding: 10px;
 }
 
 .event-card {

@@ -85,17 +85,19 @@ form[id="cerca"]{
 }
 
 select[class="form-control"]{
+  appearance: none;
   width: 40%;
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
   box-shadow: 3px 2px 7px gray;
 }
+
 input[class="form-control"]{
   width: 50%;
   border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
   box-shadow: 3px 2px 7px gray;
-  height: 17px;
+  height: 15px;
 }
 @media screen and (max-width:1000px){
   select[class="form-control"]{

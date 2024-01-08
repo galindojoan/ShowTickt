@@ -9,9 +9,9 @@
             <div class="input-group">
                 <select name="category" class="form-control" onchange="this.form.submit()">
                     <option value="" {{ $categoryId === null ? 'selected' : '' }}>Todas las categorías</option>
-                    @foreach ($categories as $category)
+                    @foreach ($categoriesWithEventCount as $category)
                         <option value="{{ $category->id }}" {{ $categoryId == $category->id ? 'selected' : '' }}>
-                            {{ $category->tipus }}
+                            {{ $category->tipus }} ({{ $category->eventCount }} eventos)
                         </option>
                     @endforeach
                 </select>

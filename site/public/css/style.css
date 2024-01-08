@@ -160,11 +160,13 @@ input[class="form-control"] {
   /* Bordes redondeados */
   height: 150px;
   border: 1px solid black;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
   transition: transform 0.3s ease; /* Transición de la propiedad transform */
 }
 
 .event-card:hover {
   transform: scale(1.025); /* Ampliación al pasar el ratón */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al pasar el ratón */
 }
 
 .event-details {

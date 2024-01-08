@@ -8,7 +8,7 @@ body {
 }
 
 header {
-  background-color: #FF7118;
+  background-color: black;
   height: 15%;
   display: grid;
   grid-template-columns: 0.1fr 1fr;
@@ -20,6 +20,7 @@ header {
 .titulo {
   justify-self: center;
   padding-right: 130px;
+  color: white;
 }
 
 .logo {
@@ -28,24 +29,38 @@ header {
 }
 
 @media screen and (max-width:300px) {
-  .titulo{
+  .titulo {
     font-size: 25px;
     padding-right: 0px;
   }
-  .logo{
+
+  .logo {
     width: 60px;
   }
 }
 
 footer {
-  background-color: #FF7118;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
   height: 10%;
-  text-align: center;
+  color: white;
 }
 
-/* #footerHome{
+#footerHome {
+  color: #FF7118;
+  transition: color 0.3s ease; /* Transición de color */
+}
 
-} */
+#footerHome:hover {
+  color: #ff5e00; /* Color diferente al pasar el ratón */
+}
+
+#footerHome:active {
+  transform: scale(0.9); /* Animación de escala al hacer clic */
+}
+
 /* @media screen and (min-width:376px){
 
 } */
@@ -53,21 +68,24 @@ footer {
   padding: 10px;
   margin-bottom: 10px;
   display: grid;
-  grid-template-areas: 
+  grid-template-areas:
     "a a b b b";
 }
 
 form {
   margin: 0px;
 }
-form[id="filtre"]{
+
+form[id="filtre"] {
   grid-area: a;
   text-align: end;
 }
-form[id="cerca"]{
+
+form[id="cerca"] {
   grid-area: b;
   text-align: start;
 }
+
 .input-group {
   display: inline-block;
   position: relative;
@@ -80,7 +98,7 @@ form[id="cerca"]{
   padding: 8px;
 }
 
-select[class="form-control"]{
+select[class="form-control"] {
   appearance: none;
   width: 40%;
   border-bottom-left-radius: 5px;
@@ -88,32 +106,35 @@ select[class="form-control"]{
   box-shadow: 3px 2px 7px gray;
 }
 
-input[class="form-control"]{
+input[class="form-control"] {
   width: 50%;
   border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
   box-shadow: 3px 2px 7px gray;
   height: 15px;
 }
-@media screen and (max-width:1000px){
-  select[class="form-control"]{
+
+@media screen and (max-width:1000px) {
+  select[class="form-control"] {
     width: 90%;
   }
-  input[class="form-control"]{
+
+  input[class="form-control"] {
     width: 80%;
   }
 }
 
 .btn-primary {
-  background-color:inherit;
+  background-color: inherit;
   height: fit-content;
-  border:0;
+  border: 0;
   border-radius: 20%;
   margin-left: -42px;
   padding: 5px;
   vertical-align: middle;
 }
-.btn-primary:hover{
+
+.btn-primary:hover {
   background-color: white;
 }
 
@@ -131,12 +152,17 @@ input[class="form-control"]{
   display: flex;
   box-sizing: border-box;
   overflow: hidden;
-  background-color: #F2AB7E;
+  background-color: white;
   /* Color de fondo */
   border-radius: 10px;
   /* Bordes redondeados */
   height: 150px;
   border: 1px solid black;
+  transition: transform 0.3s ease; /* Transición de la propiedad transform */
+}
+
+.event-card:hover {
+  transform: scale(1.025); /* Ampliación al pasar el ratón */
 }
 
 .event-details {
@@ -145,7 +171,7 @@ input[class="form-control"]{
   height: 100%;
 }
 
-.event-details p{
+.event-details p {
   margin: 0;
 }
 
@@ -166,6 +192,7 @@ input[class="form-control"]{
 .event-details p:nth-of-type(4) {
   font-size: 19px;
 }
+
 .event-card img {
   display: flex;
   justify-content: left;
@@ -178,34 +205,38 @@ input[class="form-control"]{
 }
 
 @media screen and (max-width:800px) {
-  .titulo{
+  .titulo {
     padding-right: 0px;
   }
-  .event-details p{
+
+  .event-details p {
     margin: 0;
   }
+
   .event-details p:nth-of-type(1) {
     font-weight: bolder;
     font-size: 20px;
     margin-bottom: 4%;
   }
-  
+
   .event-details p:nth-of-type(2) {
     font-size: 19px;
   }
-  
+
   .event-details p:nth-of-type(3) {
     font-size: 19px;
   }
-  
+
   .event-details p:nth-of-type(4) {
     font-size: 19px;
   }
 }
 
 .pagination .page-link.small {
-  font-size: 3em; /* Ajusta el tamaño del texto */
-  padding: 0.25rem 0.5rem; /* Ajusta el relleno para hacer más compacto */
+  font-size: 3em;
+  /* Ajusta el tamaño del texto */
+  padding: 0.25rem 0.5rem;
+  /* Ajusta el relleno para hacer más compacto */
 }
 
 /* Estilo para la paginación */
@@ -230,7 +261,7 @@ input[class="form-control"]{
   border: 1px solid #3498db;
   border-radius: 4px;
   transition: background-color 0.3s ease;
-} 
+}
 
 /* Estilo para los enlaces de la paginación al pasar el ratón */
 .pagination a:hover {
@@ -241,14 +272,15 @@ input[class="form-control"]{
 /* Estilo para el enlace de la página activa */
 .pagination .active a,
 .pagination .active span {
-    background-color: #3498db;
-    color: #fff;
-    border-color: #3498db;
-    border-radius: 4px;
+  background-color: #3498db;
+  color: #fff;
+  border-color: #3498db;
+  border-radius: 4px;
 }
 
 /* Estilo para los botones de cambio de página (anterior y siguiente) */
-.pagination .prev, .pagination .next {
+.pagination .prev,
+.pagination .next {
   color: #3498db;
   text-decoration: none;
   padding: 8px 12px;
@@ -258,7 +290,8 @@ input[class="form-control"]{
 }
 
 /* Estilo para los botones de cambio de página al pasar el ratón */
-.pagination .prev:hover, .pagination .next:hover {
+.pagination .prev:hover,
+.pagination .next:hover {
   background-color: #3498db;
   color: #fff;
 }
@@ -271,8 +304,9 @@ input[class="form-control"]{
 
 .pagination .disabled span,
 .pagination .disabled a {
-    color: #ddd;
-    pointer-events: none; /* Esto evita que se hagan clics en botones deshabilitados */
+  color: #ddd;
+  pointer-events: none;
+  /* Esto evita que se hagan clics en botones deshabilitados */
 }
 
 .event-link {
@@ -280,7 +314,7 @@ input[class="form-control"]{
   text-decoration: none;
 }
 
-.pages{
+.pages {
   overflow-x: auto;
 }
 
@@ -294,10 +328,10 @@ ul {
   padding-inline-start: 0px;
 }
 
-.pag{
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 20px;
-    margin-inline-end: 20px;
+.pag {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 20px;
+  margin-inline-end: 20px;
 }

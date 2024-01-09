@@ -151,7 +151,6 @@ input[class="form-control"] {
   justify-content: center;
   gap: 5%;
   /* Espacio entre tarjetas */
-  overflow-y: auto;
   height: 65%;
   padding: 10px;
 }
@@ -446,5 +445,11 @@ a{
 
   input[class="form-control"] {
     width: 80%;
+  }
+}
+
+@media screen and (max-width:1287px) {
+  .event-cards { 
+    overflow-y: auto;
   }
 }

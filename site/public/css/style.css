@@ -3,7 +3,6 @@ body {
   font-family: 'Nunito', sans-serif;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: 100vh;
 }
 
@@ -30,6 +29,10 @@ header {
 
 
 footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,6 +40,7 @@ footer {
   height: 10%;
   color: white;
 }
+
 
 #footerHome {
   color: #FF7118;
@@ -58,8 +62,10 @@ footer {
   padding: 10px;
   margin-bottom: 10px;
   display: grid;
+  top: 0;
   grid-template-areas:
     "a a b b b";
+
 }
 
 form {
@@ -76,10 +82,29 @@ form[id="cerca"] {
   text-align: start;
 }
 
+.filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 .input-group {
   display: inline-block;
   position: relative;
   width: 100%;
+}
+
+.input-group .icon-container {
+  height: 100%;
+  position: absolute;
+  top: 25%;
+  right: 10px;
+  pointer-events: none;
+}
+
+option {
+  font-size: 16px;
 }
 
 .form-control {
@@ -340,6 +365,13 @@ ul {
     font-size: 19px;
   }
 }
+
+@media screen and (max-width:820px) {
+  .pages{
+    margin-bottom: 100px;
+  }
+}
+
 @media screen and (max-width:1000px) {
   .event-cards{
     height: auto;

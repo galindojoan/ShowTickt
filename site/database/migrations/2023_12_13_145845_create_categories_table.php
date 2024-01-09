@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->enum('tipus', ['social', 'cultural', 'esportiu', 'altres']);
+            $table->enum('tipus', ['social', 'cultural', 'deportivo', 'otros']);
             $table->timestamps();
         });
     }

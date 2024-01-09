@@ -28,16 +28,6 @@ header {
   justify-self: end;
 }
 
-@media screen and (max-width:300px) {
-  .titulo {
-    font-size: 25px;
-    padding-right: 0px;
-  }
-
-  .logo {
-    width: 60px;
-  }
-}
 
 footer {
   display: flex;
@@ -114,15 +104,6 @@ input[class="form-control"] {
   height: 15px;
 }
 
-@media screen and (max-width:1000px) {
-  select[class="form-control"] {
-    width: 90%;
-  }
-
-  input[class="form-control"] {
-    width: 80%;
-  }
-}
 
 .btn-primary {
   background-color: inherit;
@@ -207,35 +188,6 @@ input[class="form-control"] {
   border: 1px solid black;
   border-radius: 5px;
 }
-
-@media screen and (max-width:800px) {
-  .titulo {
-    padding-right: 0px;
-  }
-
-  .event-details p {
-    margin: 0;
-  }
-
-  .event-details p:nth-of-type(1) {
-    font-weight: bolder;
-    font-size: 20px;
-    margin-bottom: 4%;
-  }
-
-  .event-details p:nth-of-type(2) {
-    font-size: 19px;
-  }
-
-  .event-details p:nth-of-type(3) {
-    font-size: 19px;
-  }
-
-  .event-details p:nth-of-type(4) {
-    font-size: 19px;
-  }
-}
-
 .pagination .page-link.small {
   font-size: 3em;
   /* Ajusta el tamaño del texto */
@@ -338,4 +290,65 @@ ul {
   margin-block-end: 1em;
   margin-inline-start: 20px;
   margin-inline-end: 20px;
+}
+
+
+
+
+
+
+
+
+
+/* Adaptación a móvil */
+
+@media screen and (max-width:300px) {
+  .titulo {
+    font-size: 25px;
+    padding-right: 0px;
+  }
+  
+  .logo {
+    width: 60px;
+  }
+}
+
+@media screen and (max-width:800px) {
+  .titulo {
+    padding-right: 0px;
+  }
+
+  .event-details p {
+    margin: 0;
+  }
+
+  .event-details p:nth-of-type(1) {
+    font-weight: bolder;
+    font-size: 20px;
+    margin-bottom: 4%;
+  }
+
+  .event-details p:nth-of-type(2) {
+    font-size: 19px;
+  }
+
+  .event-details p:nth-of-type(3) {
+    font-size: 19px;
+  }
+
+  .event-details p:nth-of-type(4) {
+    font-size: 19px;
+  }
+}
+@media screen and (max-width:1000px) {
+  .event-cards{
+    height: auto;
+  }
+  select[class="form-control"] {
+    width: 90%;
+  }
+
+  input[class="form-control"] {
+    width: 80%;
+  }
 }

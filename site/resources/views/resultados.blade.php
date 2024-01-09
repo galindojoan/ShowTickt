@@ -27,7 +27,7 @@
             <div class="input-group">
                 <!-- Campo de entrada oculto para la categoría -->
                 <input type="hidden" name="category" value="{{ $categoryId }}">
-                <input type="text" name="q" class="form-control" placeholder="Buscar">
+                <input type="text" name="q" class="form-control" placeholder="Buscar" value="{{ request('q') }}">
                 <button type="submit" class="btn-primary"><svg xmlns="http://www.w3.org/2000/svg" height="16"
                         width="16"
                         viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->

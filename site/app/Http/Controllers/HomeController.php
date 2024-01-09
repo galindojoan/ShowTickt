@@ -90,7 +90,7 @@ class HomeController extends Controller
             }
         }
 
-        $esdeveniments = $query->paginate(config('app.items_per_page', 6));
+        $esdeveniments = $query->paginate(config('app.items_per_page', 6))->appends(request()->query());
 
         $categories = Categoria::all();
 

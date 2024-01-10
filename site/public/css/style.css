@@ -1,3 +1,4 @@
+/*Estilos generales*/
 body {
   margin: 0;
   font-family: 'Nunito', sans-serif;
@@ -5,7 +6,7 @@ body {
   flex-direction: column;
   height: 100vh;
 }
-
+/*Estilos para el header y el footer*/
 header {
   background-color: black;
   height: 15%;
@@ -56,9 +57,7 @@ footer {
   transform: scale(0.9); /* Animación de escala al hacer clic */
 }
 
-/* @media screen and (min-width:376px){
-
-} */
+/*Estilos para la pantalla Home*/
 .container {
   padding: 10px;
   margin-bottom: 10px;

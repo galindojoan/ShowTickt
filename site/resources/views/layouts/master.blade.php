@@ -13,22 +13,27 @@
   <header>
     <img class="logo" alt="logoShowTickt" src="{{ asset('imagen/logo-definitivo.png') }}">
     <h1 class="titulo">ShowTickt</h1>
+    
+    @if(session('key'))
     <select onfocus='this.size=2;' onblur='this.size=0;' onchange='this.size=1; this.blur();' class="userOptions">
-      @if(session('key'))
       <option class="optionProfile" value="" selected hidden>{{ session('key') }}</option>
       <option class="optionProfile" value="profile">Perfil de usuario</option>
       <option class="optionProfile" value="closeSession">Cerrar sesión</option>
-      @else
-      <option value="session">Iniciar Session</option>
-      @endif
     </select>
+    @else
+    <input type="button" class="ahref" value="Iniciar Session">
+    @endif
   </header>
   <div>
     @yield('content') 
   </div>
   <footer>
     <a id="footerHome" href="{{ route('home') }}">HOME</a>
-    <form method="POST" action="@if(session('key'))
+    <form method="@if(session('key'))
+     POST 
+     @else GET 
+     @endif" 
+     action="@if(session('key'))
     {{route('homePromotor')}}
     @else{{route('login')}}
     @endif">

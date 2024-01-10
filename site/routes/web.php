@@ -21,3 +21,4 @@ Route::get('/cerca', [HomeController::class, 'cerca'])->name('cerca');
 Route::get('/resultados', [HomeController::class, 'cerca'])->name('resultados');
 Route::get('/esdeveniment/{id}', [EsdevenimentController::class, 'show'])->name('mostrar-esdeveniment');
 Route::get('/login',[LoginController::class,'login'])->name(('login'));
+Route::post('/homePromotor', [LoginController::class,'iniciarSesion'])->name('homePromotor');

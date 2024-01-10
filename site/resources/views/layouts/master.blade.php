@@ -20,6 +20,7 @@
   </div>
   <footer>
     <a id="footerHome" href="{{ route('home') }}">HOME</a>
+    <a id="footerHome" href="{{route('login')}}">PROMOTORES</a>
   </footer>
 </body>
 

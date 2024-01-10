@@ -39,6 +39,7 @@ footer {
 }
 
 #footerHome {
+  padding: 10px;
   color: #FF7118;
   transition: color 0.3s ease; /* Transición de color */
 }
@@ -293,6 +294,7 @@ ul {
 }
 
 /*Estilos para la pantalla del login*/
+
 .loginPage{
   background-color: #dcd;
   width: 100vw;
@@ -307,7 +309,7 @@ ul {
   grid-template-columns: 1fr;
   justify-items: center;
   width: 20%;
-  border: 0px solid;
+  border: 1.7px solid darkgray;
   border-radius: 6px;
   padding: 5%;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -352,6 +354,9 @@ a{
 .boton:hover{
   cursor: pointer;
   background-color: #F2AB7E;
+}
+.boton:active{
+  background-color: #ff5e00;
 }
 
 

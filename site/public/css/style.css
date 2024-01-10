@@ -11,7 +11,7 @@ header {
   background-color: black;
   height: 15%;
   display: grid;
-  grid-template-columns: 0.1fr 1fr;
+  grid-template-columns: 0.1fr 1fr 0.1fr;
   grid-template-rows: 1fr;
   align-items: center;
   align-content: center;
@@ -28,6 +28,19 @@ header {
   justify-self: end;
 }
 
+.userOptions{
+  appearance: none;
+  background-color: inherit;
+  color: #fff;
+  border: 1px solid black;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 5px;
+  overflow: hidden;
+}
+.optionProfile:hover{
+  background: red;
+}
 
 footer {
   position: fixed;
@@ -55,6 +68,26 @@ footer {
 
 #footerHome:active {
   transform: scale(0.9); /* Animación de escala al hacer clic */
+}
+
+.ahref{
+  border: none;
+  margin: 0px;
+  padding: 0px;
+  font-weight: 700;
+  font-size: 17px;
+  background-color: inherit;
+  color: #FF7118;
+  transition: color 0.3s ease;
+}
+
+.ahref:hover{
+  cursor: pointer;
+  color: #ff5e00;
+}
+
+.ahref:active{
+  transform: scale(0.9);
 }
 
 /*Estilos para la pantalla Home*/

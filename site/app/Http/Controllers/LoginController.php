@@ -17,7 +17,10 @@ class LoginController extends Controller
 
     public function iniciarSesion(Request $request)
     {
-        $this->validate($request, [
+        if(session('key')){
+            return view('homePromotor',['session' => (session('key'))]);
+        }
+        else{$this->validate($request, [
             'usuario' => 'required',
             'password' => 'required',
         ]);
@@ -33,6 +36,6 @@ class LoginController extends Controller
             return view('homePromotor', ['session' => $sessionValue]);
         } else {
             return back()->withInput()->withErrors(['usuario' => 'Credenciales inválidas']);
-        }
+        }}
     }
 }

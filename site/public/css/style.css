@@ -382,9 +382,33 @@ a{
   background-color: #ff5e00;
 }
 
+/*Ver Eventos inicio*/
 
+.containerEvent{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+}
+.textEvent{
+margin:5%
+}
+.imagenesEventos{
+margin:5%
+}
+#imagenEvento{
+  width: 100%;
+  border-radius: 10px;
+}
 
+/*Ver Eventos fin*/
 
+@media screen and (max-width:1000px) {
+  .containerEvent{
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 0.5fr;
+  }
+}
 
 /* Adaptación a móvil */
 

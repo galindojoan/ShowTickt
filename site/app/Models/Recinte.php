@@ -9,12 +9,17 @@ class Recinte extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nom', 'lloc'];
+    protected $fillable = ['nom', 'provincia', 'lloc', 'codi_postal', 'capacitat', 'user_id'];
     
     protected $table = 'recintes';
 
     public function esdeveniments()
     {
         return $this->hasMany(Esdeveniment::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

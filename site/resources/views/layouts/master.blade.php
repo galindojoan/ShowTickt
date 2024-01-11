@@ -14,6 +14,7 @@
     <img class="logo" alt="logoShowTickt" src="{{ asset('imagen/logo-definitivo.png') }}">
     <h1 class="titulo">ShowTickt</h1>
 
+
     @if(session('key'))
 
     <form action="{{ route('session') }}" method="get" class="form">

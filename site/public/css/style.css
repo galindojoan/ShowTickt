@@ -38,14 +38,11 @@ header {
   padding: 5px;
   overflow: hidden;
 }
+.userOptions:hover{
+  cursor: pointer;
+}
 .optionProfile:hover{
   background: red;
-}
-#svg{
-  appearance: none;
-  display: none;
-  background-color: black;
-  color: #fff;
 }
 
 footer {
@@ -549,9 +546,6 @@ margin:5%
   .linkPromotor{
     font-weight: 800;
     font-size: 13px;
-  }
-  #svg{
-    display: block;
   }
   .optionsBar{
     display: none;

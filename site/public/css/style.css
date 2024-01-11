@@ -415,6 +415,12 @@ a{
   background-color: #ff5e00;
 }
 
+.errorMsg{
+  color: red;
+  position: fixed;
+  margin-top: 2%;
+}
+
 /*Ver Eventos inicio*/
 
 .containerEvent{
@@ -440,6 +446,9 @@ margin:5%
   .containerEvent{
     grid-template-columns: 1fr;
     grid-template-rows: 0.5fr 0.5fr;
+  }
+  .errorMsg{
+    margin-top: 2.5%;
   }
 }
 
@@ -487,6 +496,9 @@ margin:5%
   }
   .login{
     width: 60%;
+  }
+  .errorMsg{
+    margin-top: 5%;
   }
 }
 

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Errors;
 
 class LoginController extends Controller
 {
@@ -35,7 +36,7 @@ class LoginController extends Controller
             $sessionValue = $request->session()->get('key');
             return view('homePromotor');
         } else {
-            return back()->withInput()->withErrors(['usuario' => 'Credenciales inválidas']);
+            return redirect('login')->withErrors(array('msg' =>'Credenciales Incorrectas'));
         }}
     }
 }

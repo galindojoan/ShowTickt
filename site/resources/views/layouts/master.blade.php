@@ -14,10 +14,11 @@
     <img class="logo" alt="logoShowTickt" src="{{ asset('imagen/logo-definitivo.png') }}">
     <h1 class="titulo">ShowTickt</h1>
 
+
     @if(session('key'))
 
     <form action="{{ route('session') }}" method="get" class="form">
-      <select onfocus='this.size=2;' onblur='this.size=0;' onchange='this.size=1; this.blur();this.form.submit()' class="userOptions">
+      <select name="sesionOpcion" onfocus='this.size=2;' onblur='this.size=0;' onchange='this.size=1; this.blur();this.form.submit()' class="userOptions">
         <option class="optionProfile" value="" selected hidden>{{ session('key') }}</option>
         <option class="optionProfile" value="profile">Perfil de usuario</option>
         <option class="optionProfile" value="closeSession">Cerrar sesión</option>

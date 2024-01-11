@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\passwordController;
 use App\Http\Controllers\PasswordController as ControllersPasswordController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\CrearEsdevenimentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +28,5 @@ Route::post('/login',[LoginController::class,'login'])->name(('login'));
 Route::post('/homePromotor', [LoginController::class,'iniciarSesion'])->name('homePromotor');
 Route::post('/perfil', [LoginController::class,'iniciarSesion'])->name('perfil');
 Route::get('/session', [SessionController::class, 'SessionController'])->name('session');
+Route::get('/crear-esdeveniment', [CrearEsdevenimentController::class, 'index'])->name('crear-esdeveniment');
 Route::get('/recuperar',[PasswordController::class,'passwordPage'])->name('recuperar');

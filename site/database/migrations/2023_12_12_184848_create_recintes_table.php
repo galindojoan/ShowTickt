@@ -14,8 +14,14 @@ return new class extends Migration
         Schema::create('recintes', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
+            $table->string('provincia');
             $table->string('lloc');
+            $table->string('codi_postal');
+            $table->unsignedInteger('capacitat');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -25,7 +25,10 @@ class RecinteFactory extends Factory
     {
         return [
             'nom' => $this->faker->word,
+            'provincia' => $this->faker->state,
             'lloc' => $this->faker->city,
+            'codi_postal' => $this->faker->postcode,
+            'capacitat' => $this->faker->randomNumber(3),
         ];
     }
 }

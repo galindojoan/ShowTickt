@@ -41,6 +41,12 @@ header {
 .optionProfile:hover{
   background: red;
 }
+#svg{
+  appearance: none;
+  display: none;
+  background-color: black;
+  color: #fff;
+}
 
 footer {
   position: fixed;
@@ -97,7 +103,7 @@ footer {
   display: grid;
   top: 0;
   grid-template-areas:
-    "a a b b b";
+    "a a a a a b b b b b b c";
 
 }
 
@@ -113,6 +119,12 @@ form[id="filtre"] {
 form[id="cerca"] {
   grid-area: b;
   text-align: start;
+}
+
+form[id="promotores"]{
+  display: grid;
+  grid-area: c;
+  width: fit-content;
 }
 
 .filter-bar {
@@ -152,16 +164,35 @@ select[class="form-control"] {
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
   box-shadow: 3px 2px 7px gray;
+  height: 32px;
 }
 
 input[class="form-control"] {
-  width: 50%;
+  width: 75%;
   border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
   box-shadow: 3px 2px 7px gray;
   height: 15px;
 }
 
+.linkPromotor{
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  margin: 0px;
+  padding: 5px;
+  font-weight: 700;
+  font-size: 17px;
+  transition: color 0.3s ease;
+  box-shadow: 0 5px 1px rgba(0, 0, 0, 0.1);
+}
+.linkPromotor:hover{
+  cursor: pointer;
+  color: #ff5e00;
+}
+.linkPromotor:active{
+  transform: scale(0.9);
+}
 
 .btn-primary {
   background-color: inherit;
@@ -499,6 +530,19 @@ margin:5%
   }
   .errorMsg{
     margin-top: 5%;
+  }
+  .linkPromotor{
+    font-weight: 800;
+    font-size: 13px;
+  }
+  #svg{
+    display: block;
+  }
+  .optionsBar{
+    display: none;
+  }
+  select[class="form-control"] {
+    height: 32px;
   }
 }
 

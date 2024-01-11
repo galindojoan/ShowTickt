@@ -36,6 +36,17 @@
                     </svg></button>
             </div>
         </form>
+        <form id="promotores" method="@if(session('key'))
+            POST 
+            @else GET 
+            @endif" 
+            action="@if(session('key'))
+            {{route('homePromotor')}}
+            @else{{route('login')}}
+            @endif">
+            @csrf
+            <input class="linkPromotor" type="submit" value="PROMOTORES">
+        </form>
     </div>
     <div class="event-cards">
         @foreach ($esdeveniments as $esdeveniment)

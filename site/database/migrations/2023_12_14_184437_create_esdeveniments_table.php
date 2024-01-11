@@ -17,8 +17,10 @@ return new class extends Migration
             $table->date('dia');
             $table->string('imatge');
             $table->decimal('preu', 8, 2);
+            $table->integer('aforament');
             $table->foreignId('recinte_id')->constrained('recintes');
             $table->foreignId('categoria_id')->constrained('categories');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

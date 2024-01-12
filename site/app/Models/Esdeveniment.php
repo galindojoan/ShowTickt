@@ -9,7 +9,7 @@ class Esdeveniment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nom', 'dia', 'imatge', 'preu', 'recinte_id', 'categoria_id'];
+    protected $fillable = ['nom', 'dia', 'imatge', 'preu', 'aforament', 'recinte_id', 'categoria_id', 'user_id'];
 
     public function recinte()
     {
@@ -19,5 +19,10 @@ class Esdeveniment extends Model
     public function categoria()
     {
         return $this->belongsTo(Categoria::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

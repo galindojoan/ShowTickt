@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Esdeveniment;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class EsdevenimentFactory extends Factory
@@ -26,6 +27,8 @@ class EsdevenimentFactory extends Factory
             'dia' => $this->faker->date,
             'imatge' => $this->faker->imageUrl(),
             'preu' => $this->faker->randomFloat(2, 10, 1000),
+            'aforament' => $this->faker->randomNumber(3),
+            'user_id' => User::factory(),
         ];
     }
 }

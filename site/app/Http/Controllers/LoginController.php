@@ -30,6 +30,7 @@ class LoginController extends Controller
 
         if ($user && Hash::check($password, $user->password)) {
             $request->session()->put('key', $userName);
+            $request->session()->put('user_id', $user->id); // Almacenar el ID del usuario en la sesión
             $sessionValue = $request->session()->get('key');
             return view('homePromotor');
         } else {

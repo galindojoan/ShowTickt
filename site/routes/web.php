@@ -25,6 +25,7 @@ Route::get('/cerca', [HomeController::class, 'cerca'])->name('cerca');
 Route::get('/resultados', [HomeController::class, 'cerca'])->name('resultados');
 Route::get('/esdeveniment/{id}', [EsdevenimentController::class, 'show'])->name('mostrar-esdeveniment');
 Route::post('/login',[LoginController::class,'login'])->name(('login'));
+Route::get('/login',[LoginController::class,'login'])->name(('login'));
 Route::post('/homePromotor', [LoginController::class,'iniciarSesion'])->name('homePromotor');
 Route::get('/homePromotor', [LoginController::class, 'iniciarSesion'])->name('homePromotor');
 Route::post('/perfil', [LoginController::class,'iniciarSesion'])->name('perfil');

@@ -41,7 +41,7 @@
             @else{{route('login')}}
             @endif">
             @csrf
-        <input class="ahref" type="submit" value="PROMOTORES">
+        <input class="linkPromotor" type="submit" value="PROMOTORES">
         </form>
     </div>
     <div class="event-cards">

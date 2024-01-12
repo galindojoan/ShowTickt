@@ -393,7 +393,9 @@ ul {
 }
 
 /*Estilos para la pantalla del login*/
-
+#loginForm{
+  display: contents;
+}
 .loginPage{
   background-color: #dcd;
   width: 100vw;

@@ -41,8 +41,21 @@ header {
 .userOptions:hover{
   cursor: pointer;
 }
+.optionProfile{
+  color: #fff;
+  background-color: inherit;
+  border: 1px solid black;
+  transition: color 0.3s ease;
+  font-weight: 700;
+  font-size: 14px;
+  margin: 10px;
+}
 .optionProfile:hover{
-  background: red;
+  color: #FF7118;
+  
+}
+.optionProfile:active {
+  transform: scale(0.9); 
 }
 
 footer {

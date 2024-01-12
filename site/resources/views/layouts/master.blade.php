@@ -19,8 +19,8 @@
     <button id="openOpt" class="selOpt ahref">{{ session('key') }}</button>
     <div name="opciones">
       <form action="{{route('session')}}" method="get" id="form">
-        <button id="profile" class="optionProfile">Perfil de usuario</button>
-        <button id="sesion" class="optionProfile">Cerrar sesión</button>
+        <button id="profile" class="optionProfile">Perfil</button>
+        <button id="sesion" class="optionProfile">Salir</button>
         <input type="hidden" name="sesionOpcion" id="sesionOpcion">
       </form>
     </div>    

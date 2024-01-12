@@ -200,7 +200,7 @@ input[class="form-control"] {
 }
 .linkPromotor:hover{
   cursor: pointer;
-  color: #ff5e00;
+  transform: scale(1.05);
 }
 .linkPromotor:active{
   transform: scale(0.9);

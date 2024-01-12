@@ -57,7 +57,6 @@
     options.style.display = 'none';
     const button = document.querySelector('.selOpt');
     window.addEventListener('click',function(e){
-      e.preventDefault();
       if(button.contains(e.target)){
         button.style.display = 'none';
         options.style.display = 'block';

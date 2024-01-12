@@ -42,17 +42,17 @@ header {
   cursor: pointer;
 }
 .optionProfile{
-  color: #fff;
+  color: #FF7118;
   background-color: inherit;
   border: 1px solid black;
   transition: color 0.3s ease;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 15px;
   margin: 10px;
 }
 .optionProfile:hover{
-  color: #FF7118;
-  
+  color: #ff5e00;
+  transform: scale(1.1);
 }
 .optionProfile:active {
   transform: scale(0.9); 
@@ -80,6 +80,7 @@ footer {
 
 #footerHome:hover {
   color: #ff5e00; /* Color diferente al pasar el ratón */
+  transform: scale(1.1);
 }
 
 #footerHome:active {
@@ -100,6 +101,7 @@ footer {
 .ahref:hover{
   cursor: pointer;
   color: #ff5e00;
+  transform: scale(1.1);
 }
 
 .ahref:active{

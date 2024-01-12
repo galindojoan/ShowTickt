@@ -44,21 +44,29 @@
         <input class="linkPromotor" type="submit" value="PROMOTORES">
         </form>
     </div>
+    
     <div class="event-cards">
-        @foreach ($esdeveniments as $esdeveniment)
-            <a href="{{ route('mostrar-esdeveniment', ['id' => $esdeveniment->id]) }}" class="event-link">
-                <div class="event-card">
-                    <div class="event-details">
-                        <p>{{ $esdeveniment->nom }}</p>
-                        <p>{{ $esdeveniment->dia }}</p>
-                        <p>{{ $esdeveniment->recinte->lloc }}</p>
-                        <p>{{ $esdeveniment->preu }} €</p>
-                    </div>
-                    <img src="{{ $esdeveniment->imatge }}" alt="Imatge de l'esdeveniment">
-                </div>
-            </a>
+      @foreach($categoriesWithEventCount as $category)
+      <h3>{{ $category->tipus }}</h3><br>
+      @foreach ($esdeveniments as $esdeveniment)
+      @if($esdeveniment->categoria_id==$category->id)
+      <a href="{{ route('mostrar-esdeveniment', ['id' => $esdeveniment->id]) }}" class="event-link">
+        <div class="event-card">
+            <div class="event-details">
+                <p>{{ $esdeveniment->nom }}</p>
+                <p>{{ $esdeveniment->dia }}</p>
+                <p>{{ $esdeveniment->recinte->lloc }}</p>
+                <p>{{ $esdeveniment->preu }} €</p>
+            </div>
+            <img src="{{ $esdeveniment->imatge }}" alt="Imatge de l'esdeveniment">
+        </div>
+    </a>
+      @endif
         @endforeach
+      @endforeach
+      
+        
     </div>
 
-    <div class="pages">{{ $esdeveniments->links('pagination::bootstrap-5') }}</div>
+    {{-- <div class="pages">{{ $esdeveniments->links('pagination::bootstrap-5') }}</div> --}}
 @endsection

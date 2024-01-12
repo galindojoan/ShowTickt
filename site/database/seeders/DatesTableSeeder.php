@@ -7,7 +7,7 @@ use App\Models\Data;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class dates extends Seeder
+class DatesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,7 +18,7 @@ class dates extends Seeder
         $esdevenimentIds = Esdeveniment::pluck('id');
 
         data::factory()->count(10)->create([
-            'esdeveniment_id' => function () use ($esdevenimentIds) {
+            'esdeveniments_id' => function () use ($esdevenimentIds) {
                 return rand(1, count($esdevenimentIds));
             },
         ]);

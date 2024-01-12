@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class data extends Model
 {
     use HasFactory;
-    protected $fillable = ['dia', 'hores','esdeveniments_id'];
+    protected $fillable = ['dia', 'hores'];
     public function esdeveniment()
     {
         return $this->belongsTo(Esdeveniment::class);

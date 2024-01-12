@@ -11,6 +11,19 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class HomeController extends Controller
 {
+
+    public function getCategoriesWithEventCount()
+    {
+        $categories = Categoria::all();
+
+        $categoriesWithEventCount = $categories->map(function ($category) {
+            $category->eventCount = Esdeveniment::where('categoria_id', $category->id)->count();
+            return $category;
+        });
+
+        return $categoriesWithEventCount;
+    }
+
     public function index()
     {
         $pag = Config::get('app.items_per_page', 6);
@@ -22,17 +35,22 @@ class HomeController extends Controller
 
         $categories = Categoria::all();
 
-        return view('home', compact('esdeveniments', 'categories', 'categoryId'));
+        $categoriesWithEventCount = $this->getCategoriesWithEventCount();
+
+        return view('home', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount'));
     }
 
-    public function quitarAcentos($cadena) {
+    
+
+    public function quitarAcentos($cadena)
+    {
         $acentos = [
             'á' => 'a', 'é' => 'e', 'í' => 'i', 'ó' => 'o', 'ú' => 'u',
             'Á' => 'A', 'É' => 'E', 'Í' => 'I', 'Ó' => 'O', 'Ú' => 'U',
             'ä' => 'a', 'ë' => 'e', 'ï' => 'i', 'ö' => 'o', 'ü' => 'u',
             'Ä' => 'A', 'Ë' => 'E', 'Ï' => 'I', 'Ö' => 'O', 'Ü' => 'U',
         ];
-    
+
         return strtr($cadena, $acentos);
     }
 
@@ -43,7 +61,7 @@ class HomeController extends Controller
         $categoryId = $request->input('category');
 
         $query = Esdeveniment::with(['recinte'])
-        ->orderBy('dia', 'desc'); // Ordenar por fecha descendente
+            ->orderBy('dia', 'desc'); // Ordenar por fecha descendente
 
         // Verifica si se ha seleccionado una categoría
         if ($categoryId !== null) {
@@ -72,10 +90,12 @@ class HomeController extends Controller
             }
         }
 
-        $esdeveniments = $query->paginate(config('app.items_per_page', 9));
+        $esdeveniments = $query->paginate(config('app.items_per_page', 6))->appends(request()->query());
 
         $categories = Categoria::all();
 
-        return view('home', compact('esdeveniments', 'categories', 'categoryId'));
+        $categoriesWithEventCount = $this->getCategoriesWithEventCount();
+
+        return view('resultados', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount'));
     }
 }

@@ -5,16 +5,35 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\Recinte;
+use App\Models\Esdeveniment;
+use App\Models\Categoria;
 
 class HomeTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_home_page_loads_correctly()
     {
+        Categoria::factory(4)->create();
+        Recinte::factory(2)->create();
+
+        // Obtener IDs de recintos y categorias existentes
+        $recintesIds = Recinte::pluck('id');
+        $categoriesIds = Categoria::pluck('id');
+        Esdeveniment::factory()->count(6)->create([
+            'recinte_id' => function () use ($recintesIds) {
+                return rand(1, count($recintesIds));
+            },
+            'categoria_id' => function () use ($categoriesIds) {
+                return rand(1, count($categoriesIds));
+            },
+        ]);
+
         $response = $this->get('/');
         $response->assertOk();
 
-        // Ajusta a la lògica per obtenir esdeveniments
-        $events = \App\Models\Esdeveniment::take(5)->get();
+        $events = Esdeveniment::take(1)->get();
 
         foreach ($events as $event) {
             $response->assertSeeText($event->nom);
@@ -23,12 +42,19 @@ class HomeTest extends TestCase
 
     public function test_search_filter_works_correctly()
     {
-        // Assumint que hi ha resultats de cerca vàlids a la base de dades
-        $response = $this->get('/?q=keyword_with_valid_results');
+        $keyword = 'keyword_with_valid_results';
+
+        // Utilitza la fàbrica per crear un esdeveniment amb recinte i categoria
+        Esdeveniment::factory()->create([
+            'nom' => $keyword,
+            'recinte_id' => Recinte::factory()->create()->id,
+            'categoria_id' => Categoria::factory()->create()->id,
+        ]);
+
+        $response = $this->get("/?q={$keyword}");
         $response->assertOk();
 
-        // Ajusta a la teva lògica per obtenir i verificar els resultats de cerca
-        $expectedResults = \App\Models\Esdeveniment::where('nom', 'like', '%keyword_with_valid_results%')->get();
+        $expectedResults = Esdeveniment::where('nom', 'like', "%{$keyword}%")->get();
 
         foreach ($expectedResults as $result) {
             $response->assertSeeText($result->nom);
@@ -37,37 +63,47 @@ class HomeTest extends TestCase
 
     public function test_category_filter_works_correctly()
     {
-        // Assegura't que hi ha dades a la base de dades
-        // associades a una categoria específica
-        $categoryId = 4; // Ajusta a l'ID correcte de la categoria "social"
-        $response = $this->get("/cerca?category={$categoryId}");
+        $categoryId = 3;
 
+        Categoria::factory()->create(['id' => $categoryId]);
+
+        // Utilitza la fàbrica per crear un esdeveniment amb recinte i categoria
+        Esdeveniment::factory()->create([
+            'categoria_id' => $categoryId,
+            'recinte_id' => Recinte::factory()->create()->id,
+        ]);
+
+        $response = $this->get("/cerca?category={$categoryId}");
         $response->assertOk();
     }
 
-    // Podeu continuar afegint altres proves aquí...
-
     public function test_pagination_works_correctly()
     {
-        // Prova de paginació
+        // Crea recintes i categories necessàries
+        Recinte::factory(10)->create();
+        Categoria::factory(10)->create();
+
+        // Crea esdeveniments amb recintes i categories associats
+        Esdeveniment::factory(10)->create([
+            'recinte_id' => Recinte::factory()->create()->id,
+            'categoria_id' => Categoria::factory()->create()->id,
+        ]);
+
         $response = $this->get('/?page=2');
         $response->assertOk();
 
-        // Verifica que es mostri correctament la segona pàgina
         $response->assertSeeText('2');
-
-        // Assegura't que la paginació no estigui buida
         $response->assertDontSeeText('Mostrando 0 - 0 de 0 resultados');
     }
 
     public function test_home_page_contains_category_options()
     {
-        // Prova que la pàgina conté les opcions de categoria
+        Categoria::factory(4)->create();
+
         $response = $this->get('/');
         $response->assertOk();
 
-        // Ajusta a la teva lògica per obtenir les categories
-        $categories = \App\Models\Categoria::all();
+        $categories = Categoria::all();
 
         foreach ($categories as $category) {
             $response->assertSeeText($category->tipus);

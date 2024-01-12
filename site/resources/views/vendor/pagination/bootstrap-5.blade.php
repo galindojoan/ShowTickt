@@ -3,7 +3,7 @@
 
         <div class="d-none flex-sm-fill d-sm-flex align-items-sm-center justify-content-sm-between">
             <div>
-                <p class="small text-muted">
+                <p class="small text-muted pag">
                     {!! __('Mostrando') !!}
                     <span class="fw-semibold">{{ $paginator->firstItem() }}</span>
                     {!! __('-') !!}
@@ -18,7 +18,7 @@
                 <ul class="pagination">
                     {{-- Previous Page Link --}}
                     @if ($paginator->onFirstPage())
-                        <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
+                        <li class="page-item disabled" aria-disabled="true">
                             <span class="page-link" aria-hidden="true">&lsaquo;</span>
                         </li>
                     @else
@@ -49,7 +49,7 @@
                     {{-- Next Page Link --}}
                     @if ($paginator->hasMorePages())
                         <li class="page-item">
-                            <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
+                            <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next">&rsaquo;</a>
                         </li>
                     @else
                         <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.next')">

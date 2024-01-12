@@ -24,7 +24,7 @@ class CategoriaFactory extends Factory
     public function definition()
     {
         return [
-            'tipus' => $this->faker->randomElement(['social', 'cultural', 'esportiu', 'altres']),
+            'tipus' => $this->faker->randomElement(['social', 'cultural', 'deportivo', 'otros']),
         ];
     }
 }

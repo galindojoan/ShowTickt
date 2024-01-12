@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('data', function (Blueprint $table) {
             $table->id();
-            $table->enum('tipus', ['social', 'cultural', 'deportivo', 'otros']);
+            $table->date("dia");
+            $table->time("hores");
+            $table->foreignId('esdeveniments_id')->constrained('esdeveniments');
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('data');
     }
 };

@@ -14,7 +14,15 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        Categoria::factory()->count(4)->create();
+        // Verificar si las categorías ya existen
+        $existingCategories = Categoria::whereIn('tipus', ['social', 'cultural', 'deportivo', 'otros'])->pluck('tipus')->toArray();
+
+        // Crear solo las categorías que no existen
+        $categoriesToCreate = array_diff(['social', 'cultural', 'deportivo', 'otros'], $existingCategories);
+
+        foreach ($categoriesToCreate as $category) {
+            Categoria::factory()->create(['tipus' => $category]);
+        }
     }
 }
 

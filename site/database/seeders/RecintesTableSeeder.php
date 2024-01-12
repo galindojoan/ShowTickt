@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Recinte;
+use App\Models\User;
 
 class RecintesTableSeeder extends Seeder
 {
@@ -14,6 +15,10 @@ class RecintesTableSeeder extends Seeder
      */
     public function run()
     {
-        Recinte::factory()->count(5)->create();
+        $users = User::all();
+
+        Recinte::factory()->count(5)->create([
+            'user_id' => $users->random(),
+        ]);
     }
 }

@@ -28,5 +28,6 @@ Route::post('/login',[LoginController::class,'login'])->name(('login'));
 Route::post('/homePromotor', [LoginController::class,'iniciarSesion'])->name('homePromotor');
 Route::post('/perfil', [LoginController::class,'iniciarSesion'])->name('perfil');
 Route::get('/session', [SessionController::class, 'SessionController'])->name('session');
+Route::post('/session', [SessionController::class, 'SessionController']);
 Route::get('/crear-esdeveniment', [CrearEsdevenimentController::class, 'index'])->name('crear-esdeveniment');
 Route::get('/recuperar',[PasswordController::class,'passwordPage'])->name('recuperar');

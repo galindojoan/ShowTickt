@@ -26,7 +26,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $pag = Config::get('app.items_per_page');
+        $pag = Config::get('app.items_per_page',100);
         $categoryId = ''; // Establece un valor predeterminado
 
         $esdeveniments = Esdeveniment::with(['recinte'])

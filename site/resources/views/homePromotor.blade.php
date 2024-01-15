@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div>
+<div class="promotorBody">
     @if(session('key'))
         <p>Bienvenido, {{ session('key') }}</p>
         <div class="button-container">

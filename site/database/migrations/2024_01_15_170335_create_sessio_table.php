@@ -4,17 +4,16 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateSessioTable extends Migration
 {
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('data', function (Blueprint $table) {
+        Schema::create('sessios', function (Blueprint $table) {
             $table->id();
-            $table->date("dia");
-            $table->time("hores");
+            $table->dateTime("data");
             $table->foreignId('esdeveniments_id')->constrained('esdeveniments');
             $table->timestamps();
         });
@@ -23,8 +22,8 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('data');
+        Schema::dropIfExists('sessio');
     }
-};
+}

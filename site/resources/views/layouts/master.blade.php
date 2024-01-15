@@ -29,7 +29,7 @@
     <input type="button" class="ahref" value="Iniciar Session">
     @endif
   </header>
-  <div>
+  <div class="masterBody">
     @yield('content') 
   </div>
   <footer>

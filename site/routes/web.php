@@ -32,6 +32,5 @@ Route::post('/perfil', [LoginController::class,'iniciarSesion'])->name('perfil')
 Route::get('/session', [SessionController::class, 'SessionController'])->name('session');
 Route::post('/session', [SessionController::class, 'SessionController']);
 Route::get('/crear-esdeveniment', [CrearEsdevenimentController::class, 'index'])->name('crear-esdeveniment');
-Route::get('/crear-esdeveniment.create', [CrearEsdevenimentController::class, 'create'])->name('crear-esdeveniment.create');
 Route::post('/crear-esdeveniment.store', [CrearEsdevenimentController::class, 'store'])->name('crear-esdeveniment.store');
 Route::get('/recuperar',[PasswordController::class,'passwordPage'])->name('recuperar');

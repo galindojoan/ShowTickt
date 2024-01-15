@@ -3,21 +3,16 @@
 namespace Database\Seeders;
 
 use App\Models\Esdeveniment;
-use App\Models\Data;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Sessio;
 use Illuminate\Database\Seeder;
 
-class DatesTableSeeder extends Seeder
+class SessioTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        // Obtener IDs de recintos y categorias existentes
         $esdevenimentIds = Esdeveniment::pluck('id');
 
-        data::factory()->count(10)->create([
+        Sessio::factory()->count(10)->create([
             'esdeveniments_id' => function () use ($esdevenimentIds) {
                 return rand(1, count($esdevenimentIds));
             },

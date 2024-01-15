@@ -11,7 +11,7 @@
         @endif
         
         <span>Escriba el email de la cuenta a recuperar.</span> <br> <br>
-        <form action="{{route('homePromotor')}}" method="post" id="loginForm">
+        <form action="{{route('homePromotor')}}" method="post" id="recuperarForm">
         @csrf
             <div class="loginInput">
                 <input type="email" name="email" id="email" placeholder="Email">

@@ -40,8 +40,21 @@ header {
 .userOptions:hover{
   cursor: pointer;
 }
+.optionProfile{
+  color: #FF7118;
+  background-color: inherit;
+  border: 1px solid black;
+  transition: color 0.3s ease;
+  font-weight: 700;
+  font-size: 15px;
+  margin: 10px;
+}
 .optionProfile:hover{
-  background: red;
+  color: #ff5e00;
+  transform: scale(1.1);
+}
+.optionProfile:active {
+  transform: scale(0.9); 
 }
 
 footer {
@@ -66,6 +79,7 @@ footer {
 
 #footerHome:hover {
   color: #ff5e00; /* Color diferente al pasar el ratón */
+  transform: scale(1.1);
 }
 
 #footerHome:active {
@@ -75,7 +89,7 @@ footer {
 .ahref{
   border: none;
   margin: 0px;
-  padding: 0px;
+  padding: 10px;
   font-weight: 700;
   font-size: 17px;
   background-color: inherit;
@@ -86,6 +100,7 @@ footer {
 .ahref:hover{
   cursor: pointer;
   color: #ff5e00;
+  transform: scale(1.1);
 }
 
 .ahref:active{
@@ -184,7 +199,7 @@ input[class="form-control"] {
 }
 .linkPromotor:hover{
   cursor: pointer;
-  color: #ff5e00;
+  transform: scale(1.05);
 }
 .linkPromotor:active{
   transform: scale(0.9);
@@ -377,7 +392,9 @@ ul {
 }
 
 /*Estilos para la pantalla del login*/
-
+#loginForm{
+  display: contents;
+}
 .loginPage{
   background-color: #dcd;
   width: 100vw;

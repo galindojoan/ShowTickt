@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Models\Esdeveniment;
+use App\Models\data;
 use App\Models\Categoria;
+use App\Models\Esdeveniment;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -26,7 +26,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $pag = Config::get('app.items_per_page', 6);
+        $pag = Config::get('app.items_per_page');
         $categoryId = ''; // Establece un valor predeterminado
 
         $esdeveniments = Esdeveniment::with(['recinte'])
@@ -34,10 +34,11 @@ class HomeController extends Controller
             ->paginate($pag);
 
         $categories = Categoria::all();
+        $dates= data::all();
 
         $categoriesWithEventCount = $this->getCategoriesWithEventCount();
 
-        return view('home', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount'));
+        return view('home', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount','dates'));
     }
 
     

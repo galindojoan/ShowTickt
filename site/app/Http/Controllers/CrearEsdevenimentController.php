@@ -7,6 +7,7 @@ use App\Models\Esdeveniment;
 use App\Models\Categoria;
 use App\Models\Recinte;
 use App\Models\Sessio;
+use App\Models\Entrada;
 use Illuminate\Support\Facades\Auth;
 
 class CrearEsdevenimentController extends Controller
@@ -19,7 +20,7 @@ class CrearEsdevenimentController extends Controller
 
         if ($recintes->isEmpty()) {
             $noRecintes = true;
-        }        
+        }
 
         return view('crearEsdeveniment', compact('categories', 'recintes', 'noRecintes'));
     }
@@ -32,7 +33,7 @@ class CrearEsdevenimentController extends Controller
 
         if ($recintes->isEmpty()) {
             $noRecintes = true;
-        }        
+        }
 
         return view('crearEsdeveniment', compact('categories', 'recintes', 'noRecintes'));
     }
@@ -100,12 +101,34 @@ class CrearEsdevenimentController extends Controller
             $esdevenimentId = $esdeveniment->id;
         }
 
+        // Crear la sessió
         $sessio = new Sessio([
             'data' => $request->input('data_hora'),
             'esdeveniments_id' => $esdevenimentId,
         ]);
 
         $sessio->save();
+
+        if ($sessio) {
+            $sessioId = $sessio->id;
+        }
+
+        // Obtener datos de las entradas
+        $noms = $request->input('entrades-nom');
+        $preus = $request->input('entrades-preu');
+        $quantitats = $request->input('entrades-quantitat');
+
+        // Procesar los datos según sea necesario
+        for ($i = 0; $i < count($noms); $i++) {
+            $entrada = new Entrada([
+                'nom' => $noms[$i],
+                'preu' => $preus[$i],
+                'quantitat' => $quantitats[$i],
+                'sessios_id' => $sessioId,
+            ]);
+
+            $entrada->save();
+        }
 
         return redirect()->route('homePromotor')->with('success', 'Evento creado exitosamente');
     }

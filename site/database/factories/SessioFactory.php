@@ -13,6 +13,8 @@ class SessioFactory extends Factory
     {
         return [
             'data' => $this->faker->dateTime,
+            'tancament' => $this->faker->dateTime,
+            'nominal' => $this->faker->boolean(),
         ];
     }
 }

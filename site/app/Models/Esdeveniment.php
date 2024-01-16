@@ -9,7 +9,7 @@ class Esdeveniment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nom', 'imatge', 'preu', 'aforament', 'recinte_id', 'categoria_id', 'user_id'];
+    protected $fillable = ['nom', 'imatge', 'aforament', 'ocult', 'recinte_id', 'categoria_id', 'user_id'];
 
     public function recinte()
     {

@@ -9,7 +9,7 @@ class Sessio extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['data', 'esdeveniments_id'];
+    protected $fillable = ['data', 'tancament', 'nominal', 'esdeveniments_id'];
 
     public function esdeveniment()
     {

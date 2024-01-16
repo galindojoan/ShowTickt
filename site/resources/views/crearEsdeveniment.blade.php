@@ -129,6 +129,32 @@
                 <button type="button" class="btn btn-add" id="agregarTipoEntrada">Agregar Tipo de Entrada</button>
             </div>
 
+            <div class="form-group">
+                <label for="tancamentVenda" class="form-label">Tancament de la venda en línia</label>
+                <select id="tancamentVenda" class="form-select" name="tancamentVenda">
+                    <option value="esdeveniment">A l'hora de celebració de l'esdeveniment</option>
+                    <option value="1hora">1 hora abans</option>
+                    <option value="2hores">2 hores abans</option>
+                    <option value="personalitzat">Personalitzat (triem data i hora)</option>
+                </select>
+
+                <div id="personalitzatTancament" style="display: none;">
+                    <label for="dataHoraPersonalitzada" class="form-label">Data i hora de tancament</label>
+                    <input type="datetime-local" class="form-controller" id="dataHoraPersonalitzada"
+                        name="dataHoraPersonalitzada">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="ocultarEsdeveniment" class="form-label">Esdeveniment Ocult</label>
+                <input type="checkbox" id="ocultarEsdeveniment" name="ocultarEsdeveniment">
+            </div>
+
+            <div class="form-group">
+                <label for="entradaNominal" class="form-label">Entrades Nominals</label>
+                <input type="checkbox" id="entradaNominal" name="entradaNominal">
+            </div>
+
             <button type="button" class="btn btn-add" id="validarYCrear">Crear Esdeveniment</button>
         </form>
     </div>
@@ -140,6 +166,10 @@
             var novaAdrecaBoto = document.getElementById('mostrarNovaAdreca');
             var tiposEntradas = document.getElementById('tiposEntradas');
             var agregarTipoEntrada = document.getElementById('agregarTipoEntrada');
+            var tancamentVendaSelect = document.getElementById('tancamentVenda');
+            var personalitzatTancamentDiv = document.getElementById('personalitzatTancament');
+            var dataHoraPersonalitzadaInput = document.getElementById('dataHoraPersonalitzada');
+            var dataHoraEsdevenimentInput = document.getElementById('data_hora');
 
             // Afegir un esdeveniment d'escolta al botó "Afegir Nova Adreça"
             document.getElementById('mostrarNovaAdreca').addEventListener('click', function() {
@@ -179,7 +209,44 @@
                 tiposEntradas.appendChild(nuevoTipoEntrada);
             });
 
+            function establirValorPerDefecte() {
+                var tancamentValue = tancamentVendaSelect.value;
+
+                if (tancamentValue === 'personalitzat') {
+                    personalitzatTancamentDiv.style.display = 'block';
+                } else {
+                    personalitzatTancamentDiv.style.display = 'none';
+
+                    if (tancamentValue === '1hora' || tancamentValue === '2hores') {
+                        // Calcula la data de tancament ajustant-hi les hores segons l'opció seleccionada
+                        var dataEsdeveniment = new Date(dataHoraEsdevenimentInput.value);
+                        var horesAbans = (tancamentValue === '1hora') ? 1 : 2;
+                        var dataTancament = new Date(dataEsdeveniment.getTime() - (horesAbans - 1) * 60 * 60 *
+                            1000);
+
+                        // Formateja la data de tancament com a string per a l'input datetime-local
+                        var dataTancamentString = dataTancament.toISOString().slice(0, -8);
+                        dataHoraPersonalitzadaInput.value = dataTancamentString;
+                    } else {
+                        // Assigna la data de tancament en base a la selecció
+                        dataHoraPersonalitzadaInput.value = dataHoraEsdevenimentInput.value;
+                    }
+                }
+            }
+
+            tancamentVendaSelect.addEventListener('change', establirValorPerDefecte);
+
+            // Funció per validar la data de tancament
+            function validarDataTancament() {
+                var dataEsdeveniment = new Date(dataHoraEsdevenimentInput.value);
+                var dataTancament = new Date(dataHoraPersonalitzadaInput.value);
+
+                // Comprova si la data de tancament és anterior o igual a la data de l'esdeveniment
+                return dataTancament <= dataEsdeveniment;
+            }
+
             validarYCrear.addEventListener('click', function() {
+                establirValorPerDefecte();
                 // Obtener la lista de entradas
                 var entradas = document.querySelectorAll('.tipo-entrada');
 
@@ -190,7 +257,11 @@
                     // Realitzar les validacions addicionals
                     if (verificarQuantitats()) {
                         // Si tot està bé, enviar el formulari
-                        document.getElementById('addEvent').submit();
+                        if (validarDataTancament()) {
+                            document.getElementById('addEvent').submit();
+                        } else {
+                            alert('La data de tancament ha de ser anterior o igual a la data de l\'esdeveniment.');
+                        }
                     }
                 }
             });
@@ -216,7 +287,8 @@
                     // Verifica que la quantitat no superi la capacitat total del local
                     if (quantitat > aforamentMaxim) {
                         alert(
-                            'La quantitat disponible per a aquest tipus d\'entrada no pot superar la capacitat total del local.');
+                            'La quantitat disponible per a aquest tipus d\'entrada no pot superar la capacitat total del local.'
+                        );
                         return false; // Evitar l'enviament del formulari
                     }
                 }

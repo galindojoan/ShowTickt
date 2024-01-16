@@ -14,6 +14,8 @@ class CreateSessioTable extends Migration
         Schema::create('sessios', function (Blueprint $table) {
             $table->id();
             $table->dateTime("data");
+            $table->dateTime("tancament");
+            $table->boolean('nominal')->default(false);
             $table->foreignId('esdeveniments_id')->constrained('esdeveniments');
             $table->timestamps();
         });

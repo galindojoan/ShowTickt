@@ -12,7 +12,7 @@
 
             <div class="form-group">
                 <label for="titol" class="form-label">Título del evento</label>
-                <input type="text" class="form-controller" id="titol" name="titol" required>
+                <input type="text" maxlength="20" class="form-controller" id="titol" name="titol" required>
             </div>
 
             <div class="form-group">
@@ -43,21 +43,22 @@
 
                     <div class="form-group">
                         <label for="nova_codi_postal" class="form-label">Codigo Postal</label>
-                        <input type="text" class="form-controller" id="nova_codi_postal" name="nova_codi_postal">
+                        <input type="number" maxlength="5" class="form-controller" id="nova_codi_postal"
+                            name="nova_codi_postal">
                     </div>
 
                     <div class="form-group">
                         <label for="nova_capacitat" class="form-label">Aforo</label>
-                        <input type="text" class="form-controller" id="nova_capacitat" name="nova_capacitat">
+                        <input type="number" class="form-controller" id="nova_capacitat" name="nova_capacitat">
                     </div>
 
                     <input type="hidden" name="nova_user_id" value="{{ session('user_id') }}">
                 </div>
             @else
                 <div class="form-group">
-                    <label for="recinte" class="form-label">Recinte</label>
+                    <label for="recinte" class="form-label">Recinto</label>
                     <select class="form-select" id="recinteSelect" name="recinte">
-                        <option value="">Selecciona un recinte existent</option>
+                        <option value="">Selecciona un recinto existente</option>
                         @foreach ($recintes as $recinte)
                             <option value="{{ $recinte->id }}">{{ $recinte->nom }}</option>
                         @endforeach
@@ -86,12 +87,13 @@
 
                     <div class="form-group">
                         <label for="nova_codi_postal" class="form-label">Codigo Postal</label>
-                        <input type="text" class="form-controller" id="nova_codi_postal" name="nova_codi_postal">
+                        <input type="number" maxlength="5" class="form-controller" id="nova_codi_postal"
+                            name="nova_codi_postal">
                     </div>
 
                     <div class="form-group">
                         <label for="nova_capacitat" class="form-label">Aforo</label>
-                        <input type="text" class="form-controller" id="nova_capacitat" name="nova_capacitat">
+                        <input type="number" class="form-controller" id="nova_capacitat" name="nova_capacitat">
                     </div>
 
                     <input type="hidden" name="nova_user_id" value="{{ session('user_id') }}">
@@ -107,7 +109,7 @@
 
             <div class="form-group">
                 <label for="descripcio" class="form-label">Descripción del evento</label>
-                <textarea class="form-controller" id="descripcio" name="descripcio" rows="3" required></textarea>
+                <textarea class="form-controller" maxlength="640" id="descripcio" name="descripcio" rows="3" required></textarea>
             </div>
 
             <div class="form-group">
@@ -127,35 +129,45 @@
                     <!-- Contenido dinámico para los tipos de entradas -->
                 </div>
                 <button type="button" class="btn btn-add" id="agregarTipoEntrada">Agregar Tipo de Entrada</button>
+                <button type="button" class="btn btn-remove" id="eliminarTipoEntrada" style="display: none;">Eliminar
+                    Entrada</button>
             </div>
 
             <div class="form-group">
-                <label for="tancamentVenda" class="form-label">Tancament de la venda en línia</label>
+                <label for="tancamentVenda" class="form-label">Fecha de cierre de ventas</label>
                 <select id="tancamentVenda" class="form-select" name="tancamentVenda">
-                    <option value="esdeveniment">A l'hora de celebració de l'esdeveniment</option>
-                    <option value="1hora">1 hora abans</option>
-                    <option value="2hores">2 hores abans</option>
-                    <option value="personalitzat">Personalitzat (triem data i hora)</option>
+                    <option value="esdeveniment">Inicio de la celebración</option>
+                    <option value="1hora">1 hora antes</option>
+                    <option value="2hores">2 horas antes</option>
+                    <option value="personalitzat">Personalizado (escogemos fecha y hora)</option>
                 </select>
 
                 <div id="personalitzatTancament" style="display: none;">
-                    <label for="dataHoraPersonalitzada" class="form-label">Data i hora de tancament</label>
+                    <label for="dataHoraPersonalitzada" class="form-label">Fecha y hora del cierre</label>
                     <input type="datetime-local" class="form-controller" id="dataHoraPersonalitzada"
                         name="dataHoraPersonalitzada">
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="ocultarEsdeveniment" class="form-label">Esdeveniment Ocult</label>
+                <label for="ocultarEsdeveniment" class="form-label">Evento Oculto</label>
                 <input type="checkbox" id="ocultarEsdeveniment" name="ocultarEsdeveniment">
             </div>
 
             <div class="form-group">
-                <label for="entradaNominal" class="form-label">Entrades Nominals</label>
+                <label for="entradaNominal" class="form-label">Entradas Nominales</label>
                 <input type="checkbox" id="entradaNominal" name="entradaNominal">
             </div>
 
-            <button type="button" class="btn btn-add" id="validarYCrear">Crear Esdeveniment</button>
+            <!-- Afegir a la part inferior del teu document -->
+            <div id="errorDiv" style="display: none;">
+                <div id="errorContent">
+                    <!-- El missatge d'error es mostrarà aquí -->
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-add" id="validarYCrear">Crear Evento</button>
+
         </form>
     </div>
     <script>
@@ -195,7 +207,7 @@
                 nuevoTipoEntrada.innerHTML = `
 <div class="tipo-entrada">
     <label for="entrades-nom" class="form-label">Nombre del Tipo</label>
-    <input type="text" class="form-controller" name="entrades-nom[]" required>
+    <input type="text" maxlength="20" class="form-controller" name="entrades-nom[]" required>
 
     <label for="entrades-preu" class="form-label">Precio</label>
     <input type="text" class="form-controller" name="entrades-preu[]" required>
@@ -207,7 +219,38 @@
     `;
 
                 tiposEntradas.appendChild(nuevoTipoEntrada);
+
+                // Mostrar el botón de eliminar si hay al menos un tipo de entrada
+                var eliminarTipoEntradaButton = document.getElementById('eliminarTipoEntrada');
+                eliminarTipoEntradaButton.style.display = 'block';
             });
+
+            // Eliminar Último Tipo de Entrada
+            eliminarTipoEntrada.addEventListener('click', function() {
+                // Obtener el contenedor de tipos de entrada
+                var tiposEntradasContainer = document.getElementById('tiposEntradas');
+
+                // Obtener la lista de tipos de entrada
+                var tiposEntradas = tiposEntradasContainer.querySelectorAll('.tipo-entrada');
+
+                // Verificar que haya al menos un tipo de entrada para eliminar
+                if (tiposEntradas.length > 1) {
+                    // Obtener el último tipo de entrada
+                    var ultimoTipoEntrada = tiposEntradas[tiposEntradas.length - 1];
+
+                    // Eliminar el último tipo de entrada
+                    ultimoTipoEntrada.parentNode.removeChild(ultimoTipoEntrada);
+                }
+
+                // Ocultar el botón de eliminar si no hay más tipos de entrada
+                if (tiposEntradas.length <= 1) {
+                    mostrarMissatge('Debe haber al menos un tipo de entrada.');
+                } else {
+                    var errorDiv = document.getElementById('errorDiv');
+                    errorDiv.style.display = 'none';
+                }
+            });
+
 
             function establirValorPerDefecte() {
                 var tancamentValue = tancamentVendaSelect.value;
@@ -245,26 +288,181 @@
                 return dataTancament <= dataEsdeveniment;
             }
 
-            validarYCrear.addEventListener('click', function() {
-                establirValorPerDefecte();
-                // Obtener la lista de entradas
+            function validarCamposVacios() {
+                var titol = document.getElementById('titol').value.trim();
+                var recinteSelect = document.getElementById('recinteSelect');
+                var nousCamps = document.getElementById('nousCamps');
+                var imatgeInput = document.getElementById('imatge');
+                var descripcionInput = document.getElementById('descripcio');
+                var descripcionValue = descripcionInput.value.trim();
+                var fechaHoraInput = document.getElementById('data_hora');
+                var fechaHoraValue = fechaHoraInput.value.trim();
+                var aforoInput = document.getElementById('aforament_maxim');
+                var aforoValue = aforoInput.value.trim();
+                var tancamentVendaSelect = document.getElementById('tancamentVenda');
+                var personalitzatTancamentDiv = document.getElementById('personalitzatTancament');
+                var dataHoraPersonalitzadaInput = document.getElementById('dataHoraPersonalitzada');
+
+                if (titol === '') {
+                    mostrarMissatge('El título del evento es un campo obligatorio');
+                    return false;
+                }
+
+                if (titol.length > 20) {
+                    mostrarMissatge('El título del evento no puede tener más de 20 caracteres.');
+                    return false;
+                }
+
+                if (recinteSelect.value === '' && nousCamps.style.display !== 'block') {
+                    mostrarMissatge('Debe seleccionar un recinto existente o agregar una nueva dirección.');
+                    return false;
+                }
+
+                if (nousCamps.style.display === 'block') {
+                    var novaNom = document.getElementById('nova_nom').value.trim();
+                    var novaProvincia = document.getElementById('nova_provincia').value.trim();
+                    var novaCiutat = document.getElementById('nova_ciutat').value.trim();
+                    var novaCodiPostal = document.getElementById('nova_codi_postal').value.trim();
+                    var novaCapacitat = document.getElementById('nova_capacitat').value.trim();
+
+                    // Validar que el código postal sea numérico
+                    if (isNaN(novaCodiPostal)) {
+                        mostrarMissatge('El código postal debe ser un valor numérico.');
+                        return false;
+                    }
+
+                    // Validar que la capacidad sea numérica
+                    if (isNaN(novaCapacitat)) {
+                        mostrarMissatge('El aforo debe ser un valor numérico.');
+                        return false;
+                    }
+
+                    if (novaNom === '' || novaProvincia === '' || novaCiutat === '' || novaCodiPostal === '' ||
+                        novaCapacitat === '') {
+                        mostrarMissatge('Todos los campos de dirección son obligatorios.');
+                        return false;
+                    }
+
+
+                    // Validar que el código postal tenga el formato adecuado (5 dígitos)
+                    var codiPostalRegExp = /^\d{5}$/;
+                    if (!codiPostalRegExp.test(novaCodiPostal)) {
+                        mostrarMissatge('El código postal debe tener 5 dígitos.');
+                        return false;
+                    }
+
+                    if (parseInt(novaCapacitat) < 20) {
+                        mostrarMissatge('El aforo no puede ser menor de 20.')
+                        return false;
+                    }
+                }
+
+                if (imatgeInput.files.length === 0) {
+                    mostrarMissatge('Debe seleccionar una imagen para el evento.');
+                    return false;
+                }
+
+                if (descripcionValue === '') {
+                    mostrarMissatge('La descripción del evento no puede estar vacía.');
+                    return false;
+                }
+
+                if (descripcionValue.length > 640) {
+                    mostrarMissatge('La descripción del evento debe tener un máximo de 640 caracteres.');
+                    return false;
+                }
+
+                if (fechaHoraValue === '') {
+                    mostrarMissatge('El campo de fecha y hora de la celebración no puede estar vacío.');
+                    return false;
+                }
+
+                if (aforoValue === '') {
+                    mostrarMissatge('El campo de aforo máximo no puede estar vacío.');
+                    return false;
+                }
+
+                if (isNaN(aforoValue)) {
+                    mostrarMissatge('El valor del aforo máximo debe ser numérico.');
+                    return false;
+                }
+
+                if (parseInt(aforoValue) < 20) {
+                    mostrarMissatge('El aforo no puede ser menor de 20.')
+                    return false;
+                }
+
                 var entradas = document.querySelectorAll('.tipo-entrada');
 
-                // Verificar que haya al menos una entrada
-                if (entradas.length === 0) {
-                    alert('Debe agregar al menos una entrada antes de crear el evento.');
-                } else {
-                    // Realitzar les validacions addicionals
-                    if (verificarQuantitats()) {
-                        // Si tot està bé, enviar el formulari
-                        if (validarDataTancament()) {
-                            document.getElementById('addEvent').submit();
-                        } else {
-                            alert('La data de tancament ha de ser anterior o igual a la data de l\'esdeveniment.');
+                for (var i = 0; i < entradas.length; i++) {
+                    var entrada = entradas[i];
+                    var nombreInput = entrada.querySelector('[name="entrades-nom[]"]');
+                    var precioInput = entrada.querySelector('[name="entrades-preu[]"]');
+                    var cantidadInput = entrada.querySelector('[name="entrades-quantitat[]"]');
+                    var nombreValue = nombreInput.value.trim();
+                    var precioValue = precioInput.value.trim();
+                    var cantidadValue = cantidadInput.value.trim();
+                    if (nombreValue === '') {
+                        mostrarMissatge(
+                            'El nombre del tipo de entrada no puede estar vacío.'
+                        );
+                        return false;
+                    }
+
+                    if (nombreValue.length > 20) {
+                        mostrarMissatge('El nombre del tipo de entrada debe tener máximo 20 caracteres.')
+                        return false;
+                    }
+
+                    if (precioValue === '' || isNaN(precioValue) || parseFloat(precioValue) <= 0) {
+                        mostrarMissatge('El precio debe ser un valor numérico mayor que 0.');
+                        return false;
+                    }
+
+                    if (cantidadValue !== '' && (isNaN(cantidadValue) || parseInt(cantidadValue) <= 0)) {
+                        mostrarMissatge('La cantidad disponible debe ser un valor numérico mayor que 0.');
+                        return false;
+                    }
+                }
+
+                if (tancamentVendaSelect.value === 'personalitzat' && personalitzatTancamentDiv.style.display !==
+                    'none') {
+                    var dataHoraPersonalitzadaValue = dataHoraPersonalitzadaInput.value.trim();
+                    if (dataHoraPersonalitzadaValue === '') {
+                        mostrarMissatge('La fecha y hora personalizada no puede estar vacía.');
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            validarYCrear.addEventListener('click', function() {
+                establirValorPerDefecte();
+
+                if (validarCamposVacios()) {
+                    // Obtener la lista de entradas
+                    var entradas = document.querySelectorAll('.tipo-entrada');
+
+                    // Verificar que haya al menos una entrada
+                    if (entradas.length === 0) {
+                        mostrarMissatge('Debe agregar al menos una entrada antes de crear el evento.');
+                    } else {
+                        // Realitzar les validacions addicionals
+                        if (verificarQuantitats()) {
+                            // Si tot està bé, enviar el formulari
+                            if (validarDataTancament()) {
+                                document.getElementById('addEvent').submit();
+                            } else {
+                                mostrarMissatge(
+                                    'La fecha de cierre de ventas debe ser anterior o igual a la fecha de inicio.'
+                                );
+                            }
                         }
                     }
                 }
             });
+
 
             function verificarQuantitats() {
                 var entradas = document.querySelectorAll('.tipo-entrada');
@@ -286,8 +484,8 @@
 
                     // Verifica que la quantitat no superi la capacitat total del local
                     if (quantitat > aforamentMaxim) {
-                        alert(
-                            'La quantitat disponible per a aquest tipus d\'entrada no pot superar la capacitat total del local.'
+                        mostrarMissatge(
+                            'La cantidad disponible para este tipo de entrada no puede superar la capacidad total del local.'
                         );
                         return false; // Evitar l'enviament del formulari
                     }
@@ -295,12 +493,22 @@
 
                 // Verifica que el total de quantitats disponibles no superi l'aforament màxim
                 if (totalQuantitats > aforamentMaxim) {
-                    alert('La suma total de quantitats d\'entrades disponibles no pot superar l\'aforament màxim.');
+                    mostrarMissatge(
+                        'La suma total de cantidades de entradas disponibles no puede superar el aforo máximo.'
+                    );
                     return false; // Evitar l'enviament del formulari
                 }
 
                 // Si tot està bé, permet l'enviament del formulari
                 return true;
+            }
+
+            function mostrarMissatge(missatge) {
+                // Mostrar el missatge d'error
+                var errorDiv = document.getElementById('errorDiv');
+                var errorContent = document.getElementById('errorContent');
+                errorContent.innerHTML = missatge;
+                errorDiv.style.display = 'block';
             }
 
         });

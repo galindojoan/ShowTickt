@@ -85,14 +85,17 @@ footer {
 #footerHome {
   padding: 10px;
   color: #ff7118;
-  transition: color 0.3s ease; /* Transición de color */
+  transition: color 0.3s ease;
+  /* Transición de color */
 }
 #footerHome:hover {
-  color: #ff5e00; /* Color diferente al pasar el ratón */
+  color: #ff5e00;
+  /* Color diferente al pasar el ratón */
   transform: scale(1.1);
 }
 #footerHome:hover:active {
-  transform: scale(0.9); /* Animación de escala al hacer clic */
+  transform: scale(0.9);
+  /* Animación de escala al hacer clic */
 }
 
 .event-home {
@@ -119,12 +122,16 @@ footer {
   height: 150px;
   margin: 10px;
   border: 1px solid black;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  transition: transform 0.3s ease; /* Transición de la propiedad transform */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Sombra suave */
+  transition: transform 0.3s ease;
+  /* Transición de la propiedad transform */
 }
 .event-card:hover {
-  transform: scale(1.025); /* Ampliación al pasar el ratón */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al pasar el ratón */
+  transform: scale(1.025);
+  /* Ampliación al pasar el ratón */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  /* Sombra más pronunciada al pasar el ratón */
 }
 .event-card img {
   display: flex;
@@ -506,6 +513,92 @@ a {
 }
 .boton:active {
   background-color: #ff5e00;
+}
+
+/* Estilos para el contenido del formulario */
+#content-container {
+  background-color: #dcd;
+  padding: 50px;
+}
+
+.addEvent {
+  max-width: 600px;
+  margin: auto;
+  min-height: 100vh;
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1.7px solid darkgray;
+  border-radius: 6px;
+  padding: 5%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-size: 18px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.form-controller {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.promotorBody {
+  min-height: 75vh;
+}
+
+/* Estilos para los botones */
+.btn {
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+}
+
+.btn-add {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+/* Estilos para la sección de nueva dirección */
+#nousCamps {
+  display: none;
+  margin-top: 20px;
+}
+
+#cancelarBoto {
+  display: none;
+  margin-top: 10px;
+}
+
+#errorDiv {
+  display: none;
+  background-color: #ffb3b3;
+  /* Color de fondo rojo claro */
+  padding: 10px;
+  /* Añadir relleno */
+  margin: 10px 0;
+  /* Añadir margen arriba y abajo */
+  border: 1px solid #e74c3c;
+  /* Añadir borde rojo oscuro */
+  border-radius: 5px;
+  /* Añadir bordes redondeados */
 }
 
 .errorMsg {

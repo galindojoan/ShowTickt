@@ -57,17 +57,22 @@ header {
 .optionProfile:active {
     transform: scale(0.9);
 }
-
+.bg-page{
+    background-color: #fff;
+    width: 100vw;
+    height: 80vh;
+}
+.masterBody{
+    display: contents;
+    min-height: 80vh;
+}
 footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
     width: 100%;
-    display: flex;
+    display:flex;
     justify-content: center;
     align-items: center;
     background-color: black;
-    height: 10%;
+    min-height: 70px;
     color: white;
 }
 
@@ -106,7 +111,7 @@ footer {
              justify-items: end;
         h2 {
             grid-area: a;
-            justify-items: center;
+            justify-self: center;
         }
     }
     &-card {
@@ -433,7 +438,7 @@ ul {
 .loginPage {
     background-color: #dcd;
     width: 100vw;
-    height: 75vh;
+    height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;

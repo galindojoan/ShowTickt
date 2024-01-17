@@ -39,7 +39,7 @@ Route::get('/homePromotor', [LoginController::class, 'iniciarSesion'])->name('ho
 Route::post('/perfil', [LoginController::class,'iniciarSesion'])->name('perfil');
 
 Route::get('/session', [SessionController::class, 'SessionController'])->name('session');
-Route::post('/session', [SessionController::class, 'SessionController']);
+Route::post('/session', [SessionController::class, 'SessionController'])->name('session');
 
 Route::get('/crear-esdeveniment', [CrearEsdevenimentController::class, 'index'])->name('crear-esdeveniment');
 Route::post('/crear-esdeveniment.store', [CrearEsdevenimentController::class, 'store'])->name('crear-esdeveniment.store');

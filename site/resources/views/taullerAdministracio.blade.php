@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div>
+<div class="bg-page">
     @if(session('key'))
         <p>Tauller d'administració</p>
     @endif

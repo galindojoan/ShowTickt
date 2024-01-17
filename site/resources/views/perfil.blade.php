@@ -3,7 +3,7 @@
 @section('title', 'perfil')
 
 @section('content')
-<div>
+<div class="bg-page">
   @if(session('key'))
       <p>Bienvenido, {{ session('key') }}</p>
   @endif

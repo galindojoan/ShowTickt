@@ -26,13 +26,17 @@ class LoginController extends Controller
         $userName = $request->input('usuario');
         $password = $request->input('password');
 
-        $user = DB::table('users')->where('name', $userName)->first();
+        $user = DB::table('users')->where('username', $userName)->first();
+        $tipus = DB::table('users')->where('username', $userName)->value('tipus');
 
         if ($user && Hash::check($password, $user->password)) {
             $request->session()->put('key', $userName);
             $request->session()->put('user_id', $user->id); // Almacenar el ID del usuario en la sesión
-            $sessionValue = $request->session()->get('key');
-            return view('homePromotor');
+            if ($tipus == 'Promotor') {
+                return view('homePromotor');
+            }else{
+                return view('taullerAdministracio');
+            }
         } else {
             return redirect('login')->withErrors(array('msg' =>'Credenciales Incorrectas'));
         }}

@@ -3,7 +3,6 @@
 @section('title', 'resultados')
 
 @section('content')
-<h1>Eventos del promotor</h1>
     <div class="event-cards">
         @foreach ($esdeveniments as $esdeveniment)
             <a href="{{ route('editar-esdeveniment', ['id' => $esdeveniment->id]) }}" class="event-link">

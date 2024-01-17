@@ -40,7 +40,6 @@ header {
   padding: 5px;
   overflow: hidden;
 }
-
 .userOptions:hover {
   cursor: pointer;
 }
@@ -54,12 +53,10 @@ header {
   font-size: 15px;
   margin: 10px;
 }
-
 .optionProfile:hover {
   color: #ff5e00;
   transform: scale(1.1);
 }
-
 .optionProfile:active {
   transform: scale(0.9);
 }
@@ -90,13 +87,11 @@ footer {
   color: #ff7118;
   transition: color 0.3s ease; /* Transición de color */
 }
-
 #footerHome:hover {
   color: #ff5e00; /* Color diferente al pasar el ratón */
   transform: scale(1.1);
 }
-
-#footerHome:active {
+#footerHome:hover:active {
   transform: scale(0.9); /* Animación de escala al hacer clic */
 }
 
@@ -113,6 +108,33 @@ footer {
 }
 .event-card {
   grid-area: b;
+  display: flex;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: white;
+  /* Color de fondo */
+  border-radius: 10px;
+  /* Bordes redondeados */
+  width: 425px;
+  height: 150px;
+  margin: 10px;
+  border: 1px solid black;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  transition: transform 0.3s ease; /* Transición de la propiedad transform */
+}
+.event-card:hover {
+  transform: scale(1.025); /* Ampliación al pasar el ratón */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al pasar el ratón */
+}
+.event-card img {
+  display: flex;
+  justify-content: left;
+  max-width: 45%;
+  height: auto;
+  object-fit: cover;
+  margin: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 .event-form {
   display: contents;
@@ -122,13 +144,59 @@ footer {
   justify-items: end;
 }
 .event-btn {
-  background-color: inherit;
-  height: fit-content;
-  border: 0;
-  border-radius: 20%;
-  margin-left: -42px;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  margin: 0px;
   padding: 5px;
-  vertical-align: middle;
+  font-weight: 700;
+  font-size: 17px;
+  transition: color 0.3s ease;
+  background-color: inherit;
+}
+.event-btn:hover {
+  background-color: #FEFEFE;
+  cursor: pointer;
+  transform: scale(1.05);
+}
+.event-btn:active {
+  transform: scale(0.9);
+}
+.event-link {
+  color: black;
+  text-decoration: none;
+}
+.event-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 380px));
+  /* Mínimo 300px, máximo 1 fracción del contenedor */
+  justify-content: center;
+  gap: 5%;
+  /* Espacio entre tarjetas */
+  height: 65%;
+  padding: 10px;
+}
+.event-details {
+  flex: 1;
+  padding: 15px;
+  height: 100%;
+}
+.event-details p {
+  margin: 0;
+}
+.event-details p:nth-of-type(1) {
+  font-weight: bolder;
+  font-size: 20px;
+  margin-bottom: 4%;
+}
+.event-details p:nth-of-type(2) {
+  font-size: 16px;
+}
+.event-details p:nth-of-type(3) {
+  font-size: 15px;
+}
+.event-details p:nth-of-type(4) {
+  font-size: 19px;
 }
 
 .ahref {
@@ -141,13 +209,11 @@ footer {
   color: #ff7118;
   transition: color 0.3s ease;
 }
-
 .ahref:hover {
   cursor: pointer;
   color: #ff5e00;
   transform: scale(1.1);
 }
-
 .ahref:active {
   transform: scale(0.9);
 }
@@ -245,12 +311,10 @@ input[class=form-control] {
   transition: color 0.3s ease;
   box-shadow: 0 5px 1px rgba(0, 0, 0, 0.1);
 }
-
 .linkPromotor:hover {
   cursor: pointer;
   transform: scale(1.05);
 }
-
 .linkPromotor:active {
   transform: scale(0.9);
 }
@@ -266,75 +330,6 @@ input[class=form-control] {
 }
 .btn-primary:hover {
   background-color: white;
-}
-
-.event-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 380px));
-  /* Mínimo 300px, máximo 1 fracción del contenedor */
-  justify-content: center;
-  gap: 5%;
-  /* Espacio entre tarjetas */
-  height: 65%;
-  padding: 10px;
-}
-
-.event-card {
-  display: flex;
-  box-sizing: border-box;
-  overflow: hidden;
-  background-color: white;
-  /* Color de fondo */
-  border-radius: 10px;
-  /* Bordes redondeados */
-  height: 150px;
-  border: 1px solid black;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  transition: transform 0.3s ease; /* Transición de la propiedad transform */
-}
-
-.event-card:hover {
-  transform: scale(1.025); /* Ampliación al pasar el ratón */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al pasar el ratón */
-}
-
-.event-details {
-  flex: 1;
-  padding: 15px;
-  height: 100%;
-}
-
-.event-details p {
-  margin: 0;
-}
-
-.event-details p:nth-of-type(1) {
-  font-weight: bolder;
-  font-size: 20px;
-  margin-bottom: 4%;
-}
-
-.event-details p:nth-of-type(2) {
-  font-size: 16px;
-}
-
-.event-details p:nth-of-type(3) {
-  font-size: 15px;
-}
-
-.event-details p:nth-of-type(4) {
-  font-size: 19px;
-}
-
-.event-card img {
-  display: flex;
-  justify-content: left;
-  max-width: 45%;
-  height: auto;
-  object-fit: cover;
-  margin: 20px;
-  border: 1px solid black;
-  border-radius: 5px;
 }
 
 .pagination .page-link.small {
@@ -412,11 +407,6 @@ input[class=form-control] {
   color: #ddd;
   pointer-events: none;
   /* Esto evita que se hagan clics en botones deshabilitados */
-}
-
-.event-link {
-  color: black;
-  text-decoration: none;
 }
 
 .pages {
@@ -510,12 +500,10 @@ a {
   font-weight: 700;
   margin: 2%;
 }
-
 .boton:hover {
   cursor: pointer;
   background-color: #f2ab7e;
 }
-
 .boton:active {
   background-color: #ff5e00;
 }
@@ -562,16 +550,6 @@ a {
 }
 
 /*Ver Eventos fin*/
-@media screen and (max-width: 1000px) {
-  .containerEvent {
-    grid-template-columns: 1fr;
-    grid-template-rows: 0.5fr 0.5fr;
-  }
-  .errorMsg {
-    margin-top: 2.5%;
-  }
-}
-/* Adaptación a móvil */
 @media screen and (max-width: 300px) {
   .titulo {
     font-size: 25px;
@@ -582,6 +560,16 @@ a {
   }
   .loginInput > input {
     width: 70vw;
+  }
+}
+@media screen and (max-width: 500px) {
+  .event-card {
+    margin: 10px;
+    width: 350px;
+    height: 200px;
+  }
+  .event-link {
+    margin: 10px;
   }
 }
 @media screen and (max-width: 800px) {
@@ -628,6 +616,13 @@ a {
   }
 }
 @media screen and (max-width: 1000px) {
+  .containerEvent {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 0.5fr;
+  }
+  .errorMsg {
+    margin-top: 2.5%;
+  }
   .event-cards {
     height: auto;
   }
@@ -636,6 +631,11 @@ a {
   }
   input[class=form-control] {
     width: 80%;
+  }
+}
+@media screen and (max-width: 1300px) {
+  .event-home {
+    grid-template-areas: "a" "b1" "b2" "b3" "c";
   }
 }
 @media screen and (max-width: 1287px) {

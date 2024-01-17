@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('esdeveniments', function (Blueprint $table) {
             $table->id(); 
             $table->string('nom');
-            $table->date('dia');
             $table->string('imatge');
-            $table->decimal('preu', 8, 2);
             $table->integer('aforament');
+            $table->boolean('ocult')->default(false);
             $table->foreignId('recinte_id')->constrained('recintes');
             $table->foreignId('categoria_id')->constrained('categories');
             $table->foreignId('user_id')->constrained();

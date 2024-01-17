@@ -33,7 +33,7 @@
    
     @endif
   </header>
-  <div>
+  <div class="masterBody">
     @yield('content') 
   </div>
   <footer>

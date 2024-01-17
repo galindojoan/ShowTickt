@@ -2,26 +2,24 @@
 
 namespace Database\Factories;
 
-use App\Models\data;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Data>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Entrada>
  */
-class DataFactory extends Factory
+class EntradaFactory extends Factory
 {
     /**
      * Define the model's default state.
      *
-     * 
      * @return array<string, mixed>
      */
-    protected $model = data::class;
     public function definition(): array
     {
         return [
-          'dia' => $this->faker->date,
-          'hores' => $this->faker->time,
+            'nom' => $this->faker->name,
+            'preu' => $this->faker->randomFloat(2, 10, 1000),
+            'quantitat' => $this->faker->randomNumber(3),
         ];
     }
 }

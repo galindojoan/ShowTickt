@@ -45,14 +45,16 @@
         </form>
     </div>
     
-    <div class="event-cards">
+    
       
       @foreach($categoriesWithEventCount as $category)
-        <h3>{{ $category->tipus }}</h3>
+
+      <div class="event-home">
+        <h2>{{ $category->tipus }}</h2>
           @php
           $cont=0;
           @endphp
-          @foreach ($esdeveniments as $esdeveniment)
+          @foreach ($events as $esdeveniment)
           
             @if($esdeveniment->categoria_id==$category->id && $cont<3)
               @php
@@ -60,9 +62,9 @@
               @endphp
               <a href="{{ route('mostrar-esdeveniment', ['id' => $esdeveniment->id]) }}" class="event-link">
                 <div class="event-card">
-                    <div class="event-details">
+                    <div class="event-detailsHome">
                         <p>{{ $esdeveniment->nom }}</p>
-                        <p>{{ $esdeveniment->dia }}</p>
+                        <p>{{ $esdeveniment->data_sessio}}</p>
                         <p>{{ $esdeveniment->recinte->lloc }}</p>
                         <p>{{ $esdeveniment->preu }} €</p>
                     </div>
@@ -72,14 +74,16 @@
             @endif
           @endforeach
 
-          <form action="{{ route('cerca') }}" method="get">
-            <div class="input-group">
+          <form action="{{ route('cerca') }}" method="get" id="event-form">
+            <div class="event-group">
               <input type="hidden" name="category" value="{{ $category->id}}">
+              <button type="submit" class="event-btn">ver mas ></button>
             </div>
-            <button type="submit" class="btn-primary">ver mas ></button>
           </form>
+          
+        </div>
       @endforeach
-    </div>
+    
 
     {{-- <div class="pages">{{ $esdeveniments->links('pagination::bootstrap-5') }}</div> --}}
 @endsection

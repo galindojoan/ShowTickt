@@ -12,9 +12,9 @@
         <form action="{{route('homePromotor')}}" method="post" id="loginForm">
         @csrf
             <div class="loginInput">
-                <input type="text" name="usuario" id="usuario" placeholder="Usuario">
-                <input type="password" name="password" id="password" placeholder="Contraseña">
-                <a href="">Contraseña olvidada?</a>
+                <input type="text" name="usuario" id="usuario" placeholder="Usuario" required>
+                <input type="password" name="password" id="password" placeholder="Contraseña" required>
+                <a href="recuperar">Contraseña olvidada?</a>
             </div>
             <input type="submit" value="Acceder" class="boton">
         </form>

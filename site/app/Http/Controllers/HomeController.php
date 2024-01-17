@@ -48,8 +48,9 @@ class HomeController extends Controller
           $join->on('sessios.esdeveniments_id', '=', 'min_dates.esdeveniments_id')
             ->on('sessios.data', '=', 'min_dates.min_data');
         })
+        ->join('entradas','entradas.sessios_id','=','sessios.id')
         ->join('categories', 'categories.id', '=', 'esdeveniments.categoria_id')
-        ->select('esdeveniments.*', 'sessios.data as data_sessio')
+        ->select('esdeveniments.*', 'sessios.data as data_sessio','entradas.preu as entradas_preu')
         ->orderBy('data_sessio', 'asc')
         ->get();
 
@@ -128,12 +129,12 @@ class HomeController extends Controller
         $join->on('sessios.esdeveniments_id', '=', 'min_dates.esdeveniments_id')
           ->on('sessios.data', '=', 'min_dates.min_data');
       })
+      
       ->join('categories', 'categories.id', '=', 'esdeveniments.categoria_id')
-      ->select('esdeveniments.*', 'sessios.data as data_sessio')
+      ->select('esdeveniments.*', 'sessios.data as data_sessio','entradas.preu as entradas_preu')
       ->where('categories.id', '=', $categoryId)
       ->orderBy('data_sessio', 'asc')
       ->paginate(config('app.items_per_page', 6)); // Ajusta el valor según tus necesidades
-
 
     $eventsNoData = Esdeveniment::leftJoin('sessios', 'sessios.esdeveniments_id', '=', 'esdeveniments.id')
       ->join('categories', 'categories.id', '=', 'esdeveniments.categoria_id')

@@ -17,7 +17,7 @@
                 <input type="email" name="email" id="email" placeholder="Email">
             </div>
             <button class="boton" id="atras">Atrás</button>
-            <input type="submit" value="Acceder" class="boton">
+            <input type="submit" value="Enviar" class="boton">
         </form>
     </div>
 </div>

@@ -13,6 +13,11 @@ class Sessio extends Model
 
     public function esdeveniment()
     {
-        return $this->belongsTo(Esdeveniment::class);
+        return $this->belongsTo(Esdeveniment::class, 'esdeveniments_id');
+    }
+
+    public function entrades()
+    {
+        return $this->hasMany(Entrada::class, 'sessios_id');
     }
 }

@@ -8,11 +8,12 @@
             <a href="<?php echo e(route('editar-esdeveniment', ['id' => $esdeveniment->id])); ?>" class="event-link">
                 <div class="event-card">
                     <div class="event-details">
-                        <p><?php echo e($esdeveniment->nom); ?>  </p>
-                        <p><?php echo e($esdeveniment->categoria->tipus); ?></p>
+                        <p><?php echo e($esdeveniment->nom); ?> </p>
+                        <p><?php echo e($esdeveniment->sesions->first()->data); ?></p>
                         <p><?php echo e($esdeveniment->recinte->lloc); ?></p>
+                        <p><?php echo e($esdeveniment->sesions->first()->entrades->first()->preu); ?> €</p>
                     </div>
-                    <img src="<?php echo e(Storage::url( $esdeveniment->imatge )); ?>" alt="Imatge de l'esdeveniment">
+                    <img src="<?php echo e(Storage::url($esdeveniment->imatge)); ?>" alt="Imatge de l'esdeveniment">
                 </div>
             </a>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

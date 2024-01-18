@@ -19,8 +19,8 @@ class AdministrarEsdevenimentsController extends Controller
         // Obtiene el usuario a partir de la sesión
         $userId = $request->session()->get('user_id');
 
-        // Obtén los eventos asociados al usuario
-        $esdeveniments = Esdeveniment::where('user_id', $userId)->paginate(6);
+        // Obtén los eventos asociados al usuario con sus sesiones (usando with)
+        $esdeveniments = Esdeveniment::with('sesions')->where('user_id', $userId)->paginate(6);
 
         // Pasa los eventos a la vista
         return view('administrarEsdeveniments', ['esdeveniments' => $esdeveniments]);

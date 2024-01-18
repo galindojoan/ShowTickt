@@ -244,6 +244,7 @@ footer {
 
 .ahref {
     border: none;
+    width: min-content;
     margin: 0px;
     padding: 10px;
     font-weight: 700;
@@ -765,7 +766,6 @@ a {
     select[class="form-control"] {
         height: 32px;
     }
-
 }
 
 @media screen and (max-width: 820px) {

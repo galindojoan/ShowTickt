@@ -6,8 +6,8 @@
 <div class="loginPage">
     <div class="login">
         <h2>Contraseña Olvidada</h2>
-        @if($errors->has('msg'))
-            <span class="errorMsg">{{$errors->first('msg')}}</span>
+        @if($errors->has('error'))
+            <span class="errorMsg">{{$errors->first('error')}}</span>
         @endif
         
         <span id="indicador">Escriba la cuenta a recuperar.</span> <br> <br>
@@ -17,7 +17,7 @@
                 <input type="email" name="email" id="email" placeholder="Email">
             </div>
             <div>
-                <button class="boton" id="atras">Atrás</button>
+                <a href="{{route('login')}}" class="boton" id="atras">Atrás</a>
                 <input type="submit" value="Enviar" class="boton">
             </div>
         </form>

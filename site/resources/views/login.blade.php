@@ -6,8 +6,10 @@
 <div class="loginPage">
     <div class="login">
         <h2>Login</h2>
-        @if($errors->has('msg'))
-            <span class="errorMsg">{{$errors->first('msg')}}</span>
+        @if($errors->has('error'))
+            <span class="errorMsg">{{$errors->first('error')}}</span>
+        @elseif($errors->has('vali'))
+            <span class="valiMsg">{{$errors->first('vali')}}</span>
         @endif
         <form action="{{route('homePromotor')}}" method="post" id="loginForm">
         @csrf

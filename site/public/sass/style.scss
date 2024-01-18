@@ -586,13 +586,23 @@ a {
     display: block;
 }
 
-.form-controller {
-    width: 100%;
+.form-controller,
+.form-select {
+    width: calc(100% - 16px); // Resta el doble del relleno (8px a cada lado)
+    max-width: 100%;
     padding: 8px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+/* Configuración específica para el textarea */
+.form-controller[type="textarea"] {
+    max-height: 300px; /* Ajusta según tu preferencia */
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+    resize: vertical;
 }
 
 .promotorBody {
@@ -606,6 +616,8 @@ a {
     cursor: pointer;
     border: none;
     border-radius: 4px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .btn-add {
@@ -650,6 +662,49 @@ a {
     position: fixed;
     margin-top: 2%;
 }
+
+.tipo-entrada {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc; /* Línea horizontal entre entradas */
+    padding-bottom: 10px; /* Espaciado para mejorar la estética */
+}
+
+.tipo-entrada label {
+    display: block;
+    margin-bottom: 5px; /* Espai entre les etiquetes i els inputs */
+}
+
+.tipo-entrada input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Estilos para los botones "Cancelar" y "Eliminar" */
+.btn-cancelar {
+    background-color: #dc3545; /* Rojo */
+    color: #fff;
+}
+
+.btn-eliminar {
+    background-color: #dc3545; /* Rojo */
+    color: #fff;
+}
+
+/* Estilo adicional para resaltar el botón "Eliminar" */
+.btn-eliminar:hover {
+    background-color: #c82333; /* Rojo oscuro al pasar el ratón */
+}
+
+.button-entrada {
+    display: flex;
+    justify-content: space-between; /* Coloca los elementos al principio y al final del contenedor */
+    margin-top: 10px;
+}
+
 .valiMsg{
     color: green;
     position: fixed;
@@ -690,6 +745,18 @@ a {
     padding: 10px 20px;
     border-radius: 5px;
     text-decoration: none;
+}
+
+/* Estilos para el hover de btn-add */
+.btn-add:hover {
+    background-color: #0056b3; /* Cambia el color de fondo al pasar el mouse */
+    color: #fff; /* Cambia el color del texto al pasar el mouse */
+}
+
+/* Estilos para el hover de btn-cancelar */
+.btn-cancelar:hover {
+    background-color: #ff3333; /* Cambia el color de fondo al pasar el mouse */
+    color: #fff; /* Cambia el color del texto al pasar el mouse */
 }
 
 /*Ver Eventos fin*/

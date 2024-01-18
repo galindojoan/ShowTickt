@@ -63,3 +63,5 @@ Route::post('/cambiarPassword',[passwordController::class, 'pagePassword'])->nam
 
 Route::get('/peticionCambiar',[passwordController::class, 'cambiarPassword'])->name('peticionCambiar');
 Route::post('/peticionCambiar',[passwordController::class, 'cambiarPassword'])->name('peticionCambiar');
+
+Route::post('/confirmacio',[EsdevenimentController::class, 'compra'])->name('confirmacioCompra');

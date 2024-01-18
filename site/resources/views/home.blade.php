@@ -62,11 +62,11 @@
               @endphp
               <a href="{{ route('mostrar-esdeveniment', ['id' => $esdeveniment->id]) }}" class="event-link">
                 <div class="event-card">
-                    <div class="event-detailsHome">
+                    <div class="event-details">
                         <p>{{ $esdeveniment->nom }}</p>
                         <p>{{ $esdeveniment->data_sessio}}</p>
                         <p>{{ $esdeveniment->recinte->lloc }}</p>
-                        <p>{{ $esdeveniment->preu }} €</p>
+                        <p>{{ $esdeveniment->entradas_preu }} €</p>
                     </div>
                     <img src="{{ $esdeveniment->imatge }}" alt="Imatge de l'esdeveniment">
                 </div>

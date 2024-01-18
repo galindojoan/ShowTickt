@@ -24,83 +24,55 @@
                 </select>
             </div>
 
-            @if (isset($noRecintes) && $noRecintes)
-                <div id="nousCamps" style="display: block;">
-                    <div class="form-group">
-                        <label for="nova_nom" class="form-label">Nombre del Local</label>
-                        <input type="text" class="form-controller" id="nova_nom" name="nova_nom">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="nova_provincia" class="form-label">Provincia</label>
-                        <input type="text" class="form-controller" id="nova_provincia" name="nova_provincia">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="nova_ciutat" class="form-label">Ciudad</label>
-                        <input type="text" class="form-controller" id="nova_ciutat" name="nova_ciutat">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="nova_codi_postal" class="form-label">Codigo Postal</label>
-                        <input type="number" maxlength="5" class="form-controller" id="nova_codi_postal"
-                            name="nova_codi_postal">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="nova_capacitat" class="form-label">Aforo</label>
-                        <input type="number" class="form-controller" id="nova_capacitat" name="nova_capacitat">
-                    </div>
-
-                    <input type="hidden" name="nova_user_id" value="{{ session('user_id') }}">
-                </div>
-            @else
-                <div class="form-group">
-                    <label for="recinte" class="form-label">Recinto</label>
-                    <select class="form-select" id="recinteSelect" name="recinte">
+            <div class="form-group @if (count($recintes) === 0) d-none @endif">
+                <label for="recinte" class="form-label">Recinto</label>
+                <select class="form-select" id="recinteSelect" name="recinte">
+                    @if (count($recintes) === 0)
+                        <option value="" selected disabled>No hay recintos disponibles</option>
+                    @else
                         <option value="">Selecciona un recinto existente</option>
                         @foreach ($recintes as $recinte)
                             <option value="{{ $recinte->id }}">{{ $recinte->nom }}</option>
                         @endforeach
-                    </select>
+                    @endif
+                </select>
+            </div>
+
+            <div class="form-group">
+                <button type="button" id="mostrarNovaAdreca" class="btn btn-add">Añadir nueva dirección</button>
+            </div>
+
+            <div id="nousCamps" style="display: none;">
+                <div class="form-group">
+                    <label for="nova_nom" class="form-label">Nombre del Local</label>
+                    <input type="text" class="form-controller" id="nova_nom" name="nova_nom">
                 </div>
 
                 <div class="form-group">
-                    <button type="button" id="mostrarNovaAdreca" class="btn btn-add">Añadir nueva dirección</button>
+                    <label for="nova_provincia" class="form-label">Provincia</label>
+                    <input type="text" class="form-controller" id="nova_provincia" name="nova_provincia">
                 </div>
 
-                <div id="nousCamps" style="display: none;">
-                    <div class="form-group">
-                        <label for="nova_nom" class="form-label">Nombre del Local</label>
-                        <input type="text" class="form-controller" id="nova_nom" name="nova_nom">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="nova_provincia" class="form-label">Provincia</label>
-                        <input type="text" class="form-controller" id="nova_provincia" name="nova_provincia">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="nova_ciutat" class="form-label">Ciudad</label>
-                        <input type="text" class="form-controller" id="nova_ciutat" name="nova_ciutat">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="nova_codi_postal" class="form-label">Codigo Postal</label>
-                        <input type="number" maxlength="5" class="form-controller" id="nova_codi_postal"
-                            name="nova_codi_postal">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="nova_capacitat" class="form-label">Aforo</label>
-                        <input type="number" class="form-controller" id="nova_capacitat" name="nova_capacitat">
-                    </div>
-
-                    <input type="hidden" name="nova_user_id" value="{{ session('user_id') }}">
+                <div class="form-group">
+                    <label for="nova_ciutat" class="form-label">Ciudad</label>
+                    <input type="text" class="form-controller" id="nova_ciutat" name="nova_ciutat">
                 </div>
 
-                <button type="button" id="cancelarBoto" style="display: none;">Cancelar</button>
-            @endif
+                <div class="form-group">
+                    <label for="nova_codi_postal" class="form-label">Codigo Postal</label>
+                    <input type="number" maxlength="5" class="form-controller" id="nova_codi_postal"
+                        name="nova_codi_postal">
+                </div>
+
+                <div class="form-group">
+                    <label for="nova_capacitat" class="form-label">Aforo</label>
+                    <input type="number" class="form-controller" id="nova_capacitat" name="nova_capacitat">
+                </div>
+
+                <input type="hidden" name="nova_user_id" value="{{ session('user_id') }}">
+            </div>
+
+            <button type="button" id="cancelarBoto" style="display: none;">Cancelar</button>
 
             <div class="form-group">
                 <label for="imatge" class="form-label">Imagen principal del evento</label>

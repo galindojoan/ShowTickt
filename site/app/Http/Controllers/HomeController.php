@@ -129,7 +129,10 @@ class HomeController extends Controller
         $join->on('sessios.esdeveniments_id', '=', 'min_dates.esdeveniments_id')
           ->on('sessios.data', '=', 'min_dates.min_data');
       })
-      
+      ->join('entradas', function ($join) {
+        $join->on('entradas.sessios_id', '=', 'sessios.id')
+            ->where('entradas.preu', '=', DB::raw('(SELECT MIN(preu) FROM entradas WHERE sessios_id = sessios.id)'));
+    })
       ->join('categories', 'categories.id', '=', 'esdeveniments.categoria_id')
       ->select('esdeveniments.*', 'sessios.data as data_sessio','entradas.preu as entradas_preu')
       ->where('categories.id', '=', $categoryId)

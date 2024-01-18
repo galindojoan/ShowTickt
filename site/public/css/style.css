@@ -205,6 +205,10 @@ footer {
 .event-details p:nth-of-type(4) {
   font-size: 19px;
 }
+.event-imagen {
+  width: 100%;
+  max-height: 50%;
+}
 
 .ahref {
   border: none;

@@ -13,6 +13,6 @@ class Entrada extends Model
 
     public function sessio()
     {
-        return $this->belongsTo(Sessio::class);
+        return $this->belongsTo(Sessio::class, 'sessios_id');
     }
 }

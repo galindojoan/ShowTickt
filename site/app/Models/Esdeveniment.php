@@ -25,4 +25,9 @@ class Esdeveniment extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function sesions()
+    {
+        return $this->hasMany(Sessio::class, 'esdeveniments_id');
+    }
 }

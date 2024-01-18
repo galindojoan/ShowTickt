@@ -87,4 +87,4 @@
   <?php echo $__env->yieldContent('scripts'); ?>
 </body>
 
-</html><?php /**PATH C:\Users\alexg\OneDrive\Documentos\Projecte 2\gr6-arrua-galindo-jumelle\site\resources\views/layouts/master.blade.php ENDPATH**/ ?>
+</html><?php /**PATH C:\Users\domin\Escritorio\gr6-arrua-galindo-jumelle\site\resources\views/layouts/master.blade.php ENDPATH**/ ?>

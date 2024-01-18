@@ -26,6 +26,6 @@ class CreateSessioTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sessio');
+        Schema::dropIfExists('sessios');
     }
 }

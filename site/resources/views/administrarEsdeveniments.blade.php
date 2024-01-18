@@ -8,11 +8,12 @@
             <a href="{{ route('editar-esdeveniment', ['id' => $esdeveniment->id]) }}" class="event-link">
                 <div class="event-card">
                     <div class="event-details">
-                        <p>{{ $esdeveniment->nom }}  </p>
-                        <p>{{ $esdeveniment->categoria->tipus}}</p>
+                        <p>{{ $esdeveniment->nom }} </p>
+                        <p>{{ $esdeveniment->sesions->first()->data }}</p>
                         <p>{{ $esdeveniment->recinte->lloc }}</p>
+                        <p>{{ $esdeveniment->sesions->first()->entrades->first()->preu }} €</p>
                     </div>
-                    <img src="{{ Storage::url( $esdeveniment->imatge ) }}" alt="Imatge de l'esdeveniment">
+                    <img src="{{ Storage::url($esdeveniment->imatge) }}" alt="Imatge de l'esdeveniment">
                 </div>
             </a>
         @endforeach

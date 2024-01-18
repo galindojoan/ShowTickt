@@ -55,7 +55,7 @@
                         <p>{{ $esdeveniment->recinte->lloc }}</p>
                         <p>{{ $esdeveniment->entradas_preu }} €</p>
                     </div>
-                    <img src="{{ $esdeveniment->imatge }}" alt="Imatge de l'esdeveniment">
+                    <img src="{{ Storage::url( $esdeveniment->imatge ) }}" alt="Imatge de l'esdeveniment">
                 </div>
             </a>
         @endforeach

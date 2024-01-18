@@ -141,13 +141,11 @@ footer {
   color: #ff7118;
   transition: color 0.3s ease;
 }
-
 .ahref:hover {
   cursor: pointer;
   color: #ff5e00;
   transform: scale(1.1);
 }
-
 .ahref:active {
   transform: scale(0.9);
 }
@@ -466,10 +464,12 @@ ul {
   padding: 5%;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-
-.login > h2 {
+.login h2 {
   margin: 0px;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
+}
+.login #indicador {
+  margin-top: 10%;
 }
 
 a {
@@ -480,9 +480,9 @@ a {
 
 .loginInput {
   justify-items: start;
+  margin-top: 20%;
 }
-
-.loginInput > input {
+.loginInput input {
   background-color: lightgray;
   width: 100%;
   height: 3vh;
@@ -491,8 +491,7 @@ a {
   margin-bottom: 10px;
   padding: 5px;
 }
-
-.loginInput > input::placeholder {
+.loginInput input::placeholder {
   color: black;
 }
 
@@ -508,14 +507,13 @@ a {
   padding-left: 15px;
   padding-right: 15px;
   font-weight: 700;
+  font-size: 20px;
   margin: 2%;
 }
-
 .boton:hover {
   cursor: pointer;
   background-color: #f2ab7e;
 }
-
 .boton:active {
   background-color: #ff5e00;
 }
@@ -568,7 +566,7 @@ a {
     grid-template-rows: 0.5fr 0.5fr;
   }
   .errorMsg {
-    margin-top: 2.5%;
+    margin-top: 5.5%;
   }
 }
 /* Adaptación a móvil */
@@ -609,7 +607,8 @@ a {
     width: 60%;
   }
   .errorMsg {
-    margin-top: 5%;
+    margin-top: 7%;
+    max-width: 200px;
   }
   .linkPromotor {
     font-weight: 800;

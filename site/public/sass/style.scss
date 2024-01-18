@@ -137,17 +137,16 @@ footer {
     background-color: inherit;
     color: #ff7118;
     transition: color 0.3s ease;
+    &:hover {
+        cursor: pointer;
+        color: #ff5e00;
+        transform: scale(1.1);
+    }
+    &:active {
+        transform: scale(0.9);
+    }
 }
 
-.ahref:hover {
-    cursor: pointer;
-    color: #ff5e00;
-    transform: scale(1.1);
-}
-
-.ahref:active {
-    transform: scale(0.9);
-}
 
 /*Estilos para la pantalla Home*/
 .container {
@@ -453,10 +452,13 @@ ul {
     border-radius: 6px;
     padding: 5%;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-.login > h2 {
-    margin: 0px;
-    margin-bottom: 10%;
+    & h2 {
+        margin: 0px;
+        margin-bottom: 5%;
+    }
+    & #indicador{
+        margin-top: 10%;
+    }
 }
 a {
     color: #072591;
@@ -465,18 +467,19 @@ a {
 }
 .loginInput {
     justify-items: start;
-}
-.loginInput > input {
-    background-color: lightgray;
-    width: 100%;
-    height: 3vh;
-    border: 0px solid;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    padding: 5px;
-}
-.loginInput > input::placeholder {
-    color: black;
+    margin-top: 20%;
+    & input {
+        background-color: lightgray;
+        width: 100%;
+        height: 3vh;
+        border: 0px solid;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        padding: 5px;
+        &::placeholder {
+            color: black;
+        }
+    }
 }
 .login > .boton {
     margin-top: 15%;
@@ -489,14 +492,15 @@ a {
     padding-left: 15px;
     padding-right: 15px;
     font-weight: 700;
+    font-size: 20px;
     margin: 2%;
-}
-.boton:hover {
-    cursor: pointer;
-    background-color: #f2ab7e;
-}
-.boton:active {
-    background-color: #ff5e00;
+    &:hover {
+        cursor: pointer;
+        background-color: #f2ab7e;
+    }
+    &:active {
+        background-color: #ff5e00;
+    }
 }
 
 .errorMsg {
@@ -546,7 +550,7 @@ a {
         grid-template-rows: 0.5fr 0.5fr;
     }
     .errorMsg {
-        margin-top: 2.5%;
+        margin-top: 5.5%;
     }
 }
 
@@ -596,7 +600,8 @@ a {
         width: 60%;
     }
     .errorMsg {
-        margin-top: 5%;
+        margin-top: 7%;
+        max-width: 200px;
     }
     .linkPromotor {
         font-weight: 800;

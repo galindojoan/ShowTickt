@@ -24,12 +24,12 @@ class PasswordController extends Controller
 
         if ($email == $user) {
             $username = DB::table('users')->where('email', $email)->value('name');
-            $url = URL::temporarySignedRoute('cambiarPassword', now()->addMinutes(30),['user' => 1]);
+            $url = URL::temporarySignedRoute('cambiarPassword', now()->addMinutes(env('MAIL_TIME_LIMIT')),['user' => 1]);
             $data = ['username' => $username, 'urlGenerada' => $url];
             Mail::to($email)->send(new CorreoRecuperar($data));
-            return view('login');
+            return redirect('login')->withErrors(array('msg' => 'Correo enviado con éxito, revisa tu bandeja de entrada.'));
         }else{
-            return redirect('recuperar')->withErrors(array('msg' =>'Credenciales Incorrectas'));
+            return redirect('recuperar')->withErrors(array('msg' => 'No existe esa cuenta.'));
         }
     }
     public function cambiarPassword(Request $request){

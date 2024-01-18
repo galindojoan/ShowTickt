@@ -7,7 +7,7 @@
     <div class="login">
         <h2>Login</h2>
         @if($errors->has('msg'))
-            <span class="errorMsg">Usuario o contraseña incorrecta</span>
+            <span class="errorMsg">{{$errors->first('msg')}}</span>
         @endif
         <form action="{{route('homePromotor')}}" method="post" id="loginForm">
         @csrf

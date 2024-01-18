@@ -9,10 +9,10 @@
                 <div class="event-card">
                     <div class="event-details">
                         <p>{{ $esdeveniment->nom }}  </p>
-                        <p>{{ $esdeveniment->data_sessio}}</p>
+                        <p>{{ $esdeveniment->categoria->tipus}}</p>
                         <p>{{ $esdeveniment->recinte->lloc }}</p>
                     </div>
-                    <img src="{{ asset($esdeveniment->imatge) }}" alt="Imatge de l'esdeveniment">
+                    <img src="{{ Storage::url( $esdeveniment->imatge ) }}" alt="Imatge de l'esdeveniment">
                 </div>
             </a>
         @endforeach

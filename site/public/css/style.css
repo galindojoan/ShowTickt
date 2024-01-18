@@ -499,6 +499,7 @@ a {
 }
 
 .boton {
+  color: #000;
   background-color: #ff5e00;
   border-radius: 5px;
   border: none;
@@ -506,7 +507,7 @@ a {
   padding-left: 15px;
   padding-right: 15px;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 15px;
   margin: 2%;
 }
 .boton:hover {
@@ -609,6 +610,12 @@ a {
   margin-top: 2%;
 }
 
+.valiMsg {
+  color: green;
+  position: fixed;
+  margin-top: 2%;
+}
+
 /*Ver Eventos inicio*/
 .containerEvent {
   display: grid;
@@ -695,6 +702,10 @@ a {
     margin-top: 7%;
     max-width: 200px;
   }
+  .valiMsg {
+    margin-top: 7%;
+    max-width: 200px;
+  }
   .linkPromotor {
     font-weight: 800;
     font-size: 13px;
@@ -717,6 +728,9 @@ a {
     grid-template-rows: 0.5fr 0.5fr;
   }
   .errorMsg {
+    margin-top: 2.5%;
+  }
+  .valiMsg {
     margin-top: 2.5%;
   }
   .event-cards {

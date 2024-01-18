@@ -11,7 +11,7 @@
             <!-- Otros detalles del evento -->
         </div>
         <div class="imagenesEventos">
-            <img id="imagenEvento" src="{{ asset($esdeveniment->imatge) }}" alt="Imatge de l'esdeveniment">
+            <img src="{{ Storage::url( $esdeveniment->imatge ) }}" alt="Imatge de l'esdeveniment">
         </div>
     </div>
 

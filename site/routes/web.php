@@ -58,5 +58,10 @@ Route::get('/recuperar-form',[PasswordController::class,'enviarCorreo'])->name('
 Route::post('/recuperar-form',[PasswordController::class,'enviarCorreo'])->name('recuperar-form');
 
 Route::get('/cambiarPassword',[passwordController::class, 'pagePassword'])->name('cambiarPassword');
+Route::post('/cambiarPassword',[passwordController::class, 'pagePassword'])->name('cambiarPassword');
+
+
+Route::get('/peticionCambiar',[passwordController::class, 'cambiarPassword'])->name('peticionCambiar');
+Route::post('/peticionCambiar',[passwordController::class, 'cambiarPassword'])->name('peticionCambiar');
 
 Route::post('/confirmacio',[EsdevenimentController::class, 'compra'])->name('confirmacioCompra');

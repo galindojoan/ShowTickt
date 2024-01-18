@@ -38,7 +38,7 @@ class LoginController extends Controller
                 return view('taullerAdministracio');
             }
         } else {
-            return redirect('login')->withErrors(array('msg' =>'Credenciales Incorrectas'));
+            return redirect('login')->withErrors(array('error' =>'Credenciales Incorrectas'));
         }}
     }
 }

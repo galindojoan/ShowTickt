@@ -33,7 +33,7 @@
    
     @endif
   </header>
-  <div>
+  <div class="masterBody">
     @yield('content') 
   </div>
   <footer>
@@ -82,6 +82,7 @@
       form.submit();
     })
   </script>
+  @yield('scripts')
 </body>
 
 </html>

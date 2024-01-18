@@ -8,6 +8,8 @@ use App\Http\Controllers\passwordController;
 use App\Http\Controllers\PasswordController as ControllersPasswordController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\CrearEsdevenimentController;
+use App\Http\Controllers\AdministrarEsdevenimentsController;
+use App\Http\Controllers\EditarEsdevenimentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,17 +23,45 @@ use App\Http\Controllers\CrearEsdevenimentController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
 Route::get('/cerca', [HomeController::class, 'cerca'])->name('cerca');
+
 Route::get('/resultados', [HomeController::class, 'cerca'])->name('resultados');
+
 Route::get('/esdeveniment/{id}', [EsdevenimentController::class, 'show'])->name('mostrar-esdeveniment');
+
+Route::get('/editarEsdeveniment/{id}', [EditarEsdevenimentController::class, 'editar'])->name('editar-esdeveniment');
+
 Route::post('/login',[LoginController::class,'login'])->name(('login'));
 Route::get('/login',[LoginController::class,'login'])->name(('login'));
+
+Route::get('/taullerAdministracio',[LoginController::class,'login'])->name('taullerAdministracio');
+
 Route::post('/homePromotor', [LoginController::class,'iniciarSesion'])->name('homePromotor');
 Route::get('/homePromotor', [LoginController::class, 'iniciarSesion'])->name('homePromotor');
+
 Route::post('/perfil', [LoginController::class,'iniciarSesion'])->name('perfil');
+
 Route::get('/session', [SessionController::class, 'SessionController'])->name('session');
-Route::post('/session', [SessionController::class, 'SessionController']);
+Route::post('/session', [SessionController::class, 'SessionController'])->name('session');
+
 Route::get('/crear-esdeveniment', [CrearEsdevenimentController::class, 'index'])->name('crear-esdeveniment');
-Route::get('/crear-esdeveniment.create', [CrearEsdevenimentController::class, 'create'])->name('crear-esdeveniment.create');
 Route::post('/crear-esdeveniment.store', [CrearEsdevenimentController::class, 'store'])->name('crear-esdeveniment.store');
+
+Route::get('/administrar-esdeveniments', [AdministrarEsdevenimentsController::class, 'index'])->name('administrar-esdeveniments');
+Route::post('/administrar-esdeveniments', [AdministrarEsdevenimentsController::class, 'index'])->name('administrar-esdeveniments');
+
 Route::get('/recuperar',[PasswordController::class,'passwordPage'])->name('recuperar');
+Route::post('/recuperar',[PasswordController::class,'passwordPage'])->name('recuperar');
+
+Route::get('/recuperar-form',[PasswordController::class,'enviarCorreo'])->name('recuperar-form');
+Route::post('/recuperar-form',[PasswordController::class,'enviarCorreo'])->name('recuperar-form');
+
+Route::get('/cambiarPassword',[passwordController::class, 'pagePassword'])->name('cambiarPassword');
+Route::post('/cambiarPassword',[passwordController::class, 'pagePassword'])->name('cambiarPassword');
+
+
+Route::get('/peticionCambiar',[passwordController::class, 'cambiarPassword'])->name('peticionCambiar');
+Route::post('/peticionCambiar',[passwordController::class, 'cambiarPassword'])->name('peticionCambiar');
+
+Route::post('/confirmacio',[EsdevenimentController::class, 'compra'])->name('confirmacioCompra');

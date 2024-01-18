@@ -18,7 +18,77 @@ Los miembros del proyecto somos Brian Tobias Arrua, Galindo Palacio Joan y Camil
 === Sprint 1
 
 == Seguimiento semanal
-// Actualizar cada viernes con descripción y valoración
+=== Semana 11/12 - 19/12
+
+**Dia 11 **
+
+El primer dia de projecte el Camilo i el Brian vam dissenyar un esquema de com seria la base de dades del projecte a més de crear una plantilla indicant els colors, mides de text, dimensió de botons, estil de text, etc. El que vam fer només començar va ser repartir les tasques de la setmana assignant una o vàries tasques requerides a cada membre del grup. 
+Les tasques R01 i R03 queden assignades per al Camilo, les quals són definir els estils de l'aplicació (el qual vam acabar de definir el mateix dia) i pujar l'aplicació al servidor.
+
+Al Brian se li assignen les tasques R02 i R04 les quals la primera és la que hem comentat anteriorment que també vam fer el mateix dia, la definició de com necessitaríem l'estructura de la base de dades per l'aplicació que vam definir el mateix dia i la segona tasca que era dissenyar i crear el layout principal el qual és la capçalera i el peu de totes les pàgines de l'aplicació on s'inclou el logo, menús, etc. D'aquesta tasca aquest dia només vam pensar el disseny.
+
+En últim lloc, al Joan se li assigna la tasca R05, només se li assigna aquest pel fet que es tracta de la tasca més llarga de realitzar.
+Aquest dia el Joan no va poder assistir a la classe.
+
+**Dia 12 **
+
+Al segon dia el Brian va acabar la segona tasca que tenia assignada, la qual era implementar el disseny que es va idear el dia anterior, la capçalera i el peu de la pàgina amb els dissenys aplicats a la paleta de colors.
+El Camilo va intentar arrencar el projecte al servidor, però s'hi van presentar complicacions i no es va poder aconseguir que s'executés correctament. També va fer la creació de la base de dades amb les taules corresponents.
+El Joan va començar a implementar la pàgina Home la qual ja s'havia pensat el disseny abans. Aquest dia es va dedicar sobretot a la part de base de dades, concretament a un cop creades les taules pel Camilo, intentar inserir dades d'exemple per a poder-les visualitzar a la pàgina Home que es volia crear després.
+
+**Dia 13**
+
+En aquest dia el Brian es va dedicar a omplir tot el contingut necessari a la memòria del projecte intentant també aplicar-li uns estils agradables a la vista del lector i a l'ampliació de contingut al Figma.
+El Camilo va acabar la creació de la base de dades i va continuar intentant l'execució de l'aplicació al servidor, però se'ns continuaven presentant problemes.
+El Joan va acabar la inserció de dades a la base de dades i va aconseguir mostrar aquestes dades a la pantalla principal de la pàgina. Un cop mostrats se'ls hi va donar part dels estils dissenyats el primer dia.
+
+
+**Dia 14** 
+
+En aquest dia el Camilo no va poder assistir a classe.
+El Brian i el Joan ens vam centrar a continuar avançant la pantalla Home, el Joan la continuava dissenyant resolent els requisits de l'enunciat i el Brian anava actualitzant la memòria segons avançàvem la feina i ajudava en cas de dubte. El Joan va acabar el buscador i filtre de la pàgina, a més de mostrar els resultats paginats. Però no va acabar de donar temps a implementar tots els estils del tot. Per acabar el dia vam comprovar quins requisits li faltaven a la pàgina Home per organitzar-nos el temps.
+
+**Dia 15**
+
+Aquest dia el Brian no va poder assistir.
+El Joan va continuar amb els requisits restants que va analitzar el dia anterior amb el Brian, els quals ja no eren gaires i el Camilo va continuar intentant la pujada a servidor a més d'actualitzar part del contingut del Figma. El Joan va aconseguir acabar tots els requisits restants de la pàgina (ordenar els resultats per data, mostrar quants resultats s'estan mostrant, etc.). Per tant, el que quedava ja només per a fer en finalitzar el dia van ser, per part del Camilo, acabar de resoldre el problema a l'hora de pujar el projecte i, per part del Joan, fer els Tests per comprovar el bon funcionament de la pàgina, i sobretot, del cercador.
+
+
+**Dia 18**
+
+Aquest era el dia abans de la correcció pel que havíem d'enllestir-ho tot. El Camilo, amb ajuda del Brian, va aconseguir el correcte funcionament del projecte a servidor. I el Joan va acabar els tests que faltaven per a la comprovació del correcte funcionament de la pàgina. En aquest dia se'ns va corregir el disseny de Figma i es van presentar propostes de millora que vam anar avançant, però no vam tenir temps d'acabar d'implementar del tot.
+
+**Dia 19** 
+
+Aquest és l'últim dia de la setmana, ja teníem tot el que es demanava a l'enunciat acabat i, per tant, només ens quedava esperar a la correcció. Mentre esperàvem a la correcció vam aprofitar per acabar d'adaptar el disseny del Figma i de l'aplicació a com trobava el profe que quedaria millor. La correcció va ser correcta, ja que teníem tot acabat, simplement faltava acabar de polir part del disseny de la pàgina i algun element de la pàgina.
+
+
+=== Semana 10/1 - 16/1
+
+Aquesta setmana ens han afegit el 'sprint 2' en aquesta part ens han dit d'afegir pantalles al projecte. Primerament, una pantalla on pots loguear-te amb usuaris ja creats, si l'inici de sessió és correcte doncs et donarà a una altra pàgina on pots accedir a la funció per crear esdeveniments; encara que també en el mateix login tens una altra funció on pots canviar la contrasenya si tu com usuari promotor t'has oblidat la contrasenya. A part d'aquestes noves pestanyes també han dit de reformar la pantalla d'home, on abans es veia tots els esdeveniments possibles ara s'ha de veure una quantitat menor i es veuen només els més importants amb una opció de veure més i aniràs a la pantalla home que existia abans.
+
+
+**10/01**
+
+El dimecres 10 vam començar amb la pantalla login, primer hem fet el disseny de la pantalla, escollim com es veuria. Una vegada ja amb el disseny completament decidit ens hem posat a fer la part, primer, de com es veuria i en tenir-ho hem fet la part dels controllers perquè pugui funcionar correctament, hem controlat que la contrasenya i el nom d'usuari que es posa en el login sigui correcte i també que es vegi la següent pantalla només si ja has iniciat sessió. La següent pantalla (que seria homePromotor) hem fet amb un disseny simple, ja que no es demanava res d'aquesta pantalla.
+Mentre es realitza això, també estem realitzant una funció que després ens hem adonat que no cal hi va fer-la, aquesta és la funció de mostrar esdeveniment, que consta que si donés clic en algú esdeveniment que es mostra a la pantalla home t'adona aquesta pestanya on et mostra el nom de l'esdeveniment, la data, el lloc, el preu i la imatge que s'ha posat en aquest esdeveniment.
+
+**11/01**
+
+Quan hem acabat amb la pantalla login, ens hem posat a realitzar la funció per sortir-se (sign out) de la sessió, hem discutit on vam posar el botó per poder sortir-se del compte, i havíem decidit en posar el nom a la dreta superior de la pantalla i en donar-li clic s'obrirà un mini-menú on es pot anar al profile de l'usuari o tancar la sessió, després d'haver-lo parlat-ho ho vam fer.I en tenir totes aquestes funcions ens hem posat a fer una part de crear esdeveniment, aquesta funció tens la possibilitat de crear un esdeveniment en entrar en algun compte com a promotor, està funció necessita agafar tota la informació necessària tant com el nom de l'esdeveniment com la data, el lloc, el preu i una imatge, però a més has de posar una opció per poder posar algun lloc que hagis afegit abans o pots crear un nou lloc al moment, posant província, ciutat, codi postal, nom del local i aforament d'aquest. A part d'això també hem de posar el tipus d'entrades disponibles, amb tota la informació requerida. D'aquestes funcions hem fet pel moment només la de crear un esdeveniment, però ens falta realitzar el lloc i el tipus d'entrades. 
+
+**12/01**
+
+El dia 12 hem realitzat la correcció setmanal amb el professorat, i ens van dir que ens falten moltes funcionalitats com la de crear esdeveniments la qual faltava la part per poder crear adreces i entrades, i també algunes coses respecte al disseny de l'aplicació, com pot ser les mides dels botons, el missatge d'error quan feies un login, però vas posar la contrasenya o usuari correcte es mostra molt a prop de l'input d'usuari, donar més espai entre categoria i la imatge del buscador. I també els errors del fitxer Apache i les pàgines que algunes es veien en total blanc i no es mostrava res.A l'acabat ens hem posat a parlar sobre els errors i com podríem solucionar-ho. I es va seguir amb la part de crear esdeveniments en la part d'adreces i corregir parts del disseny de les pestanyes existents.
+
+**15/01**
+
+El dilluns ens vam posar a fer bé les correccions del divendres, hem canviat la major part de la base de dades. També en el principi del sprint ens van donar la possibilitat d'utilitzar sass en aquest projecte, nosaltres no vam usar-ho, però això va canviar en el segon sprint i utilitzar sass va ser obligatori ara, ja que vam usar aquest dia per poder posar sass en el nostre projecte. Mentre també van a fer una correcció de la reforma d'home, i vam a tornar a fer el codi per què s'ordena d'una altra manera i només mostra uns pocs esdeveniments en comptes de mostrar tots els esdeveniments existents.
+
+**16/01**
+
+I en el dimarts ens hem posat finalment a fer la funció s'ha oblidat la contrasenya, hem realitzat un mini disseny molt simple per fer les proves i hem creat un compte en MailTrap per poder fer l’enviament d'emails. Hem fet uns simples controllers per l’enviament però ens falta molta feina en aquesta funció. A més hem finalitzat la funció de crear un esdeveniment, ja havíem tingut finalitzada la part d'adreces i ara tanquem la feina amb les entrades.
+
 
 == Diseño
     

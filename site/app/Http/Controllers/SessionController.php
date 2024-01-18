@@ -26,11 +26,11 @@ class SessionController extends Controller
         break;
     case "closeSession":
         $this->out();
-        return view('login');
+        return redirect('login');
         break;
     case "openSession":
         $this->in();
-        return view('login');
+        return redirect('login');
         break;
     }
   }

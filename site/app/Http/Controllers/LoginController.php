@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
@@ -17,24 +18,30 @@ class LoginController extends Controller
     {
         if(session('key')){
             return view('homePromotor');
-        }
-        else{$this->validate($request, [
+        }else{
+            $validator = Validator::make($request->all(), [
             'usuario' => 'required',
             'password' => 'required',
         ]);
 
         $userName = $request->input('usuario');
         $password = $request->input('password');
-
-        $user = DB::table('users')->where('name', $userName)->first();
+        if ($validator->fails()) {
+            return redirect('login')->withErrors(array('error' =>'Rellene todos los camposa'));
+        }
+        $user = DB::table('users')->where('username', $userName)->first();
+        $tipus = DB::table('users')->where('username', $userName)->value('tipus');
 
         if ($user && Hash::check($password, $user->password)) {
             $request->session()->put('key', $userName);
             $request->session()->put('user_id', $user->id); // Almacenar el ID del usuario en la sesión
-            $sessionValue = $request->session()->get('key');
-            return view('homePromotor');
+            if ($tipus == 'Promotor') {
+                return view('homePromotor');
+            }else{
+                return view('taullerAdministracio');
+            }
         } else {
-            return redirect('login')->withErrors(array('msg' =>'Credenciales Incorrectas'));
+            return redirect('login')->withErrors(array('error' =>'Credenciales Incorrectas'));
         }}
     }
 }

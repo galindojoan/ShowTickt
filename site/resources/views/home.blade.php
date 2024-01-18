@@ -44,21 +44,46 @@
         <input class="linkPromotor" type="submit" value="PROMOTORES">
         </form>
     </div>
-    <div class="event-cards">
-        @foreach ($esdeveniments as $esdeveniment)
-            <a href="{{ route('mostrar-esdeveniment', ['id' => $esdeveniment->id]) }}" class="event-link">
+    
+    
+      
+      @foreach($categoriesWithEventCount as $category)
+
+      <div class="event-home">
+        <h2>{{ $category->tipus }}</h2>
+          @php
+          $cont=0;
+          @endphp
+          @foreach ($events as $esdeveniment)
+          
+            @if($esdeveniment->categoria_id==$category->id && $cont<3)
+              @php
+                  $cont++
+              @endphp
+              <a href="{{ route('mostrar-esdeveniment', ['id' => $esdeveniment->id]) }}" class="event-link">
                 <div class="event-card">
                     <div class="event-details">
                         <p>{{ $esdeveniment->nom }}</p>
-                        <p>{{ $esdeveniment->dia }}</p>
+                        <p>{{ $esdeveniment->data_sessio}}</p>
                         <p>{{ $esdeveniment->recinte->lloc }}</p>
-                        <p>{{ $esdeveniment->preu }} €</p>
+                        <p>{{ $esdeveniment->entradas_preu }} €</p>
                     </div>
-                    <img src="{{ $esdeveniment->imatge }}" alt="Imatge de l'esdeveniment">
+                    <img src="{{ Storage::url( $esdeveniment->imatge ) }}" alt="Imatge de l'esdeveniment">
                 </div>
-            </a>
-        @endforeach
-    </div>
+             </a>
+            @endif
+          @endforeach
 
-    <div class="pages">{{ $esdeveniments->links('pagination::bootstrap-5') }}</div>
+          <form action="{{ route('cerca') }}" method="get" id="event-form">
+            <div class="event-group">
+              <input type="hidden" name="category" value="{{ $category->id}}">
+              <button type="submit" class="event-btn">ver mas ></button>
+            </div>
+          </form>
+          
+        </div>
+      @endforeach
+    
+
+    {{-- <div class="pages">{{ $esdeveniments->links('pagination::bootstrap-5') }}</div> --}}
 @endsection

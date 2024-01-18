@@ -6,18 +6,20 @@
 <div class="loginPage">
     <div class="login">
         <h2>Contraseña Olvidada</h2>
-        @if($errors->has('msg'))
-            <span class="errorMsg">El email no esta vinculado con ninguno de nuestros usuarios.</span>
+        @if($errors->has('error'))
+            <span class="errorMsg">{{$errors->first('error')}}</span>
         @endif
         
-        <span>Escriba el email de la cuenta a recuperar.</span> <br> <br>
-        <form action="{{route('homePromotor')}}" method="post" id="recuperarForm">
+        <span id="indicador">Escriba la cuenta a recuperar.</span> <br> <br>
+        <form action="{{route('recuperar-form')}}" method="post" id="recuperarForm">
         @csrf
             <div class="loginInput">
                 <input type="email" name="email" id="email" placeholder="Email">
             </div>
-            <button class="boton" id="atras">Atrás</button>
-            <input type="submit" value="Acceder" class="boton">
+            <div>
+                <a href="{{route('login')}}" class="boton" id="atras">Atrás</a>
+                <input type="submit" value="Enviar" class="boton">
+            </div>
         </form>
     </div>
 </div>

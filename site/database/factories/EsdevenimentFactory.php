@@ -24,10 +24,9 @@ class EsdevenimentFactory extends Factory
     {
         return [
             'nom' => $this->faker->name,
-            'dia' => $this->faker->date,
             'imatge' => $this->faker->imageUrl(),
-            'preu' => $this->faker->randomFloat(2, 10, 1000),
             'aforament' => $this->faker->randomNumber(3),
+            'ocult' => $this->faker->boolean(),
             'user_id' => User::factory(),
         ];
     }

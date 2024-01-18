@@ -244,6 +244,7 @@ footer {
 
 .ahref {
     border: none;
+    width: min-content;
     margin: 0px;
     padding: 10px;
     font-weight: 700;
@@ -542,6 +543,7 @@ a {
     padding-left: 15px;
     padding-right: 15px;
     font-weight: 700;
+    font-size: 20px;
     margin: 2%;
 
     &:hover {
@@ -748,7 +750,8 @@ a {
     }
 
     .errorMsg {
-        margin-top: 5%;
+        margin-top: 7%;
+        max-width: 200px;
     }
 
     .linkPromotor {
@@ -763,7 +766,6 @@ a {
     select[class="form-control"] {
         height: 32px;
     }
-
 }
 
 @media screen and (max-width: 820px) {

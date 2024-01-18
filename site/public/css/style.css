@@ -208,6 +208,7 @@ footer {
 
 .ahref {
   border: none;
+  width: min-content;
   margin: 0px;
   padding: 10px;
   font-weight: 700;
@@ -505,6 +506,7 @@ a {
   padding-left: 15px;
   padding-right: 15px;
   font-weight: 700;
+  font-size: 20px;
   margin: 2%;
 }
 .boton:hover {
@@ -690,7 +692,8 @@ a {
     width: 60%;
   }
   .errorMsg {
-    margin-top: 5%;
+    margin-top: 7%;
+    max-width: 200px;
   }
   .linkPromotor {
     font-weight: 800;

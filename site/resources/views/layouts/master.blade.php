@@ -82,6 +82,7 @@
       form.submit();
     })
   </script>
+  @yield('scripts')
 </body>
 
 </html>

@@ -72,7 +72,7 @@
                 <input type="hidden" name="nova_user_id" value="{{ session('user_id') }}">
             </div>
 
-            <button type="button" id="cancelarBoto" style="display: none;">Cancelar</button>
+            <button type="button" id="cancelarBoto" class="btn btn-cancelar" style="display: none;">Cancelar</button>
 
             <div class="form-group">
                 <label for="imatge" class="form-label">Imagen principal del evento</label>
@@ -81,7 +81,8 @@
 
             <div class="form-group">
                 <label for="descripcio" class="form-label">Descripción del evento</label>
-                <textarea class="form-controller" maxlength="640" id="descripcio" name="descripcio" rows="3" required></textarea>
+                <textarea type="textarea" class="form-controller" maxlength="640" id="descripcio" name="descripcio" rows="3"
+                    required></textarea>
             </div>
 
             <div class="form-group">
@@ -100,9 +101,12 @@
                 <div id="tiposEntradas">
                     <!-- Contenido dinámico para los tipos de entradas -->
                 </div>
-                <button type="button" class="btn btn-add" id="agregarTipoEntrada">Agregar Tipo de Entrada</button>
-                <button type="button" class="btn btn-remove" id="eliminarTipoEntrada" style="display: none;">Eliminar
-                    Entrada</button>
+                <div class="button-entrada">
+                    <button type="button" class="btn btn-add" id="agregarTipoEntrada">Agregar Tipo de Entrada</button>
+                    <button type="button" class="btn btn-eliminar" id="eliminarTipoEntrada"
+                        style="display: none;">Eliminar
+                        Entrada</button>
+                </div>
             </div>
 
             <div class="form-group">

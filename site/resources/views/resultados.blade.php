@@ -7,7 +7,8 @@
         <form action="{{ route('cerca') }}" method="get" class="form" id="filtre">
             <div class="input-group">
                 <select name="category" class="form-control" onchange="this.form.submit()">
-                    <option value="" {{ $categoryId === null ? 'selected' : '' }}>Todas las categorías</option>
+                    <option value="" disabled selected>Categorías</option>
+                    <option value="" {{ $categoryId === null ? 'selected' : '' }}>Mostrar todos</option>
                     @foreach ($categoriesWithEventCount as $category)
                         <option value="{{ $category->id }}" {{ $categoryId == $category->id ? 'selected' : '' }}>
                             {{ $category->tipus }} ({{ $category->eventCount }} eventos)

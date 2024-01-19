@@ -27,7 +27,7 @@ class LoginController extends Controller
         $userName = $request->input('usuario');
         $password = $request->input('password');
         if ($validator->fails()) {
-            return redirect('login')->withErrors(array('error' =>'Rellene todos los camposa'));
+            return redirect('login')->withErrors(array('error' =>'Rellene todos los campos'));
         }
         $user = DB::table('users')->where('username', $userName)->first();
         $tipus = DB::table('users')->where('username', $userName)->value('tipus');

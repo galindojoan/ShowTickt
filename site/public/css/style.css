@@ -421,10 +421,6 @@ input[class=form-control] {
   /* Esto evita que se hagan clics en botones deshabilitados */
 }
 
-.pages {
-  overflow-x: auto;
-}
-
 ul {
   display: block;
   list-style-type: disc;

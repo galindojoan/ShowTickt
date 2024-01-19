@@ -793,9 +793,6 @@ a {
     grid-template-columns: 1fr;
     grid-template-rows: 0.5fr 0.5fr;
   }
-  .errorMsg {
-    margin-top: 2.5%;
-  }
   .valiMsg {
     margin-top: 2.5%;
   }

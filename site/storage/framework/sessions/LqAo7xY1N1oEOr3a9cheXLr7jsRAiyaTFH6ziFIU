@@ -1,1 +1,1 @@
-a:5:{s:6:"_token";s:40:"6Eyzx2sLbWYz2mgc6vYgEDrpGaEJPEMVPQpcFV5Y";s:9:"_previous";a:1:{s:3:"url";s:34:"http://localhost:8000/homePromotor";}s:6:"_flash";a:2:{s:3:"old";a:0:{}s:3:"new";a:0:{}}s:3:"key";s:9:"promotor2";s:7:"user_id";i:2;}
+a:5:{s:6:"_token";s:40:"6Eyzx2sLbWYz2mgc6vYgEDrpGaEJPEMVPQpcFV5Y";s:9:"_previous";a:1:{s:3:"url";s:47:"http://localhost:8000/administrar-esdeveniments";}s:6:"_flash";a:2:{s:3:"old";a:0:{}s:3:"new";a:0:{}}s:3:"key";s:9:"promotor2";s:7:"user_id";i:2;}

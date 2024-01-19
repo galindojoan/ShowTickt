@@ -9,9 +9,17 @@
                 <div class="event-card">
                     <div class="event-details">
                         <p>{{ $esdeveniment->nom }} </p>
-                        <p>{{ $esdeveniment->sesions->first()->data }}</p>
+                        @if ($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->data !== null)
+                            <p>{{ $esdeveniment->sesions->first()->data }}</p>
+                        @else
+                            <p>No hay sesiones</p>
+                        @endif
                         <p>{{ $esdeveniment->recinte->lloc }}</p>
-                        <p>{{ $esdeveniment->sesions->first()->entrades->first()->preu }} €</p>
+                        @if ($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->entrades->isNotEmpty())
+                            <p>{{ $esdeveniment->sesions->first()->entrades->first()->preu }} €</p>
+                        @else
+                            <p>Sin entradas</p>
+                        @endif
                     </div>
                     <img src="{{ Storage::url($esdeveniment->imatge) }}" alt="Imatge de l'esdeveniment">
                 </div>

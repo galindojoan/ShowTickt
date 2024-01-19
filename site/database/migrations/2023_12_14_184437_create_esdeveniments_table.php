@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('esdeveniments', function (Blueprint $table) {
             $table->id(); 
             $table->string('nom');
+            $table->string('descripcio', 640);
             $table->string('imatge');
             $table->integer('aforament');
             $table->boolean('ocult')->default(false);

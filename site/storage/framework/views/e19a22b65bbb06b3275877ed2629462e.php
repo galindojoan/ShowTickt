@@ -5,7 +5,8 @@
         <form action="<?php echo e(route('cerca')); ?>" method="get" class="form" id="filtre">
             <div class="input-group">
                 <select name="category" class="form-control" onchange="this.form.submit()">
-                    <option value="" <?php echo e($categoryId === null ? 'selected' : ''); ?>>Todas las categorías</option>
+                    <option value="" disabled selected>Categorías</option>
+                    <option value="" <?php echo e($categoryId === null ? 'selected' : ''); ?>>Mostrar todos</option>
                     <?php $__currentLoopData = $categoriesWithEventCount; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <option value="<?php echo e($category->id); ?>" <?php echo e($categoryId == $category->id ? 'selected' : ''); ?>>
                             <?php echo e($category->tipus); ?> (<?php echo e($category->eventCount); ?> eventos)
@@ -53,9 +54,9 @@
                         <p><?php echo e($esdeveniment->nom); ?>  </p>
                         <p><?php echo e($esdeveniment->data_sessio); ?></p>
                         <p><?php echo e($esdeveniment->recinte->lloc); ?></p>
-                        <p><?php echo e($esdeveniment->preu); ?> €</p>
+                        <p><?php echo e($esdeveniment->entradas_preu); ?> €</p>
                     </div>
-                    <img src="<?php echo e($esdeveniment->imatge); ?>" alt="Imatge de l'esdeveniment">
+                    <img src="<?php echo e(Storage::url( $esdeveniment->imatge )); ?>" alt="Imatge de l'esdeveniment">
                 </div>
             </a>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

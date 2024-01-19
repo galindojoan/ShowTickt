@@ -4,8 +4,10 @@
 <div class="loginPage">
     <div class="login">
         <h2>Login</h2>
-        <?php if($errors->has('msg')): ?>
-            <span class="errorMsg">Usuario o contraseña incorrecta</span>
+        <?php if($errors->has('error')): ?>
+            <span class="errorMsg"><?php echo e($errors->first('error')); ?></span>
+        <?php elseif($errors->has('vali')): ?>
+            <span class="valiMsg"><?php echo e($errors->first('vali')); ?></span>
         <?php endif; ?>
         <form action="<?php echo e(route('homePromotor')); ?>" method="post" id="loginForm">
         <?php echo csrf_field(); ?>

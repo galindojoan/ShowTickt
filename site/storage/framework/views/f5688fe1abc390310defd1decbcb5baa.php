@@ -395,6 +395,12 @@
                         return false;
                     }
 
+                    // Validar que el precio no supere el límite
+                    if (parseFloat(precioValue) > 1000) {
+                        mostrarMissatge('El precio no puede ser superior a 1.000.€');
+                        return false;
+                    }
+
                     if (cantidadValue !== '' && (isNaN(cantidadValue) || parseInt(cantidadValue) <= 0)) {
                         mostrarMissatge('La cantidad disponible debe ser un valor numérico mayor que 0.');
                         return false;

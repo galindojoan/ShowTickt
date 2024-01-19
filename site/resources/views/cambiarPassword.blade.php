@@ -4,11 +4,11 @@
 
 @section('content')
 <div class="loginPage">
+    @if ($errors->has('error'))
+        <span class="errorMsg">{{$errors->first('error')}}</span>
+    @endif
     <div class="login">
         <h2>Cambiar Contraseña</h2>
-        @if ($errors->has('error'))
-            <span class="errorMsg">{{$errors->first('error')}}</span>
-        @endif
         <form action="{{route('peticionCambiar')}}" method="post" id="loginForm">
         @csrf
             <div class="loginInput">

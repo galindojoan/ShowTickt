@@ -4,11 +4,11 @@
 
 <?php $__env->startSection('content'); ?>
 <div class="loginPage">
+    <?php if($errors->has('error')): ?>
+        <span class="errorMsg"><?php echo e($errors->first('error')); ?></span>
+    <?php endif; ?>
     <div class="login">
         <h2>Cambiar Contraseña</h2>
-        <?php if($errors->has('error')): ?>
-            <span class="errorMsg"><?php echo e($errors->first('error')); ?></span>
-        <?php endif; ?>
         <form action="<?php echo e(route('peticionCambiar')); ?>" method="post" id="loginForm">
         <?php echo csrf_field(); ?>
             <div class="loginInput">

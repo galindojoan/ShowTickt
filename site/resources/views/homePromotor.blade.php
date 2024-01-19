@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="promotorBody">
+    <div class="bg-page">
         @if (session('key'))
             <div class="button-container">
                 <a href="{{ route('administrar-esdeveniments') }}" class="custom-button">Administrar Esdeveniments</a>

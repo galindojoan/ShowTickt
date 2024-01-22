@@ -10,6 +10,10 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\CrearEsdevenimentController;
 use App\Http\Controllers\AdministrarEsdevenimentsController;
 use App\Http\Controllers\EditarEsdevenimentController;
+use App\Http\Controllers\LlistatSessionsController;
+use App\Http\Controllers\AdministrarEsdevenimentController;
+use App\Http\Controllers\DetallsEsdevenimentController;
+use App\Http\Controllers\LlistatsEntradesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,3 +69,10 @@ Route::get('/peticionCambiar',[passwordController::class, 'cambiarPassword'])->n
 Route::post('/peticionCambiar',[passwordController::class, 'cambiarPassword'])->name('peticionCambiar');
 
 Route::post('/confirmacio',[EsdevenimentController::class, 'compra'])->name('confirmacioCompra');
+
+Route::get('/llistat-sessions', [LlistatSessionsController::class, 'index'])->name('llistat-sessions');
+Route::post('/llistat-sessions', [LlistatSessionsController::class, 'index'])->name('llistat-sessions');
+
+Route::get('/detalls-esdeveniment/{id}', [DetallsEsdevenimentController::class, 'show'])->name('detalls-esdeveniment');
+Route::get('/administrar-esdeveniment/{id}', [AdministrarEsdevenimentController::class, 'show'])->name('administrar-esdeveniment');
+Route::get('/llistats-entrades/{id}', [LlistatsEntradesController::class, 'show'])->name('llistats-entrades');

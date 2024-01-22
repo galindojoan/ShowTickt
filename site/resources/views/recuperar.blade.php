@@ -4,12 +4,11 @@
 
 @section('content')
 <div class="loginPage">
+    @if($errors->has('error'))
+        <span class="errorMsg">{{$errors->first('error')}}</span>
+    @endif
     <div class="login">
         <h2>Contraseña Olvidada</h2>
-        @if($errors->has('error'))
-            <span class="errorMsg">{{$errors->first('error')}}</span>
-        @endif
-        
         <span id="indicador">Escriba la cuenta a recuperar.</span> <br> <br>
         <form action="{{route('recuperar-form')}}" method="post" id="recuperarForm">
         @csrf

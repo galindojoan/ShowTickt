@@ -488,6 +488,7 @@ ul {
     width: 100vw;
     height: 80vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -594,7 +595,7 @@ a {
     max-width: 100%;
     padding: 8px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid #474747;
     border-radius: 4px;
     box-sizing: border-box;
     margin-bottom: 10px;
@@ -657,12 +658,18 @@ a {
     /* Añadir bordes redondeados */
 }
 
-
+.valiMsg{
+    background-color: limegreen;
+    padding: 10px;
+    color: black;
+    margin: 20px;
+}
 
 .errorMsg {
-    color: red;
-    position: fixed;
-    margin-top: 2%;
+    background-color: #980000;
+    padding: 10px;
+    color: white;
+    margin: 20px;
 }
 
 .tipo-entrada {
@@ -707,11 +714,7 @@ a {
     margin-top: 10px;
 }
 
-.valiMsg{
-    color: green;
-    position: fixed;
-    margin-top: 2%;
-}
+
 
 /*Ver Eventos inicio*/
 
@@ -738,7 +741,7 @@ a {
 /*Pantalla Home Promotor*/
 .button-container {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10%;
 }
 
 .custom-button {
@@ -873,15 +876,6 @@ a {
         width: 60%;
     }
 
-    .errorMsg {
-        margin-top: 7%;
-        max-width: 200px;
-    }
-    .valiMsg{
-        margin-top: 7%;
-        max-width: 200px;
-    }
-
     .linkPromotor {
         font-weight: 800;
         font-size: 13px;
@@ -906,10 +900,6 @@ a {
     .containerEvent {
         grid-template-columns: 1fr;
         grid-template-rows: 0.5fr 0.5fr;
-    }
-
-    .valiMsg{
-        margin-top: 2.5%;
     }
 
     .event-cards {

@@ -769,6 +769,19 @@ a {
   z-index: 1; /* Establece un valor más alto para que el tooltip esté sobre la tarjeta */
 }
 
+/* Estilos para el mensaje informativo */
+.info-message {
+  background-color: #ff7118;
+  color: white;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.info-text {
+  margin: 0;
+  font-size: 16px;
+}
+
 /*Ver Eventos fin*/
 @media screen and (max-width: 300px) {
   .titulo {

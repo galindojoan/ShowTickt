@@ -7,12 +7,13 @@
       {{-- {{$esdeveniment}} --}}
       <div class="textEvent">
         <h1>{{ $esdeveniment->nom }}</h1>
-        <p>Lugar: {{ $esdeveniment->recinte->lloc }}</p>
+        <h6>{{ $esdeveniment->descripcio}}</h6>
+        <p><strong>Lugar:</strong> {{ $esdeveniment->recinte->lloc }}</p>
         <form action="{{ route('confirmacioCompra') }}" method="post" class="ComprarEntrada" id="ComprarEntrada"
             enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-              <label for="fecha" class="form-label">Fecha</label>
+              <label for="fecha" class="form-label">Fechas:</label>
               <select class="form-select" id="fecha" name="fecha" required>
                   @foreach ($fechas as $fecha)
                       <option value="{{ $fecha->id }}">{{ $fecha->data_sessio }}</option>

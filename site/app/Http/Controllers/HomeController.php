@@ -52,6 +52,7 @@ class HomeController extends Controller
       ->join('categories', 'categories.id', '=', 'esdeveniments.categoria_id')
       ->select('esdeveniments.*', 'sessios.data as data_sessio', 'entradas.preu as entradas_preu')
       ->orderBy('data_sessio', 'asc')
+      ->groupBy('esdeveniments.id','sessios.data','entradas.preu')
       ->get();
 
     $categories = Categoria::all();

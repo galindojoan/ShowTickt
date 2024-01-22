@@ -5,12 +5,13 @@
       
       <div class="textEvent">
         <h1><?php echo e($esdeveniment->nom); ?></h1>
-        <p>Lugar: <?php echo e($esdeveniment->recinte->lloc); ?></p>
+        <h6><?php echo e($esdeveniment->descripcio); ?></h6>
+        <p><strong>Lugar:</strong> <?php echo e($esdeveniment->recinte->lloc); ?></p>
         <form action="<?php echo e(route('confirmacioCompra')); ?>" method="post" class="ComprarEntrada" id="ComprarEntrada"
             enctype="multipart/form-data">
             <?php echo csrf_field(); ?>
             <div class="form-group">
-              <label for="fecha" class="form-label">Fecha</label>
+              <label for="fecha" class="form-label">Fechas:</label>
               <select class="form-select" id="fecha" name="fecha" required>
                   <?php $__currentLoopData = $fechas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fecha): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                       <option value="<?php echo e($fecha->id); ?>"><?php echo e($fecha->data_sessio); ?></option>

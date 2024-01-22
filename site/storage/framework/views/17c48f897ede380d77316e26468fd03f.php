@@ -11,7 +11,7 @@
 
 <body class="w3-content">
   <header>
-    <img class="logo" alt="logoShowTickt" src="<?php echo e(asset('imagen/logo-definitivo.png')); ?>">
+    <a href="<?php echo e(route('home')); ?>"><img class="logo" alt="logoShowTickt" src="<?php echo e(asset('imagen/logo-definitivo.png')); ?>"></a>
     <h1 class="titulo">ShowTickt</h1>
 
 

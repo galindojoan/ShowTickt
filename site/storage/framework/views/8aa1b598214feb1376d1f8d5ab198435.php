@@ -5,7 +5,8 @@
         <form action="<?php echo e(route('cerca')); ?>" method="get" class="form" id="filtre">
             <div class="input-group">
                 <select name="category" class="form-control" onchange="this.form.submit()">
-                    <option value="" <?php echo e($categoryId === null ? 'selected' : ''); ?>>Todas las categorías</option>
+                    <option value="" disabled selected>Categorías</option>
+                    <option value="" <?php echo e($categoryId === null ? 'selected' : ''); ?>>Mostrar todos</option>
                     <?php $__currentLoopData = $categoriesWithEventCount; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <option value="<?php echo e($category->id); ?>" <?php echo e($categoryId == $category->id ? 'selected' : ''); ?>>
                             <?php echo e($category->tipus); ?> (<?php echo e($category->eventCount); ?> eventos)
@@ -34,23 +35,40 @@
                     </svg></button>
             </div>
         </form>
+        <form id="promotores" method="POST" action="<?php if(session('key')): ?>
+            <?php echo e(route('homePromotor')); ?>
+
+            <?php else: ?><?php echo e(route('login')); ?>
+
+            <?php endif; ?>">
+            <?php echo csrf_field(); ?>
+        <input class="linkPromotor" type="submit" value="PROMOTORES">
+        </form>
     </div>
+    
     <div class="event-cards">
         <?php $__currentLoopData = $esdeveniments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $esdeveniment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <a href="<?php echo e(route('mostrar-esdeveniment', ['id' => $esdeveniment->id])); ?>" class="event-link">
                 <div class="event-card">
                     <div class="event-details">
-                        <p><?php echo e($esdeveniment->nom); ?></p>
-                        <p><?php echo e($esdeveniment->dia); ?></p>
+                        <p><?php echo e($esdeveniment->nom); ?>  </p>
+                        <?php if($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->data !== null): ?>
+                            <p><?php echo e($esdeveniment->sesions->first()->data); ?></p>
+                        <?php else: ?>
+                            <p>No hay sesiones</p>
+                        <?php endif; ?>
                         <p><?php echo e($esdeveniment->recinte->lloc); ?></p>
-                        <p><?php echo e($esdeveniment->preu); ?> €</p>
+                        <?php if($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->entrades->isNotEmpty()): ?>
+                            <p><?php echo e($esdeveniment->sesions->first()->entrades->first()->preu); ?> €</p>
+                        <?php else: ?>
+                            <p>Sin entradas</p>
+                        <?php endif; ?>
                     </div>
-                    <img src="<?php echo e($esdeveniment->imatge); ?>" alt="Imatge de l'esdeveniment">
+                    <img src="<?php echo e(Storage::url( $esdeveniment->imatge )); ?>" alt="Imatge de l'esdeveniment">
                 </div>
             </a>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
-
     <div class="pages"><?php echo e($esdeveniments->links('pagination::bootstrap-5')); ?></div>
 <?php $__env->stopSection(); ?>
 

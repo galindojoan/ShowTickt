@@ -7,7 +7,8 @@
         <form action="{{ route('cerca') }}" method="get" class="form" id="filtre">
             <div class="input-group">
                 <select name="category" class="form-control" onchange="this.form.submit()">
-                    <option value="" {{ $categoryId === null ? 'selected' : '' }}>Todas las categorías</option>
+                    <option value="" disabled selected>Categorías</option>
+                    <option value="" {{ $categoryId === null ? 'selected' : '' }}>Mostrar todos</option>
                     @foreach ($categoriesWithEventCount as $category)
                         <option value="{{ $category->id }}" {{ $categoryId == $category->id ? 'selected' : '' }}>
                             {{ $category->tipus }} ({{ $category->eventCount }} eventos)
@@ -36,22 +37,37 @@
                     </svg></button>
             </div>
         </form>
+        <form id="promotores" method="POST" action="@if(session('key'))
+            {{route('homePromotor')}}
+            @else{{route('login')}}
+            @endif">
+            @csrf
+        <input class="linkPromotor" type="submit" value="PROMOTORES">
+        </form>
     </div>
+    
     <div class="event-cards">
         @foreach ($esdeveniments as $esdeveniment)
             <a href="{{ route('mostrar-esdeveniment', ['id' => $esdeveniment->id]) }}" class="event-link">
                 <div class="event-card">
                     <div class="event-details">
-                        <p>{{ $esdeveniment->nom }}</p>
-                        <p>{{ $esdeveniment->dia }}</p>
+                        <p>{{ $esdeveniment->nom }}  </p>
+                        @if ($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->data !== null)
+                            <p>{{ $esdeveniment->sesions->first()->data }}</p>
+                        @else
+                            <p>No hay sesiones</p>
+                        @endif
                         <p>{{ $esdeveniment->recinte->lloc }}</p>
-                        <p>{{ $esdeveniment->preu }} €</p>
+                        @if ($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->entrades->isNotEmpty())
+                            <p>{{ $esdeveniment->sesions->first()->entrades->first()->preu }} €</p>
+                        @else
+                            <p>Sin entradas</p>
+                        @endif
                     </div>
-                    <img src="{{ $esdeveniment->imatge }}" alt="Imatge de l'esdeveniment">
+                    <img src="{{ Storage::url( $esdeveniment->imatge ) }}" alt="Imatge de l'esdeveniment">
                 </div>
             </a>
         @endforeach
     </div>
-
     <div class="pages">{{ $esdeveniments->links('pagination::bootstrap-5') }}</div>
 @endsection

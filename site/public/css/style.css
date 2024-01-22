@@ -138,7 +138,7 @@ footer {
 .event-card img {
   display: flex;
   justify-content: left;
-  max-width: 45%;
+  max-width: 40%;
   height: auto;
   object-fit: cover;
   margin: 20px;
@@ -804,28 +804,6 @@ a {
   margin: 10px;
 }
 
-/*Estilos del div donde se visualizan las fechas para poder editarlas*/
-#fechaDiv {
-  display: grid;
-  grid-template-columns: auto auto;
-  max-width: 200px;
-  border: none;
-  align-items: center;
-}
-#fechaDiv > button {
-  width: fit-content;
-  height: fit-content;
-  border: none;
-  background-color: transparent;
-}
-#fechaDiv > button:hover {
-  background-color: #dcd;
-  border-radius: 5px;
-}
-
-#fechaButton {
-  margin: 10px;
-}
 /*Ver Eventos fin*/
 @media screen and (max-width: 300px) {
   .titulo {

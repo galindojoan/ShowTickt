@@ -65,3 +65,8 @@ Route::get('/peticionCambiar',[passwordController::class, 'cambiarPassword'])->n
 Route::post('/peticionCambiar',[passwordController::class, 'cambiarPassword'])->name('peticionCambiar');
 
 Route::post('/confirmacio',[EsdevenimentController::class, 'compra'])->name('confirmacioCompra');
+
+Route::get('/añadirSession',[EditarEsdevenimentController::class,'newSessionPage'])->name('añadirSession');
+Route::post('/añadirSession',[EditarEsdevenimentController::class,'newSessionPage'])->name('añadirSession');
+
+Route::post('/peticionSesion',[EditarEsdevenimentController::class,'newSesion'])->name('peticionSesion');

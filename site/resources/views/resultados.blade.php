@@ -7,8 +7,7 @@
         <form action="{{ route('cerca') }}" method="get" class="form" id="filtre">
             <div class="input-group">
                 <select name="category" class="form-control" onchange="this.form.submit()">
-                    <option value="" disabled selected>Categorías</option>
-                    <option value="" {{ $categoryId === null ? 'selected' : '' }}>Mostrar todos</option>
+                    <option value="" {{ $categoryId === null ? 'selected' : '' }}>Todas las categorías</option>
                     @foreach ($categoriesWithEventCount as $category)
                         <option value="{{ $category->id }}" {{ $categoryId == $category->id ? 'selected' : '' }}>
                             {{ $category->tipus }} ({{ $category->eventCount }} eventos)
@@ -37,29 +36,22 @@
                     </svg></button>
             </div>
         </form>
-        <form id="promotores" method="POST" action="@if(session('key'))
-            {{route('homePromotor')}}
-            @else{{route('login')}}
-            @endif">
-            @csrf
-        <input class="linkPromotor" type="submit" value="PROMOTORES">
-        </form>
     </div>
-    
     <div class="event-cards">
-        @foreach ($eventsOrdenats as $esdeveniment)
+        @foreach ($esdeveniments as $esdeveniment)
             <a href="{{ route('mostrar-esdeveniment', ['id' => $esdeveniment->id]) }}" class="event-link">
                 <div class="event-card">
                     <div class="event-details">
-                        <p>{{ $esdeveniment->nom }}  </p>
-                        <p>{{ $esdeveniment->data_sessio}}</p>
+                        <p>{{ $esdeveniment->nom }}</p>
+                        <p>{{ $esdeveniment->dia }}</p>
                         <p>{{ $esdeveniment->recinte->lloc }}</p>
-                        <p>{{ $esdeveniment->entradas_preu }} €</p>
+                        <p>{{ $esdeveniment->preu }} €</p>
                     </div>
-                    <img src="{{ Storage::url( $esdeveniment->imatge ) }}" alt="Imatge de l'esdeveniment">
+                    <img src="{{ $esdeveniment->imatge }}" alt="Imatge de l'esdeveniment">
                 </div>
             </a>
         @endforeach
     </div>
+
     <div class="pages">{{ $esdeveniments->links('pagination::bootstrap-5') }}</div>
 @endsection

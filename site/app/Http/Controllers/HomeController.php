@@ -52,7 +52,7 @@ class HomeController extends Controller
       ->join('categories', 'categories.id', '=', 'esdeveniments.categoria_id')
       ->select('esdeveniments.*', 'sessios.data as data_sessio', 'entradas.preu as entradas_preu')
       ->orderBy('data_sessio', 'asc')
-      ->groupBy('esdeveniments.id','sessios.data','entradas.preu')
+      ->groupBy('esdeveniments.id', 'sessios.data', 'entradas.preu')
       ->get();
 
     $categories = Categoria::all();
@@ -82,7 +82,8 @@ class HomeController extends Controller
     $cerca = $this->quitarAcentos($request->input('q'));
     $categoryId = $request->input('category');
 
-    $query = Esdeveniment::with(['recinte']); // Ordenar por fecha descendente
+    $query = Esdeveniment::with(['recinte']);
+      //->orderBy('dia', 'desc'); // Ordenar por fecha descendente
 
     // Verifica si se ha seleccionado una categoría
     if ($categoryId !== null) {
@@ -116,50 +117,7 @@ class HomeController extends Controller
     $categories = Categoria::all();
 
     $categoriesWithEventCount = $this->getCategoriesWithEventCount();
-    $sessio = Sessio::all();
 
-    $eventsOrdenats = Esdeveniment::join(
-      DB::raw('(SELECT esdeveniments_id, MIN(data) as min_data 
-                        FROM sessios 
-                        GROUP BY esdeveniments_id) as min_dates'),
-      function ($join) {
-        $join->on('esdeveniments.id', '=', 'min_dates.esdeveniments_id');
-      }
-    )
-      ->join('sessios', function ($join) {
-        $join->on('sessios.esdeveniments_id', '=', 'min_dates.esdeveniments_id')
-          ->on('sessios.data', '=', 'min_dates.min_data');
-      })
-      
-      ->join(
-        DB::raw('(SELECT sessios_id, MIN(preu) as min_preu 
-                      FROM entradas 
-                      GROUP BY sessios_id) as min_preus'),
-        function ($join) {
-          $join->on('sessios.id', '=', 'min_preus.sessios_id');
-        }
-      )
-      ->join('entradas', function ($join) {
-        $join->on('entradas.sessios_id', '=', 'min_preus.sessios_id')
-          ->on('entradas.preu', '=', 'min_preus.min_preu');
-      })
-      ->join('categories', 'categories.id', '=', 'esdeveniments.categoria_id')
-      ->select('esdeveniments.*', 'sessios.data as data_sessio', 'entradas.preu as entradas_preu')
-      ->where('categories.id', '=', $categoryId)
-      ->orderBy('data_sessio', 'asc')
-      ->groupBy('esdeveniments.id','sessios.data','entradas.preu')
-      ->paginate(config('app.items_per_page', 6)); // Ajusta el valor según tus necesidades
-
-    $eventsNoData = Esdeveniment::leftJoin('sessios', 'sessios.esdeveniments_id', '=', 'esdeveniments.id')
-      ->join('categories', 'categories.id', '=', 'esdeveniments.categoria_id')
-      ->select('esdeveniments.*')
-      ->where('categories.id', '=', $categoryId)
-      ->whereNull('sessios.id')  // Condición para eventos sin fechas
-      ->groupBy('esdeveniments.id')
-      ->paginate(config('app.items_per_page', 6));
-
-    // $eventsNoData = $query->paginate(config('app.items_per_page', 6))->appends(request()->query());
-
-    return view('resultados', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount', 'sessio', 'eventsOrdenats', 'eventsNoData'));
+    return view('resultados', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount'));
   }
 }

@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'Home'); ?>
+<?php $__env->startSection('title', 'resultados'); ?>
 
 <?php $__env->startSection('content'); ?>
     <div class="container">
@@ -6,7 +6,7 @@
             <div class="input-group">
                 <select name="category" class="form-control" onchange="this.form.submit()">
                     <option value="" disabled selected>Categorías</option>
-                    <option value="" <?php echo e($categoryId === null ? 'selected' : ''); ?> >Mostrar todos</option>
+                    <option value="" <?php echo e($categoryId === null ? 'selected' : ''); ?>>Mostrar todos</option>
                     <?php $__currentLoopData = $categoriesWithEventCount; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <option value="<?php echo e($category->id); ?>" <?php echo e($categoryId == $category->id ? 'selected' : ''); ?>>
                             <?php echo e($category->tipus); ?> (<?php echo e($category->eventCount); ?> eventos)
@@ -26,7 +26,7 @@
             <div class="input-group">
                 <!-- Campo de entrada oculto para la categoría -->
                 <input type="hidden" name="category" value="<?php echo e($categoryId); ?>">
-                <input type="text" name="q" class="form-control" placeholder="Buscar">
+                <input type="text" name="q" class="form-control" placeholder="Buscar" value="<?php echo e(request('q')); ?>">
                 <button type="submit" class="btn-primary"><svg xmlns="http://www.w3.org/2000/svg" height="16"
                         width="16"
                         viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
@@ -46,47 +46,22 @@
         </form>
     </div>
     
-    
-      
-      <?php $__currentLoopData = $categoriesWithEventCount; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-
-      <div class="event-home">
-        <h2><?php echo e($category->tipus); ?></h2>
-          <?php
-          $cont=0;
-          ?>
-          <?php $__currentLoopData = $events; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $esdeveniment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-          
-            <?php if($esdeveniment->categoria_id==$category->id && $cont<3): ?>
-              <?php
-                  $cont++
-              ?>
-              <a href="<?php echo e(route('mostrar-esdeveniment', ['id' => $esdeveniment->id])); ?>" class="event-link">
+    <div class="event-cards">
+        <?php $__currentLoopData = $eventsOrdenats; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $esdeveniment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <a href="<?php echo e(route('mostrar-esdeveniment', ['id' => $esdeveniment->id])); ?>" class="event-link">
                 <div class="event-card">
                     <div class="event-details">
-                        <p><?php echo e($esdeveniment->nom); ?></p>
+                        <p><?php echo e($esdeveniment->nom); ?>  </p>
                         <p><?php echo e($esdeveniment->data_sessio); ?></p>
                         <p><?php echo e($esdeveniment->recinte->lloc); ?></p>
                         <p><?php echo e($esdeveniment->entradas_preu); ?> €</p>
                     </div>
                     <img src="<?php echo e(Storage::url( $esdeveniment->imatge )); ?>" alt="Imatge de l'esdeveniment">
                 </div>
-             </a>
-            <?php endif; ?>
-          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-          <form action="<?php echo e(route('cerca')); ?>" method="get" id="event-form">
-            <div class="event-group">
-              <input type="hidden" name="category" value="<?php echo e($category->id); ?>">
-              <button type="submit" class="event-btn">ver mas ></button>
-            </div>
-          </form>
-          
-        </div>
-      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-    
-
-    
+            </a>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    </div>
+    <div class="pages"><?php echo e($esdeveniments->links('pagination::bootstrap-5')); ?></div>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\alexg\OneDrive\Documentos\Projecte 2\gr6-arrua-galindo-jumelle\site\resources\views/home.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\alexg\OneDrive\Documentos\Projecte 2\gr6-arrua-galindo-jumelle\site\resources\views/resultados.blade.php ENDPATH**/ ?>

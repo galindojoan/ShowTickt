@@ -76,3 +76,8 @@ Route::post('/llistat-sessions', [LlistatSessionsController::class, 'index'])->n
 Route::get('/detalls-esdeveniment/{id}', [DetallsEsdevenimentController::class, 'show'])->name('detalls-esdeveniment');
 Route::get('/administrar-esdeveniment/{id}', [AdministrarEsdevenimentController::class, 'show'])->name('administrar-esdeveniment');
 Route::get('/llistats-entrades/{id}', [LlistatsEntradesController::class, 'show'])->name('llistats-entrades');
+
+Route::get('/añadirSession',[EditarEsdevenimentController::class,'newSessionPage'])->name('añadirSession');
+Route::post('/añadirSession',[EditarEsdevenimentController::class,'newSessionPage'])->name('añadirSession');
+
+Route::post('/peticionSesion',[EditarEsdevenimentController::class,'newSesion'])->name('peticionSesion');

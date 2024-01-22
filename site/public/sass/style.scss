@@ -528,10 +528,9 @@ a {
     border-radius: 5px;
     margin-bottom: 10px;
     padding: 5px;
-}
-
-.loginInput>input::placeholder {
-    color: black;
+    &::placeholder {
+        color: black;
+    }
 }
 
 .login>.boton {
@@ -825,6 +824,27 @@ a {
 }
 
 
+/*Estilos del div donde se visualizan las fechas para poder editarlas*/
+#fechaDiv{
+    display: grid;
+    grid-template-columns: auto auto;
+    max-width: 200px;
+    border: none;
+    align-items: center;
+    &> button{
+        width: fit-content;
+        height: fit-content;
+        border: none;
+        background-color: transparent;
+        &:hover{
+            background-color: #dcd;
+            border-radius: 5px;
+        }
+    }
+}
+#fechaButton{
+    margin: 10px;
+}
 
 /*Ver Eventos fin*/
 @media screen and (max-width: 300px) {

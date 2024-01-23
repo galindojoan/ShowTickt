@@ -9,6 +9,10 @@
             </div>
 
             <div class="button-container">
+                <a href="<?php echo e(route('llistat-sessions' )); ?>" class="custom-button">Llistat de sessions</a>
+            </div>
+
+            <div class="button-container">
                 <a href="<?php echo e(route('crear-esdeveniment')); ?>" class="custom-button">Crear Esdeveniment</a>
             </div>
         <?php endif; ?>

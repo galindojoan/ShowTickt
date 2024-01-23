@@ -84,3 +84,5 @@ Route::get('/editarSesion',[EditarEsdevenimentController::class,'updateSesionPag
 
 Route::post('/peticionSesion',[EditarEsdevenimentController::class,'newSesion'])->name('peticionSesion');
 Route::post('/cambiarSesion',[EditarEsdevenimentController::class,'updateSesion'])->name('cambiarSesion');
+
+Route::get('/local/{id}',[EsdevenimentController::class, 'local'])->name('detallesLocal');

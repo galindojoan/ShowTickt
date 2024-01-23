@@ -138,7 +138,7 @@ footer {
 .event-card img {
   display: flex;
   justify-content: left;
-  max-width: 45%;
+  max-width: 40%;
   height: auto;
   object-fit: cover;
   margin: 20px;
@@ -817,6 +817,35 @@ a {
   background-color: inherit;
 }
 
+#fechaDiv > button:hover {
+  background-color: #dcd;
+  border-radius: 5px;
+}
+
+#fechaButton {
+  margin: 10px;
+}
+#fechaDiv > .fecha {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+}
+#fechaDiv > .fecha > button {
+  width: fit-content;
+  height: fit-content;
+  border: none;
+  background-color: inherit;
+}
+#fechaDiv > .fecha > button:hover {
+  background-color: #dcd;
+  border-radius: 5px;
+}
+
+#fechaButton {
+  margin: 10px;
+  border: none;
+  background-color: inherit;
+}
 /*Ver Eventos fin*/
 @media screen and (max-width: 300px) {
   .titulo {

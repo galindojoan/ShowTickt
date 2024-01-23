@@ -84,11 +84,14 @@ class CrearEsdevenimentController extends Controller
             }
         }
 
+        // Generar un nombre único basado en el timestamp y el nombre original del archivo
+        $nombreUnico = time() . '_' . $request->file('imatge')->getClientOriginalName();
+
         $esdeveniment = new Esdeveniment([
             'nom' => $request->input('titol'),
             'categoria_id' => $request->input('categoria'),
             'recinte_id' => $recinteId,
-            'imatge' => $request->file('imatge')->storeAs('images', $request->file('imatge')->getClientOriginalName()),
+            'imatge' => $request->file('imatge')->storeAs('images', $nombreUnico),
             'descripcio' => $request->input('descripcio'),
             'aforament' => $request->input('aforament_maxim'),
             'ocult' => $request->has('ocultarEsdeveniment'),

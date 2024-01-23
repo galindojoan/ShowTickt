@@ -113,18 +113,20 @@ footer {
   grid-area: b;
   display: flex;
   box-sizing: border-box;
-  overflow: hidden;
+  overflow-wrap: break-word;
   background-color: white;
   /* Color de fondo */
   border-radius: 10px;
   /* Bordes redondeados */
-  width: 425px;
+  flex: 1;
   height: 150px;
   margin: 10px;
   border: 1px solid black;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   /* Sombra suave */
   transition: transform 0.3s ease;
+  position: relative;
+  z-index: 0; /* Valor por defecto para la tarjeta */
   /* Transición de la propiedad transform */
 }
 .event-card:hover {
@@ -136,7 +138,7 @@ footer {
 .event-card img {
   display: flex;
   justify-content: left;
-  max-width: 45%;
+  max-width: 40%;
   height: auto;
   object-fit: cover;
   margin: 20px;
@@ -175,7 +177,7 @@ footer {
 }
 .event-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 380px));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 400px));
   /* Mínimo 300px, máximo 1 fracción del contenedor */
   justify-content: center;
   gap: 5%;
@@ -490,7 +492,6 @@ a {
   margin-bottom: 10px;
   padding: 5px;
 }
-
 .loginInput > input::placeholder {
   color: black;
 }
@@ -603,7 +604,7 @@ a {
   margin-top: 10px;
 }
 
-#errorDiv {
+.errorDiv {
   display: none;
   background-color: #ffb3b3;
   /* Color de fondo rojo claro */
@@ -718,6 +719,89 @@ a {
 .btn-cancelar:hover {
   background-color: #ff3333; /* Cambia el color de fondo al pasar el mouse */
   color: #fff; /* Cambia el color del texto al pasar el mouse */
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around; /* Distribuye el espacio disponible alrededor de los botones */
+}
+
+.buttons a {
+  color: #000;
+  display: flex;
+  padding: 5px;
+  margin: 10px;
+  align-items: center; /* Centra verticalmente el contenido del botón */
+  border-radius: 5px; /* Bordes redondeados */
+  text-decoration: none; /* Elimina el subrayado predeterminado en los enlaces */
+  transition: background-color 0.3s ease; /* Agrega una transición suave al color de fondo */
+  position: relative; /* Establece la posición relativa para que el tooltip sea relativo a este elemento */
+}
+
+.buttons a:hover {
+  background-color: #f0f0f0; /* Cambia el color de fondo al pasar el ratón sobre el botón */
+}
+
+.buttons a svg {
+  color: #000;
+}
+
+.buttons a:hover::after {
+  content: attr(title); /* Muestra el texto del atributo title como contenido del tooltip */
+  position: absolute;
+  top: 100%; /* Coloca el tooltip encima del enlace */
+  left: 50%; /* Centra el tooltip horizontalmente */
+  transform: translateX(-15%); /* Ajusta la posición horizontal del tooltip */
+  padding: 8px;
+  background-color: #333; /* Color de fondo del tooltip */
+  color: #fff; /* Color del texto del tooltip */
+  border-radius: 5px; /* Bordes redondeados */
+  font-size: 14px;
+  z-index: 1; /* Asegura que el tooltip esté en la parte superior */
+  white-space: nowrap; /* Evita el desbordamiento del texto en varias líneas */
+  opacity: 0; /* Inicialmente, el tooltip está oculto */
+  transition: opacity 0.3s ease; /* Agrega una transición suave para mostrar/ocultar el tooltip */
+}
+
+.buttons a:hover::after {
+  opacity: 1; /* Muestra el tooltip al pasar el ratón sobre el enlace */
+  z-index: 1; /* Establece un valor más alto para que el tooltip esté sobre la tarjeta */
+}
+
+/* Estilos para el mensaje informativo */
+.info-message {
+  background-color: #ff7118;
+  color: white;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.info-text {
+  margin: 0;
+  font-size: 16px;
+}
+
+/*Estilos del div donde se visualizan las fechas para poder editarlas*/
+#fechaDiv {
+  display: grid;
+  grid-template-columns: auto auto;
+  max-width: 200px;
+  border: none;
+  align-items: center;
+}
+#fechaDiv > button {
+  width: fit-content;
+  height: fit-content;
+  border: none;
+  background-color: transparent;
+}
+#fechaDiv > button:hover {
+  background-color: #dcd;
+  border-radius: 5px;
+}
+
+#fechaButton {
+  margin: 10px;
 }
 
 /*Ver Eventos fin*/

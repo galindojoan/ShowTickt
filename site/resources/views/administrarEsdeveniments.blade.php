@@ -3,6 +3,10 @@
 @section('title', 'resultados')
 
 @section('content')
+    <div class="info-message">
+        <p class="info-text">Haz clic sobre un evento para poder editarlo.</p>
+    </div>
+
     <div class="event-cards">
         @foreach ($esdeveniments as $esdeveniment)
             <a href="{{ route('editar-esdeveniment', ['id' => $esdeveniment->id]) }}" class="event-link">

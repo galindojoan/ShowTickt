@@ -65,3 +65,4 @@ Route::get('/peticionCambiar',[passwordController::class, 'cambiarPassword'])->n
 Route::post('/peticionCambiar',[passwordController::class, 'cambiarPassword'])->name('peticionCambiar');
 
 Route::post('/confirmacio',[EsdevenimentController::class, 'compra'])->name('confirmacioCompra');
+Route::get('/local/{id}',[EsdevenimentController::class, 'local'])->name('detallesLocal');

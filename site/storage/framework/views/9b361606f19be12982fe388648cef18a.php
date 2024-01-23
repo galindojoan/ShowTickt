@@ -2,10 +2,14 @@
 
 <?php $__env->startSection('content'); ?>
 
-    <div class="promotorBody">
+    <div class="bg-page">
         <?php if(session('key')): ?>
             <div class="button-container">
                 <a href="<?php echo e(route('administrar-esdeveniments')); ?>" class="custom-button">Administrar Esdeveniments</a>
+            </div>
+
+            <div class="button-container">
+                <a href="<?php echo e(route('llistat-sessions' )); ?>" class="custom-button">Llistat de sessions</a>
             </div>
 
             <div class="button-container">

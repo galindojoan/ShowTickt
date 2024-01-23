@@ -31,4 +31,12 @@ class EsdevenimentController extends Controller
     {
         return view('confirmarCompra');
     }
+    public function local($id)
+    {
+      $esdeveniment = Esdeveniment::join('recintes','recintes.id','=','esdeveniments.recinte_id')
+          ->select('recintes.*')
+          ->where('esdeveniments.id', '=', $id)
+          ->first();
+        return view('detallesLocal',compact('esdeveniment'));
+    }
 }

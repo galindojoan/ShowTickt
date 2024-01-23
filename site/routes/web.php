@@ -10,6 +10,10 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\CrearEsdevenimentController;
 use App\Http\Controllers\AdministrarEsdevenimentsController;
 use App\Http\Controllers\EditarEsdevenimentController;
+use App\Http\Controllers\LlistatSessionsController;
+use App\Http\Controllers\AdministrarEsdevenimentController;
+use App\Http\Controllers\DetallsEsdevenimentController;
+use App\Http\Controllers\LlistatsEntradesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,3 +69,20 @@ Route::get('/peticionCambiar',[passwordController::class, 'cambiarPassword'])->n
 Route::post('/peticionCambiar',[passwordController::class, 'cambiarPassword'])->name('peticionCambiar');
 
 Route::post('/confirmacio',[EsdevenimentController::class, 'compra'])->name('confirmacioCompra');
+
+Route::get('/llistat-sessions', [LlistatSessionsController::class, 'index'])->name('llistat-sessions');
+Route::post('/llistat-sessions', [LlistatSessionsController::class, 'index'])->name('llistat-sessions');
+
+Route::get('/detalls-esdeveniment/{id}', [DetallsEsdevenimentController::class, 'show'])->name('detalls-esdeveniment');
+Route::get('/administrar-esdeveniment/{id}', [AdministrarEsdevenimentController::class, 'show'])->name('administrar-esdeveniment');
+Route::get('/llistats-entrades/{id}', [LlistatsEntradesController::class, 'show'])->name('llistats-entrades');
+
+Route::get('/añadirSession',[EditarEsdevenimentController::class,'newSessionPage'])->name('añadirSession');
+Route::post('/añadirSession',[EditarEsdevenimentController::class,'newSessionPage'])->name('añadirSession');
+
+Route::get('/editarSesion',[EditarEsdevenimentController::class,'updateSesionPage'])->name('editarSesion');
+
+Route::post('/peticionSesion',[EditarEsdevenimentController::class,'newSesion'])->name('peticionSesion');
+Route::post('/cambiarSesion',[EditarEsdevenimentController::class,'updateSesion'])->name('cambiarSesion');
+
+Route::get('/local/{id}',[EsdevenimentController::class, 'local'])->name('detallesLocal');

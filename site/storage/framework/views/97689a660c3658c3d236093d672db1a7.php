@@ -3,6 +3,10 @@
 <?php $__env->startSection('title', 'resultados'); ?>
 
 <?php $__env->startSection('content'); ?>
+    <div class="info-message">
+        <p class="info-text">Haz clic sobre un evento para poder editarlo.</p>
+    </div>
+
     <div class="event-cards">
         <?php $__currentLoopData = $esdeveniments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $esdeveniment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <a href="<?php echo e(route('editar-esdeveniment', ['id' => $esdeveniment->id])); ?>" class="event-link">

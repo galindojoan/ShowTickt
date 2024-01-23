@@ -42,7 +42,7 @@ class PasswordController extends Controller
     public function cambiarPassword(Request $request){
         $password = $request->input('password');
         $user = $request->input('userId');
-        if (strlen($password)>=8 || preg_match('/[A-Z]/', $password) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $password)) {
+        if (strlen($password)>=8 && preg_match('/[A-Z]/', $password) && preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $password)) {
             User::where('id',$user)->update(array('password' => Hash::make($password)));
             return redirect('login')->withErrors(array('vali'=>'Contraseña cambiada correctamente'));
         }else{

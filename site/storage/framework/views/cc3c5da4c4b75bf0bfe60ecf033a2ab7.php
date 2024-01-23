@@ -5,7 +5,8 @@
         <form action="<?php echo e(route('cerca')); ?>" method="get" class="form" id="filtre">
             <div class="input-group">
                 <select name="category" class="form-control" onchange="this.form.submit()">
-                    <option value="" <?php echo e($categoryId === null ? 'selected' : ''); ?>>Todas las categorías</option>
+                    <option value="" disabled selected>Categorías</option>
+                    <option value="" <?php echo e($categoryId === null ? 'selected' : ''); ?> >Mostrar todos</option>
                     <?php $__currentLoopData = $categoriesWithEventCount; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <option value="<?php echo e($category->id); ?>" <?php echo e($categoryId == $category->id ? 'selected' : ''); ?>>
                             <?php echo e($category->tipus); ?> (<?php echo e($category->eventCount); ?> eventos)

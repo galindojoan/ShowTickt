@@ -26,7 +26,6 @@ class EsdevenimentFactory extends Factory
             'nom' => $this->faker->name,
             'descripcio' => $this->faker->text,
             'imatge' => $this->faker->imageUrl(),
-            'aforament' => $this->faker->randomNumber(3),
             'ocult' => $this->faker->boolean(),
             'user_id' => User::factory(),
         ];

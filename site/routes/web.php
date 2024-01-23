@@ -80,4 +80,9 @@ Route::get('/llistats-entrades/{id}', [LlistatsEntradesController::class, 'show'
 Route::get('/añadirSession',[EditarEsdevenimentController::class,'newSessionPage'])->name('añadirSession');
 Route::post('/añadirSession',[EditarEsdevenimentController::class,'newSessionPage'])->name('añadirSession');
 
+Route::get('/editarSesion',[EditarEsdevenimentController::class,'updateSesionPage'])->name('editarSesion');
+
 Route::post('/peticionSesion',[EditarEsdevenimentController::class,'newSesion'])->name('peticionSesion');
+Route::post('/cambiarSesion',[EditarEsdevenimentController::class,'updateSesion'])->name('cambiarSesion');
+
+Route::get('/local/{id}',[EsdevenimentController::class, 'local'])->name('detallesLocal');

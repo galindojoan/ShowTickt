@@ -93,7 +93,6 @@ class CrearEsdevenimentController extends Controller
             'recinte_id' => $recinteId,
             'imatge' => $request->file('imatge')->storeAs('images', $nombreUnico),
             'descripcio' => $request->input('descripcio'),
-            'aforament' => $request->input('aforament_maxim'),
             'ocult' => $request->has('ocultarEsdeveniment'),
             'user_id' => $request->input('user_id'),
         ]);
@@ -108,6 +107,7 @@ class CrearEsdevenimentController extends Controller
         $sessio = new Sessio([
             'data' => $request->input('data_hora'),
             'tancament' => $request->input('dataHoraPersonalitzada'),
+            'aforament' => $request->input('aforament_maxim'),
             'nominal' => $request->has('entradaNominal'),
             'esdeveniments_id' => $esdevenimentId,
         ]);

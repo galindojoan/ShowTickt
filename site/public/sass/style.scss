@@ -827,23 +827,36 @@ a {
 /*Estilos del div donde se visualizan las fechas para poder editarlas*/
 #fechaDiv{
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto;
     max-width: 200px;
-    border: none;
-    align-items: center;
-    &> button{
+    border: 1px solid;
+    justify-items: end;
+    &>button{
+        border: none;
+        background-color: inherit;
         width: fit-content;
         height: fit-content;
-        border: none;
-        background-color: transparent;
-        &:hover{
-            background-color: #dcd;
-            border-radius: 5px;
+    }
+    &> .fecha{
+        display: grid;
+        grid-template-columns: auto auto;
+        align-items: center;
+        &> button{
+            width: fit-content;
+            height: fit-content;
+            border: none;
+            background-color: inherit;
+            &:hover{
+                background-color: #dcd;
+                border-radius: 5px;
+            }
         }
     }
 }
 #fechaButton{
     margin: 10px;
+    border: none;
+    background-color: inherit;
 }
 
 /*Ver Eventos fin*/

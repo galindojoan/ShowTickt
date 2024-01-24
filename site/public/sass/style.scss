@@ -750,8 +750,11 @@ a {
 
 /*Pantalla Home Promotor*/
 .button-container {
+    display: grid;
     text-align: center;
-    margin-top: 10%;
+    margin: 10%;
+    grid-gap: 20%;
+    grid-template-columns: auto auto auto;
 }
 
 .custom-button {
@@ -990,6 +993,10 @@ a {
 
     select[class="form-control"] {
         height: 32px;
+    }
+    .button-container {
+        grid-template-rows: auto auto auto;
+        grid-template-columns: auto;
     }
 }
 

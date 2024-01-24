@@ -48,7 +48,7 @@
     
     
       
-      @foreach($categoriesWithEventCount as $category)
+      @foreach($categoriesWith3 as $category)
 
       <div class="event-home">
         <h2>{{ $category->tipus }}</h2>

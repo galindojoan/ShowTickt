@@ -16,7 +16,11 @@
                     @endforeach
                 </select>
                 <div class="icon-container">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
+                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                        <path
+                            d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
+                    </svg>
                 </div>
             </div>
         </form>
@@ -37,37 +41,42 @@
                     </svg></button>
             </div>
         </form>
-        <form id="promotores" method="POST" action="@if(session('key'))
-            {{route('homePromotor')}}
-            @else{{route('login')}}
-            @endif">
+        <form id="promotores" method="POST"
+            action="@if (session('key')) {{ route('homePromotor') }}
+            @else{{ route('login') }} @endif">
             @csrf
-        <input class="linkPromotor" type="submit" value="PROMOTORES">
+            <input class="linkPromotor" type="submit" value="PROMOTORES">
         </form>
     </div>
-    
-    <div class="event-cards">
-        @foreach ($esdeveniments as $esdeveniment)
-            <a href="{{ route('mostrar-esdeveniment', ['id' => $esdeveniment->id]) }}" class="event-link">
-                <div class="event-card">
-                    <div class="event-details">
-                        <p>{{ $esdeveniment->nom }}  </p>
-                        @if ($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->data !== null)
-                            <p>{{ $esdeveniment->sesions->first()->data }}</p>
-                        @else
-                            <p>No hay sesiones</p>
-                        @endif
-                        <p>{{ $esdeveniment->recinte->lloc }}</p>
-                        @if ($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->entrades->isNotEmpty())
-                            <p>{{ $esdeveniment->sesions->first()->entrades->first()->preu }} €</p>
-                        @else
-                            <p>Sin entradas</p>
-                        @endif
+
+    @if ($esdeveniments->isEmpty())
+        <div class="center-message">
+            <p class="info-alert">No se ha encontrado ningún evento.</p>
+        </div>
+    @else
+        <div class="event-cards">
+            @foreach ($esdeveniments as $esdeveniment)
+                <a href="{{ route('mostrar-esdeveniment', ['id' => $esdeveniment->id]) }}" class="event-link">
+                    <div class="event-card">
+                        <div class="event-details">
+                            <p>{{ $esdeveniment->nom }} </p>
+                            @if ($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->data !== null)
+                                <p>{{ $esdeveniment->sesions->first()->data }}</p>
+                            @else
+                                <p>No hay sesiones</p>
+                            @endif
+                            <p>{{ $esdeveniment->recinte->lloc }}</p>
+                            @if ($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->entrades->isNotEmpty())
+                                <p>{{ $esdeveniment->sesions->first()->entrades->first()->preu }} €</p>
+                            @else
+                                <p>Sin entradas</p>
+                            @endif
+                        </div>
+                        <img src="{{ Storage::url($esdeveniment->imatge) }}" alt="Imatge de l'esdeveniment">
                     </div>
-                    <img src="{{ Storage::url( $esdeveniment->imatge ) }}" alt="Imatge de l'esdeveniment">
-                </div>
-            </a>
-        @endforeach
-    </div>
-    <div class="pages">{{ $esdeveniments->links('pagination::bootstrap-5') }}</div>
+                </a>
+            @endforeach
+        </div>
+        <div class="pages">{{ $esdeveniments->links('pagination::bootstrap-5') }}</div>
+    @endif
 @endsection

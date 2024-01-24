@@ -39,21 +39,21 @@ Route::get('/editarEsdeveniment/{id}', [EditarEsdevenimentController::class, 'ed
 Route::post('/login',[LoginController::class,'login'])->name(('login'));
 Route::get('/login',[LoginController::class,'login'])->name(('login'));
 
-Route::get('/taullerAdministracio',[LoginController::class,'login'])->name('taullerAdministracio');
+Route::get('/taullerAdministracio',[LoginController::class,'login'])->name('taullerAdministracio')->middleware('check');
 
 Route::post('/homePromotor', [LoginController::class,'iniciarSesion'])->name('homePromotor');
 Route::get('/homePromotor', [LoginController::class, 'iniciarSesion'])->name('homePromotor');
 
-Route::post('/perfil', [LoginController::class,'iniciarSesion'])->name('perfil');
+Route::post('/perfil', [LoginController::class,'iniciarSesion'])->name('perfil')->middleware('check');
 
 Route::get('/session', [SessionController::class, 'SessionController'])->name('session');
 Route::post('/session', [SessionController::class, 'SessionController'])->name('session');
 
-Route::get('/crear-esdeveniment', [CrearEsdevenimentController::class, 'index'])->name('crear-esdeveniment');
-Route::post('/crear-esdeveniment.store', [CrearEsdevenimentController::class, 'store'])->name('crear-esdeveniment.store');
+Route::get('/crear-esdeveniment', [CrearEsdevenimentController::class, 'index'])->name('crear-esdeveniment')->middleware('check');
+Route::post('/crear-esdeveniment.store', [CrearEsdevenimentController::class, 'store'])->name('crear-esdeveniment.store')->middleware('check');
 
-Route::get('/administrar-esdeveniments', [AdministrarEsdevenimentsController::class, 'index'])->name('administrar-esdeveniments');
-Route::post('/administrar-esdeveniments', [AdministrarEsdevenimentsController::class, 'index'])->name('administrar-esdeveniments');
+Route::get('/administrar-esdeveniments', [AdministrarEsdevenimentsController::class, 'index'])->name('administrar-esdeveniments')->middleware('check');
+Route::post('/administrar-esdeveniments', [AdministrarEsdevenimentsController::class, 'index'])->name('administrar-esdeveniments')->middleware('check');
 
 Route::get('/recuperar',[PasswordController::class,'passwordPage'])->name('recuperar');
 Route::post('/recuperar',[PasswordController::class,'passwordPage'])->name('recuperar');
@@ -70,15 +70,19 @@ Route::post('/peticionCambiar',[passwordController::class, 'cambiarPassword'])->
 
 Route::post('/confirmacio',[EsdevenimentController::class, 'compra'])->name('confirmacioCompra');
 
-Route::get('/llistat-sessions', [LlistatSessionsController::class, 'index'])->name('llistat-sessions');
-Route::post('/llistat-sessions', [LlistatSessionsController::class, 'index'])->name('llistat-sessions');
+Route::get('/llistat-sessions', [LlistatSessionsController::class, 'index'])->name('llistat-sessions')->middleware('check');
+Route::post('/llistat-sessions', [LlistatSessionsController::class, 'index'])->name('llistat-sessions')->middleware('check');
 
-Route::get('/detalls-esdeveniment/{id}', [DetallsEsdevenimentController::class, 'show'])->name('detalls-esdeveniment');
-Route::get('/administrar-esdeveniment/{id}', [AdministrarEsdevenimentController::class, 'show'])->name('administrar-esdeveniment');
-Route::get('/llistats-entrades/{id}', [LlistatsEntradesController::class, 'show'])->name('llistats-entrades');
+Route::get('/detalls-esdeveniment/{id}', [DetallsEsdevenimentController::class, 'show'])->name('detalls-esdeveniment')->middleware('check');
+Route::get('/administrar-esdeveniment/{id}', [AdministrarEsdevenimentController::class, 'show'])->name('administrar-esdeveniment')->middleware('check');
+Route::get('/llistats-entrades/{id}', [LlistatsEntradesController::class, 'show'])->name('llistats-entrades')->middleware('check');
 
-Route::get('/añadirSession',[EditarEsdevenimentController::class,'newSessionPage'])->name('añadirSession');
-Route::post('/añadirSession',[EditarEsdevenimentController::class,'newSessionPage'])->name('añadirSession');
+Route::get('/añadirSession',[EditarEsdevenimentController::class,'newSessionPage'])->name('añadirSession')->middleware('check');
+Route::post('/añadirSession',[EditarEsdevenimentController::class,'newSessionPage'])->name('añadirSession')->middleware('check');
 
-Route::post('/peticionSesion',[EditarEsdevenimentController::class,'newSesion'])->name('peticionSesion');
+Route::get('/editarSesion',[EditarEsdevenimentController::class,'updateSesionPage'])->name('editarSesion')->middleware('check');
+
+Route::post('/peticionSesion',[EditarEsdevenimentController::class,'newSesion'])->name('peticionSesion')->middleware('check');
+Route::post('/cambiarSesion',[EditarEsdevenimentController::class,'updateSesion'])->name('cambiarSesion')->middleware('check');
+
 Route::get('/local/{id}',[EsdevenimentController::class, 'local'])->name('detallesLocal');

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('nom');
             $table->string('descripcio', 640);
             $table->string('imatge');
-            $table->integer('aforament');
             $table->boolean('ocult')->default(false);
             $table->foreignId('recinte_id')->constrained('recintes');
             $table->foreignId('categoria_id')->constrained('categories');

@@ -58,8 +58,14 @@ class HomeController extends Controller
     $categories = Categoria::all();
     $sessio = Sessio::all();
     $categoriesWithEventCount = $this->getCategoriesWithEventCount();
+    $categoriesWith3 = DB::table('categories')
+    ->join('esdeveniments', 'categories.id', '=', 'esdeveniments.categoria_id')
+    ->select('categories.*', DB::raw('COUNT(esdeveniments.id) as event_count'))
+    ->groupBy('categories.id')
+    ->havingRaw('COUNT(esdeveniments.id) > 1')
+    ->get();
 
-    return view('home', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount', 'sessio', 'events'));
+    return view('home', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount', 'sessio', 'events','categoriesWith3'));
   }
 
 

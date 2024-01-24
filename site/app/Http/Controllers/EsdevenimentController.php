@@ -16,12 +16,12 @@ class EsdevenimentController extends Controller
           ->where('esdeveniments.id', '=', $id)
           ->first();
           $fechas = Esdeveniment::join('sessios','sessios.esdeveniments_id','=','esdeveniments.id')
-          ->select('esdeveniments.*', 'sessios.data as data_sessio')
+          ->select('sessios.*')
           ->where('esdeveniments.id', '=', $id)
           ->get();
           $entradas = Esdeveniment::join('sessios','sessios.esdeveniments_id','=','esdeveniments.id')
           ->join('entradas','entradas.sessios_id','=','sessios.id')
-          ->select('esdeveniments.*', 'sessios.data as data_sessio','entradas.*')
+          ->select('entradas.*')
           ->where('esdeveniments.id', '=', $id)
           ->get();
           $preuTotal = 0;

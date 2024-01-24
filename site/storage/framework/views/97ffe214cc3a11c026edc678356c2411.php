@@ -19,7 +19,7 @@
                     <select class="form-select" id="fecha" name="fecha" required>
                       <option value="" disabled selected>Fechas de las sesiones</option>
                         <?php $__currentLoopData = $fechas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fecha): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <option value="<?php echo e($fecha->data_sessio); ?>"><?php echo e($fecha->data_sessio); ?></option>
+                            <option value="<?php echo e($fecha->data); ?>,<?php echo e($fecha->id); ?>"><?php echo e($fecha->data); ?></option>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
                 </div>
@@ -28,7 +28,7 @@
                   <select class="form-select" id="preu" name="preu" required>
                     <option value="" disabled selected>Entradas</option>
                       <?php $__currentLoopData = $entradas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $entrada): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                          <option value="<?php echo e($entrada->preu); ?>,<?php echo e($entrada->quantitat); ?>,<?php echo e($entrada->nom); ?>" ><?php echo e($entrada->nom); ?> <?php echo e($entrada->preu); ?>€ </option>
+                          <option value="<?php echo e($entrada->preu); ?>,<?php echo e($entrada->quantitat); ?>,<?php echo e($entrada->nom); ?>,<?php echo e($entrada->id); ?>" ><?php echo e($entrada->nom); ?> <?php echo e($entrada->preu); ?>€ </option>
                       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   </select>
                   <label for="cantidad" class="form-label" id="escogerCantidad">Escoge el numero de entradas:</label>
@@ -36,7 +36,6 @@
                   <div class="form-group" id="errorCantidad" style="display:none;">
                     <p id="mensajeError" class="errorMsg"></p>
                   </div>
-
                   <input type="number" id="cantidad" name="cantidad" min="1" max="2" />
                   <button type="button" id="reservarEntrada">Reservar entrada</button>
                  
@@ -45,7 +44,6 @@
                     <div id="containerList">
                       
                     </div>
-                    <button type="button" id="eliminarReserva" class="event-list">Eliminar reserva</button>
                   </div>
 
               </div>

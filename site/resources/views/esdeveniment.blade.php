@@ -21,7 +21,7 @@
                     <select class="form-select" id="fecha" name="fecha" required>
                       <option value="" disabled selected>Fechas de las sesiones</option>
                         @foreach ($fechas as $fecha)
-                            <option value="{{ $fecha->data_sessio }}">{{ $fecha->data_sessio }}</option>
+                            <option value="{{ $fecha->data }},{{$fecha->id }}">{{ $fecha->data }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -30,7 +30,7 @@
                   <select class="form-select" id="preu" name="preu" required>
                     <option value="" disabled selected>Entradas</option>
                       @foreach ($entradas as $entrada)
-                          <option value="{{ $entrada->preu }},{{$entrada->quantitat}},{{$entrada->nom}}" >{{ $entrada->nom }} {{ $entrada->preu }}€ </option>
+                          <option value="{{ $entrada->preu }},{{$entrada->quantitat}},{{$entrada->nom}},{{$entrada->id}}" >{{ $entrada->nom }} {{ $entrada->preu }}€ </option>
                       @endforeach
                   </select>
                   <label for="cantidad" class="form-label" id="escogerCantidad">Escoge el numero de entradas:</label>
@@ -46,7 +46,6 @@
                     <div id="containerList">
                       
                     </div>
-                    <button type="button" id="eliminarReserva" class="event-list">Eliminar reserva</button>
                   </div>
 
               </div>

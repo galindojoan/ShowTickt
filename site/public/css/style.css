@@ -21,7 +21,6 @@ header {
 
 .titulo {
   justify-self: center;
-  padding-right: 130px;
   color: white;
 }
 
@@ -126,7 +125,8 @@ footer {
   /* Sombra suave */
   transition: transform 0.3s ease;
   position: relative;
-  z-index: 0; /* Valor por defecto para la tarjeta */
+  z-index: 0;
+  /* Valor por defecto para la tarjeta */
   /* Transición de la propiedad transform */
 }
 .event-card:hover {
@@ -563,8 +563,10 @@ a {
 
 /* Configuración específica para el textarea */
 .form-controller[type=textarea] {
-  max-height: 300px; /* Ajusta según tu preferencia */
-  overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+  max-height: 300px;
+  /* Ajusta según tu preferencia */
+  overflow-y: auto;
+  /* Agrega una barra de desplazamiento vertical si es necesario */
   resize: vertical;
 }
 
@@ -634,13 +636,16 @@ a {
 
 .tipo-entrada {
   margin-bottom: 20px;
-  border-bottom: 1px solid #ccc; /* Línea horizontal entre entradas */
-  padding-bottom: 10px; /* Espaciado para mejorar la estética */
+  border-bottom: 1px solid #ccc;
+  /* Línea horizontal entre entradas */
+  padding-bottom: 10px;
+  /* Espaciado para mejorar la estética */
 }
 
 .tipo-entrada label {
   display: block;
-  margin-bottom: 5px; /* Espai entre les etiquetes i els inputs */
+  margin-bottom: 5px;
+  /* Espai entre les etiquetes i els inputs */
 }
 
 .tipo-entrada input {
@@ -654,23 +659,27 @@ a {
 
 /* Estilos para los botones "Cancelar" y "Eliminar" */
 .btn-cancelar {
-  background-color: #dc3545; /* Rojo */
+  background-color: #dc3545;
+  /* Rojo */
   color: #fff;
 }
 
 .btn-eliminar {
-  background-color: #dc3545; /* Rojo */
+  background-color: #dc3545;
+  /* Rojo */
   color: #fff;
 }
 
 /* Estilo adicional para resaltar el botón "Eliminar" */
 .btn-eliminar:hover {
-  background-color: #c82333; /* Rojo oscuro al pasar el ratón */
+  background-color: #c82333;
+  /* Rojo oscuro al pasar el ratón */
 }
 
 .button-entrada {
   display: flex;
-  justify-content: space-between; /* Coloca los elementos al principio y al final del contenedor */
+  justify-content: space-between;
+  /* Coloca los elementos al principio y al final del contenedor */
   margin-top: 10px;
 }
 
@@ -711,19 +720,24 @@ a {
 
 /* Estilos para el hover de btn-add */
 .btn-add:hover {
-  background-color: #0056b3; /* Cambia el color de fondo al pasar el mouse */
-  color: #fff; /* Cambia el color del texto al pasar el mouse */
+  background-color: #0056b3;
+  /* Cambia el color de fondo al pasar el mouse */
+  color: #fff;
+  /* Cambia el color del texto al pasar el mouse */
 }
 
 /* Estilos para el hover de btn-cancelar */
 .btn-cancelar:hover {
-  background-color: #ff3333; /* Cambia el color de fondo al pasar el mouse */
-  color: #fff; /* Cambia el color del texto al pasar el mouse */
+  background-color: #ff3333;
+  /* Cambia el color de fondo al pasar el mouse */
+  color: #fff;
+  /* Cambia el color del texto al pasar el mouse */
 }
 
 .buttons {
   display: flex;
-  justify-content: space-around; /* Distribuye el espacio disponible alrededor de los botones */
+  justify-content: space-around;
+  /* Distribuye el espacio disponible alrededor de los botones */
 }
 
 .buttons a {
@@ -731,15 +745,21 @@ a {
   display: flex;
   padding: 5px;
   margin: 10px;
-  align-items: center; /* Centra verticalmente el contenido del botón */
-  border-radius: 5px; /* Bordes redondeados */
-  text-decoration: none; /* Elimina el subrayado predeterminado en los enlaces */
-  transition: background-color 0.3s ease; /* Agrega una transición suave al color de fondo */
-  position: relative; /* Establece la posición relativa para que el tooltip sea relativo a este elemento */
+  align-items: center;
+  /* Centra verticalmente el contenido del botón */
+  border-radius: 5px;
+  /* Bordes redondeados */
+  text-decoration: none;
+  /* Elimina el subrayado predeterminado en los enlaces */
+  transition: background-color 0.3s ease;
+  /* Agrega una transición suave al color de fondo */
+  position: relative;
+  /* Establece la posición relativa para que el tooltip sea relativo a este elemento */
 }
 
 .buttons a:hover {
-  background-color: #f0f0f0; /* Cambia el color de fondo al pasar el ratón sobre el botón */
+  background-color: #f0f0f0;
+  /* Cambia el color de fondo al pasar el ratón sobre el botón */
 }
 
 .buttons a svg {
@@ -747,25 +767,38 @@ a {
 }
 
 .buttons a:hover::after {
-  content: attr(title); /* Muestra el texto del atributo title como contenido del tooltip */
+  content: attr(title);
+  /* Muestra el texto del atributo title como contenido del tooltip */
   position: absolute;
-  top: 100%; /* Coloca el tooltip encima del enlace */
-  left: 50%; /* Centra el tooltip horizontalmente */
-  transform: translateX(-15%); /* Ajusta la posición horizontal del tooltip */
+  top: 100%;
+  /* Coloca el tooltip encima del enlace */
+  left: 50%;
+  /* Centra el tooltip horizontalmente */
+  transform: translateX(-15%);
+  /* Ajusta la posición horizontal del tooltip */
   padding: 8px;
-  background-color: #333; /* Color de fondo del tooltip */
-  color: #fff; /* Color del texto del tooltip */
-  border-radius: 5px; /* Bordes redondeados */
+  background-color: #333;
+  /* Color de fondo del tooltip */
+  color: #fff;
+  /* Color del texto del tooltip */
+  border-radius: 5px;
+  /* Bordes redondeados */
   font-size: 14px;
-  z-index: 1; /* Asegura que el tooltip esté en la parte superior */
-  white-space: nowrap; /* Evita el desbordamiento del texto en varias líneas */
-  opacity: 0; /* Inicialmente, el tooltip está oculto */
-  transition: opacity 0.3s ease; /* Agrega una transición suave para mostrar/ocultar el tooltip */
+  z-index: 1;
+  /* Asegura que el tooltip esté en la parte superior */
+  white-space: nowrap;
+  /* Evita el desbordamiento del texto en varias líneas */
+  opacity: 0;
+  /* Inicialmente, el tooltip está oculto */
+  transition: opacity 0.3s ease;
+  /* Agrega una transición suave para mostrar/ocultar el tooltip */
 }
 
 .buttons a:hover::after {
-  opacity: 1; /* Muestra el tooltip al pasar el ratón sobre el enlace */
-  z-index: 1; /* Establece un valor más alto para que el tooltip esté sobre la tarjeta */
+  opacity: 1;
+  /* Muestra el tooltip al pasar el ratón sobre el enlace */
+  z-index: 1;
+  /* Establece un valor más alto para que el tooltip esté sobre la tarjeta */
 }
 
 /* Estilos para el mensaje informativo */
@@ -779,6 +812,28 @@ a {
 .info-text {
   margin: 0;
   font-size: 16px;
+}
+
+.center-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.info-alert {
+  font-size: 24px;
+  color: white;
+  /* Puedes ajustar el color según tus preferencias */
+  background-color: #fe8336;
+  /* Puedes ajustar el color según tus preferencias */
+  padding: 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  /* Puedes ajustar el color según tus preferencias */
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 /*Estilos del div donde se visualizan las fechas para poder editarlas*/
@@ -817,40 +872,10 @@ a {
   background-color: inherit;
 }
 
-#fechaDiv > button:hover {
-  background-color: #dcd;
-  border-radius: 5px;
-}
-
-#fechaButton {
-  margin: 10px;
-}
-#fechaDiv > .fecha {
-  display: grid;
-  grid-template-columns: auto auto;
-  align-items: center;
-}
-#fechaDiv > .fecha > button {
-  width: fit-content;
-  height: fit-content;
-  border: none;
-  background-color: inherit;
-}
-#fechaDiv > .fecha > button:hover {
-  background-color: #dcd;
-  border-radius: 5px;
-}
-
-#fechaButton {
-  margin: 10px;
-  border: none;
-  background-color: inherit;
-}
 /*Ver Eventos fin*/
 @media screen and (max-width: 300px) {
   .titulo {
     font-size: 25px;
-    padding-right: 0px;
   }
   .logo {
     width: 60px;
@@ -870,9 +895,6 @@ a {
   }
 }
 @media screen and (max-width: 800px) {
-  .titulo {
-    padding-right: 0px;
-  }
   .event-details p {
     margin: 0;
   }

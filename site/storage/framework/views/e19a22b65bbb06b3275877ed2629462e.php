@@ -14,7 +14,11 @@
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </select>
                 <div class="icon-container">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
+                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                        <path
+                            d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
+                    </svg>
                 </div>
             </div>
         </form>
@@ -35,41 +39,45 @@
                     </svg></button>
             </div>
         </form>
-        <form id="promotores" method="POST" action="<?php if(session('key')): ?>
-            <?php echo e(route('homePromotor')); ?>
+        <form id="promotores" method="POST"
+            action="<?php if(session('key')): ?> <?php echo e(route('homePromotor')); ?>
 
-            <?php else: ?><?php echo e(route('login')); ?>
-
-            <?php endif; ?>">
+            <?php else: ?><?php echo e(route('login')); ?> <?php endif; ?>">
             <?php echo csrf_field(); ?>
-        <input class="linkPromotor" type="submit" value="PROMOTORES">
+            <input class="linkPromotor" type="submit" value="PROMOTORES">
         </form>
     </div>
-    
-    <div class="event-cards">
-        <?php $__currentLoopData = $esdeveniments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $esdeveniment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <a href="<?php echo e(route('mostrar-esdeveniment', ['id' => $esdeveniment->id])); ?>" class="event-link">
-                <div class="event-card">
-                    <div class="event-details">
-                        <p><?php echo e($esdeveniment->nom); ?>  </p>
-                        <?php if($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->data !== null): ?>
-                            <p><?php echo e($esdeveniment->sesions->first()->data); ?></p>
-                        <?php else: ?>
-                            <p>No hay sesiones</p>
-                        <?php endif; ?>
-                        <p><?php echo e($esdeveniment->recinte->lloc); ?></p>
-                        <?php if($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->entrades->isNotEmpty()): ?>
-                            <p><?php echo e($esdeveniment->sesions->first()->entrades->first()->preu); ?> €</p>
-                        <?php else: ?>
-                            <p>Sin entradas</p>
-                        <?php endif; ?>
+
+    <?php if($esdeveniments->isEmpty()): ?>
+        <div class="center-message">
+            <p class="info-alert">No se ha encontrado ningún evento.</p>
+        </div>
+    <?php else: ?>
+        <div class="event-cards">
+            <?php $__currentLoopData = $esdeveniments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $esdeveniment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <a href="<?php echo e(route('mostrar-esdeveniment', ['id' => $esdeveniment->id])); ?>" class="event-link">
+                    <div class="event-card">
+                        <div class="event-details">
+                            <p><?php echo e($esdeveniment->nom); ?> </p>
+                            <?php if($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->data !== null): ?>
+                                <p><?php echo e($esdeveniment->sesions->first()->data); ?></p>
+                            <?php else: ?>
+                                <p>No hay sesiones</p>
+                            <?php endif; ?>
+                            <p><?php echo e($esdeveniment->recinte->lloc); ?></p>
+                            <?php if($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->entrades->isNotEmpty()): ?>
+                                <p><?php echo e($esdeveniment->sesions->first()->entrades->first()->preu); ?> €</p>
+                            <?php else: ?>
+                                <p>Sin entradas</p>
+                            <?php endif; ?>
+                        </div>
+                        <img src="<?php echo e(Storage::url($esdeveniment->imatge)); ?>" alt="Imatge de l'esdeveniment">
                     </div>
-                    <img src="<?php echo e(Storage::url( $esdeveniment->imatge )); ?>" alt="Imatge de l'esdeveniment">
-                </div>
-            </a>
-        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-    </div>
-    <div class="pages"><?php echo e($esdeveniments->links('pagination::bootstrap-5')); ?></div>
+                </a>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        </div>
+        <div class="pages"><?php echo e($esdeveniments->links('pagination::bootstrap-5')); ?></div>
+    <?php endif; ?>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\jumel\OneDrive\Escritorio\gr6-arrua-galindo-jumelle\site\resources\views/resultados.blade.php ENDPATH**/ ?>

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Esdeveniment;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,7 +20,15 @@ class DatabaseSeeder extends Seeder
 
         $eventsNum = max((int) $this->command->ask('Introdueix la quantitat de esdeveniments', 20), 1);
 
-        \App\Models\Esdeveniment::factory($eventsNum)->create();
+        $this->call([
+            UsersTableSeeder::class,
+            CategoriesTableSeeder::class,
+            RecintesTableSeeder::class,
+            EsdevenimentsTableSeeder::class,
+            SessioTableSeeder::class,
+            EntradaTableSeeder::class,
+        ]);
+
         $this->command->info("S'han creat $eventsNum tasques");
 
     }

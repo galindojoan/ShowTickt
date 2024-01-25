@@ -248,6 +248,11 @@ footer {
         max-height: 50%;
     }
 }
+#containerList{
+  display: grid;
+  grid-template-columns: 1fr 0.3fr;
+  
+}
 
 .ahref {
     border: none;

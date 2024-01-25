@@ -91,7 +91,7 @@ class CrearEsdevenimentController extends Controller
             'nom' => $request->input('titol'),
             'categoria_id' => $request->input('categoria'),
             'recinte_id' => $recinteId,
-            'imatge' => $request->file('imatge')->storeAs('images', $nombreUnico),
+            'imatge' => $request->file('imatge')->storeAs('images', $request->file('imatge')->getClientOriginalName()),
             'descripcio' => $request->input('descripcio'),
             'ocult' => $request->has('ocultarEsdeveniment'),
             'user_id' => $request->input('user_id'),

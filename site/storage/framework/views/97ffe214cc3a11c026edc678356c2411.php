@@ -19,19 +19,27 @@
                     <select class="form-select" id="fecha" name="fecha" required>
                       <option value="" disabled selected>Fechas de las sesiones</option>
                         <?php $__currentLoopData = $fechas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fecha): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <option value="<?php echo e($fecha->data); ?>,<?php echo e($fecha->id); ?>"><?php echo e($fecha->data); ?></option>
+                            <option value="<?php echo e($fecha->data); ?>,<?php echo e($fecha->id); ?>"name="a"><?php echo e($fecha->data); ?></option>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
                 </div>
+                
                 <div class="form-group" id="entradas" style="display:none;">
                   <label for="preu" class="form-label">Tipus Entradas:</label>
-                  <select class="form-select" id="preu" name="preu" required>
-                    <option value="" disabled selected>Entradas</option>
-                      <?php $__currentLoopData = $entradas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $entrada): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                          <option value="<?php echo e($entrada->preu); ?>,<?php echo e($entrada->quantitat); ?>,<?php echo e($entrada->nom); ?>,<?php echo e($entrada->id); ?>" ><?php echo e($entrada->nom); ?> <?php echo e($entrada->preu); ?>€ </option>
+                  
+                    <?php $__currentLoopData = $fechas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fecha): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <select class="form-select" id="<?php echo e($fecha->id); ?>" name="preu" style="display:none;">
+                      <option value="" disabled selected>Entradas</option>
+                            <?php $__currentLoopData = $entradas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $entrada): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if($entrada->sessios_id==$fecha->id): ?>
+                            <option value="<?php echo e($entrada->preu); ?>,<?php echo e($entrada->quantitat); ?>,<?php echo e($entrada->nom); ?>,<?php echo e($entrada->id); ?>" ><?php echo e($entrada->nom); ?> <?php echo e($entrada->preu); ?>€ </option>
+                            <?php endif; ?>
                       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                  </select>
-                  <label for="cantidad" class="form-label" id="escogerCantidad">Escoge el numero de entradas:</label>
+                    </select>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                      
+                  
+                  <label for="cantidad" class="form-label" id="escogerCantidad">Escoge la entrada y el numero de entradas:</label>
                   
                   <div class="form-group" id="errorCantidad" style="display:none;">
                     <p id="mensajeError" class="errorMsg"></p>

@@ -62,7 +62,7 @@ class HomeController extends Controller
     ->join('esdeveniments', 'categories.id', '=', 'esdeveniments.categoria_id')
     ->select('categories.*', DB::raw('COUNT(esdeveniments.id) as event_count'))
     ->groupBy('categories.id')
-    ->havingRaw('COUNT(esdeveniments.id) > 1')
+    ->havingRaw('COUNT(esdeveniments.id) >= 1')
     ->get();
 
     return view('home', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount', 'sessio', 'events','categoriesWith3'));
@@ -156,16 +156,8 @@ class HomeController extends Controller
       ->groupBy('esdeveniments.id','sessios.data','entradas.preu')
       ->paginate(config('app.items_per_page', 6)); // Ajusta el valor según tus necesidades
 
-    $eventsNoData = Esdeveniment::leftJoin('sessios', 'sessios.esdeveniments_id', '=', 'esdeveniments.id')
-      ->join('categories', 'categories.id', '=', 'esdeveniments.categoria_id')
-      ->select('esdeveniments.*')
-      ->where('categories.id', '=', $categoryId)
-      ->whereNull('sessios.id')  // Condición para eventos sin fechas
-      ->groupBy('esdeveniments.id')
-      ->paginate(config('app.items_per_page', 6));
-
     // $eventsNoData = $query->paginate(config('app.items_per_page', 6))->appends(request()->query());
 
-    return view('resultados', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount', 'sessio', 'eventsOrdenats', 'eventsNoData'));
+    return view('resultados', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount', 'sessio', 'eventsOrdenats'));
   }
 }

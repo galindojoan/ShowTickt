@@ -69,7 +69,7 @@
                             @if ($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->entrades->isNotEmpty())
                                 <p>{{ $esdeveniment->sesions->first()->entrades->first()->preu }} €</p>
                             @else
-                                <p>Sin entradas</p>
+                                <p>Entradas Agotadas</p>
                             @endif
                         </div>
                         <img src="{{ Storage::url($esdeveniment->imatge) }}" alt="Imatge de l'esdeveniment">

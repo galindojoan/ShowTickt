@@ -52,20 +52,20 @@ class HomeController extends Controller
       ->join('categories', 'categories.id', '=', 'esdeveniments.categoria_id')
       ->select('esdeveniments.*', 'sessios.data as data_sessio', 'entradas.preu as entradas_preu')
       ->orderBy('data_sessio', 'asc')
-      ->groupBy('esdeveniments.id','sessios.data','entradas.preu')
+      ->groupBy('esdeveniments.id', 'sessios.data', 'entradas.preu')
       ->get();
 
     $categories = Categoria::all();
     $sessio = Sessio::all();
     $categoriesWithEventCount = $this->getCategoriesWithEventCount();
     $categoriesWith3 = DB::table('categories')
-    ->join('esdeveniments', 'categories.id', '=', 'esdeveniments.categoria_id')
-    ->select('categories.*', DB::raw('COUNT(esdeveniments.id) as event_count'))
-    ->groupBy('categories.id')
-    ->havingRaw('COUNT(esdeveniments.id) > 1')
-    ->get();
+      ->join('esdeveniments', 'categories.id', '=', 'esdeveniments.categoria_id')
+      ->select('categories.*', DB::raw('COUNT(esdeveniments.id) as event_count'))
+      ->groupBy('categories.id')
+      ->havingRaw('COUNT(esdeveniments.id) > 1')
+      ->get();
 
-    return view('home', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount', 'sessio', 'events','categoriesWith3'));
+    return view('home', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount', 'sessio', 'events', 'categoriesWith3'));
   }
 
 
@@ -88,7 +88,19 @@ class HomeController extends Controller
     $cerca = $this->quitarAcentos($request->input('q'));
     $categoryId = $request->input('category');
 
-    $query = Esdeveniment::with(['recinte']); // Ordenar por fecha descendente
+    $query = Esdeveniment::with(['recinte'])
+      ->join(
+        DB::raw('(SELECT esdeveniments_id, MIN(data) as min_data FROM sessios GROUP BY esdeveniments_id) as min_dates'),
+        function ($join) {
+          $join->on('esdeveniments.id', '=', 'min_dates.esdeveniments_id');
+        }
+      )
+      ->leftJoin('sessios', function ($join) {
+        $join->on('esdeveniments.id', '=', 'sessios.esdeveniments_id')
+          ->on('sessios.data', '=', 'min_dates.min_data');
+      })
+      ->select('esdeveniments.*', 'min_dates.min_data as min_data')
+      ->orderBy('min_data', 'asc'); // Ordenar por fecha mínima de sesión ascendente
 
     // Verifica si se ha seleccionado una categoría
     if ($categoryId !== null) {
@@ -136,7 +148,7 @@ class HomeController extends Controller
         $join->on('sessios.esdeveniments_id', '=', 'min_dates.esdeveniments_id')
           ->on('sessios.data', '=', 'min_dates.min_data');
       })
-      
+
       ->join(
         DB::raw('(SELECT sessios_id, MIN(preu) as min_preu 
                       FROM entradas 
@@ -153,7 +165,7 @@ class HomeController extends Controller
       ->select('esdeveniments.*', 'sessios.data as data_sessio', 'entradas.preu as entradas_preu')
       ->where('categories.id', '=', $categoryId)
       ->orderBy('data_sessio', 'asc')
-      ->groupBy('esdeveniments.id','sessios.data','entradas.preu')
+      ->groupBy('esdeveniments.id', 'sessios.data', 'entradas.preu')
       ->paginate(config('app.items_per_page', 6)); // Ajusta el valor según tus necesidades
 
     $eventsNoData = Esdeveniment::leftJoin('sessios', 'sessios.esdeveniments_id', '=', 'esdeveniments.id')

@@ -15,7 +15,11 @@
                         <div class="event-details">
                             <p>{{ $sessio->esdeveniment->nom }}</p>
                             <p>{{ $sessio->data }}</p>
-                            <p>Sin entradas</p>
+                            @if ($sessio->entrades->isNotEmpty())
+                                <p>{{ $sessio->entrades->first()->preu }} €</p>
+                            @else
+                                <p>Sin entradas</p>
+                            @endif
                             <div class="buttons">
                                 <!-- Botones -->
                                 <a href="{{ route('detalls-esdeveniment', ['id' => $sessio->esdeveniment->id]) }}"

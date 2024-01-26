@@ -32,6 +32,7 @@ class HomeController extends Controller
             ->on('sessios.data', '=', 'min_dates.min_data');
         })
         ->select('esdeveniments.*', 'min_dates.min_data as min_data')
+        ->where('esdeveniments.ocult', false) // Filtrar eventos no ocultos
         ->where('min_dates.min_data', '>', now())
 
         ->count();
@@ -66,6 +67,7 @@ class HomeController extends Controller
       ->join('entradas', 'entradas.sessios_id', '=', 'sessios.id')
       ->join('categories', 'categories.id', '=', 'esdeveniments.categoria_id')
       ->select('esdeveniments.*', 'sessios.data as data_sessio', 'entradas.preu as entradas_preu')
+      ->where('esdeveniments.ocult', false) // Filtrar eventos no ocultos
       ->orderBy('data_sessio', 'asc')
       ->groupBy('esdeveniments.id', 'sessios.data', 'entradas.preu')
       ->get();
@@ -115,6 +117,7 @@ class HomeController extends Controller
           ->on('sessios.data', '=', 'min_dates.min_data');
       })
       ->select('esdeveniments.*', 'min_dates.min_data as min_data')
+      ->where('esdeveniments.ocult', false) // Filtrar eventos no ocultos
       ->where('min_dates.min_data', '>', now()) // Filtrar eventos cuya fecha mínima sea mayor que la fecha local actual
       ->orderBy('min_data', 'asc'); // Ordenar por fecha mínima de sesión ascendente
 

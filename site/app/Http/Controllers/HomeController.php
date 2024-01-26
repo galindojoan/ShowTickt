@@ -20,7 +20,22 @@ class HomeController extends Controller
     $categories = Categoria::all();
 
     $categoriesWithEventCount = $categories->map(function ($category) {
-      $category->eventCount = Esdeveniment::where('categoria_id', $category->id)->count();
+      $category->eventCount = Esdeveniment::join(
+        DB::raw('(SELECT esdeveniments_id, MIN(data) as min_data FROM sessios GROUP BY esdeveniments_id) as min_dates'),
+        function ($join) use ($category) {
+          $join->on('esdeveniments.id', '=', 'min_dates.esdeveniments_id')
+            ->where('esdeveniments.categoria_id', $category->id);
+        }
+      )
+        ->leftJoin('sessios', function ($join) {
+          $join->on('esdeveniments.id', '=', 'sessios.esdeveniments_id')
+            ->on('sessios.data', '=', 'min_dates.min_data');
+        })
+        ->select('esdeveniments.*', 'min_dates.min_data as min_data')
+        ->where('min_dates.min_data', '>', now())
+
+        ->count();
+
       return $category;
     });
 
@@ -100,7 +115,9 @@ class HomeController extends Controller
           ->on('sessios.data', '=', 'min_dates.min_data');
       })
       ->select('esdeveniments.*', 'min_dates.min_data as min_data')
+      ->where('min_dates.min_data', '>', now()) // Filtrar eventos cuya fecha mínima sea mayor que la fecha local actual
       ->orderBy('min_data', 'asc'); // Ordenar por fecha mínima de sesión ascendente
+
 
     // Verifica si se ha seleccionado una categoría
     if ($categoryId !== null) {

@@ -103,6 +103,7 @@ footer {
   padding: 10px;
   justify-content: space-evenly;
   justify-items: end;
+  gap: 50px;
 }
 .event-home h2 {
   grid-area: a;
@@ -138,10 +139,10 @@ footer {
 .event-card img {
   display: flex;
   justify-content: left;
-  max-width: 40%;
+  max-width: 35%;
   height: auto;
   object-fit: cover;
-  margin: 20px;
+  margin: 15px;
   border: 1px solid black;
   border-radius: 5px;
 }
@@ -174,6 +175,7 @@ footer {
 .event-link {
   color: black;
   text-decoration: none;
+  height: 150px;
 }
 .event-cards {
   display: grid;
@@ -938,11 +940,6 @@ a {
     grid-template-columns: auto;
   }
 }
-@media screen and (max-width: 820px) {
-  .pages {
-    margin-bottom: 100px;
-  }
-}
 @media screen and (max-width: 1000px) {
   .containerEvent {
     grid-template-columns: 1fr;
@@ -966,6 +963,7 @@ a {
 @media screen and (max-width: 1287px) {
   .event-cards {
     overflow-y: auto;
+    gap: 50px;
   }
 }
 

@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EsdevenimentController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\passwordController;
-use App\Http\Controllers\PasswordController as ControllersPasswordController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\CrearEsdevenimentController;
 use App\Http\Controllers\AdministrarEsdevenimentsController;
@@ -61,12 +60,12 @@ Route::post('/recuperar',[PasswordController::class,'passwordPage'])->name('recu
 Route::get('/recuperar-form',[PasswordController::class,'enviarCorreo'])->name('recuperar-form');
 Route::post('/recuperar-form',[PasswordController::class,'enviarCorreo'])->name('recuperar-form');
 
-Route::get('/cambiarPassword',[passwordController::class, 'pagePassword'])->name('cambiarPassword');
-Route::post('/cambiarPassword',[passwordController::class, 'pagePassword'])->name('cambiarPassword');
+Route::get('/cambiarPassword',[PasswordController::class, 'pagePassword'])->name('cambiarPassword');
+Route::post('/cambiarPassword',[PasswordController::class, 'pagePassword'])->name('cambiarPassword');
 
 
-Route::get('/peticionCambiar',[passwordController::class, 'cambiarPassword'])->name('peticionCambiar');
-Route::post('/peticionCambiar',[passwordController::class, 'cambiarPassword'])->name('peticionCambiar');
+Route::get('/peticionCambiar',[PasswordController::class, 'cambiarPassword'])->name('peticionCambiar');
+Route::post('/peticionCambiar',[PasswordController::class, 'cambiarPassword'])->name('peticionCambiar');
 
 Route::post('/confirmacio',[EsdevenimentController::class, 'compra'])->name('confirmacioCompra');
 

@@ -66,13 +66,14 @@ cd /var/www/html/
 git clone https://git.copernic.cat/arrua.dominguez.brian.tobias/gr6-arrua-galindo-jumelle.git
 ----
 
-Al tener ya el repositorio descargado en la carpeta de site deberás de ejecutar los siguientes comandos de **Composer**
+Al tener ya el repositorio descargado, en la carpeta de site deberás de ejecutar los siguientes comandos de **Composer**
 
 [source, sh]
 ----
 composer install
 cp .env.example .env
 php artisan key:generate
+composer require railsware/mailtrap-php symfony/http-client nyholm/psr7 larswiegers/laravel-maps
 ----
 
 Con esto ya funcionaria el laravel, y para tener la base de datos tendremos que tener docker
@@ -89,12 +90,24 @@ Luego deberás de configurar el apache con el directorio de la carpeta de la app
 
 [source, sh]
 ----
-sudo nano /etc/apache2/sites-available/000-default.conf
+sudo nano /etc/apache2/sites-available/laravel.conf
 ----
+[source,ruby]
+----
+<VirtualHost *:80>
+    ServerAdmin isard@localhost
+    ServerName 10.2.115.24 #ip o dirección web
+    DocumentRoot /var/www/html/gr6-arrua-galindo-jumelle/site/public/ #Esta es la carpeta (Tenés que poner la public)
 
-[source, txt]
-----
-DocumentRoot /var/www/html/gr6-arrua-galindo-jumelle/site/public
+    <Directory /var/www/html/gr6-arrua-galindo-jumelle/site/public>
+            Options Indexes FollowSymLinks
+            AllowOverride All
+            Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
 ----
 
 También deberás de añadir el grupo www-data a los permisos de la carpeta, como grupo propietario ademas de otorgar permisos de escritura para grupos

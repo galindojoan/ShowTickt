@@ -8,7 +8,9 @@ use App\Models\Categoria;
 use App\Models\Recinte;
 use App\Models\Sessio;
 use App\Models\Entrada;
+use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class CrearEsdevenimentController extends Controller
 {
@@ -65,74 +67,87 @@ class CrearEsdevenimentController extends Controller
                 'nova_capacitat' => 'required|integer|min:1',
             ]);
 
-            // Crea un nou recinte amb les dades proporcionades
-            $recinte = new Recinte([
-                'nom' => $request->input('nova_nom'),
-                'provincia' => $request->input('nova_provincia'),
-                'lloc' => $request->input('nova_ciutat'),
-                'codi_postal' => $request->input('nova_codi_postal'),
-                'capacitat' => $request->input('nova_capacitat'),
-                'user_id' => $request->input('nova_user_id'),
-            ]);
+            try {
+                // Crea un nou recinte amb les dades proporcionades
+                $recinte = new Recinte([
+                    'nom' => $request->input('nova_nom'),
+                    'provincia' => $request->input('nova_provincia'),
+                    'lloc' => $request->input('nova_ciutat'),
+                    'codi_postal' => $request->input('nova_codi_postal'),
+                    'capacitat' => $request->input('nova_capacitat'),
+                    'user_id' => $request->input('nova_user_id'),
+                ]);
 
-            $recinte->save();
+                $recinte->save();
 
-            if ($recinte) {
-                $recinteId = $recinte->id;
-            } else {
-                // Maneig de l'error, com redirigir l'usuari a una pàgina d'error
+                if ($recinte) {
+                    $recinteId = $recinte->id;
+                    Log::info('Se ha creado un nuevo recinto con la id: '.$recinteId);
+                } else {
+                    // Maneig de l'error, com redirigir l'usuari a una pàgina d'error
+                    Log::error('Intento de crear un nuevo recinto fallido');
+                }
+            } catch (Exception $e) {
+                //throw $th;
             }
         }
 
-        // Generar un nombre único basado en el timestamp y el nombre original del archivo
-        $nombreUnico = time() . '_' . $request->file('imatge')->getClientOriginalName();
+        try{
+            // Generar un nombre único basado en el timestamp y el nombre original del archivo
+            $nombreUnico = time() . '_' . $request->file('imatge')->getClientOriginalName();
 
-        $esdeveniment = new Esdeveniment([
-            'nom' => $request->input('titol'),
-            'categoria_id' => $request->input('categoria'),
-            'recinte_id' => $recinteId,
-            'imatge' => $request->file('imatge')->storeAs('images', $nombreUnico),
-            'descripcio' => $request->input('descripcio'),
-            'ocult' => $request->has('ocultarEsdeveniment'),
-            'user_id' => $request->input('user_id'),
-        ]);
-
-        $esdeveniment->save();
-
-        if ($esdeveniment) {
-            $esdevenimentId = $esdeveniment->id;
-        }
-
-        // Crear la sessió
-        $sessio = new Sessio([
-            'data' => $request->input('data_hora'),
-            'aforament' => $request->input('aforament_maxim'),
-            'tancament' => $request->input('dataHoraPersonalitzada'),
-            'nominal' => $request->has('entradaNominal'),
-            'esdeveniments_id' => $esdevenimentId,
-        ]);
-
-        $sessio->save();
-
-        if ($sessio) {
-            $sessioId = $sessio->id;
-        }
-
-        // Obtener datos de las entradas
-        $noms = $request->input('entrades-nom');
-        $preus = $request->input('entrades-preu');
-        $quantitats = $request->input('entrades-quantitat');
-
-        // Procesar los datos según sea necesario
-        for ($i = 0; $i < count($noms); $i++) {
-            $entrada = new Entrada([
-                'nom' => $noms[$i],
-                'preu' => $preus[$i],
-                'quantitat' => $quantitats[$i],
-                'sessios_id' => $sessioId,
+            $esdeveniment = new Esdeveniment([
+                'nom' => $request->input('titol'),
+                'categoria_id' => $request->input('categoria'),
+                'recinte_id' => $recinteId,
+                'imatge' => $request->file('imatge')->storeAs('images', $nombreUnico),
+                'descripcio' => $request->input('descripcio'),
+                'ocult' => $request->has('ocultarEsdeveniment'),
+                'user_id' => $request->input('user_id'),
             ]);
 
-            $entrada->save();
+            $esdeveniment->save();
+
+            if ($esdeveniment) {
+                $esdevenimentId = $esdeveniment->id;
+            }
+
+            // Crear la sessió
+            $sessio = new Sessio([
+                'data' => $request->input('data_hora'),
+                'aforament' => $request->input('aforament_maxim'),
+                'tancament' => $request->input('dataHoraPersonalitzada'),
+                'nominal' => $request->has('entradaNominal'),
+                'esdeveniments_id' => $esdevenimentId,
+            ]);
+
+            $sessio->save();
+
+            if ($sessio) {
+                $sessioId = $sessio->id;
+            }
+
+            // Obtener datos de las entradas
+            $noms = $request->input('entrades-nom');
+            $preus = $request->input('entrades-preu');
+            $quantitats = $request->input('entrades-quantitat');
+
+            // Procesar los datos según sea necesario
+            for ($i = 0; $i < count($noms); $i++) {
+                $entrada = new Entrada([
+                    'nom' => $noms[$i],
+                    'preu' => $preus[$i],
+                    'quantitat' => $quantitats[$i],
+                    'sessios_id' => $sessioId,
+                ]);
+
+                $entrada->save();
+            }
+
+            Log::info('Evento nuevo creado con la id: '.$esdevenimentId);
+        
+        }catch(Exception $e){
+            Log::error('Fallo al intentar crer un nuevo evento. Mensaje de error: '.$e->getMessage());
         }
 
         return redirect()->route('homePromotor')->with('success', 'Evento creado exitosamente');

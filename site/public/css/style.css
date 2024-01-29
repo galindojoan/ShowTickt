@@ -882,12 +882,17 @@ a {
 @media screen and (max-width: 1287px) {
   .event-cards {
     overflow-y: auto;
-    gap: 50px;
   }
 }
 @media screen and (max-width: 1300px) {
   .event-home {
     grid-template-areas: "a" "b1" "b2" "b3" "c";
+  }
+}
+@media screen and (max-width: 1287px) {
+  .event-cards {
+    overflow-y: auto;
+    gap: 50px;
   }
 }
 

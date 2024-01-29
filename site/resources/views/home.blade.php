@@ -62,7 +62,7 @@
                 @php
                     $cont = 0;
                 @endphp
-                @foreach ($events as $esdeveniment)
+                @foreach ($esdeveniments as $esdeveniment)
                     @if ($esdeveniment->categoria_id == $category->id && $cont < 3)
                         @php
                             $cont++;
@@ -71,9 +71,17 @@
                             <div class="event-card">
                                 <div class="event-details">
                                     <p>{{ $esdeveniment->nom }}</p>
-                                    <p>{{ $esdeveniment->data_sessio }}</p>
-                                    <p>{{ $esdeveniment->recinte->lloc }}</p>
-                                    <p>{{ $esdeveniment->entradas_preu }} €</p>
+                                    @if ($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->data !== null)
+                                        <p>{{ $esdeveniment->sesions->first()->data }}</p>
+                                    @else
+                                    <p>No hay sesiones</p>
+                                    @endif
+                                        <p>{{ $esdeveniment->recinte->lloc }}</p>
+                                        @if ($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->entrades->isNotEmpty())
+                                            <p>{{ $esdeveniment->sesions->first()->entrades->first()->preu }} €</p>
+                                        @else
+                                        <p>Entradas Agotadas</p>
+                                        @endif
                                 </div>
                                 <img src="{{ Storage::url($esdeveniment->imatge) }}" alt="Imatge de l'esdeveniment">
                             </div>

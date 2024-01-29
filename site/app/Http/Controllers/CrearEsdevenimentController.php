@@ -91,7 +91,7 @@ class CrearEsdevenimentController extends Controller
             'nom' => $request->input('titol'),
             'categoria_id' => $request->input('categoria'),
             'recinte_id' => $recinteId,
-            'imatge' => $request->file('imatge')->storeAs('images', $request->file('imatge')->getClientOriginalName()),
+            'imatge' => $request->file('imatge')->storeAs('images', $nombreUnico),
             'descripcio' => $request->input('descripcio'),
             'ocult' => $request->has('ocultarEsdeveniment'),
             'user_id' => $request->input('user_id'),
@@ -106,8 +106,8 @@ class CrearEsdevenimentController extends Controller
         // Crear la sessió
         $sessio = new Sessio([
             'data' => $request->input('data_hora'),
-            'tancament' => $request->input('dataHoraPersonalitzada'),
             'aforament' => $request->input('aforament_maxim'),
+            'tancament' => $request->input('dataHoraPersonalitzada'),
             'nominal' => $request->has('entradaNominal'),
             'esdeveniments_id' => $esdevenimentId,
         ]);

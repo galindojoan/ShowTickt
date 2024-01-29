@@ -1,16 +1,12 @@
-let precioTotal = 0;
+let precioTotal = 0,contador = 0,contadorSession = 0,contadorEntrada = 0;
 let entradasArray = [];
 let entradas;
 let sessiones;
-let contador = 0;
-let contadorSession = 0;
-let contadorEntrada = 0;
 let nuevoDivEntrada = true;
-let creaNuevo=true;
+let FinEach=true;
 
 const sessionSelect = document.getElementById("fecha");
 const divEntradas = document.getElementById("entradas");
-const precioSelect = document.getElementById("preu");
 const maxEntradas = document.getElementById("cantidad");
 const mostrarMax = document.getElementById("escogerCantidad");
 const buttonEntrada = document.getElementById("reservarEntrada");
@@ -48,29 +44,80 @@ function reiniciarEntradas() {
     });
 }
 
+function verMaximEntradas(max,Session,Entrada)  {
+  let esZero=false;
+  if (entradasArray.length!==0) {
+    entradasArray.forEach((entrada) => {
+    
+      if(FinEach){
+        if (
+          entrada.contadorSession === Session &&
+          entrada.contadorEntrada === Entrada
+      ) {
+          max=entrada.Maxcantidad;
+          FinEach=false;
+          if (entrada.Maxcantidad<=0) {
+            esZero=true;
+          }
+          
+      }
+      }
+    });
+  }
+  if (esZero) {
+    console.log("entrp",max);
+    max=0;
+    vermax(max);
+    return max;  
+  }else{
+    vermax(max);
+    return max; 
+  }
+}
+function vermax(entrada)  {
+  if (entrada<=0) {
+    mostrarMax.textContent = `Escoge otra entrada, esta entrada esta agotada`;
+    maxEntradas.max=0;
+    cantidad = 0;
+  }else{
+    mostrarMax.textContent = `Escoge el numero de entradas (Max ${entrada})`;
+  }
+}
+
 sessionSelect.addEventListener("change", function () {
     // Verifica si algo está seleccionado
     if (sessionSelect.value) {
         divEntradas.style.display = "block";
         sessiones = sessionSelect.value.split(",");
+        if (contadorSession!==0) {
+          document.getElementById(contadorSession).style.display="none";
+          document.getElementById(contadorSession).value="";
+          mostrarMax.textContent=" ";
+        }
         contadorSession = parseInt(sessiones[1]);
+        document.getElementById(contadorSession).style.display="block";
+        document.getElementById(contadorSession).addEventListener("change", function () {
+          entradas = document.getElementById(contadorSession).value.split(`,`);
+          precioTotal = parseFloat(entradas[0]).toFixed(2);
+          contadorEntrada = parseInt(entradas[3]);
+          maxEntradas.max = verMaximEntradas(parseInt(entradas[1]),contadorSession,contadorEntrada);
+      });
     }
 });
 
-precioSelect.addEventListener("change", function () {
-    entradas = precioSelect.value.split(",");
-    precioTotal = parseFloat(entradas[0]).toFixed(2);
-    maxEntradas.max = parseInt(entradas[1]);
-    contadorEntrada = parseInt(entradas[3]);
-    mostrarMax.textContent = `Escoge el numero de entradas (Max ${maxEntradas.max})`;
-});
 
 buttonEntrada.addEventListener("click", function (e) {
     e.preventDefault;
 
-    if (precioSelect.value) {
-        
-        if (maxEntradas.max < maxEntradas.value) {
+    if (document.getElementById(contadorSession).value) {
+        if (maxEntradas.max<=0) {
+          mensajeError.textContent = `Entradas Agotadas`;
+            divError.style.display = "block";
+            // Ocultar el div después de 3 segundos
+            setTimeout(function () {
+                divError.style.display = "none";
+            }, 3000);
+        }else if (maxEntradas.max < maxEntradas.value) {
             mensajeError.textContent = `La cantidad escogida supera la máxima, escoge un número inferior a ${maxEntradas.max}`;
             divError.style.display = "block";
             // Ocultar el div después de 3 segundos
@@ -92,30 +139,36 @@ buttonEntrada.addEventListener("click", function (e) {
                 cantidad: parseInt(maxEntradas.value),
                 contadorSession: contadorSession,
                 contadorEntrada: contadorEntrada,
+                Maxcantidad: parseInt(maxEntradas.max-maxEntradas.value),
             };
-            creaNuevo=true;
+            FinEach=true;
             entradasArray.forEach((entrada) => {
-              if(creaNuevo){
+              if(FinEach){
                 if (
                   entrada.contadorSession === divReserva.contadorSession &&
                   entrada.contadorEntrada === divReserva.contadorEntrada
               ) {
                   entrada.cantidad = entrada.cantidad + divReserva.cantidad;
+                  entrada.Maxcantidad =entrada.Maxcantidad-entrada.cantidad;
+                  maxEntradas.max=entrada.Maxcantidad;
+                  vermax(maxEntradas.max);
                   nuevoDivEntrada = false;
-                  creaNuevo=false;
-              } else if (
-                  entrada.contadorSession === divReserva.contadorSession
-              ) {
-                  if (
-                      entrada.contadorEntrada === divReserva.contadorEntrada
-                  ) {
-                      entrada.cantidad =
-                          entrada.cantidad + divReserva.cantidad;
-                      nuevoDivEntrada = false;
-                      creaNuevo=false;
-                  } else {
-                      nuevoDivEntrada = true;
-                  }
+                  FinEach=false;
+              // } else if (
+              //     entrada.contadorSession === divReserva.contadorSession
+              // ) {
+              //     if (
+              //         entrada.contadorEntrada === divReserva.contadorEntrada
+              //     ) {
+              //         entrada.cantidad = entrada.cantidad + divReserva.cantidad;
+              //         entrada.Maxcantidad =entrada.Maxcantidad-entrada.cantidad;
+              //         maxEntradas.max=entrada.Maxcantidad;
+              //         mostrarMax.textContent = `Escoge el numero de entradas (Max ${maxEntradas.max})`;
+              //         nuevoDivEntrada = false;
+              //         FinEach=false;
+              //     } else {
+              //         nuevoDivEntrada = true;
+              //     }
               } else{
                   nuevoDivEntrada = true;
               }
@@ -123,6 +176,8 @@ buttonEntrada.addEventListener("click", function (e) {
                 
             });
             if (nuevoDivEntrada === true) {
+              maxEntradas.max=divReserva.Maxcantidad;
+              vermax(maxEntradas.max);
                 entradasArray.push(divReserva);
             }
             precioTotal = precioTotal * maxEntradas.value;

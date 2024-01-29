@@ -1,8 +1,6 @@
 <?php $__env->startSection('title', 'local'); ?>
 
 <?php $__env->startSection('content'); ?>
-    <?php echo e(dd($lloc)); ?>
-
     <div class="containerEvent">
         <div class="textEvent">
             <h1><?php echo e($esdeveniment->nom); ?></h1>

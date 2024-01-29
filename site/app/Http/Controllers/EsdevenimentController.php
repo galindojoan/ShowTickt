@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use Geocoder\Laravel\Facades\Geocoder;
-use Illuminate\Http\Request;
+use GuzzleHttp\Client;
 use App\Models\Esdeveniment;
+use Illuminate\Http\Request;
+use Geocoder\Laravel\Facades\Geocoder;
 
 
 class EsdevenimentController extends Controller
@@ -38,15 +39,28 @@ class EsdevenimentController extends Controller
       ->select('recintes.*')
       ->where('esdeveniments.id', '=', $id)
       ->first();
-    $direccion = $esdeveniment->provincia . ', ' . $esdeveniment->lloc;
+      $provincia = str_replace(' ', '+', $esdeveniment->provincia);
+      $lloc = str_replace(' ', '+', $esdeveniment->lloc);
+      
+      $direccion = $provincia . '+' . $lloc;
 
-    $lloc = Geocoder::getCoordinatesForAddress('Carrer de Calaf, 08227, Terrassa, Barcelona, Spain')->get();
-      // $cordenadas = $lloc->getCoordinates();
-      // $lat = $cordenadas->getLatitude();
-      // $long = $cordenadas->getLongitude();
-    
-    $direccion = $esdeveniment->provincia . ', ' . $esdeveniment->lloc;
+    $client = new Client();
+    try {
+        $response = $client->get('https://nominatim.openstreetmap.org/search?q='. $direccion.'&format=json', [
+            'verify' => false,
+        ]);
 
-    return view('detallesLocal', compact('esdeveniment','lloc'));
+        $data = json_decode($response->getBody(), true);
+
+        if (!empty($data)) {
+          $lat = $data[0]['lat'] ?? null;
+          $long = $data[0]['lon'] ?? null;
+        } 
+    } catch (\Exception $e) {
+        $lat = null;
+        $long = null;
+    }
+
+    return view('detallesLocal', compact('esdeveniment','lat','long'));
   }
 }

@@ -3,7 +3,6 @@
 @section('title', 'local')
 
 @section('content')
-    {{dd($lloc)}}
     <div class="containerEvent">
         <div class="textEvent">
             <h1>{{ $esdeveniment->nom }}</h1>

@@ -16,30 +16,14 @@ header {
     grid-template-rows: 1fr;
     align-items: center;
     align-content: center;
-}
-
-.titulo {
-    justify-self: center;
-    color: white;
-}
-
-.logo {
-    width: 100px;
-    justify-self: end;
-}
-
-.userOptions {
-    appearance: none;
-    background-color: inherit;
-    color: #fff;
-    border: 1px solid black;
-    font-size: 20px;
-    font-weight: 700;
-    padding: 5px;
-    overflow: hidden;
-
-    &:hover {
-        cursor: pointer;
+    .titulo {
+        justify-self: center;
+        color: white;
+    }
+    
+    .logo {
+        width: 100px;
+        justify-self: end;
     }
 }
 
@@ -56,22 +40,23 @@ header {
         color: #ff5e00;
         transform: scale(1.1);
     }
-
     &:active {
         transform: scale(0.9);
     }
 }
 
-.bg-page {
+.bg {
+    /*Poner un div con esta clase para poder determinar la altura de manera fija*/
     background-color: #fff;
     width: 100vw;
     height: 80vh;
 }
-
-.masterBody {
+.masterBody{
+    /*Con esta clase la altura no es fija y se puede alargar*/
     display: contents;
     min-height: 80vh;
 }
+
 
 footer {
     width: 100%;
@@ -81,25 +66,26 @@ footer {
     background-color: black;
     min-height: 70px;
     color: white;
-}
-
-#footerHome {
-    padding: 10px;
-    color: #ff7118;
-    transition: color 0.3s ease;
-
-    /* Transición de color */
-    &:hover {
-        color: #ff5e00;
-        /* Color diferente al pasar el ratón */
-        transform: scale(1.1);
-
-        &:active {
-            transform: scale(0.9);
-            /* Animación de escala al hacer clic */
+    #footerHome {
+        padding: 10px;
+        color: #ff7118;
+        transition: color 0.3s ease;
+    
+        /* Transición de color */
+        &:hover {
+            color: #ff5e00;
+            /* Color diferente al pasar el ratón */
+            transform: scale(1.1);
+    
+            &:active {
+                transform: scale(0.9);
+                /* Animación de escala al hacer clic */
+            }
         }
     }
 }
+
+/*BOTONES*/
 
 @mixin btns {
     background-color: inherit;
@@ -110,6 +96,118 @@ footer {
     padding: 5px;
     vertical-align: middle;
 }
+.button-entrada {
+    display: flex;
+    justify-content: space-between;
+    /* Coloca los elementos al principio y al final del contenedor */
+    margin-top: 10px;
+}
+/* Estilos para los botones */
+.btn {
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    &-add {
+        background-color: #007bff;
+        color: #fff;
+        &-add:hover {
+            background-color: #0056b3;
+            /* Cambia el color de fondo al pasar el mouse */
+            color: #fff;
+            /* Cambia el color del texto al pasar el mouse */
+        }
+    }
+    &-primary {
+        @include btns;
+
+        &:hover {
+            background-color: white;
+        }
+    }
+    &-secondary {
+        background-color: #6c757d;
+        color: #fff;
+    }
+    &-cancelar {
+        background-color: #dc3545;
+        /* Rojo */
+        color: #fff;
+        /* Estilos para el hover de btn-cancelar */
+        &:hover {
+            background-color: #ff3333;
+            /* Cambia el color de fondo al pasar el mouse */
+            color: #fff;
+            /* Cambia el color del texto al pasar el mouse */
+        }
+    }
+    &-eliminar {
+        background-color: #dc3545;
+        /* Rojo */
+        color: #fff;
+        &:hover {
+            background-color: #c82333;
+            /* Rojo oscuro al pasar el ratón */
+        }
+    }
+}
+.button-container {
+    display: grid;
+    text-align: center;
+    margin: 10%;
+    grid-gap: 20%;
+    grid-template-columns: auto auto auto;
+}
+
+.custom-button {
+    background-color: #3490dc;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    /* Distribuye el espacio disponible alrededor de los botones */
+    a {
+        color: #000;
+        display: flex;
+        padding: 5px;
+        margin: 10px;
+        align-items: center;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        position: relative;
+        & :hover {
+            background-color: #f0f0f0;
+        }
+        svg {
+            color: #000;
+        }
+        &:hover::after {
+            content: attr(title);
+            /* Muestra el texto del atributo title como contenido del tooltip */
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-15%);
+            padding: 8px;
+            background-color: #333;
+            color: #fff;
+            font-size: 14px;
+            z-index: 1;
+            white-space: nowrap;
+            opacity: 1;
+        }
+    }
+}
+
 
 .event {
     &-home {
@@ -156,7 +254,7 @@ footer {
             /* Sombra más pronunciada al pasar el ratón */
         }
 
-        & img {
+        img {
             display: flex;
             justify-content: left;
             max-width: 40%;
@@ -220,7 +318,7 @@ footer {
         padding: 15px;
         height: 100%;
 
-        & p {
+        p {
             margin: 0;
 
             &:nth-of-type(1) {
@@ -285,29 +383,26 @@ footer {
     grid-template-areas: "a a a a a b b b b b b c";
 }
 
-form {
+.form {
     margin: 0px;
+    &-filtre{
+        grid-area: a;
+        text-align: end;
+    }
+    &-cerca{
+        grid-area: b;
+        text-align: start;
+    }
+    &-promotores{
+        display: grid;
+        grid-area: c;
+        width: fit-content;
+    }
 }
-
-form[id="filtre"] {
-    grid-area: a;
-    text-align: end;
-}
-
-form[id="cerca"] {
-    grid-area: b;
-    text-align: start;
-}
-
-form[id="promotores"] {
-    display: grid;
-    grid-area: c;
-    width: fit-content;
-}
-
-form[id="event-form"] {
+#event-form{
     display: contents;
     justify-items: end;
+    
 }
 
 .filter-bar {
@@ -321,14 +416,14 @@ form[id="event-form"] {
     display: inline-block;
     position: relative;
     width: 100%;
-}
-
-.input-group .icon-container {
-    height: 100%;
-    position: absolute;
-    top: 25%;
-    right: 10px;
-    pointer-events: none;
+    .icon-container {
+        height: 100%;
+        position: absolute;
+        top: 25%;
+        right: 10px;
+        pointer-events: none;
+    }
+    
 }
 
 option {
@@ -379,16 +474,6 @@ input[class="form-control"] {
     }
 }
 
-.btn {
-    &-primary {
-        @include btns;
-
-        &:hover {
-            background-color: white;
-        }
-    }
-}
-
 .pagination .page-link.small {
     font-size: 3em;
     /* Ajusta el tamaño del texto */
@@ -402,28 +487,23 @@ input[class="form-control"] {
     justify-content: center;
     align-items: center;
     margin-top: 20px;
-}
-
-/* Estilo para los elementos de la paginación */
-.pagination li {
-    list-style: none;
-    margin: 0 5px;
-}
-
-/* Estilo para los enlaces de la paginación */
-.pagination a {
-    color: #3498db;
-    text-decoration: none;
-    padding: 8px 12px;
-    border: 1px solid #3498db;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-}
-
-/* Estilo para los enlaces de la paginación al pasar el ratón */
-.pagination a:hover {
-    background-color: #3498db;
-    color: #fff;
+    li {
+        list-style: none;
+        margin: 0 5px;
+    }
+    a {
+        color: #3498db;
+        text-decoration: none;
+        padding: 8px 12px;
+        border: 1px solid #3498db;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+        &:hover {
+            background-color: #3498db;
+            color: #fff;
+        }
+    }
+    
 }
 
 /* Estilo para el enlace de la página activa */
@@ -485,11 +565,8 @@ ul {
 }
 
 /*Estilos para la pantalla del login*/
-#loginForm {
-    display: contents;
-}
 
-.loginPage {
+.login {
     background-color: #dcd;
     width: 100vw;
     height: 80vh;
@@ -497,51 +574,49 @@ ul {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    &-div {
+        background-color: #fff;
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        width: 20%;
+        border: 1.7px solid darkgray;
+        border-radius: 6px;
+        padding: 5%;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        h2 {
+            margin: 0px;
+            margin-bottom: 10%;
+        }
+        .login-form {
+            display: contents;
+        }
+    }
 }
-
-.login {
-    background-color: #fff;
-    display: grid;
-    grid-template-columns: 1fr;
-    justify-items: center;
-    width: 20%;
-    border: 1.7px solid darkgray;
-    border-radius: 6px;
-    padding: 5%;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+.login-input {
+    justify-items: start;
+    input {
+        background-color: lightgray;
+        width: 100%;
+        height: 3vh;
+        border: 0px solid;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        padding: 5px;
+    
+        &::placeholder {
+            color: black;
+        }
+    }
 }
-
-.login>h2 {
-    margin: 0px;
-    margin-bottom: 10%;
+.boton {
+    margin-top: 15%;
 }
 
 a {
     color: #072591;
     text-decoration: none;
     font-weight: 600;
-}
-
-.loginInput {
-    justify-items: start;
-}
-
-.loginInput>input {
-    background-color: lightgray;
-    width: 100%;
-    height: 3vh;
-    border: 0px solid;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    padding: 5px;
-
-    &::placeholder {
-        color: black;
-    }
-}
-
-.login>.boton {
-    margin-top: 15%;
 }
 
 .boton {
@@ -616,31 +691,6 @@ a {
     resize: vertical;
 }
 
-.promotorBody {
-    min-height: 75vh;
-}
-
-/* Estilos para los botones */
-.btn {
-    padding: 10px 20px;
-    font-size: 18px;
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.btn-add {
-    background-color: #007bff;
-    color: #fff;
-}
-
-.btn-secondary {
-    background-color: #6c757d;
-    color: #fff;
-}
-
 /* Estilos para la sección de nueva dirección */
 #nousCamps {
     display: none;
@@ -666,18 +716,19 @@ a {
     /* Añadir bordes redondeados */
 }
 
-.valiMsg {
+.msg{
+    &-valido {
     background-color: limegreen;
     padding: 10px;
     color: black;
     margin: 20px;
-}
-
-.errorMsg {
-    background-color: #980000;
-    padding: 10px;
-    color: white;
-    margin: 20px;
+    }
+    &-error {
+        background-color: #980000;
+        padding: 10px;
+        color: white;
+        margin: 20px;
+    }
 }
 
 .tipo-entrada {
@@ -686,48 +737,22 @@ a {
     /* Línea horizontal entre entradas */
     padding-bottom: 10px;
     /* Espaciado para mejorar la estética */
+    label {
+        display: block;
+        margin-bottom: 5px;
+        /* Espai entre les etiquetes i els inputs */
+    }
+    input {
+        width: 100%;
+        padding: 8px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
 }
 
-.tipo-entrada label {
-    display: block;
-    margin-bottom: 5px;
-    /* Espai entre les etiquetes i els inputs */
-}
 
-.tipo-entrada input {
-    width: 100%;
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-/* Estilos para los botones "Cancelar" y "Eliminar" */
-.btn-cancelar {
-    background-color: #dc3545;
-    /* Rojo */
-    color: #fff;
-}
-
-.btn-eliminar {
-    background-color: #dc3545;
-    /* Rojo */
-    color: #fff;
-}
-
-/* Estilo adicional para resaltar el botón "Eliminar" */
-.btn-eliminar:hover {
-    background-color: #c82333;
-    /* Rojo oscuro al pasar el ratón */
-}
-
-.button-entrada {
-    display: flex;
-    justify-content: space-between;
-    /* Coloca los elementos al principio y al final del contenedor */
-    margin-top: 10px;
-}
 
 
 
@@ -754,117 +779,35 @@ a {
 }
 
 /*Pantalla Home Promotor*/
-.button-container {
-    display: grid;
-    text-align: center;
-    margin: 10%;
-    grid-gap: 20%;
-    grid-template-columns: auto auto auto;
-}
 
-.custom-button {
-    background-color: #3490dc;
-    color: #ffffff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-}
-
-/* Estilos para el hover de btn-add */
-.btn-add:hover {
-    background-color: #0056b3;
-    /* Cambia el color de fondo al pasar el mouse */
-    color: #fff;
-    /* Cambia el color del texto al pasar el mouse */
-}
-
-/* Estilos para el hover de btn-cancelar */
-.btn-cancelar:hover {
-    background-color: #ff3333;
-    /* Cambia el color de fondo al pasar el mouse */
-    color: #fff;
-    /* Cambia el color del texto al pasar el mouse */
-}
-
-.buttons {
-    display: flex;
-    justify-content: space-around;
-    /* Distribuye el espacio disponible alrededor de los botones */
-}
-
-.buttons a {
-    color: #000;
-    display: flex;
-    padding: 5px;
-    margin: 10px;
-    align-items: center;
-    /* Centra verticalmente el contenido del botón */
-    border-radius: 5px;
-    /* Bordes redondeados */
-    text-decoration: none;
-    /* Elimina el subrayado predeterminado en los enlaces */
-    transition: background-color 0.3s ease;
-    /* Agrega una transición suave al color de fondo */
-    position: relative;
-    /* Establece la posición relativa para que el tooltip sea relativo a este elemento */
-}
-
-.buttons a:hover {
-    background-color: #f0f0f0;
-    /* Cambia el color de fondo al pasar el ratón sobre el botón */
-}
-
-.buttons a svg {
-    color: #000;
-}
-
-.buttons a:hover::after {
-    content: attr(title);
-    /* Muestra el texto del atributo title como contenido del tooltip */
-    position: absolute;
-    top: 100%;
-    /* Coloca el tooltip encima del enlace */
-    left: 50%;
-    /* Centra el tooltip horizontalmente */
-    transform: translateX(-15%);
-    /* Ajusta la posición horizontal del tooltip */
-    padding: 8px;
-    background-color: #333;
-    /* Color de fondo del tooltip */
-    color: #fff;
-    /* Color del texto del tooltip */
-    border-radius: 5px;
-    /* Bordes redondeados */
-    font-size: 14px;
-    z-index: 1;
-    /* Asegura que el tooltip esté en la parte superior */
-    white-space: nowrap;
-    /* Evita el desbordamiento del texto en varias líneas */
-    opacity: 0;
-    /* Inicialmente, el tooltip está oculto */
-    transition: opacity 0.3s ease;
-    /* Agrega una transición suave para mostrar/ocultar el tooltip */
-}
-
-.buttons a:hover::after {
-    opacity: 1;
-    /* Muestra el tooltip al pasar el ratón sobre el enlace */
-    z-index: 1;
-    /* Establece un valor más alto para que el tooltip esté sobre la tarjeta */
-}
 
 /* Estilos para el mensaje informativo */
-.info-message {
-    background-color: #ff7118;
-    color: white;
-    padding: 10px;
-    margin-bottom: 20px;
+.info{
+    &-message {
+        background-color: #ff7118;
+        color: white;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+    &-text {
+        margin: 0;
+        font-size: 16px;
+    }
+    &-alert {
+        font-size: 24px;
+        color: white;
+        /* Puedes ajustar el color según tus preferencias */
+        background-color: #fe8336;
+        /* Puedes ajustar el color según tus preferencias */
+        padding: 20px;
+        border-radius: 8px;
+        font-weight: bold;
+        /* Puedes ajustar el color según tus preferencias */
+        max-width: 400px;
+        margin: 0 auto;
+    }
 }
 
-.info-text {
-    margin: 0;
-    font-size: 16px;
-}
 
 .center-message {
     display: flex;
@@ -874,19 +817,6 @@ a {
     text-align: center;
 }
 
-.info-alert {
-    font-size: 24px;
-    color: white;
-    /* Puedes ajustar el color según tus preferencias */
-    background-color: #fe8336;
-    /* Puedes ajustar el color según tus preferencias */
-    padding: 20px;
-    border-radius: 8px;
-    font-weight: bold;
-    /* Puedes ajustar el color según tus preferencias */
-    max-width: 400px;
-    margin: 0 auto;
-}
 
 
 /*Estilos del div donde se visualizan las fechas para poder editarlas*/
@@ -897,19 +827,19 @@ a {
     border: 1px solid;
     justify-items: end;
 
-    &>button {
+    button {
         border: none;
         background-color: inherit;
         width: fit-content;
         height: fit-content;
     }
 
-    &>.fecha {
+    .fecha {
         display: grid;
         grid-template-columns: auto auto;
         align-items: center;
 
-        &>button {
+        button {
             width: fit-content;
             height: fit-content;
             border: none;
@@ -924,7 +854,8 @@ a {
 }
 
 #fechaButton {
-    margin: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
     border: none;
     background-color: inherit;
 }
@@ -939,7 +870,7 @@ a {
         width: 60px;
     }
 
-    .loginInput>input {
+    .login-input>input {
         width: 70vw;
     }
 }
@@ -982,11 +913,6 @@ a {
             }
         }
     }
-
-    .login {
-        width: 60%;
-    }
-
     .linkPromotor {
         font-weight: 800;
         font-size: 13px;
@@ -1028,6 +954,15 @@ a {
     input[class="form-control"] {
         width: 80%;
     }
+    .login-div {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 1287px) {
+    .event-cards {
+        overflow-y: auto;
+    }
 }
 
 @media screen and (max-width: 1300px) {
@@ -1040,11 +975,5 @@ a {
                 "b3"
                 "c";
         }
-    }
-}
-
-@media screen and (max-width: 1287px) {
-    .event-cards {
-        overflow-y: auto;
     }
 }

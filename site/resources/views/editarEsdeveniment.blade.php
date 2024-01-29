@@ -6,7 +6,7 @@
     <div class="containerEvent">
         <div class="textEvent">
             <h1>{{ $esdeveniment->nom }}</h1>
-            <button id="fechaButton">Fechas:
+            <button id="fechaButton">Fechas
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="10"
                     width="10"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                     <path
@@ -33,9 +33,9 @@
             </div>
             <form method="get" action="{{ route('añadirSession') }}">
                 <input type="hidden" name="event-id" value="{{ $esdeveniment->id }}">
-                <button type="submit" class="boton">Añadir Sesión</button>
+                <button type="submit" class="boton down">Añadir Sesión</button>
             </form>
-            <p>Lugar: {{ $esdeveniment->recinte->lloc }}</p>
+            <p class="down">Lugar: {{ $esdeveniment->recinte->lloc }}</p>
             <!-- Otros detalles del evento -->
         </div>
         <div class="imagenesEventos">

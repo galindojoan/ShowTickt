@@ -89,7 +89,7 @@
                     @endif
                 @endforeach
 
-                <form action="{{ route('cerca') }}" method="get" id="event-form">
+                <form action="{{ route('cerca') }}" method="get" class="event-form">
                     <div class="event-group">
                         <input type="hidden" name="category" value="{{ $category->id }}">
                         <button type="submit" class="event-btn">ver mas ></button>

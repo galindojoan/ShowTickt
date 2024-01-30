@@ -88,7 +88,7 @@
                     <?php endif; ?>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-                <form action="<?php echo e(route('cerca')); ?>" method="get" id="event-form">
+                <form action="<?php echo e(route('cerca')); ?>" method="get" class="event-form">
                     <div class="event-group">
                         <input type="hidden" name="category" value="<?php echo e($category->id); ?>">
                         <button type="submit" class="event-btn">ver mas ></button>

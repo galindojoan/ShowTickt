@@ -3,16 +3,16 @@
 @section('title', 'Recuperar')
 
 @section('content')
-<div class="loginPage">
+<div class="login">
     @if($errors->has('error'))
-        <span class="errorMsg">{{$errors->first('error')}}</span>
+        <span class="msg-error">{{$errors->first('error')}}</span>
     @endif
-    <div class="login">
+    <div class="login-div">
         <h2>Contraseña Olvidada</h2>
         <span id="indicador">Escriba la cuenta a recuperar.</span> <br> <br>
-        <form action="{{route('recuperar-form')}}" method="post" id="recuperarForm">
+        <form action="{{route('recuperar-form')}}" method="post" id="recuperarForm" >
         @csrf
-            <div class="loginInput">
+            <div class="login-input">
                 <input type="email" name="email" id="email" placeholder="Email">
             </div>
             <div>

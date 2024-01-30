@@ -21,19 +21,27 @@
                     <select class="form-select" id="fecha" name="fecha" required>
                       <option value="" disabled selected>Fechas de las sesiones</option>
                         @foreach ($fechas as $fecha)
-                            <option value="{{ $fecha->data }},{{$fecha->id }}">{{ $fecha->data }}</option>
+                            <option value="{{ $fecha->data }},{{$fecha->id }}"name="a">{{ $fecha->data }}</option>
                         @endforeach
                     </select>
                 </div>
+                
                 <div class="form-group" id="entradas" style="display:none;">
                   <label for="preu" class="form-label">Tipus Entradas:</label>
-                  <select class="form-select" id="preu" name="preu" required>
-                    <option value="" disabled selected>Entradas</option>
-                      @foreach ($entradas as $entrada)
-                          <option value="{{ $entrada->preu }},{{$entrada->quantitat}},{{$entrada->nom}},{{$entrada->id}}" >{{ $entrada->nom }} {{ $entrada->preu }}€ </option>
+                  
+                    @foreach ($fechas as $fecha)
+                    <select class="form-select" id="{{$fecha->id}}" name="preu" style="display:none;">
+                      <option value="" disabled selected>Entradas</option>
+                            @foreach ($entradas as $entrada)
+                            @if($entrada->sessios_id==$fecha->id)
+                            <option value="{{ $entrada->preu }},{{$entrada->quantitat}},{{$entrada->nom}},{{$entrada->id}}" >{{ $entrada->nom }} {{ $entrada->preu }}€ </option>
+                            @endif
                       @endforeach
-                  </select>
-                  <label for="cantidad" class="form-label" id="escogerCantidad">Escoge el numero de entradas:</label>
+                    </select>
+                        @endforeach
+                      
+                  
+                  <label for="cantidad" class="form-label" id="escogerCantidad">Escoge la entrada y el numero de entradas:</label>
                   
                   <div class="form-group" id="errorCantidad" style="display:none;">
                     <p id="mensajeError" class="errorMsg"></p>

@@ -17,7 +17,7 @@
 
     @if(session('key'))
     <button id="openOpt" class="selOpt ahref">{{ session('key') }}</button>
-    <div name="opciones">
+    <div id="opciones">
       <form action="{{route('session')}}" method="get" id="form">
         <button id="profile" class="optionProfile">Perfil</button>
         <button id="sesion" class="optionProfile">Salir</button>
@@ -47,7 +47,7 @@
     </form>
   </footer>
   <script>
-    const options = document.querySelector('div[name="opciones"]');
+    const options = document.getElementById('opciones');
     const profileOption = document.querySelector('#profile');
     const sessionOption = document.querySelector('#sesion');
     const form = document.querySelector('#form');

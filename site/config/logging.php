@@ -88,8 +88,7 @@ return [
                 'stream' => 'php://stderr',
             ],
         ],
-
-
+        
         'errorlog' => [
             'driver' => 'errorlog',
             'level' => 'debug',

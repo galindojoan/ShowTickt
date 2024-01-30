@@ -13,7 +13,11 @@
                         <div class="event-details">
                             <p><?php echo e($sessio->esdeveniment->nom); ?></p>
                             <p><?php echo e($sessio->data); ?></p>
-                            <p>Sin entradas</p>
+                            <?php if($sessio->entrades->isNotEmpty()): ?>
+                                <p><?php echo e($sessio->entrades->first()->preu); ?> €</p>
+                            <?php else: ?>
+                                <p>Sin entradas</p>
+                            <?php endif; ?>
                             <div class="buttons">
                                 <!-- Botones -->
                                 <a href="<?php echo e(route('detalls-esdeveniment', ['id' => $sessio->esdeveniment->id])); ?>"

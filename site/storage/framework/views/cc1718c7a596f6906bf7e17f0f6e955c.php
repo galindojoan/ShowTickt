@@ -1,9 +1,7 @@
-
-
 <?php $__env->startSection('title', 'perfil'); ?>
 
 <?php $__env->startSection('content'); ?>
-<div>
+<div class="bg-page">
   <?php if(session('key')): ?>
       <p>Bienvenido, <?php echo e(session('key')); ?></p>
   <?php endif; ?>

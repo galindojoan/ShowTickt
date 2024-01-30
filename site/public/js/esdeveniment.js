@@ -5,7 +5,6 @@ let sessiones;
 let nuevoDivEntrada = true;
 let FinEach=true;
 
-const sessionSelect = document.getElementById("fecha");
 const divEntradas = document.getElementById("entradas");
 const maxEntradas = document.getElementById("cantidad");
 const mostrarMax = document.getElementById("escogerCantidad");
@@ -15,6 +14,59 @@ const DivListaEntradas = document.getElementById("listaEntradas");
 const containerList = document.getElementById("containerList");
 const divError = document.getElementById("errorCantidad");
 const mensajeError = document.getElementById("mensajeError");
+
+function pad(numero) {
+  return numero < 10 ? '0' + numero : numero;
+}
+
+function convertirFormato(fechaHoraString) {
+  const fechaHora = new Date(fechaHoraString);
+  const año = fechaHora.getFullYear();
+  const mes = pad(fechaHora.getMonth() + 1);
+  const dia = pad(fechaHora.getDate());
+  const hora = pad(fechaHora.getHours() - 5); // Ajuste de la diferencia horaria
+  const minuto = pad(fechaHora.getMinutes());
+  const segundo = pad(fechaHora.getSeconds());
+
+  return `${año}-${mes}-${dia}T${hora}:${minuto}:${segundo}`;
+}
+
+function obtenerSiguienteHora(fechaHoraString) {
+  const fechaHora = new Date(fechaHoraString);
+  fechaHora.setHours(fechaHora.getHours() + 1);
+  const año = fechaHora.getFullYear();
+  const mes = pad(fechaHora.getMonth() + 1);
+  const dia = pad(fechaHora.getDate());
+  const hora = pad(fechaHora.getHours());
+  const minuto = pad(fechaHora.getMinutes());
+  const segundo = pad(fechaHora.getSeconds());
+
+  return `${año}-${mes}-${dia} ${hora}:${minuto}:${segundo}`;
+}
+
+function compararFechas(a, b) {
+  var fechaA = new Date(a.data);
+  var fechaB = new Date(b.data);
+
+  return fechaA - fechaB;
+}
+
+function crearEventos(Session) {
+  var eventos = [];
+  let cont = 1;
+  // Crea eventos para diferentes horas en el día
+  Session.forEach(fechaSession => {
+    let siguienteHora=obtenerSiguienteHora(fechaSession.data);
+      var evento = {
+          title: `${cont} Session`,
+          start: `${convertirFormato(fechaSession.data)}`,
+          end: `${convertirFormato(siguienteHora)}`
+      }
+      eventos.push(evento);
+      cont++;
+  });
+  return eventos;
+}
 
 function reiniciarEntradas() {
     containerList.innerHTML = " ";
@@ -84,27 +136,23 @@ function vermax(entrada)  {
   }
 }
 
-sessionSelect.addEventListener("change", function () {
-    // Verifica si algo está seleccionado
-    if (sessionSelect.value) {
-        divEntradas.style.display = "block";
-        sessiones = sessionSelect.value.split(",");
-        if (contadorSession!==0) {
-          document.getElementById(contadorSession).style.display="none";
-          document.getElementById(contadorSession).value="";
-          mostrarMax.textContent=" ";
-        }
-        contadorSession = parseInt(sessiones[1]);
-        document.getElementById(contadorSession).style.display="block";
-        document.getElementById(contadorSession).addEventListener("change", function () {
-          entradas = document.getElementById(contadorSession).value.split(`,`);
-          precioTotal = parseFloat(entradas[0]).toFixed(2);
-          contadorEntrada = parseInt(entradas[3]);
-          maxEntradas.max = verMaximEntradas(parseInt(entradas[1]),contadorSession,contadorEntrada);
-      });
-    }
+function sessionSelect(ArraySession){
+  divEntradas.style.display = "block";
+  if (contadorSession!==0) {
+    document.getElementById(contadorSession).style.display="none";
+    document.getElementById(contadorSession).value="";
+    mostrarMax.textContent=" ";
+  }
+  contadorSession = parseInt(ArraySession.id);
+  document.getElementById(contadorSession).style.display="block";
+  document.getElementById(contadorSession).addEventListener("change", function () {
+    entradas = document.getElementById(contadorSession).value.split(`,`);
+    precioTotal = parseFloat(entradas[0]).toFixed(2);
+    contadorEntrada = parseInt(entradas[3]);
+    maxEntradas.max = verMaximEntradas(parseInt(entradas[1]),contadorSession,contadorEntrada);
 });
-
+sessiones=ArraySession;
+}
 
 buttonEntrada.addEventListener("click", function (e) {
     e.preventDefault;
@@ -134,7 +182,7 @@ buttonEntrada.addEventListener("click", function (e) {
         } else {
             divError.style.display = "none";
             let divReserva = {
-                session: sessiones[0],
+                session: sessiones.id,
                 nom: entradas[2],
                 cantidad: parseInt(maxEntradas.value),
                 contadorSession: contadorSession,
@@ -194,3 +242,6 @@ buttonEntrada.addEventListener("click", function (e) {
         }, 3000);
     }
 });
+
+document.getElementById('arrayEntradas').value = JSON.stringify(entradasArray);
+//$datosArray = json_decode($request->input('datos_array'));

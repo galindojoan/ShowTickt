@@ -718,6 +718,19 @@ a {
     /* Añadir bordes redondeados */
 }
 
+.alertDiv {
+    background-color: #ffb3b3;
+    /* Color de fondo rojo claro */
+    padding: 10px;
+    /* Añadir relleno */
+    margin: 10px 0;
+    /* Añadir margen arriba y abajo */
+    border: 1px solid #e74c3c;
+    /* Añadir borde rojo oscuro */
+    border-radius: 5px;
+    /* Añadir bordes redondeados */
+}
+
 .msg{
     &-valido {
     background-color: limegreen;

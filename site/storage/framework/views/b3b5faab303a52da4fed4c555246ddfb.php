@@ -1,17 +1,17 @@
 <?php $__env->startSection('title', 'Login'); ?>
 
 <?php $__env->startSection('content'); ?>
-<div class="loginPage">
+<div class="login">
     <?php if($errors->has('error')): ?>
-        <span class="errorMsg"><?php echo e($errors->first('error')); ?></span>
+        <span class="msg-error"><?php echo e($errors->first('error')); ?></span>
     <?php elseif($errors->has('vali')): ?>
-        <span class="valiMsg"><?php echo e($errors->first('vali')); ?></span>
+        <span class="msg-valido"><?php echo e($errors->first('vali')); ?></span>
     <?php endif; ?>
-    <div class="login">
+    <div class="login-div">
         <h2>Login</h2>
-        <form action="<?php echo e(route('homePromotor')); ?>" method="post" id="loginForm">
+        <form action="<?php echo e(route('homePromotor')); ?>" method="post" id="loginForm" class="login-form">
         <?php echo csrf_field(); ?>
-            <div class="loginInput">
+            <div class="login-input">
                 <input type="text" name="usuario" id="usuario" placeholder="Usuario" required>
                 <input type="password" name="password" id="password" placeholder="Contraseña" required>
                 <a href="recuperar">Contraseña olvidada?</a>

@@ -12,7 +12,7 @@
 
     </div>
     <div class="mapaLocal">
-      <x-maps-leaflet :centerPoint="['lat' => 52.16, 'long' => 5]" class="event-imagen"></x-maps-leaflet>
+      <x-maps-leaflet :centerPoint="['lat' => $lat, 'long' => $long]" class="event-imagen"></x-maps-leaflet>
     </div>
 
 @endsection

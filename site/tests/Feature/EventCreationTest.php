@@ -8,7 +8,9 @@ use Tests\TestCase;
 use App\Models\Esdeveniment;
 use App\Models\Categoria;
 use App\Models\Recinte;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,6 +21,23 @@ class EventCreationTest extends TestCase
     public function test_event_creation_page_loads_correctly()
     {
         // Simula la carga de la página de creación de eventos
+
+        DB::table('users')->insert([
+            'name' =>'promotor1',
+            'username' =>'promotor1',
+            'email' => 'promotor1@test.com',
+            'password' => Hash::make('p12345678'),
+            'tipus' => 'Promotor'
+        ]);
+
+        dump(DB::table('users')->get());
+
+        $this->post('login', [
+            'usuario' => 'promotor1',
+            'password' => 'p12345678',
+        ]);
+
+        $this->assertAuthenticated(); // Ensure the user is authenticated
 
         $response = $this->get('/crear-esdeveniment');
         $response->assertOk();

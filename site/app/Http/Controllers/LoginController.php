@@ -13,6 +13,9 @@ class LoginController extends Controller
     {
         return view('login');
     }
+    public function promotorPage(){
+        return view('homePromotor');
+    }
 
     public function iniciarSesion(Request $request)
     {
@@ -36,7 +39,7 @@ class LoginController extends Controller
             $request->session()->put('key', $userName);
             $request->session()->put('user_id', $user->id); // Almacenar el ID del usuario en la sesión
             if ($tipus == 'Promotor') {
-                return view('homePromotor');
+                return redirect()->route('homePromotor');
             }else{
                 return view('taullerAdministracio');
             }

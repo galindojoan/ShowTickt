@@ -2,17 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\EsdevenimentController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\CompraController;
 use App\Http\Controllers\SessionController;
-use App\Http\Controllers\CrearEsdevenimentController;
-use App\Http\Controllers\AdministrarEsdevenimentsController;
-use App\Http\Controllers\EditarEsdevenimentController;
+use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\EsdevenimentController;
 use App\Http\Controllers\LlistatSessionsController;
-use App\Http\Controllers\AdministrarEsdevenimentController;
-use App\Http\Controllers\DetallsEsdevenimentController;
 use App\Http\Controllers\LlistatsEntradesController;
+use App\Http\Controllers\CrearEsdevenimentController;
+use App\Http\Controllers\EditarEsdevenimentController;
+use App\Http\Controllers\DetallsEsdevenimentController;
+use App\Http\Controllers\AdministrarEsdevenimentController;
+use App\Http\Controllers\AdministrarEsdevenimentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,7 +69,7 @@ Route::post('/cambiarPassword',[PasswordController::class, 'pagePassword'])->nam
 Route::get('/peticionCambiar',[PasswordController::class, 'cambiarPassword'])->name('peticionCambiar');
 Route::post('/peticionCambiar',[PasswordController::class, 'cambiarPassword'])->name('peticionCambiar');
 
-Route::post('/confirmacio',[EsdevenimentController::class, 'compra'])->name('confirmacioCompra');
+Route::post('/confirmacio',[CompraController::class, 'compra'])->name('confirmacioCompra');
 
 Route::get('/llistat-sessions', [LlistatSessionsController::class, 'index'])->name('llistat-sessions')->middleware('check');
 Route::post('/llistat-sessions', [LlistatSessionsController::class, 'index'])->name('llistat-sessions')->middleware('check');

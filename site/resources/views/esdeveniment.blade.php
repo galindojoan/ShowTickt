@@ -16,6 +16,7 @@
             <form action="{{ route('confirmacioCompra') }}" method="post" class="ComprarEntrada" id="ComprarEntrada"
                 enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" id="detallesEvents" name='detallesEvents' value='{{$esdeveniment}}'>
                 <label for="session" class="form-label">Sesiones:</label>
                 @if (count($fechas) == 1)
                     <div class="form-group">
@@ -78,8 +79,9 @@
                     <div class="form-group">
                       <p id="precioTotal" class="form-label">Total: 0€ </p>
                   </div>
-                  <input type="hidden" id="arrayEntradas">
-                  <button type="submit">Confirmar Compra</button>
+                  <input type="hidden" id="arrayEntradas" class='arrayEntradas'>
+                  <input type="hidden" id="inputTotal" name='inputTotal'>
+                  <button type="submit" id="bottonCompra">Confirmar Compra</button>
                 </div>
             </form>
 

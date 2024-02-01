@@ -30,10 +30,6 @@ class EsdevenimentController extends Controller
     $fechaSola=false;
     return view('esdeveniment', compact('esdeveniment', 'fechas', 'entradas', 'preuTotal','fechaSola'));
   }
-  public function compra()
-  {
-    return view('confirmarCompra');
-  }
   public function local($id)
   {
     $esdeveniment = Esdeveniment::join('recintes', 'recintes.id', '=', 'esdeveniments.recinte_id')

@@ -271,5 +271,7 @@ buttonEntrada.addEventListener("click", function (e) {
     }
 });
 
+document.getElementById("bottonCompra").addEventListener("click", function () {
 document.getElementById("arrayEntradas").value = JSON.stringify(entradasArray);
-//$datosArray = json_decode($request->input('datos_array'));
+document.getElementById("inputTotal").value = precioTotal;
+});

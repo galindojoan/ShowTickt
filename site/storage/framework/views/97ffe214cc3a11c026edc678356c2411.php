@@ -64,7 +64,8 @@
                       <p id="precioTotal" class="form-label">Total: 0€ </p>
                   </div>
                   <input type="hidden" id="arrayEntradas">
-                  <button type="submit">Confirmar Compra</button>
+                  <input type="hidden" id="inputTotal">
+                  <button type="submit" id="bottonCompra">Confirmar Compra</button>
                 </div>
             </form>
 

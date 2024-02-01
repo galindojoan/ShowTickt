@@ -819,6 +819,42 @@ a {
   background-color: inherit;
 }
 
+.star-rating {
+  font-size: 3rem; /* Ajusta el tamaño de las estrellas según sea necesario */
+}
+
+.star {
+  cursor: pointer;
+  transition: color 0.2s;
+  color: #969696; /* Color de las estrellas no seleccionadas */
+}
+
+.star.selected {
+  color: gold;
+}
+
+.star.hover {
+  color: gold;
+}
+
+.emoji-selector {
+  font-size: 3rem;
+}
+
+.emoji-option {
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.emoji-option:not(.selected) {
+  opacity: 0.5;
+}
+
+.emoji-option:hover:not(.selected) {
+  opacity: 1;
+}
+
 /*Ver Eventos fin*/
 @media screen and (max-width: 300px) {
   .titulo {

@@ -13,6 +13,7 @@ use App\Http\Controllers\LlistatSessionsController;
 use App\Http\Controllers\AdministrarEsdevenimentController;
 use App\Http\Controllers\DetallsEsdevenimentController;
 use App\Http\Controllers\LlistatsEntradesController;
+use App\Http\Controllers\OpinionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +80,9 @@ Route::get('/llistats-entrades/{id}', [LlistatsEntradesController::class, 'show'
 
 Route::get('/añadirSession',[EditarEsdevenimentController::class,'newSessionPage'])->name('añadirSession')->middleware('check');
 Route::post('/añadirSession',[EditarEsdevenimentController::class,'newSessionPage'])->name('añadirSession')->middleware('check');
+
+Route::get('/crearOpinion', [OpinionController::class,'newOpinionPage'])->name('crearOpinion');
+Route::post('/crearOpinion.store', [OpinionController::class,'store'])->name('crearOpinion.store');
 
 Route::get('/editarSesion',[EditarEsdevenimentController::class,'updateSesionPage'])->name('editarSesion')->middleware('check');
 

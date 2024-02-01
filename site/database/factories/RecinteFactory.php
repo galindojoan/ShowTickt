@@ -29,6 +29,8 @@ class RecinteFactory extends Factory
             'lloc' => $this->faker->city,
             'codi_postal' => $this->faker->postcode,
             'capacitat' => $this->faker->randomNumber(3),
+            'carrer' => $this->faker->streetName,
+            'numero' => $this->faker->buildingNumber,
         ];
     }
 }

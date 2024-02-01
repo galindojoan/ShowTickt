@@ -8,7 +8,9 @@ use Tests\TestCase;
 use App\Models\Esdeveniment;
 use App\Models\Categoria;
 use App\Models\Recinte;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 

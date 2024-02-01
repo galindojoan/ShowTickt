@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('lloc');
             $table->string('codi_postal');
             $table->unsignedInteger('capacitat');
+            $table->string('carrer');
+            $table->integer('numero');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 

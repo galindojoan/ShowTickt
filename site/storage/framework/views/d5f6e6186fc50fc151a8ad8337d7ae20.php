@@ -7,7 +7,7 @@
         </div>
     <?php else: ?>
         <div class="container">
-            <form action="<?php echo e(route('cerca')); ?>" method="get" class="form" id="filtre">
+            <form action="<?php echo e(route('cerca')); ?>" method="get" class="form form-filtre" id="filtre">
                 <div class="input-group">
                     <select name="category" class="form-control" onchange="this.form.submit()">
                         <option value="" disabled selected>Categorías</option>
@@ -31,7 +31,7 @@
 
 
             <!-- Formulario de búsqueda -->
-            <form action="<?php echo e(route('cerca')); ?>" method="get" class="form" id="cerca">
+            <form action="<?php echo e(route('cerca')); ?>" method="get" class="form form-cerca" id="cerca">
                 <div class="input-group">
                     <!-- Campo de entrada oculto para la categoría -->
                     <input type="hidden" name="category" value="<?php echo e($categoryId); ?>">
@@ -44,7 +44,7 @@
                         </svg></button>
                 </div>
             </form>
-            <form id="promotores" method="POST"
+            <form id="promotores" class="form form-promotores" method="POST"
                 action="<?php if(session('key')): ?> <?php echo e(route('homePromotor')); ?>
 
             <?php else: ?><?php echo e(route('login')); ?> <?php endif; ?>">
@@ -61,7 +61,7 @@
                 <?php
                     $cont = 0;
                 ?>
-                <?php $__currentLoopData = $events; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $esdeveniment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php $__currentLoopData = $esdeveniments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $esdeveniment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <?php if($esdeveniment->categoria_id == $category->id && $cont < 3): ?>
                         <?php
                             $cont++;
@@ -70,9 +70,17 @@
                             <div class="event-card">
                                 <div class="event-details">
                                     <p><?php echo e($esdeveniment->nom); ?></p>
-                                    <p><?php echo e($esdeveniment->data_sessio); ?></p>
-                                    <p><?php echo e($esdeveniment->recinte->lloc); ?></p>
-                                    <p><?php echo e($esdeveniment->entradas_preu); ?> €</p>
+                                    <?php if($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->data !== null): ?>
+                                        <p><?php echo e($esdeveniment->sesions->first()->data); ?></p>
+                                    <?php else: ?>
+                                    <p>No hay sesiones</p>
+                                    <?php endif; ?>
+                                        <p><?php echo e($esdeveniment->recinte->lloc); ?></p>
+                                        <?php if($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->entrades->isNotEmpty()): ?>
+                                            <p><?php echo e($esdeveniment->sesions->first()->entrades->first()->preu); ?> €</p>
+                                        <?php else: ?>
+                                        <p>Entradas Agotadas</p>
+                                        <?php endif; ?>
                                 </div>
                                 <img src="<?php echo e(Storage::url($esdeveniment->imatge)); ?>" alt="Imatge de l'esdeveniment">
                             </div>

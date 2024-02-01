@@ -50,6 +50,7 @@ Route::post('/session', [SessionController::class, 'SessionController'])->name('
 
 Route::get('/crear-esdeveniment', [CrearEsdevenimentController::class, 'index'])->name('crear-esdeveniment')->middleware('check');
 Route::post('/crear-esdeveniment.store', [CrearEsdevenimentController::class, 'store'])->name('crear-esdeveniment.store')->middleware('check');
+Route::post('/verificar-carrer', [CrearEsdevenimentController::class, 'verificarCarrer'])->name('verficiar-carrer')->middleware('check');
 
 Route::get('/administrar-esdeveniments', [AdministrarEsdevenimentsController::class, 'index'])->name('administrar-esdeveniments')->middleware('check');
 Route::post('/administrar-esdeveniments', [AdministrarEsdevenimentsController::class, 'index'])->name('administrar-esdeveniments')->middleware('check');

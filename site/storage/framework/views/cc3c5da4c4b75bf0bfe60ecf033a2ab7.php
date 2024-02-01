@@ -7,7 +7,7 @@
         </div>
     <?php else: ?>
         <div class="container">
-            <form action="<?php echo e(route('cerca')); ?>" method="get" class="form" id="filtre">
+            <form action="<?php echo e(route('cerca')); ?>" method="get" class="form form-filtre" id="filtre">
                 <div class="input-group">
                     <select name="category" class="form-control" onchange="this.form.submit()">
                         <option value="" disabled selected>Categorías</option>
@@ -31,7 +31,7 @@
 
 
             <!-- Formulario de búsqueda -->
-            <form action="<?php echo e(route('cerca')); ?>" method="get" class="form" id="cerca">
+            <form action="<?php echo e(route('cerca')); ?>" method="get" class="form form-cerca" id="cerca">
                 <div class="input-group">
                     <!-- Campo de entrada oculto para la categoría -->
                     <input type="hidden" name="category" value="<?php echo e($categoryId); ?>">
@@ -44,7 +44,7 @@
                         </svg></button>
                 </div>
             </form>
-            <form id="promotores" method="POST"
+            <form id="promotores" class="form form-promotores" method="POST"
                 action="<?php if(session('key')): ?> <?php echo e(route('homePromotor')); ?>
 
             <?php else: ?><?php echo e(route('login')); ?> <?php endif; ?>">

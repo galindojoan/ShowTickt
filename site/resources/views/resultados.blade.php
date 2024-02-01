@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container">
-        <form action="{{ route('cerca') }}" method="get" class="form" id="filtre">
+        <form action="{{ route('cerca') }}" method="get" class="form form-filtre" id="filtre">
             <div class="input-group">
                 <select name="category" class="form-control" onchange="this.form.submit()">
                     <option value="" disabled selected>Categorías</option>
@@ -28,7 +28,7 @@
 
 
         <!-- Formulario de búsqueda -->
-        <form action="{{ route('cerca') }}" method="get" class="form" id="cerca">
+        <form action="{{ route('cerca') }}" method="get" class="form form-cerca" id="cerca">
             <div class="input-group">
                 <!-- Campo de entrada oculto para la categoría -->
                 <input type="hidden" name="category" value="{{ $categoryId }}">
@@ -41,7 +41,7 @@
                     </svg></button>
             </div>
         </form>
-        <form id="promotores" method="POST"
+        <form id="promotores" class="form form-promotores" method="POST"
             action="@if (session('key')) {{ route('homePromotor') }}
             @else{{ route('login') }} @endif">
             @csrf

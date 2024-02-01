@@ -12,7 +12,8 @@
 
             <div class="form-group">
                 <label for="titol" class="form-label">Título del evento</label>
-                <input type="text" maxlength="20" class="form-controller" id="titol" name="titol" required>
+                <input type="text" maxlength="20" class="form-controller" id="titol" name="titol"
+                    value="<?php echo e(old('titol')); ?>" required>
                 <div id="errorDivtitol" class="errorDiv" style="display: none;">
                     <div id="errorContent">
                         <div class="error-message" id="error-titol"></div>
@@ -24,7 +25,8 @@
                 <label for="categoria" class="form-label">Categoría</label>
                 <select class="form-select" id="categoria" name="categoria" required>
                     <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <option value="<?php echo e($category->id); ?>"><?php echo e($category->tipus); ?></option>
+                        <option value="<?php echo e($category->id); ?>" <?php echo e(old('categoria') == $category->id ? 'selected' : ''); ?>>
+                            <?php echo e($category->tipus); ?></option>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </select>
             </div>
@@ -37,7 +39,8 @@
                     <?php else: ?>
                         <option value="">Selecciona un recinto existente</option>
                         <?php $__currentLoopData = $recintes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $recinte): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <option value="<?php echo e($recinte->id); ?>"><?php echo e($recinte->nom); ?></option>
+                            <option value="<?php echo e($recinte->id); ?>" <?php echo e(old('recinte') == $recinte->id ? 'selected' : ''); ?>>
+                                <?php echo e($recinte->nom); ?></option>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <?php endif; ?>
                 </select>
@@ -48,6 +51,13 @@
                 </div>
             </div>
 
+            <?php if(session('error')): ?>
+                <div class="alertDiv">
+                    <?php echo e(session('error')); ?>
+
+                </div>
+            <?php endif; ?>
+            
             <div class="form-group">
                 <button type="button" id="mostrarNovaAdreca" class="btn btn-add">Añadir nueva dirección</button>
             </div>
@@ -55,7 +65,8 @@
             <div id="nousCamps" style="display: none;">
                 <div class="form-group">
                     <label for="nova_nom" class="form-label">Nombre del Local</label>
-                    <input type="text" class="form-controller" id="nova_nom" name="nova_nom">
+                    <input type="text" class="form-controller" id="nova_nom" name="nova_nom"
+                        value="<?php echo e(old('nova_nom')); ?>">
                     <div id="errorDivnomLocal" class="errorDiv" style="display: none;">
                         <div id="errorContent">
                             <div class="error-message" id="error-nomLocal"></div>
@@ -65,7 +76,8 @@
 
                 <div class="form-group">
                     <label for="nova_provincia" class="form-label">Provincia</label>
-                    <input type="text" class="form-controller" id="nova_provincia" name="nova_provincia">
+                    <input type="text" class="form-controller" id="nova_provincia" name="nova_provincia"
+                        value="<?php echo e(old('nova_provincia')); ?>">
                     <div id="errorDivprovincia" class="errorDiv" style="display: none;">
                         <div id="errorContent">
                             <div class="error-message" id="error-provincia"></div>
@@ -75,7 +87,8 @@
 
                 <div class="form-group">
                     <label for="nova_ciutat" class="form-label">Ciudad</label>
-                    <input type="text" class="form-controller" id="nova_ciutat" name="nova_ciutat">
+                    <input type="text" class="form-controller" id="nova_ciutat" name="nova_ciutat"
+                        value="<?php echo e(old('nova_ciutat')); ?>">
                     <div id="errorDivciutat" class="errorDiv" style="display: none;">
                         <div id="errorContent">
                             <div class="error-message" id="error-ciutat"></div>
@@ -84,9 +97,31 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="nova_carrer" class="form-label">Nombre de la calle</label>
+                    <input type="text" class="form-controller" id="nova_carrer" name="nova_carrer"
+                        value="<?php echo e(old('nova_carrer')); ?>">
+                    <div id="errorDivcarrer" class="errorDiv" style="display: none;">
+                        <div id="errorContent">
+                            <div class="error-message" id="error-carrer"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="nova_numero" class="form-label">Número de la calle</label>
+                    <input type="text" class="form-controller" id="nova_numero" name="nova_numero"
+                        value="<?php echo e(old('nova_numero')); ?>">
+                    <div id="errorDivnumero" class="errorDiv" style="display: none;">
+                        <div id="errorContent">
+                            <div class="error-message" id="error-numero"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="nova_codi_postal" class="form-label">Codigo Postal</label>
                     <input type="number" maxlength="5" class="form-controller" id="nova_codi_postal"
-                        name="nova_codi_postal">
+                        name="nova_codi_postal" value="<?php echo e(old('nova_codi_postal')); ?>">
                     <div id="errorDivpostal" class="errorDiv" style="display: none;">
                         <div id="errorContent">
                             <div class="error-message" id="error-postal"></div>
@@ -96,7 +131,8 @@
 
                 <div class="form-group">
                     <label for="nova_capacitat" class="form-label">Aforo</label>
-                    <input type="number" class="form-controller" id="nova_capacitat" name="nova_capacitat">
+                    <input type="number" class="form-controller" id="nova_capacitat" name="nova_capacitat"
+                        value="<?php echo e(old('nova_capacitat')); ?>">
                     <div id="errorDivcapacitat" class="errorDiv" style="display: none;">
                         <div id="errorContent">
                             <div class="error-message" id="error-capacitat"></div>
@@ -111,7 +147,8 @@
 
             <div class="form-group">
                 <label for="imatge" class="form-label">Imagen principal del evento</label>
-                <input type="file" class="form-controller" id="imatge" name="imatge" accept="image/*" required>
+                <input type="file" class="form-controller" id="imatge" name="imatge" accept="image/*"
+                    value="<?php echo e(old('imatge')); ?>" required>
                 <div id="errorDivimatge" class="errorDiv" style="display: none;">
                     <div id="errorContent">
                         <div class="error-message" id="error-imatge"></div>
@@ -122,7 +159,7 @@
             <div class="form-group">
                 <label for="descripcio" class="form-label">Descripción del evento</label>
                 <textarea type="textarea" class="form-controller" maxlength="640" id="descripcio" name="descripcio" rows="3"
-                    required></textarea>
+                    required><?php echo e(old('descripcio')); ?></textarea>
                 <div id="errorDivdescripcio" class="errorDiv" style="display: none;">
                     <div id="errorContent">
                         <div class="error-message" id="error-descripcio"></div>
@@ -132,7 +169,8 @@
 
             <div class="form-group">
                 <label for="data_hora" class="form-label">Fecha y hora de la celebración</label>
-                <input type="datetime-local" class="form-controller" id="data_hora" name="data_hora" required>
+                <input type="datetime-local" class="form-controller" id="data_hora" name="data_hora"
+                    value="<?php echo e(old('data_hora')); ?>" required>
                 <div id="errorDivdata" class="errorDiv" style="display: none;">
                     <div id="errorContent">
                         <div class="error-message" id="error-data"></div>
@@ -142,7 +180,8 @@
 
             <div class="form-group">
                 <label for="aforament_maxim" class="form-label">Aforo máximo</label>
-                <input type="number" class="form-controller" id="aforament_maxim" name="aforament_maxim" required>
+                <input type="number" class="form-controller" id="aforament_maxim" name="aforament_maxim"
+                    value="<?php echo e(old('aforament_maxim')); ?>" required>
                 <div id="errorDivaforo" style="display: none;">
                     <div id="errorContent">
                         <div class="error-message" id="error-aforo"></div>
@@ -162,7 +201,8 @@
                     </div>
                 </div>
                 <div class="button-entrada">
-                    <button type="button" class="btn btn-add" id="agregarTipoEntrada">Agregar Tipo de Entrada</button>
+                    <button type="button" class="btn btn-add" id="agregarTipoEntrada">Agregar Tipo de
+                        Entrada</button>
                     <button type="button" class="btn btn-eliminar" id="eliminarTipoEntrada"
                         style="display: none;">Eliminar
                         Entrada</button>
@@ -172,16 +212,24 @@
             <div class="form-group">
                 <label for="tancamentVenda" class="form-label">Fecha de cierre de ventas</label>
                 <select id="tancamentVenda" class="form-select" name="tancamentVenda">
-                    <option value="esdeveniment">Inicio de la celebración</option>
-                    <option value="1hora">1 hora antes</option>
-                    <option value="2hores">2 horas antes</option>
-                    <option value="personalitzat">Personalizado (escogemos fecha y hora)</option>
+                    <option value="esdeveniment" <?php echo e(old('tancamentVenda') == 'esdeveniment' ? 'selected' : ''); ?>>
+                        Inicio de la celebración
+                    </option>
+                    <option value="1hora" <?php echo e(old('tancamentVenda') == '1hora' ? 'selected' : ''); ?>>
+                        1 hora antes
+                    </option>
+                    <option value="2hores" <?php echo e(old('tancamentVenda') == '2hores' ? 'selected' : ''); ?>>
+                        2 horas antes
+                    </option>
+                    <option value="personalitzat" <?php echo e(old('tancamentVenda') == 'personalitzat' ? 'selected' : ''); ?>>
+                        Personalizado (escogemos fecha y hora)
+                    </option>
                 </select>
 
                 <div id="personalitzatTancament" style="display: none;">
                     <label for="dataHoraPersonalitzada" class="form-label">Fecha y hora del cierre</label>
                     <input type="datetime-local" class="form-controller" id="dataHoraPersonalitzada"
-                        name="dataHoraPersonalitzada">
+                        name="dataHoraPersonalitzada" value="<?php echo e(old('dataHoraPersonalitzada')); ?>">
                     <div id="errorDivtancament" class="errorDiv" style="display: none;">
                         <div id="errorContent">
                             <div class="error-message" id="error-tancament"></div>
@@ -192,12 +240,14 @@
 
             <div class="form-group">
                 <label for="ocultarEsdeveniment" class="form-label">Evento Oculto</label>
-                <input type="checkbox" id="ocultarEsdeveniment" name="ocultarEsdeveniment">
+                <input type="checkbox" id="ocultarEsdeveniment" name="ocultarEsdeveniment"
+                    <?php if(old('ocultarEsdeveniment')): ?> checked <?php endif; ?>>
             </div>
 
             <div class="form-group">
                 <label for="entradaNominal" class="form-label">Entradas Nominales</label>
-                <input type="checkbox" id="entradaNominal" name="entradaNominal">
+                <input type="checkbox" id="entradaNominal" name="entradaNominal"
+                    <?php if(old('entradaNominal')): ?> checked <?php endif; ?>>
             </div>
 
             <div id="errorDiv" class="errorDiv" style="display: none;">
@@ -471,7 +521,7 @@
                     if (allowedTypes.indexOf(selectedFileType) === -1) {
                         mostrarMissatge('imatge',
                             'El archivo seleccionado no es una imagen válida. Por favor, elige un archivo JPEG, PNG, BMP o WebP.'
-                            );
+                        );
                         // Limpiar el campo de imatge
                         imatgeInput.value = '';
                         return false;

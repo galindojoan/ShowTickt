@@ -21,6 +21,9 @@
                         <?php $__currentLoopData = $fechas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fecha): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <p><?php echo e($fecha->data); ?></p>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php
+                        $fechaSola=true;
+                        ?>
                     </div>
                 <?php else: ?>
                     <div id="calendar"></div>
@@ -28,7 +31,7 @@
 
                 <div class="form-group" id="entradas" style="display:none;">
                     <label id="preu" class="form-label">Tipus Entradas:</label>
-
+                    
                     <?php $__currentLoopData = $fechas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fecha): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <select class="form-select" id="<?php echo e($fecha->id); ?>" name="preu" style="display:none;">
                             <option value="" disabled selected>Entradas</option>
@@ -41,28 +44,29 @@
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    
+                    
 
-                    <label for="cantidad" class="form-label" id="escogerCantidad">Escoge la entrada y el numero de
-                        entradas:</label>
-
+                    <label for="cantidad" class="form-label" id="escogerCantidad">Escoge el Ticket y la cantidad:</label>
                     <div class="form-group" id="errorCantidad" style="display:none;">
-                        <p id="mensajeError" class="errorMsg"></p>
+                        <p id="mensajeError" class="msg-error"></p>
                     </div>
                     <input type="number" id="cantidad" name="cantidad" min="1" max="10" value="2" />
-                    <button type="button" id="reservarEntrada">Reservar entrada</button>
+                    <button type="button" id="reservarEntrada">Añadir Tickets</button>
 
                     <div class="form-group" id="listaEntradas" style="display:none;">
-                        <label for="cantidad" class="form-label">Entradas Reservadas:</label>
+                        <label for="cantidad" class="form-label">Lista de Tickets:</label>
                         <div id="containerList">
+
                         </div>
                     </div>
-
+                    <div class="form-group">
+                      <p id="precioTotal" class="form-label">Total: 0€ </p>
+                  </div>
+                  <input type="hidden" id="arrayEntradas">
+                  <input type="hidden" id="inputTotal">
+                  <button type="submit" id="bottonCompra">Confirmar Compra</button>
                 </div>
-                <div class="form-group">
-                    <label id="Preutotal" class="form-label">Total:<?php echo e($preuTotal); ?> </label>
-                </div>
-                <input type="hidden" id="arrayEntradas">
-                <button type="submit">Comprar</button>
             </form>
 
         </div>
@@ -80,27 +84,35 @@
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
     <script>
         const fechasSessiones = <?php echo json_encode($fechas, 15, 512) ?>;
+        const entradaPrecio = <?php echo json_encode($entradas, 15, 512) ?>;
+        const fechaSola=<?php echo json_encode($fechaSola, 15, 512) ?>;
         // Ordenar el array utilizando la función de comparación
         fechasSessiones.sort(compararFechas);
-            document.addEventListener('DOMContentLoaded', function() {
-                let buenas;
-                var calendarEl = document.getElementById('calendar');
-                var calendar = new FullCalendar.Calendar(calendarEl, {
-                    initialView: 'dayGridMonth',
-                    headerToolbar: {
-                        left: 'prev,next',
-                        center: 'title',
-                        right: 'dayGridMonth,dayGridWeek'
-                    },
-                    selectable: true,
-                    events: crearEventos(fechasSessiones),
-                    eventClick: function(event) {
-                        let sessionId=event.event.title.split(" ");
-                        sessionSelect(fechasSessiones[(parseInt(sessionId[0])-1)]);
-                    }
-                });
-                calendar.render();
+        if(fechaSola){
+          sessionSelect(fechasSessiones[0]);
+          console.log(1);
+        }else{
+          document.addEventListener('DOMContentLoaded', function() {
+            let buenas;
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next',
+                    center: 'title',
+                    right: 'dayGridMonth,dayGridWeek'
+                },
+                selectable: true,
+                events: crearEventos(fechasSessiones),
+                eventClick: function(event) {
+                    let sessionId = event.event.title.split(" ");
+                    sessionSelect(fechasSessiones[(parseInt(sessionId[0]) - 1)]);
+                }
             });
+            calendar.render();
+        });
+        }
+        
     </script>
 <?php $__env->stopSection(); ?>
 

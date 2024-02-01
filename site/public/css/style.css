@@ -319,7 +319,7 @@ footer #footerHome:hover:active {
   max-height: 50%;
 }
 
-#containerList {
+.entrada-lista {
   display: grid;
   grid-template-columns: 1fr 0.3fr;
 }

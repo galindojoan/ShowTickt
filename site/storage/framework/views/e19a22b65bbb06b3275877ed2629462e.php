@@ -68,7 +68,7 @@
                             <?php if($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->entrades->isNotEmpty()): ?>
                                 <p><?php echo e($esdeveniment->sesions->first()->entrades->first()->preu); ?> €</p>
                             <?php else: ?>
-                                <p>Sin entradas</p>
+                                <p>Entradas Agotadas</p>
                             <?php endif; ?>
                         </div>
                         <img src="<?php echo e(Storage::url($esdeveniment->imatge)); ?>" alt="Imatge de l'esdeveniment">

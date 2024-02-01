@@ -11,7 +11,7 @@
     @endif
     <div class="login-div">
         <h2>Login</h2>
-        <form action="{{route('homePromotor')}}" method="post" id="loginForm" class="login-form">
+        <form action="{{route('iniciarSesion')}}" method="post" id="loginForm" class="login-form">
         @csrf
             <div class="login-input">
                 <input type="text" name="usuario" id="usuario" placeholder="Usuario" required>

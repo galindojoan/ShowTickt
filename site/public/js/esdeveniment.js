@@ -1,9 +1,14 @@
-let precioTotal = 0,contador = 0,contadorSession = 0,contadorEntrada = 0;
+let precioSuma = 0,
+    precio = 1,
+    contador = 0,
+    contadorSession = 0,
+    contadorEntrada = 0,
+    precioTotal = 0;
 let entradasArray = [];
 let entradas;
 let sessiones;
 let nuevoDivEntrada = true;
-let FinEach=true;
+let FinEach = true;
 
 const divEntradas = document.getElementById("entradas");
 const maxEntradas = document.getElementById("cantidad");
@@ -16,163 +21,187 @@ const divError = document.getElementById("errorCantidad");
 const mensajeError = document.getElementById("mensajeError");
 
 function pad(numero) {
-  return numero < 10 ? '0' + numero : numero;
+    return numero < 10 ? "0" + numero : numero;
 }
 
 function convertirFormato(fechaHoraString) {
-  const fechaHora = new Date(fechaHoraString);
-  const año = fechaHora.getFullYear();
-  const mes = pad(fechaHora.getMonth() + 1);
-  const dia = pad(fechaHora.getDate());
-  const hora = pad(fechaHora.getHours() - 5); // Ajuste de la diferencia horaria
-  const minuto = pad(fechaHora.getMinutes());
-  const segundo = pad(fechaHora.getSeconds());
+    const fechaHora = new Date(fechaHoraString);
+    const año = fechaHora.getFullYear();
+    const mes = pad(fechaHora.getMonth() + 1);
+    const dia = pad(fechaHora.getDate());
+    const hora = pad(fechaHora.getHours() - 5); // Ajuste de la diferencia horaria
+    const minuto = pad(fechaHora.getMinutes());
+    const segundo = pad(fechaHora.getSeconds());
 
-  return `${año}-${mes}-${dia}T${hora}:${minuto}:${segundo}`;
+    return `${año}-${mes}-${dia}T${hora}:${minuto}:${segundo}`;
 }
 
 function obtenerSiguienteHora(fechaHoraString) {
-  const fechaHora = new Date(fechaHoraString);
-  fechaHora.setHours(fechaHora.getHours() + 1);
-  const año = fechaHora.getFullYear();
-  const mes = pad(fechaHora.getMonth() + 1);
-  const dia = pad(fechaHora.getDate());
-  const hora = pad(fechaHora.getHours());
-  const minuto = pad(fechaHora.getMinutes());
-  const segundo = pad(fechaHora.getSeconds());
+    const fechaHora = new Date(fechaHoraString);
+    fechaHora.setHours(fechaHora.getHours() + 1);
+    const año = fechaHora.getFullYear();
+    const mes = pad(fechaHora.getMonth() + 1);
+    const dia = pad(fechaHora.getDate());
+    const hora = pad(fechaHora.getHours());
+    const minuto = pad(fechaHora.getMinutes());
+    const segundo = pad(fechaHora.getSeconds());
 
-  return `${año}-${mes}-${dia} ${hora}:${minuto}:${segundo}`;
+    return `${año}-${mes}-${dia} ${hora}:${minuto}:${segundo}`;
 }
 
 function compararFechas(a, b) {
-  var fechaA = new Date(a.data);
-  var fechaB = new Date(b.data);
+    let fechaA = new Date(a.data);
+    let fechaB = new Date(b.data);
 
-  return fechaA - fechaB;
+    return fechaA - fechaB;
 }
 
 function crearEventos(Session) {
-  var eventos = [];
-  let cont = 1;
-  // Crea eventos para diferentes horas en el día
-  Session.forEach(fechaSession => {
-    let siguienteHora=obtenerSiguienteHora(fechaSession.data);
-      var evento = {
-          title: `${cont} Session`,
-          start: `${convertirFormato(fechaSession.data)}`,
-          end: `${convertirFormato(siguienteHora)}`
-      }
-      eventos.push(evento);
-      cont++;
-  });
-  return eventos;
+    let eventos = [];
+    let cont = 1;
+    // Crea eventos para diferentes horas en el día
+    Session.forEach((fechaSession) => {
+        let siguienteHora = obtenerSiguienteHora(fechaSession.data);
+        let evento = {
+            title: `${cont} Session`,
+            start: `${convertirFormato(fechaSession.data)}`,
+            end: `${convertirFormato(siguienteHora)}`,
+        };
+        eventos.push(evento);
+        cont++;
+    });
+    return eventos;
+}
+function verMaximEntradas(max, Session, Entrada) {
+    FinEach = true;
+    if (entradasArray.length !== 0) {
+        entradasArray.forEach((entrada) => {
+            if (FinEach) {
+                if (
+                    entrada.contadorSession === Session &&
+                    entrada.contadorEntrada === Entrada
+                ) {
+                    FinEach = false;
+                    if (entrada.Maxcantidad <= 0) {
+                        max = 0;
+                    } else {
+                        max = entrada.Maxcantidad;
+                    }
+                }
+            }
+        });
+    }
+    vermax(max);
+    return max;
+}
+function vermax(entrada) {
+    if (entrada <= 0) {
+        mostrarMax.textContent = `Escoge otra entrada, esta entrada esta agotada`;
+        maxEntradas.max = 0;
+        cantidad = 0;
+    } else {
+        mostrarMax.textContent = `Escoge el numero de entradas (Max ${entrada})`;
+    }
 }
 
 function reiniciarEntradas() {
+    contador = 0;
     containerList.innerHTML = " ";
     entradasArray.forEach((entrada) => {
-        const nuevoDiv = document.createElement("div");
-        containerList.appendChild(nuevoDiv);
-        nuevoDiv.id = contador;
-        let sessionP = document.createElement("p");
-        sessionP.textContent = entrada.session;
-        let entradaP = document.createElement("p");
-        entradaP.textContent = entrada.nom;
-        let cantidadP = document.createElement("p");
-        cantidadP.textContent = entrada.cantidad;
+        const DivEntrada = document.createElement("div");
+        DivEntrada.id = contador;
+        DivEntrada.classList.add("entrada-lista");
+        containerList.appendChild(DivEntrada);
 
-        nuevoDiv.appendChild(sessionP);
+        const nuevoDiv = document.createElement("div");
+        DivEntrada.appendChild(nuevoDiv);
+        let sessionP = document.createElement("p");
+        sessionP.textContent = `Fecha: ${entrada.session}`;
+        let entradaP = document.createElement("p");
+        entradaP.textContent = `Entrada: ${entrada.nom}`;
+        let cantidadP = document.createElement("p");
+        cantidadP.textContent = `Cantidad: ${entrada.cantidad}`;
+
         nuevoDiv.appendChild(entradaP);
+        nuevoDiv.appendChild(sessionP);
         nuevoDiv.appendChild(cantidadP);
 
         const btnBorrar = document.createElement("button");
         btnBorrar.id = contador;
         btnBorrar.type = "button";
-        btnBorrar.class = "borrarEntrada";
+        btnBorrar.classList.add("btn-entrada");
         btnBorrar.textContent = "eliminar";
         // Añadir el nuevo div al container
         contador++;
-        containerList.appendChild(btnBorrar);
+        DivEntrada.appendChild(btnBorrar);
+        btnBorrar.addEventListener("click", function () {
+            precioTotal-=(parseInt(entradasArray[DivEntrada.id].cantidad)*(parseFloat(entradasArray[DivEntrada.id].precio).toFixed(2)));
+            total.textContent = `Total: ${precioTotal}€`;
+            maxEntradas.max = verMaximEntradas(
+                parseInt(entradas[1]),
+                contadorSession,
+                contadorEntrada
+            );
+            entradasArray.splice(parseInt(DivEntrada.id), 1);
+            DivEntrada.remove();
+            reiniciarEntradas();
+        });
     });
 }
 
-function verMaximEntradas(max,Session,Entrada)  {
-  let esZero=false;
-  if (entradasArray.length!==0) {
-    entradasArray.forEach((entrada) => {
-    
-      if(FinEach){
-        if (
-          entrada.contadorSession === Session &&
-          entrada.contadorEntrada === Entrada
-      ) {
-          max=entrada.Maxcantidad;
-          FinEach=false;
-          if (entrada.Maxcantidad<=0) {
-            esZero=true;
-          }
-          
-      }
-      }
-    });
-  }
-  if (esZero) {
-    console.log("entrp",max);
-    max=0;
-    vermax(max);
-    return max;  
-  }else{
-    vermax(max);
-    return max; 
-  }
+function sessionSelect(ArraySession) {
+    entradasArray.splice(0, entradasArray.length);
+    containerList.innerHTML = " ";
+    precioTotal = 0;
+    total.textContent = `Total: ${precioTotal}€`;
+    divEntradas.style.display = "block";
+    if (contadorSession !== 0) {
+        document.getElementById(contadorSession).style.display = "none";
+        document.getElementById(contadorSession).value = "";
+        mostrarMax.textContent = " ";
+    }
+    contadorSession = parseInt(ArraySession.id);
+    document.getElementById(contadorSession).style.display = "block";
+    document
+        .getElementById(contadorSession)
+        .addEventListener("change", function () {
+            entradas = document
+                .getElementById(contadorSession)
+                .value.split(`,`);
+            precio = parseFloat(entradas[0]).toFixed(2);
+            contadorEntrada = parseInt(entradas[3]);
+            maxEntradas.max = verMaximEntradas(
+                parseInt(entradas[1]),
+                contadorSession,
+                contadorEntrada
+            );
+        });
+    sessiones = ArraySession;
 }
-function vermax(entrada)  {
-  if (entrada<=0) {
-    mostrarMax.textContent = `Escoge otra entrada, esta entrada esta agotada`;
-    maxEntradas.max=0;
-    cantidad = 0;
-  }else{
-    mostrarMax.textContent = `Escoge el numero de entradas (Max ${entrada})`;
-  }
-}
-
-function sessionSelect(ArraySession){
-  divEntradas.style.display = "block";
-  if (contadorSession!==0) {
-    document.getElementById(contadorSession).style.display="none";
-    document.getElementById(contadorSession).value="";
-    mostrarMax.textContent=" ";
-  }
-  contadorSession = parseInt(ArraySession.id);
-  document.getElementById(contadorSession).style.display="block";
-  document.getElementById(contadorSession).addEventListener("change", function () {
-    entradas = document.getElementById(contadorSession).value.split(`,`);
-    precioTotal = parseFloat(entradas[0]).toFixed(2);
-    contadorEntrada = parseInt(entradas[3]);
-    maxEntradas.max = verMaximEntradas(parseInt(entradas[1]),contadorSession,contadorEntrada);
-});
-sessiones=ArraySession;
+function ActivarEntrada() {
+  document.getElementById(contadorSession).style.display = "block";
 }
 
 buttonEntrada.addEventListener("click", function (e) {
     e.preventDefault;
 
     if (document.getElementById(contadorSession).value) {
-        if (maxEntradas.max<=0) {
-          mensajeError.textContent = `Entradas Agotadas`;
+        if (parseInt(maxEntradas.max) <= 0) {
+            mensajeError.textContent = `Entradas Agotadas`;
             divError.style.display = "block";
             // Ocultar el div después de 3 segundos
             setTimeout(function () {
                 divError.style.display = "none";
             }, 3000);
-        }else if (maxEntradas.max < maxEntradas.value) {
+        } else if (parseInt(maxEntradas.max) < parseInt(maxEntradas.value)) {
+            console.log(maxEntradas.max);
             mensajeError.textContent = `La cantidad escogida supera la máxima, escoge un número inferior a ${maxEntradas.max}`;
             divError.style.display = "block";
             // Ocultar el div después de 3 segundos
             setTimeout(function () {
                 divError.style.display = "none";
             }, 3000);
-        } else if (maxEntradas.value <= 0) {
+        } else if (parseInt(maxEntradas.value) <= 0) {
             mensajeError.textContent = "La cantidad escogida es inferior a 1";
             divError.style.display = "block";
             // Ocultar el div después de 3 segundos
@@ -182,56 +211,55 @@ buttonEntrada.addEventListener("click", function (e) {
         } else {
             divError.style.display = "none";
             let divReserva = {
-                session: sessiones.id,
+                session: sessiones.data,
                 nom: entradas[2],
                 cantidad: parseInt(maxEntradas.value),
                 contadorSession: contadorSession,
                 contadorEntrada: contadorEntrada,
-                Maxcantidad: parseInt(maxEntradas.max-maxEntradas.value),
+                Maxcantidad: parseInt(
+                    parseInt(maxEntradas.max) - parseInt(maxEntradas.value)
+                ),
+                precio:precio,
             };
-            FinEach=true;
-            entradasArray.forEach((entrada) => {
-              if(FinEach){
-                if (
-                  entrada.contadorSession === divReserva.contadorSession &&
-                  entrada.contadorEntrada === divReserva.contadorEntrada
-              ) {
-                  entrada.cantidad = entrada.cantidad + divReserva.cantidad;
-                  entrada.Maxcantidad =entrada.Maxcantidad-entrada.cantidad;
-                  maxEntradas.max=entrada.Maxcantidad;
-                  vermax(maxEntradas.max);
-                  nuevoDivEntrada = false;
-                  FinEach=false;
-              // } else if (
-              //     entrada.contadorSession === divReserva.contadorSession
-              // ) {
-              //     if (
-              //         entrada.contadorEntrada === divReserva.contadorEntrada
-              //     ) {
-              //         entrada.cantidad = entrada.cantidad + divReserva.cantidad;
-              //         entrada.Maxcantidad =entrada.Maxcantidad-entrada.cantidad;
-              //         maxEntradas.max=entrada.Maxcantidad;
-              //         mostrarMax.textContent = `Escoge el numero de entradas (Max ${maxEntradas.max})`;
-              //         nuevoDivEntrada = false;
-              //         FinEach=false;
-              //     } else {
-              //         nuevoDivEntrada = true;
-              //     }
-              } else{
-                  nuevoDivEntrada = true;
-              }
-              }
-                
-            });
-            if (nuevoDivEntrada === true) {
-              maxEntradas.max=divReserva.Maxcantidad;
-              vermax(maxEntradas.max);
+            if (entradasArray.length > 0) {
+                FinEach = true;
+                entradasArray.forEach((entrada) => {
+                    if (FinEach) {
+                        if (
+                            entrada.contadorSession ===
+                                divReserva.contadorSession &&
+                            entrada.contadorEntrada ===
+                                divReserva.contadorEntrada
+                        ) {
+                            entrada.cantidad =
+                                entrada.cantidad + divReserva.cantidad;
+                            entrada.Maxcantidad =
+                                entrada.Maxcantidad - divReserva.cantidad;
+                            maxEntradas.max = entrada.Maxcantidad;
+                            vermax(parseInt(maxEntradas.max));
+                            nuevoDivEntrada = false;
+                            FinEach = false;
+                        } else {
+                            nuevoDivEntrada = true;
+                        }
+                    }
+                });
+                if (nuevoDivEntrada === true) {
+                    maxEntradas.max = divReserva.Maxcantidad;
+                    vermax(maxEntradas.max);
+                    entradasArray.push(divReserva);
+                }
+            } else {
+                maxEntradas.max = divReserva.Maxcantidad;
+                vermax(maxEntradas.max);
                 entradasArray.push(divReserva);
             }
-            precioTotal = precioTotal * maxEntradas.value;
-            reiniciarEntradas();
-            total.textContent = "Total: " + precioTotal + "€";
             DivListaEntradas.style.display = "block";
+            precioSuma = precio * maxEntradas.value;
+            console.log();
+            precioTotal += precioSuma;
+            reiniciarEntradas();
+            total.textContent = `Total: ${precioTotal}€`;
         }
     } else {
         mensajeError.textContent = "Escoge una entrada";
@@ -243,5 +271,7 @@ buttonEntrada.addEventListener("click", function (e) {
     }
 });
 
-document.getElementById('arrayEntradas').value = JSON.stringify(entradasArray);
-//$datosArray = json_decode($request->input('datos_array'));
+document.getElementById("bottonCompra").addEventListener("click", function () {
+document.getElementById("arrayEntradas").value = JSON.stringify(entradasArray);
+document.getElementById("inputTotal").value = precioTotal;
+});

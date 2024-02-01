@@ -27,11 +27,8 @@ class EsdevenimentController extends Controller
       ->where('esdeveniments.id', '=', $id)
       ->get();
     $preuTotal = 0;
-    return view('esdeveniment', compact('esdeveniment', 'fechas', 'entradas', 'preuTotal'));
-  }
-  public function compra()
-  {
-    return view('confirmarCompra');
+    $fechaSola=false;
+    return view('esdeveniment', compact('esdeveniment', 'fechas', 'entradas', 'preuTotal','fechaSola'));
   }
   public function local($id)
   {

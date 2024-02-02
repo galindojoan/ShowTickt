@@ -96,6 +96,28 @@ footer {
     padding: 5px;
     vertical-align: middle;
 }
+.boton {
+    color: #000;
+    background-color: #ff5e00;
+    border-radius: 5px;
+    border: none;
+    padding: 3px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-weight: 700;
+    font-size: 15px;
+    margin: 2%;
+
+    &:hover {
+        cursor: pointer;
+        background-color: #f2ab7e;
+    }
+
+    &:active {
+        background-color: #ff5e00;
+    }
+}
+
 .button-entrada {
     display: flex;
     justify-content: space-between;
@@ -151,6 +173,13 @@ footer {
         &:hover {
             background-color: #c82333;
             /* Rojo oscuro al pasar el ratón */
+        }
+    }
+    &-entrada{
+        background-color: #C40C0C;
+        color: #fff;
+        &:hover{
+            background-color: #c82333;
         }
     }
 }
@@ -350,8 +379,17 @@ footer {
 }
 .entrada{
 &-lista{
+    margin-bottom: 5%;
   display: grid;
   grid-template-columns: 1fr 0.3fr;
+  align-items: center;
+  border: 1px solid;
+  padding-left: 14px;
+  padding-right: 14px;
+  border-radius: 10px;
+  p{
+    font-size: 17px;
+  }
 }
 }
 
@@ -612,36 +650,11 @@ ul {
         }
     }
 }
-.boton {
-    margin-top: 15%;
-}
 
 a {
     color: #072591;
     text-decoration: none;
     font-weight: 600;
-}
-
-.boton {
-    color: #000;
-    background-color: #ff5e00;
-    border-radius: 5px;
-    border: none;
-    padding: 3px;
-    padding-left: 15px;
-    padding-right: 15px;
-    font-weight: 700;
-    font-size: 15px;
-    margin: 2%;
-
-    &:hover {
-        cursor: pointer;
-        background-color: #f2ab7e;
-    }
-
-    &:active {
-        background-color: #ff5e00;
-    }
 }
 
 /* Estilos para el contenido del formulario */
@@ -777,12 +790,55 @@ a {
 .containerEvent {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    align-items: center;
+    align-items: start;
     justify-items: center;
 }
 
+.infoEvent{
+    display: grid;
+    grid-column: 1/3;
+    align-items: center;
+    justify-content: center;
+}
 .textEvent {
     margin: 5%;
+    display: grid;
+    grid-column: 1/2;
+    justify-items: center;
+    .btn{
+        padding: 7px;
+        margin: 16px;
+        margin-top: 16px;
+        margin-bottom: 10px;
+        font-size: 13px;
+        &-entrada{
+            height: fit-content;
+            border: none;
+            border-radius: 5px;
+        }
+    }
+    .detallesLocal{
+        display: grid;
+        grid-template-columns: 1fr 0.7fr;
+        align-items: center;
+        justify-self: start;
+    }
+    .ComprarEntrada{
+        #fechaSesion{
+            margin-bottom: 15%;
+        }
+    }
+    .form-label{
+        margin-bottom: 0px;
+    }
+    #cantidad{
+        border: 1px solid;
+    }
+}
+.inlineDiv{
+    display: grid;
+    grid-template-columns: 1fr 0.93fr;
+    align-items: baseline;
 }
 
 .imagenesEventos {
@@ -906,6 +962,9 @@ a {
 }
 
 @media screen and (max-width: 800px) {
+    .textEvent{
+        grid-column: 1/3;
+    }
     .event {
         &-details p {
             margin: 0;

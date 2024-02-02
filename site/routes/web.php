@@ -42,7 +42,10 @@ Route::get('/login',[LoginController::class,'login'])->name(('login'));
 Route::get('/taullerAdministracio',[LoginController::class,'login'])->name('taullerAdministracio')->middleware('check');
 
 Route::post('/iniciarSesion', [LoginController::class,'iniciarSesion'])->name('iniciarSesion');
+
 Route::get('/homePromotor', [LoginController::class, 'promotorPage'])->name('homePromotor')->middleware('check');
+Route::post('/homePromotor', [LoginController::class, 'promotorPage'])->name('homePromotor')->middleware('check');
+
 
 Route::post('/perfil', [LoginController::class,'iniciarSesion'])->name('perfil')->middleware('check');
 

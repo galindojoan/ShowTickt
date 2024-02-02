@@ -9,7 +9,7 @@
         </div>
     @else
         <div class="container">
-            <form action="{{ route('cerca') }}" method="get" class="form" id="filtre">
+            <form action="{{ route('cerca') }}" method="get" class="form form-filtre" id="filtre">
                 <div class="input-group">
                     <select name="category" class="form-control" onchange="this.form.submit()">
                         <option value="" disabled selected>Categorías</option>
@@ -33,12 +33,12 @@
 
 
             <!-- Formulario de búsqueda -->
-            <form action="{{ route('cerca') }}" method="get" class="form" id="cerca">
+            <form action="{{ route('cerca') }}" method="get" class="form form-cerca" id="cerca">
                 <div class="input-group">
                     <!-- Campo de entrada oculto para la categoría -->
                     <input type="hidden" name="category" value="{{ $categoryId }}">
                     <input type="text" name="q" class="form-control" placeholder="Buscar">
-                    <button type="submit" class="btn-primary"><svg xmlns="http://www.w3.org/2000/svg" height="16"
+                    <button type="submit" class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" height="16"
                             width="16"
                             viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
                             <path fill="#1e91d9"
@@ -46,11 +46,11 @@
                         </svg></button>
                 </div>
             </form>
-            <form id="promotores" method="POST"
+            <form id="promotores" class="form form-promotores" method="POST"
                 action="@if (session('key')) {{ route('homePromotor') }}
             @else{{ route('login') }} @endif">
                 @csrf
-                <input class="linkPromotor" type="submit" value="PROMOTORES">
+                <input class="btn btn-orange" type="submit" value="PROMOTORES">
             </form>
         </div>
 
@@ -62,7 +62,7 @@
                 @php
                     $cont = 0;
                 @endphp
-                @foreach ($events as $esdeveniment)
+                @foreach ($esdeveniments as $esdeveniment)
                     @if ($esdeveniment->categoria_id == $category->id && $cont < 3)
                         @php
                             $cont++;
@@ -71,9 +71,17 @@
                             <div class="event-card">
                                 <div class="event-details">
                                     <p>{{ $esdeveniment->nom }}</p>
-                                    <p>{{ $esdeveniment->data_sessio }}</p>
-                                    <p>{{ $esdeveniment->recinte->lloc }}</p>
-                                    <p>{{ $esdeveniment->entradas_preu }} €</p>
+                                    @if ($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->data !== null)
+                                        <p>{{ $esdeveniment->sesions->first()->data }}</p>
+                                    @else
+                                    <p>No hay sesiones</p>
+                                    @endif
+                                        <p>{{ $esdeveniment->recinte->lloc }}</p>
+                                        @if ($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->entrades->isNotEmpty())
+                                            <p>{{ $esdeveniment->sesions->first()->entrades->first()->preu }} €</p>
+                                        @else
+                                        <p>Entradas Agotadas</p>
+                                        @endif
                                 </div>
                                 <img src="{{ Storage::url($esdeveniment->imatge) }}" alt="Imatge de l'esdeveniment">
                             </div>
@@ -81,7 +89,7 @@
                     @endif
                 @endforeach
 
-                <form action="{{ route('cerca') }}" method="get" id="event-form">
+                <form action="{{ route('cerca') }}" method="get" class="event-form">
                     <div class="event-group">
                         <input type="hidden" name="category" value="{{ $category->id }}">
                         <button type="submit" class="event-btn">ver mas ></button>

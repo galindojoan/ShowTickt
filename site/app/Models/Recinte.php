@@ -9,7 +9,7 @@ class Recinte extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nom', 'provincia', 'lloc', 'codi_postal', 'capacitat', 'user_id'];
+    protected $fillable = ['nom', 'provincia', 'lloc', 'codi_postal', 'capacitat', 'carrer', 'numero', 'user_id'];
     
     protected $table = 'recintes';
 

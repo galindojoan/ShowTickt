@@ -2,17 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\EsdevenimentController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\CompraController;
 use App\Http\Controllers\SessionController;
-use App\Http\Controllers\CrearEsdevenimentController;
-use App\Http\Controllers\AdministrarEsdevenimentsController;
-use App\Http\Controllers\EditarEsdevenimentController;
+use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\EsdevenimentController;
 use App\Http\Controllers\LlistatSessionsController;
-use App\Http\Controllers\AdministrarEsdevenimentController;
-use App\Http\Controllers\DetallsEsdevenimentController;
 use App\Http\Controllers\LlistatsEntradesController;
+use App\Http\Controllers\CrearEsdevenimentController;
+use App\Http\Controllers\EditarEsdevenimentController;
+use App\Http\Controllers\DetallsEsdevenimentController;
+use App\Http\Controllers\AdministrarEsdevenimentController;
+use App\Http\Controllers\AdministrarEsdevenimentsController;
+use App\Http\Controllers\OpinionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,8 +42,11 @@ Route::get('/login',[LoginController::class,'login'])->name(('login'));
 
 Route::get('/taullerAdministracio',[LoginController::class,'login'])->name('taullerAdministracio')->middleware('check');
 
-Route::post('/homePromotor', [LoginController::class,'iniciarSesion'])->name('homePromotor');
-Route::get('/homePromotor', [LoginController::class, 'iniciarSesion'])->name('homePromotor');
+Route::post('/iniciarSesion', [LoginController::class,'iniciarSesion'])->name('iniciarSesion');
+
+Route::get('/homePromotor', [LoginController::class, 'promotorPage'])->name('homePromotor')->middleware('check');
+Route::post('/homePromotor', [LoginController::class, 'promotorPage'])->name('homePromotor')->middleware('check');
+
 
 Route::post('/perfil', [LoginController::class,'iniciarSesion'])->name('perfil')->middleware('check');
 
@@ -50,6 +55,7 @@ Route::post('/session', [SessionController::class, 'SessionController'])->name('
 
 Route::get('/crear-esdeveniment', [CrearEsdevenimentController::class, 'index'])->name('crear-esdeveniment')->middleware('check');
 Route::post('/crear-esdeveniment.store', [CrearEsdevenimentController::class, 'store'])->name('crear-esdeveniment.store')->middleware('check');
+Route::post('/verificar-carrer', [CrearEsdevenimentController::class, 'verificarCarrer'])->name('verficiar-carrer')->middleware('check');
 
 Route::get('/administrar-esdeveniments', [AdministrarEsdevenimentsController::class, 'index'])->name('administrar-esdeveniments')->middleware('check');
 Route::post('/administrar-esdeveniments', [AdministrarEsdevenimentsController::class, 'index'])->name('administrar-esdeveniments')->middleware('check');
@@ -67,7 +73,7 @@ Route::post('/cambiarPassword',[PasswordController::class, 'pagePassword'])->nam
 Route::get('/peticionCambiar',[PasswordController::class, 'cambiarPassword'])->name('peticionCambiar');
 Route::post('/peticionCambiar',[PasswordController::class, 'cambiarPassword'])->name('peticionCambiar');
 
-Route::post('/confirmacio',[EsdevenimentController::class, 'compra'])->name('confirmacioCompra');
+Route::post('/confirmacio',[CompraController::class, 'compra'])->name('confirmacioCompra');
 
 Route::get('/llistat-sessions', [LlistatSessionsController::class, 'index'])->name('llistat-sessions')->middleware('check');
 Route::post('/llistat-sessions', [LlistatSessionsController::class, 'index'])->name('llistat-sessions')->middleware('check');
@@ -78,6 +84,9 @@ Route::get('/llistats-entrades/{id}', [LlistatsEntradesController::class, 'show'
 
 Route::get('/añadirSession',[EditarEsdevenimentController::class,'newSessionPage'])->name('añadirSession')->middleware('check');
 Route::post('/añadirSession',[EditarEsdevenimentController::class,'newSessionPage'])->name('añadirSession')->middleware('check');
+
+Route::get('/crearOpinion', [OpinionController::class,'newOpinionPage'])->name('crearOpinion');
+Route::post('/crearOpinion.store', [OpinionController::class,'store'])->name('crearOpinion.store');
 
 Route::get('/editarSesion',[EditarEsdevenimentController::class,'updateSesionPage'])->name('editarSesion')->middleware('check');
 

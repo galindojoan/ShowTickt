@@ -4,7 +4,7 @@
     <div class="containerEvent">
         <div class="textEvent">
             <h1><?php echo e($esdeveniment->nom); ?></h1>
-            <button id="fechaButton">Fechas:
+            <button id="fechaButton">Fechas
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="10"
                     width="10"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                     <path
@@ -31,10 +31,15 @@
             </div>
             <form method="get" action="<?php echo e(route('añadirSession')); ?>">
                 <input type="hidden" name="event-id" value="<?php echo e($esdeveniment->id); ?>">
-                <button type="submit" class="boton">Añadir Sesión</button>
+                <button type="submit" class="btn btn-orange">Añadir Sesión</button>
             </form>
-            <p>Lugar: <?php echo e($esdeveniment->recinte->lloc); ?></p>
+            <p class="down">Lugar: <?php echo e($esdeveniment->recinte->lloc); ?></p>
             <!-- Otros detalles del evento -->
+
+            <form method="get" action="<?php echo e(route('crearOpinion')); ?>">
+                <input type="hidden" name="event-id" value="<?php echo e($esdeveniment->id); ?>">
+                <button type="submit" class="btn btn-orange">Añadir Opinion</button>
+            </form>
         </div>
         <div class="imagenesEventos">
             <img src="<?php echo e(Storage::url($esdeveniment->imatge)); ?>" alt="Imatge de l'esdeveniment" class="event-imagen">

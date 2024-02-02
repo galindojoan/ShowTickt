@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         if ($this->command->confirm('Vols refrescar la base de dades?', true)) {
-            $this->command->call('migrate:refresh');
+            $this->command->call('migrate:fresh');
             $this->command->info("S'ha reconstruït la base de dades");
         }
 

@@ -105,6 +105,12 @@ Hicimos este cambio principalmente por que en el primero no especificamos cual e
 
 image::images/BD/segonDiagrama.png[] 
 
+**Este es el Diagrama Actualizado**
+
+Añadimos las tablas de usuario, y colocamos bien sus atributos. 
+
+image::images/BD/quartDiagrama.png[]
+
 === Diagrama per classes
 **Este es el primer diagrama de la base de datos modelo por clases**
 

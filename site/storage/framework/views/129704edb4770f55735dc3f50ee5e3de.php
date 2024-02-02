@@ -8,6 +8,7 @@ margin: 15px;">
     <p>Hemos recibido tu petición para cambiar tu contraseña. </p>
     <p>Entra en el siguiente link para cambiarla (Recuerda que tan solo tienes <?php echo e(env('MAIL_TIME_LIMIT')); ?> minutos desde que se envio este mail):</p> <br>
     <p><?php echo e($url); ?></p> <br><br>
+    <a href="<?php echo e($url); ?>">Click aqui</a>
     <p>Saludos, ShowTickt</p>
 </body>
 

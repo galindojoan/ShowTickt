@@ -3,15 +3,15 @@
 <?php $__env->startSection('title', 'Cambiar contraseña'); ?>
 
 <?php $__env->startSection('content'); ?>
-<div class="loginPage">
+<div class="login">
     <?php if($errors->has('error')): ?>
-        <span class="errorMsg"><?php echo e($errors->first('error')); ?></span>
+        <span class="msg-error"><?php echo e($errors->first('error')); ?></span>
     <?php endif; ?>
-    <div class="login">
+    <div class="login-div">
         <h2>Cambiar Contraseña</h2>
-        <form action="<?php echo e(route('peticionCambiar')); ?>" method="post" id="loginForm">
+        <form action="<?php echo e(route('peticionCambiar')); ?>" method="post" class="login-form">
         <?php echo csrf_field(); ?>
-            <div class="loginInput">
+            <div class="login-input">
                 <input type="hidden" name="userId" value="<?php echo e($_GET['user']); ?>">
                 <input type="password" name="password" id="password" placeholder="Nueva contraseña" required>
             </div>

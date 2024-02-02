@@ -7,7 +7,7 @@
         </div>
     <?php else: ?>
         <div class="container">
-            <form action="<?php echo e(route('cerca')); ?>" method="get" class="form" id="filtre">
+            <form action="<?php echo e(route('cerca')); ?>" method="get" class="form form-filtre" id="filtre">
                 <div class="input-group">
                     <select name="category" class="form-control" onchange="this.form.submit()">
                         <option value="" disabled selected>Categorías</option>
@@ -31,12 +31,12 @@
 
 
             <!-- Formulario de búsqueda -->
-            <form action="<?php echo e(route('cerca')); ?>" method="get" class="form" id="cerca">
+            <form action="<?php echo e(route('cerca')); ?>" method="get" class="form form-cerca" id="cerca">
                 <div class="input-group">
                     <!-- Campo de entrada oculto para la categoría -->
                     <input type="hidden" name="category" value="<?php echo e($categoryId); ?>">
                     <input type="text" name="q" class="form-control" placeholder="Buscar">
-                    <button type="submit" class="btn-primary"><svg xmlns="http://www.w3.org/2000/svg" height="16"
+                    <button type="submit" class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" height="16"
                             width="16"
                             viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
                             <path fill="#1e91d9"
@@ -44,12 +44,12 @@
                         </svg></button>
                 </div>
             </form>
-            <form id="promotores" method="POST"
+            <form id="promotores" class="form form-promotores" method="POST"
                 action="<?php if(session('key')): ?> <?php echo e(route('homePromotor')); ?>
 
             <?php else: ?><?php echo e(route('login')); ?> <?php endif; ?>">
                 <?php echo csrf_field(); ?>
-                <input class="linkPromotor" type="submit" value="PROMOTORES">
+                <input class="btn btn-orange" type="submit" value="PROMOTORES">
             </form>
         </div>
 
@@ -61,7 +61,7 @@
                 <?php
                     $cont = 0;
                 ?>
-                <?php $__currentLoopData = $events; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $esdeveniment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php $__currentLoopData = $esdeveniments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $esdeveniment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <?php if($esdeveniment->categoria_id == $category->id && $cont < 3): ?>
                         <?php
                             $cont++;
@@ -70,9 +70,17 @@
                             <div class="event-card">
                                 <div class="event-details">
                                     <p><?php echo e($esdeveniment->nom); ?></p>
-                                    <p><?php echo e($esdeveniment->data_sessio); ?></p>
-                                    <p><?php echo e($esdeveniment->recinte->lloc); ?></p>
-                                    <p><?php echo e($esdeveniment->entradas_preu); ?> €</p>
+                                    <?php if($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->data !== null): ?>
+                                        <p><?php echo e($esdeveniment->sesions->first()->data); ?></p>
+                                    <?php else: ?>
+                                    <p>No hay sesiones</p>
+                                    <?php endif; ?>
+                                        <p><?php echo e($esdeveniment->recinte->lloc); ?></p>
+                                        <?php if($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->entrades->isNotEmpty()): ?>
+                                            <p><?php echo e($esdeveniment->sesions->first()->entrades->first()->preu); ?> €</p>
+                                        <?php else: ?>
+                                        <p>Entradas Agotadas</p>
+                                        <?php endif; ?>
                                 </div>
                                 <img src="<?php echo e(Storage::url($esdeveniment->imatge)); ?>" alt="Imatge de l'esdeveniment">
                             </div>
@@ -80,7 +88,7 @@
                     <?php endif; ?>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-                <form action="<?php echo e(route('cerca')); ?>" method="get" id="event-form">
+                <form action="<?php echo e(route('cerca')); ?>" method="get" class="event-form">
                     <div class="event-group">
                         <input type="hidden" name="category" value="<?php echo e($category->id); ?>">
                         <button type="submit" class="event-btn">ver mas ></button>

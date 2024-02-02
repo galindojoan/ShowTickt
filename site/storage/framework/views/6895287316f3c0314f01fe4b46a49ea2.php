@@ -3,21 +3,21 @@
 <?php $__env->startSection('title', 'Recuperar'); ?>
 
 <?php $__env->startSection('content'); ?>
-<div class="loginPage">
+<div class="login">
     <?php if($errors->has('error')): ?>
-        <span class="errorMsg"><?php echo e($errors->first('error')); ?></span>
+        <span class="msg-error"><?php echo e($errors->first('error')); ?></span>
     <?php endif; ?>
-    <div class="login">
+    <div class="login-div">
         <h2>Contraseña Olvidada</h2>
         <span id="indicador">Escriba la cuenta a recuperar.</span> <br> <br>
-        <form action="<?php echo e(route('recuperar-form')); ?>" method="post" id="recuperarForm">
+        <form action="<?php echo e(route('recuperar-form')); ?>" method="post" id="recuperarForm" >
         <?php echo csrf_field(); ?>
-            <div class="loginInput">
+            <div class="login-input">
                 <input type="email" name="email" id="email" placeholder="Email">
             </div>
             <div>
-                <a href="<?php echo e(route('login')); ?>" class="boton" id="atras">Atrás</a>
-                <input type="submit" value="Enviar" class="boton">
+                <a href="<?php echo e(route('login')); ?>" class="btn btn-red" id="atras">Atrás</a>
+                <input type="submit" value="Enviar" class="btn btn-orange">
             </div>
         </form>
     </div>

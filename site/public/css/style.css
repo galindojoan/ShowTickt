@@ -820,13 +820,15 @@ a {
 }
 
 .star-rating {
-  font-size: 3rem; /* Ajusta el tamaño de las estrellas según sea necesario */
+  font-size: 3rem;
+  /* Ajusta el tamaño de las estrellas según sea necesario */
 }
 
 .star {
   cursor: pointer;
   transition: color 0.2s;
-  color: #969696; /* Color de las estrellas no seleccionadas */
+  color: #969696;
+  /* Color de las estrellas no seleccionadas */
 }
 
 .star.selected {
@@ -853,6 +855,29 @@ a {
 
 .emoji-option:hover:not(.selected) {
   opacity: 1;
+}
+
+.opinion-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* Dos columnas de igual tamaño */
+  gap: 40px;
+  /* Espaciado entre las columnas */
+  margin: 50px;
+  /* Espaciado entre tarjetas */
+}
+
+.opinion-card {
+  background-color: #ffffff;
+  /* Color de fondo de la tarjeta */
+  border: 1px solid #dddddd;
+  /* Borde de la tarjeta */
+  border-radius: 8px;
+  /* Bordes redondeados */
+  padding: 15px;
+  /* Espaciado interno de la tarjeta */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Sombra de la tarjeta */
 }
 
 /*Ver Eventos fin*/

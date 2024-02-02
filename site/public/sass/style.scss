@@ -16,11 +16,12 @@ header {
     grid-template-rows: 1fr;
     align-items: center;
     align-content: center;
+
     .titulo {
         justify-self: center;
         color: white;
     }
-    
+
     .logo {
         width: 100px;
         justify-self: end;
@@ -40,6 +41,7 @@ header {
         color: #ff5e00;
         transform: scale(1.1);
     }
+
     &:active {
         transform: scale(0.9);
     }
@@ -51,7 +53,8 @@ header {
     width: 100vw;
     height: 80vh;
 }
-.masterBody{
+
+.masterBody {
     /*Con esta clase la altura no es fija y se puede alargar*/
     display: contents;
     min-height: 80vh;
@@ -66,17 +69,18 @@ footer {
     background-color: black;
     min-height: 70px;
     color: white;
+
     #footerHome {
         padding: 10px;
         color: #ff7118;
         transition: color 0.3s ease;
-    
+
         /* Transición de color */
         &:hover {
             color: #ff5e00;
             /* Color diferente al pasar el ratón */
             transform: scale(1.1);
-    
+
             &:active {
                 transform: scale(0.9);
                 /* Animación de escala al hacer clic */
@@ -96,12 +100,14 @@ footer {
     padding: 5px;
     vertical-align: middle;
 }
+
 .button-entrada {
     display: flex;
     justify-content: space-between;
     /* Coloca los elementos al principio y al final del contenedor */
     margin-top: 10px;
 }
+
 /* Estilos para los botones */
 .btn {
     padding: 10px 20px;
@@ -111,9 +117,11 @@ footer {
     border-radius: 4px;
     margin-top: 10px;
     margin-bottom: 10px;
+
     &-add {
         background-color: #007bff;
         color: #fff;
+
         &-add:hover {
             background-color: #0056b3;
             /* Cambia el color de fondo al pasar el mouse */
@@ -121,6 +129,7 @@ footer {
             /* Cambia el color del texto al pasar el mouse */
         }
     }
+
     &-primary {
         @include btns;
 
@@ -128,14 +137,17 @@ footer {
             background-color: white;
         }
     }
+
     &-secondary {
         background-color: #6c757d;
         color: #fff;
     }
+
     &-cancelar {
         background-color: #dc3545;
         /* Rojo */
         color: #fff;
+
         /* Estilos para el hover de btn-cancelar */
         &:hover {
             background-color: #ff3333;
@@ -144,16 +156,19 @@ footer {
             /* Cambia el color del texto al pasar el mouse */
         }
     }
+
     &-eliminar {
         background-color: #dc3545;
         /* Rojo */
         color: #fff;
+
         &:hover {
             background-color: #c82333;
             /* Rojo oscuro al pasar el ratón */
         }
     }
 }
+
 .button-container {
     display: grid;
     text-align: center;
@@ -173,6 +188,7 @@ footer {
 .buttons {
     display: flex;
     justify-content: space-around;
+
     /* Distribuye el espacio disponible alrededor de los botones */
     a {
         color: #000;
@@ -184,12 +200,15 @@ footer {
         text-decoration: none;
         transition: background-color 0.3s ease;
         position: relative;
+
         & :hover {
             background-color: #f0f0f0;
         }
+
         svg {
             color: #000;
         }
+
         &:hover::after {
             content: attr(title);
             /* Muestra el texto del atributo title como contenido del tooltip */
@@ -348,11 +367,12 @@ footer {
         max-height: 50%;
     }
 }
-.entrada{
-&-lista{
-  display: grid;
-  grid-template-columns: 1fr 0.3fr;
-}
+
+.entrada {
+    &-lista {
+        display: grid;
+        grid-template-columns: 1fr 0.3fr;
+    }
 }
 
 .ahref {
@@ -388,24 +408,28 @@ footer {
 
 .form {
     margin: 0px;
-    &-filtre{
+
+    &-filtre {
         grid-area: a;
         text-align: end;
     }
-    &-cerca{
+
+    &-cerca {
         grid-area: b;
         text-align: start;
     }
-    &-promotores{
+
+    &-promotores {
         display: grid;
         grid-area: c;
         width: fit-content;
     }
 }
-#event-form{
+
+#event-form {
     display: contents;
     justify-items: end;
-    
+
 }
 
 .filter-bar {
@@ -419,6 +443,7 @@ footer {
     display: inline-block;
     position: relative;
     width: 100%;
+
     .icon-container {
         height: 100%;
         position: absolute;
@@ -426,7 +451,7 @@ footer {
         right: 10px;
         pointer-events: none;
     }
-    
+
 }
 
 option {
@@ -490,10 +515,12 @@ input[class="form-control"] {
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+
     li {
         list-style: none;
         margin: 0 5px;
     }
+
     a {
         color: #3498db;
         text-decoration: none;
@@ -501,12 +528,13 @@ input[class="form-control"] {
         border: 1px solid #3498db;
         border-radius: 4px;
         transition: background-color 0.3s ease;
+
         &:hover {
             background-color: #3498db;
             color: #fff;
         }
     }
-    
+
 }
 
 /* Estilo para el enlace de la página activa */
@@ -577,6 +605,7 @@ ul {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     &-div {
         background-color: #fff;
         display: grid;
@@ -587,17 +616,21 @@ ul {
         border-radius: 6px;
         padding: 5%;
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
         h2 {
             margin: 0px;
             margin-bottom: 10%;
         }
+
         .login-form {
             display: contents;
         }
     }
 }
+
 .login-input {
     justify-items: start;
+
     input {
         background-color: lightgray;
         width: 100%;
@@ -606,12 +639,13 @@ ul {
         border-radius: 5px;
         margin-bottom: 10px;
         padding: 5px;
-    
+
         &::placeholder {
             color: black;
         }
     }
 }
+
 .boton {
     margin-top: 15%;
 }
@@ -732,13 +766,14 @@ a {
     /* Añadir bordes redondeados */
 }
 
-.msg{
+.msg {
     &-valido {
-    background-color: limegreen;
-    padding: 10px;
-    color: black;
-    margin: 20px;
+        background-color: limegreen;
+        padding: 10px;
+        color: black;
+        margin: 20px;
     }
+
     &-error {
         background-color: #980000;
         padding: 10px;
@@ -752,12 +787,14 @@ a {
     border-bottom: 1px solid #ccc;
     /* Línea horizontal entre entradas */
     padding-bottom: 10px;
+
     /* Espaciado para mejorar la estética */
     label {
         display: block;
         margin-bottom: 5px;
         /* Espai entre les etiquetes i els inputs */
     }
+
     input {
         width: 100%;
         padding: 8px;
@@ -798,17 +835,19 @@ a {
 
 
 /* Estilos para el mensaje informativo */
-.info{
+.info {
     &-message {
         background-color: #ff7118;
         color: white;
         padding: 10px;
         margin-bottom: 20px;
     }
+
     &-text {
         margin: 0;
         font-size: 16px;
     }
+
     &-alert {
         font-size: 24px;
         color: white;
@@ -877,13 +916,15 @@ a {
 }
 
 .star-rating {
-    font-size: 3rem; /* Ajusta el tamaño de las estrellas según sea necesario */
+    font-size: 3rem;
+    /* Ajusta el tamaño de las estrellas según sea necesario */
 }
 
 .star {
     cursor: pointer;
     transition: color 0.2s;
-    color: #969696; /* Color de las estrellas no seleccionadas */
+    color: #969696;
+    /* Color de las estrellas no seleccionadas */
 }
 
 .star.selected {
@@ -896,7 +937,7 @@ a {
 
 .emoji-selector {
     font-size: 3rem;
-    
+
 }
 
 .emoji-option {
@@ -912,12 +953,38 @@ a {
 .emoji-option:hover:not(.selected) {
     opacity: 1;
 }
+
+.opinion-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* Dos columnas de igual tamaño */
+    gap: 40px;
+    /* Espaciado entre las columnas */
+    margin: 50px;
+    /* Espaciado entre tarjetas */
+}
+
+.opinion-card {
+    background-color: #ffffff;
+    /* Color de fondo de la tarjeta */
+    border: 1px solid #dddddd;
+    /* Borde de la tarjeta */
+    border-radius: 8px;
+    /* Bordes redondeados */
+    padding: 15px;
+    /* Espaciado interno de la tarjeta */    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombra de la tarjeta */
+}
+
+.opinion-content {}
+
 /*Ver Eventos fin*/
 @media screen and (max-width: 300px) {
     .titulo {
         font-size: 25px;
     }
-    
+
     .logo {
         width: 60px;
     }
@@ -965,6 +1032,7 @@ a {
             }
         }
     }
+
     .linkPromotor {
         font-weight: 800;
         font-size: 13px;
@@ -977,6 +1045,7 @@ a {
     select[class="form-control"] {
         height: 32px;
     }
+
     .button-container {
         grid-template-rows: auto auto auto;
         grid-template-columns: auto;
@@ -1000,6 +1069,7 @@ a {
     input[class="form-control"] {
         width: 80%;
     }
+
     .login-div {
         width: 60%;
     }

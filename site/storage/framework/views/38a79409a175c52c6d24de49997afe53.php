@@ -12,7 +12,7 @@
 
             <div class="form-group">
                 <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" maxlength="20" id="nombre" name="nombre" class="form-controller" required>
+                <input type="text" maxlength="50" id="nombre" name="nombre" class="form-controller" required>
                 <div id="errorDivnombre" class="errorDiv" style="display: none;">
                     <div id="errorContent">
                         <div class="error-message" id="error-nombre"></div>
@@ -56,7 +56,7 @@
 
             <div class="form-group">
                 <label for="titulo" class="form-label">Título del Comentario</label>
-                <input type="text" maxlength="20" id="titulo" name="titulo" class="form-controller" required>
+                <input type="text" maxlength="50" id="titulo" name="titulo" class="form-controller" required>
                 <div id="errorDivtitulo" class="errorDiv" style="display: none;">
                     <div id="errorContent">
                         <div class="error-message" id="error-titulo"></div>
@@ -143,8 +143,8 @@
                     ocultarMissatge('nombre');
                 }
 
-                if (nombre.length > 20) {
-                    mostrarMissatge('nombre', 'El nombre no puede tener más de 20 caracteres.');
+                if (nombre.length > 50) {
+                    mostrarMissatge('nombre', 'El nombre no puede tener más de 50 caracteres.');
                     return false;
                 } else {
                     ocultarMissatge('nombre');
@@ -172,8 +172,8 @@
                     ocultarMissatge('titulo');
                 }
 
-                if (titulo.length > 20) {
-                    mostrarMissatge('titulo', 'El titulo de la opinión no puede tener más de 20 caracteres');
+                if (titulo.length > 50) {
+                    mostrarMissatge('titulo', 'El titulo de la opinión no puede tener más de 50 caracteres');
                     return false;
                 } else {
                     ocultarMissatge('titulo');

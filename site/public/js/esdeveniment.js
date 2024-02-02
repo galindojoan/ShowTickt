@@ -126,7 +126,8 @@ function reiniciarEntradas() {
         const btnBorrar = document.createElement("button");
         btnBorrar.id = contador;
         btnBorrar.type = "button";
-        btnBorrar.classList.add("btn-entrada");
+        btnBorrar.classList.add("btn-red");
+        btnBorrar.classList.add("btn");
         btnBorrar.textContent = "eliminar";
         // Añadir el nuevo div al container
         contador++;

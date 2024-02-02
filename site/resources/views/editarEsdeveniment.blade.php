@@ -37,6 +37,11 @@
             </form>
             <p class="down">Lugar: {{ $esdeveniment->recinte->lloc }}</p>
             <!-- Otros detalles del evento -->
+
+            <form method="get" action="{{ route('crearOpinion')}}">
+                <input type="hidden" name="event-id" value="{{ $esdeveniment->id }}">
+                <button type="submit" class="boton down">Añadir Opinion</button>
+            </form>
         </div>
         <div class="imagenesEventos">
             <img src="{{ Storage::url($esdeveniment->imatge) }}" alt="Imatge de l'esdeveniment" class="event-imagen">

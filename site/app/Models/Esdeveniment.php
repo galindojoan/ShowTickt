@@ -30,4 +30,9 @@ class Esdeveniment extends Model
     {
         return $this->hasMany(Sessio::class, 'esdeveniments_id');
     }
+
+    public function opinions()
+    {
+        return $this->hasMany(Opinion::class, 'esdeveniments_id');
+    }
 }

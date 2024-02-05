@@ -5,9 +5,9 @@
         <div class="bg">
             <?php if(session('key')): ?>
                 <div class="button-container">
-                    <a href="<?php echo e(route('administrar-esdeveniments')); ?>" class="custom-button">Administrar Eventos</a>
-                    <a href="<?php echo e(route('llistat-sessions' )); ?>" class="custom-button">Listado de sesiones</a>
-                    <a href="<?php echo e(route('crear-esdeveniment')); ?>" class="custom-button">Crear Evento</a>
+                    <a href="<?php echo e(route('administrar-esdeveniments')); ?>" class="btn btn-blue">Administrar Eventos</a>
+                    <a href="<?php echo e(route('llistat-sessions' )); ?>" class="btn btn-blue">Listado de sesiones</a>
+                    <a href="<?php echo e(route('crear-esdeveniment')); ?>" class="btn btn-blue">Crear Evento</a>
                 </div>
             <?php endif; ?>
         </div>

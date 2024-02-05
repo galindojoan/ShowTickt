@@ -17,17 +17,17 @@
                 <a href="<?php echo e(route('editar-esdeveniment', ['id' => $esdeveniment->id])); ?>" class="event-link">
                     <div class="event-card">
                         <div class="event-details">
-                            <p><?php echo e($esdeveniment->nom); ?> </p>
+                            <h1><?php echo e($esdeveniment->nom); ?> </h1>
                             <?php if($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->data !== null): ?>
-                                <p><?php echo e($esdeveniment->sesions->first()->data); ?></p>
+                                <h3><?php echo e($esdeveniment->sesions->first()->data); ?></h3>
                             <?php else: ?>
-                                <p>No hay sesiones</p>
+                                <h3>No hay sesiones</h3>
                             <?php endif; ?>
-                            <p><?php echo e($esdeveniment->recinte->lloc); ?></p>
+                            <h4><?php echo e($esdeveniment->recinte->lloc); ?></h4>
                             <?php if($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->entrades->isNotEmpty()): ?>
-                                <p><?php echo e($esdeveniment->sesions->first()->entrades->first()->preu); ?> €</p>
+                                <h2><?php echo e($esdeveniment->sesions->first()->entrades->first()->preu); ?> €</h2>
                             <?php else: ?>
-                                <p>Sin entradas</p>
+                                <h2>Sin entradas</h2>
                             <?php endif; ?>
                         </div>
                         <img src="<?php echo e(Storage::url($esdeveniment->imatge)); ?>" alt="Imatge de l'esdeveniment">

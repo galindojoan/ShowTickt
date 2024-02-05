@@ -13,12 +13,12 @@
                 <div class="event-link">
                     <div class="event-card">
                         <div class="event-details">
-                            <p><?php echo e($sessio->esdeveniment->nom); ?></p>
-                            <p><?php echo e($sessio->data); ?></p>
+                            <h1><?php echo e($sessio->esdeveniment->nom); ?></h1>
+                            <h3><?php echo e($sessio->data); ?></h3>
                             <?php if($sessio->entrades->isNotEmpty()): ?>
-                                <p><?php echo e($sessio->entrades->first()->preu); ?> €</p>
+                                <h2><?php echo e($sessio->entrades->sum('quantitat')); ?> entradas</h2>
                             <?php else: ?>
-                                <p>Sin entradas</p>
+                                <h2>Sin entradas</h2>
                             <?php endif; ?>
                             <div class="buttons">
                                 <!-- Botones -->

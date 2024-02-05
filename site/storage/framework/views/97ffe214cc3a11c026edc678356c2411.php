@@ -14,6 +14,7 @@
             <form action="<?php echo e(route('confirmacioCompra')); ?>" method="post" class="ComprarEntrada" id="ComprarEntrada"
                 enctype="multipart/form-data">
                 <?php echo csrf_field(); ?>
+                <input type="hidden" id="detallesEvents" name='detallesEvents' value='<?php echo e($esdeveniment->nom); ?>'>
                 <label for="session" class="form-label">Sesiones:</label>
                 <?php if(count($fechas) == 1): ?>
                     <div class="form-group">
@@ -63,9 +64,11 @@
                     <div class="form-group">
                       <p id="precioTotal" class="form-label">Total: 0€ </p>
                   </div>
-                  <input type="hidden" id="arrayEntradas">
-                  <input type="hidden" id="inputTotal">
-                  <button type="submit" id="bottonCompra">Confirmar Compra</button>
+
+                  <input type="hidden" id="arrayEntradas" name='arrayEntradas'>
+                  <input type="hidden" id="inputTotal" name='inputTotal'>
+                  <input type="hidden" id="inputSession" name='inputSession'>
+                  <button type="button" id="bottonCompra">Confirmar Compra</button>
                 </div>
             </form>
 

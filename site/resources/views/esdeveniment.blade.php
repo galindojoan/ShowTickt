@@ -19,11 +19,11 @@
             <form action="{{ route('confirmacioCompra') }}" method="post" class="ComprarEntrada" id="ComprarEntrada"
                 enctype="multipart/form-data" style="justify-self: normal">
                 @csrf
-                <input type="hidden" id="detallesEvents" name='detallesEvents' value='{{ $esdeveniment }}'>
+                <input type="hidden" id="detallesEvents" name='detallesEvents' value='{{$esdeveniment->nom}}'>
                 <div class="inlineDiv">
-                    <label for="session" class="form-label" id="fechaSesion"><strong>Sesiones:</strong></label>
-                    <button id="buttonSesion" class="btn btn-blue" style="display: none;">Cambiar sesión</button>
-                </div>
+                  <label for="session" class="form-label" id="fechaSesion"><strong>Sesiones:</strong></label>
+                  <button id="buttonSesion" class="btn btn-blue" style="display: none;">Cambiar sesión</button>
+              </div>
                 @if (count($fechas) == 1)
                     <div class="form-group">
 
@@ -85,12 +85,12 @@
 
                         </div>
                     </div>
-                    <div class="form-group inlineDiv">
-                        <p id="precioTotal" class="form-label">Total: 0€ </p>
-                        <input type="hidden" id="arrayEntradas" class='arrayEntradas'>
-                        <input type="hidden" id="inputTotal" name='inputTotal'>
-                        <button type="submit" id="bottonCompra" class="btn btn-orange">Realizar Compra</button>
-                    </div>
+                  <div class="form-group inlineDiv">
+                    <p id="precioTotal" class="form-label">Total: 0€ </p>
+                    <input type="hidden" id="arrayEntradas" class='arrayEntradas'>
+                    <input type="hidden" id="inputTotal" name='inputTotal'>
+                    <button type="submit" id="bottonCompra" class="btn btn-orange">Realizar Compra</button>
+                </div>
                 </div>
             </form>
 

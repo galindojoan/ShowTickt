@@ -13,12 +13,12 @@
                 <div class="event-link">
                     <div class="event-card">
                         <div class="event-details">
-                            <p>{{ $sessio->esdeveniment->nom }}</p>
-                            <p>{{ $sessio->data }}</p>
+                            <h1>{{ $sessio->esdeveniment->nom }}</h1>
+                            <h3>{{ $sessio->data }}</h3>
                             @if ($sessio->entrades->isNotEmpty())
-                                <p>{{ $sessio->entrades->first()->preu }} €</p>
+                                <h2>{{ $sessio->entrades->sum('quantitat') }} entradas</h2>
                             @else
-                                <p>Sin entradas</p>
+                                <h2>Sin entradas</h2>
                             @endif
                             <div class="buttons">
                                 <!-- Botones -->

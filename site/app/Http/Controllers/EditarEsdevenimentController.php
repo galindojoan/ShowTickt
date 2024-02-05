@@ -6,6 +6,7 @@ use Exception;
 use App\Models\Sessio;
 use App\Models\Entrada;
 use App\Models\Esdeveniment;
+use App\Models\Opinion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -22,7 +23,39 @@ class EditarEsdevenimentController extends Controller
             ->where('esdeveniments.id', '=', $id)
             ->get();
 
-        return view('editarEsdeveniment', compact('esdeveniment', 'fechas'));
+
+        // Obtener opiniones asociadas al evento
+        $opiniones = Opinion::where('esdeveniment_id', $id)->get();
+
+        foreach ($opiniones as $opinion) {
+            $opinion->emocio = $this->getEmoji($opinion->emocio);
+            $opinion->estrellas = $this->convertirPuntuacionAEstrellas($opinion->puntuacio);
+        }
+
+        return view('editarEsdeveniment', compact('esdeveniment', 'fechas', 'opiniones'));
+    }
+
+    private function getEmoji($emocio)
+    {
+        $emojis = [
+            '1' => '😠',
+            '2' => '😞',
+            '3' => '😐',
+            '4' => '😊',
+            '5' => '😃',
+        ];
+
+        return $emojis[$emocio] ?? '';
+    }
+
+    private function convertirPuntuacionAEstrellas($puntuacion)
+    {
+        $estrellas = '';
+        for ($i = 1; $i <= 5; $i++) {
+            $clase = ($i <= $puntuacion) ? 'star selected' : 'star';
+            $estrellas .= "<span class=\"$clase\" data-rating=\"$i\">&#9733;</span>";
+        }
+        return $estrellas;
     }
 
     public function newSessionPage(Request $request)
@@ -32,7 +65,7 @@ class EditarEsdevenimentController extends Controller
     }
     public function newSesion(Request $request)
     {
-        try{
+        try {
             $esdevenimentId = $request->input('event-id');
 
             // Crear la sessió
@@ -65,9 +98,9 @@ class EditarEsdevenimentController extends Controller
 
                 $entrada->save();
             }
-            Log::info('Creada nueva sesion para el evento '.$esdevenimentId);
-        }catch(Exception $e){
-            Log::error('Error al intentar crear la nueva sesion para el evento '. $esdevenimentId.'. Mensaje de error: '.$e->getMessage());
+            Log::info('Creada nueva sesion para el evento ' . $esdevenimentId);
+        } catch (Exception $e) {
+            Log::error('Error al intentar crear la nueva sesion para el evento ' . $esdevenimentId . '. Mensaje de error: ' . $e->getMessage());
         }
 
         return redirect()->route('editar-esdeveniment', [$esdevenimentId]);
@@ -89,7 +122,7 @@ class EditarEsdevenimentController extends Controller
 
     public function updateSesion(Request $request)
     {
-        try{
+        try {
             $esdevenimentId = $request->input('event-id');
             $sessioId = $request->input('fecha-id');
 
@@ -118,8 +151,8 @@ class EditarEsdevenimentController extends Controller
                             'sessios_id' => $sessioId,
                         ]);
                 }
-            }else if(count($noms) > count($entradas)){
-                for ($i=0; $i < count($entradas); $i++) { 
+            } else if (count($noms) > count($entradas)) {
+                for ($i = 0; $i < count($entradas); $i++) {
                     Entrada::where('entradas.id', '=', $entradas[$i]->id)
                         ->update([
                             'nom' => $noms[$i],
@@ -128,18 +161,18 @@ class EditarEsdevenimentController extends Controller
                             'sessios_id' => $sessioId,
                         ]);
                 }
-                for ($i=count($entradas); $i < count($noms); $i++) { 
+                for ($i = count($entradas); $i < count($noms); $i++) {
                     $entrada = new Entrada([
                         'nom' => $noms[$i],
                         'preu' => $preus[$i],
                         'quantitat' => $quantitats[$i],
                         'sessios_id' => $sessioId,
                     ]);
-        
+
                     $entrada->save();
                 }
-            }else if(count($noms) < count($entradas)){
-                for ($i=0; $i < count($noms); $i++) { 
+            } else if (count($noms) < count($entradas)) {
+                for ($i = 0; $i < count($noms); $i++) {
                     Entrada::where('entradas.id', '=', $entradas[$i]->id)
                         ->update([
                             'nom' => $noms[$i],
@@ -148,14 +181,14 @@ class EditarEsdevenimentController extends Controller
                             'sessios_id' => $sessioId,
                         ]);
                 }
-                for ($i=count($noms); $i < count($entradas); $i++) { 
+                for ($i = count($noms); $i < count($entradas); $i++) {
                     Entrada::where('entradas.id', '=', $entradas[$i]->id)
                         ->delete();
                 }
             }
-            Log::info('Guardada sesion: '.$sessioId.' del evento '.$esdevenimentId);
-        }catch(Exception $e){
-            Log::error('Error al intentar guardar la sesion: '.$sessioId.' para el evento '. $esdevenimentId.'. Mensaje de error: '.$e->getMessage());
+            Log::info('Guardada sesion: ' . $sessioId . ' del evento ' . $esdevenimentId);
+        } catch (Exception $e) {
+            Log::error('Error al intentar guardar la sesion: ' . $sessioId . ' para el evento ' . $esdevenimentId . '. Mensaje de error: ' . $e->getMessage());
         }
 
         return redirect()->route('editar-esdeveniment', [$esdevenimentId]);

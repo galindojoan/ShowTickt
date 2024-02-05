@@ -175,6 +175,7 @@ function sessionSelect(ArraySession) {
             );
         });
     sessiones = ArraySession;
+    document.getElementById('inputSession').value=sessiones;
 }
 function ActivarEntrada() {
   document.getElementById(contadorSession).style.display = "block";
@@ -192,7 +193,6 @@ buttonEntrada.addEventListener("click", function (e) {
                 divError.style.display = "none";
             }, 3000);
         } else if (parseInt(maxEntradas.max) < parseInt(maxEntradas.value)) {
-            console.log(maxEntradas.max);
             mensajeError.textContent = `La cantidad escogida supera la máxima, escoge un número inferior a ${maxEntradas.max}`;
             divError.style.display = "block";
             // Ocultar el div después de 3 segundos
@@ -254,7 +254,6 @@ buttonEntrada.addEventListener("click", function (e) {
             }
             DivListaEntradas.style.display = "block";
             precioSuma = precio * maxEntradas.value;
-            console.log();
             precioTotal += precioSuma;
             reiniciarEntradas();
             total.textContent = `Total: ${precioTotal}€`;
@@ -269,7 +268,9 @@ buttonEntrada.addEventListener("click", function (e) {
     }
 });
 
-document.getElementById("bottonCompra").addEventListener("click", function () {
+document.getElementById("bottonCompra").addEventListener("click", function (e) {
+  e.preventDefault;
 document.getElementById("arrayEntradas").value = JSON.stringify(entradasArray);
-document.getElementById("inputTotal").value = precioTotal;
+document.getElementById("inputSession").value = precioTotal;
+document.getElementById("ComprarEntrada").submit();
 });

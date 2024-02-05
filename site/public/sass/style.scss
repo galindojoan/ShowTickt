@@ -354,7 +354,10 @@ footer {
   grid-template-columns: 1fr 0.3fr;
 }
 }
-
+.ticketCompra{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
 .ahref {
     border: none;
     width: min-content;

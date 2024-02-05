@@ -175,7 +175,6 @@ function sessionSelect(ArraySession) {
             );
         });
     sessiones = ArraySession;
-    document.getElementById('inputSession').value=sessiones;
 }
 function ActivarEntrada() {
   document.getElementById(contadorSession).style.display = "block";
@@ -269,8 +268,8 @@ buttonEntrada.addEventListener("click", function (e) {
 });
 
 document.getElementById("bottonCompra").addEventListener("click", function (e) {
-  e.preventDefault;
+  e.preventDefault();
 document.getElementById("arrayEntradas").value = JSON.stringify(entradasArray);
-document.getElementById("inputSession").value = precioTotal;
+document.getElementById("inputTotal").value = precioTotal;
 document.getElementById("ComprarEntrada").submit();
 });

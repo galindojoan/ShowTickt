@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sessio;
 use Illuminate\Http\Request;
 
 class CompraController extends Controller
@@ -11,9 +12,8 @@ class CompraController extends Controller
     $nomEvent= $request->input('detallesEvents');
     $total=$request->input('inputTotal');
     $entradaArray = json_decode($request->input('arrayEntradas'));
-    $sessionArray = json_decode($request->input('inputSession'));
-    var_dump($sessionArray);
-    // return view('confirmarCompra',compact('nomEvent','entradaArray','sessionArray','total'));
+    $sessionArray = Sessio::getSessionbyID($entradaArray[0]->contadorSession);
+    return view('confirmarCompra',compact('nomEvent','entradaArray','sessionArray','total'));
   }
   
 }

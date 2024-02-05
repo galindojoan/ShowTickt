@@ -127,7 +127,7 @@ footer #footerHome:hover:active {
   background-color: #ff5e00;
 }
 .btn-red {
-  background-color: #C40C0C;
+  background-color: #c40c0c;
   /* Rojo */
   color: #fff;
 }
@@ -249,7 +249,7 @@ footer #footerHome:hover:active {
   background-color: inherit;
 }
 .event-btn:hover {
-  background-color: #FEFEFE;
+  background-color: #fefefe;
   cursor: pointer;
   transform: scale(1.05);
 }
@@ -315,6 +315,20 @@ footer #footerHome:hover:active {
 .ticketCompra {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-items: center;
+  border: 1px solid #ccc;
+}
+
+.resumenCompra {
+  max-width: 600px;
+  margin: auto;
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1.7px solid darkgray;
+  border-radius: 6px;
+  padding: 5%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .ahref {

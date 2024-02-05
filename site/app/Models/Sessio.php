@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Sessio extends Model
 {
@@ -30,5 +31,11 @@ class Sessio extends Model
             ->where('data', '>', now()) // Sesiones futuras
             ->orderBy('data', 'asc')
             ->paginate(6);
+    }
+    public static function getSessionbyID($SessionId)
+    {
+        return DB::table('sessios')
+            ->where('sessios.id', '=', $SessionId)
+            ->first();
     }
 }

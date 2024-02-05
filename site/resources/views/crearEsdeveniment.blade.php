@@ -538,8 +538,7 @@
                     }
 
                     if (nombreValue.length > 20) {
-                        'nomEntrada',
-                        mostrarMissatge('El nombre del tipo de entrada debe tener máximo 20 caracteres.')
+                        mostrarMissatge('nomEntrada', 'El nombre del tipo de entrada debe tener máximo 20 caracteres.')
                         return false;
                     }
                     else {

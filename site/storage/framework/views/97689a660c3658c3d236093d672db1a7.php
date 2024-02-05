@@ -1,6 +1,5 @@
-
-
 <?php $__env->startSection('title', 'resultados'); ?>
+<?php $__env->startSection('metadades', 'Administra todos los eventos que hayas creados, modificalos, eliminalos, ponlos en oculto o públicalos.'); ?>
 
 <?php $__env->startSection('content'); ?>
     <?php if($esdeveniments->isEmpty()): ?>

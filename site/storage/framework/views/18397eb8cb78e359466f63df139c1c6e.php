@@ -1,4 +1,5 @@
 <?php $__env->startSection('title', 'Añadir Sesion'); ?>
+<?php $__env->startSection('metadades','Edita una sesión de tu evento para que los clientes vean los datos actualizados.'); ?>
 
 <?php $__env->startSection('content'); ?>
     <div id="content-container">

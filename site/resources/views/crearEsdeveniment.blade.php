@@ -186,15 +186,12 @@
         let personalitzatTancamentDiv = document.getElementById('personalitzatTancament');
         let dataHoraPersonalitzadaInput = document.getElementById('dataHoraPersonalitzada');
         let dataHoraEsdevenimentInput = document.getElementById('data_hora');
-        let titol = document.getElementById('titol').value.trim();
+        let titol = document.getElementById('titol');
         let nousCamps = document.getElementById('nousCamps');
         let imatgeInput = document.getElementById('imatge');
         let descripcionInput = document.getElementById('descripcio');
-        let descripcionValue = descripcionInput.value.trim();
         let fechaHoraInput = document.getElementById('data_hora');
-        let fechaHoraValue = fechaHoraInput.value.trim();
         let aforoInput = document.getElementById('aforament_maxim');
-        let aforoValue = aforoInput.value.trim();
 
         function establirValorPerDefecte() {
             var tancamentValue = tancamentVendaSelect.value;
@@ -230,15 +227,10 @@
         }
 
         function validarCamposVacios() {
-
-            if (titol === '') {
+            if (titol.value === '') {
                 mostrarMissatge('titol', 'El título del evento es un campo obligatorio');
                 return false;
-            } else {
-                ocultarMissatge('titol');
-            }
-
-            if (titol.length > 20) {
+            } else if (titol.length > 20) {
                 mostrarMissatge('titol', 'El título del evento no puede tener más de 20 caracteres.');
                 return false;
             } else {
@@ -267,10 +259,10 @@
                 }
             }
 
-            if (descripcionValue === '') {
+            if (descripcionInput.value === '') {
                 mostrarMissatge('descripcio', 'La descripción del evento no puede estar vacía.');
                 return false;
-            } else if (descripcionValue.length > 640) {
+            } else if (descripcionInput.length > 640) {
                 mostrarMissatge('descripcio',
                     'La descripción del evento debe tener un máximo de 640 caracteres.');
                 return false;
@@ -278,7 +270,7 @@
                 ocultarMissatge('descripcio');
             }
 
-            if (fechaHoraValue === '') {
+            if (fechaHoraInput.value === '') {
                 mostrarMissatge('data', 'El campo de fecha y hora de la celebración no puede estar vacío.');
                 return false;
             } else {
@@ -297,7 +289,7 @@
                 ocultarMissatge('data');
             }
 
-            if (aforoValue === '') {
+            if (aforoInput.value === '') {
                 mostrarMissatge('aforo', 'El campo de aforo máximo no puede estar vacío.');
                 return false;
             } else {
@@ -306,13 +298,12 @@
 
             // Obtener el valor del campo novaCapacitat
             var novaCapacitatInput = document.getElementById('nova_capacitat');
-            var novaCapacitatValue = novaCapacitatInput.value.trim();
 
             // Verificar que novaCapacitat no esté vacío
-            if (novaCapacitatValue !== '') {
+            if (novaCapacitatInput !== '') {
 
                 // Verificar que el aforo máximo no supere el valor de novaCapacitat
-                if (aforoValue > parseInt(novaCapacitatValue)) {
+                if (aforoInput > parseInt(novaCapacitatInput)) {
                     mostrarMissatge('aforo', 'El aforo máximo no puede superar la capacidad del local.');
                     return false; // Evitar el envío del formulario
                 } else {
@@ -320,14 +311,14 @@
                 }
             }
 
-            if (isNaN(aforoValue)) {
+            if (isNaN(aforoInput.value)) {
                 mostrarMissatge('aforo', 'El valor del aforo máximo debe ser numérico.');
                 return false;
             } else {
                 ocultarMissatge('aforo');
             }
 
-            if (parseInt(aforoValue) < 1) {
+            if (parseInt(aforoInput.value) < 1) {
                 mostrarMissatge('aforo', 'El aforo debe ser de almenos 1 persona.')
                 return false;
             } else {
@@ -335,16 +326,15 @@
             }
 
             var entradas = document.querySelectorAll('.tipo-entrada');
-
-            for (var i = 0; i < entradas.length; i++) {
-                var entrada = entradas[i];
-                var nombreInput = entrada.querySelector('[name="entrades-nom[]"]');
-                var precioInput = entrada.querySelector('[name="entrades-preu[]"]');
-                var cantidadInput = entrada.querySelector('[name="entrades-quantitat[]"]');
-                var nombreValue = nombreInput.value.trim();
-                var precioValue = precioInput.value.trim();
-                var cantidadValue = cantidadInput.value.trim();
-                if (nombreValue === '') {
+            console.log('no ');
+            for (let i = 0; i < entradas.length; i++) {
+                let entrada = entradas[i];
+                let nombreInput = entrada.querySelector('[name="entrades-nom[]"]');
+                console.log('precio');
+                let precioInput = entrada.querySelector('[name="entrades-preu[]"]');
+                console.log(precioInput);
+                let cantidadInput = entrada.querySelector('[name="entrades-quantitat[]"]');
+                if (nombreInput.value === '') {
                     mostrarMissatge('nomEntrada',
                         'El nombre del tipo de entrada no puede estar vacío.')
                     return false;
@@ -352,7 +342,7 @@
                     ocultarMissatge('nomEntrada');
                 }
 
-                if (nombreValue.length > 20) {
+                if (nombreInput.length > 20) {
                     'nomEntrada',
                     mostrarMissatge('El nombre del tipo de entrada debe tener máximo 20 caracteres.')
                     return false;
@@ -361,7 +351,7 @@
                     ocultarMissatge('nomEntrada');
                 }
 
-                if (precioValue === '' || isNaN(precioValue) || parseFloat(precioValue) <= 0) {
+                if (precioInput.value === '' || isNaN(precioInput.value) || parseFloat(precioInput.value) <= 0) {
                     mostrarMissatge('preu', 'El precio debe ser un valor numérico mayor que 0.');
                     return false;
                 } else {
@@ -369,14 +359,14 @@
                 }
 
                 // Validar que el precio no supere el límite
-                if (parseFloat(precioValue) > 1000) {
+                if (parseFloat(precioInput) > 1000) {
                     mostrarMissatge('preu', 'El precio no puede ser superior a 1.000.€');
                     return false;
                 } else {
                     ocultarMissatge('preu');
                 }
 
-                if (cantidadValue !== '' && (isNaN(cantidadValue) || parseInt(cantidadValue) <= 0)) {
+                if (cantidadInput.value !== '' && (isNaN(cantidadInput.value) || parseInt(cantidadInput.value) <= 0)) {
                     mostrarMissatge('quantitat',
                         'La cantidad disponible debe ser un valor numérico mayor que 0.');
                     return false;
@@ -387,8 +377,7 @@
 
             if (tancamentVendaSelect.value === 'personalitzat' && personalitzatTancamentDiv.style.display !==
                 'none') {
-                var dataHoraPersonalitzadaValue = dataHoraPersonalitzadaInput.value.trim();
-                if (dataHoraPersonalitzadaValue === '') {
+                if (dataHoraPersonalitzadaInput.value === '') {
                     mostrarMissatge('tancament', 'La fecha y hora personalizada no puede estar vacía.');
                     return false;
                 } else {

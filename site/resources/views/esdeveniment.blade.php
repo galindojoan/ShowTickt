@@ -1,6 +1,8 @@
 @extends('layouts.master')
 
 @section('title', 'Detalles del Evento')
+@section('metadades','Mira los detalles sobre el evento {{$esdeveniment->nom}} y adquiere sus entradas.')
+@section('metaimages','{{$esdeveniment->imatge}}')
 
 @section('content')
     <div class="containerEvent">

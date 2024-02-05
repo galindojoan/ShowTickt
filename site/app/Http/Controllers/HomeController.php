@@ -34,24 +34,9 @@ class HomeController extends Controller
     return view('home', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount', 'events', 'categoriesWith3'));
   }
 
-
-
-  public function quitarAcentos($cadena)
-  {
-    $acentos = [
-      'á' => 'a', 'é' => 'e', 'í' => 'i', 'ó' => 'o', 'ú' => 'u',
-      'Á' => 'A', 'É' => 'E', 'Í' => 'I', 'Ó' => 'O', 'Ú' => 'U',
-      'ä' => 'a', 'ë' => 'e', 'ï' => 'i', 'ö' => 'o', 'ü' => 'u',
-      'Ä' => 'A', 'Ë' => 'E', 'Ï' => 'I', 'Ö' => 'O', 'Ü' => 'U',
-    ];
-
-    return strtr($cadena, $acentos);
-  }
-
-
   public function cerca(Request $request)
   {
-    $cerca = $this->quitarAcentos($request->input('q'));
+    $cerca = $request->input('q');
     $categoryId = $request->input('category');
 
     $esdeveniments = Categoria::getFilteredEvents($cerca, $categoryId);

@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('title', 'Cambiar contraseña')
+@section('metadades','Cambia la contraseña de tu cuenta.')
 
 @section('content')
 <div class="login">

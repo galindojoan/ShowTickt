@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('title', 'Editar Evento')
+@section('metadades','Edita tu evento para actualizar correctamente los datos de este.')
 
 @section('content')
     <div class="containerEvent">

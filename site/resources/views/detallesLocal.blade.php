@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('title', 'local')
+@section('metadades','Observa en un mapa en donde se ubica el local del evento que estas interesado.')
 
 @section('content')
     <div class="containerEvent">

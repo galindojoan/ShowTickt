@@ -16,8 +16,8 @@
                 <input type="email" name="email" id="email" placeholder="Email">
             </div>
             <div>
-                <a href="{{route('login')}}" class="boton" id="atras">Atrás</a>
-                <input type="submit" value="Enviar" class="boton">
+                <a href="{{route('login')}}" class="btn btn-red" id="atras">Atrás</a>
+                <input type="submit" value="Enviar" class="btn btn-orange">
             </div>
         </form>
     </div>

@@ -115,21 +115,19 @@ function reiniciarEntradas() {
 
         const nuevoDiv = document.createElement("div");
         DivEntrada.appendChild(nuevoDiv);
-        let sessionP = document.createElement("p");
-        sessionP.textContent = `Fecha: ${entrada.session}`;
         let entradaP = document.createElement("p");
-        entradaP.textContent = `Entrada: ${entrada.nom}`;
+        entradaP.textContent = `${entrada.nom}`;
         let cantidadP = document.createElement("p");
-        cantidadP.textContent = `Cantidad: ${entrada.cantidad}`;
+        cantidadP.textContent = `x${entrada.cantidad}`;
 
         nuevoDiv.appendChild(entradaP);
-        nuevoDiv.appendChild(sessionP);
         nuevoDiv.appendChild(cantidadP);
 
         const btnBorrar = document.createElement("button");
         btnBorrar.id = contador;
         btnBorrar.type = "button";
-        btnBorrar.classList.add("btn-entrada");
+        btnBorrar.classList.add("btn-red");
+        btnBorrar.classList.add("btn");
         btnBorrar.textContent = "eliminar";
         // Añadir el nuevo div al container
         contador++;
@@ -154,7 +152,7 @@ function sessionSelect(ArraySession) {
     containerList.innerHTML = " ";
     precioTotal = 0;
     total.textContent = `Total: ${precioTotal}€`;
-    divEntradas.style.display = "block";
+    divEntradas.style.display = "grid";
     if (contadorSession !== 0) {
         document.getElementById(contadorSession).style.display = "none";
         document.getElementById(contadorSession).value = "";

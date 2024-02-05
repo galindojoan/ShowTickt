@@ -16,7 +16,7 @@
                             <p><?php echo e($sessio->esdeveniment->nom); ?></p>
                             <p><?php echo e($sessio->data); ?></p>
                             <?php if($sessio->entrades->isNotEmpty()): ?>
-                                <p><?php echo e($sessio->entrades->first()->preu); ?> €</p>
+                                <p>Entradas disponibles: <?php echo e($sessio->entrades->sum('quantitat')); ?></p>
                             <?php else: ?>
                                 <p>Sin entradas</p>
                             <?php endif; ?>

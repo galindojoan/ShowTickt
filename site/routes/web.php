@@ -14,6 +14,7 @@ use App\Http\Controllers\EditarEsdevenimentController;
 use App\Http\Controllers\DetallsEsdevenimentController;
 use App\Http\Controllers\AdministrarEsdevenimentController;
 use App\Http\Controllers\AdministrarEsdevenimentsController;
+use App\Http\Controllers\OpinionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +43,10 @@ Route::get('/login',[LoginController::class,'login'])->name(('login'));
 Route::get('/taullerAdministracio',[LoginController::class,'login'])->name('taullerAdministracio')->middleware('check');
 
 Route::post('/iniciarSesion', [LoginController::class,'iniciarSesion'])->name('iniciarSesion');
+
 Route::get('/homePromotor', [LoginController::class, 'promotorPage'])->name('homePromotor')->middleware('check');
+Route::post('/homePromotor', [LoginController::class, 'promotorPage'])->name('homePromotor')->middleware('check');
+
 
 Route::post('/perfil', [LoginController::class,'iniciarSesion'])->name('perfil')->middleware('check');
 
@@ -80,6 +84,9 @@ Route::get('/llistats-entrades/{id}', [LlistatsEntradesController::class, 'show'
 
 Route::get('/añadirSession',[EditarEsdevenimentController::class,'newSessionPage'])->name('añadirSession')->middleware('check');
 Route::post('/añadirSession',[EditarEsdevenimentController::class,'newSessionPage'])->name('añadirSession')->middleware('check');
+
+Route::get('/crearOpinion', [OpinionController::class,'newOpinionPage'])->name('crearOpinion');
+Route::post('/crearOpinion.store', [OpinionController::class,'store'])->name('crearOpinion.store');
 
 Route::get('/editarSesion',[EditarEsdevenimentController::class,'updateSesionPage'])->name('editarSesion')->middleware('check');
 

@@ -7,9 +7,9 @@
         <div class="bg">
             @if (session('key'))
                 <div class="button-container">
-                    <a href="{{ route('administrar-esdeveniments') }}" class="custom-button">Administrar Esdeveniments</a>
-                    <a href="{{ route('llistat-sessions' )}}" class="custom-button">Llistat de sessions</a>
-                    <a href="{{ route('crear-esdeveniment') }}" class="custom-button">Crear Esdeveniment</a>
+                    <a href="{{ route('administrar-esdeveniments') }}" class="btn btn-blue">Administrar Eventos</a>
+                    <a href="{{ route('llistat-sessions' )}}" class="btn btn-blue">Listado de sesiones</a>
+                    <a href="{{ route('crear-esdeveniment') }}" class="btn btn-blue">Crear Evento</a>
                 </div>
             @endif
         </div>

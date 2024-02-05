@@ -9,7 +9,7 @@
     <?php endif; ?>
     <div class="login-div">
         <h2>Login</h2>
-        <form action="<?php echo e(route('homePromotor')); ?>" method="post" id="loginForm" class="login-form">
+        <form action="<?php echo e(route('iniciarSesion')); ?>" method="post" id="loginForm" class="login-form">
         <?php echo csrf_field(); ?>
             <div class="login-input">
                 <input type="text" name="usuario" id="usuario" placeholder="Usuario" required>

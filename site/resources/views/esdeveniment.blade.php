@@ -5,19 +5,25 @@
 @section('content')
     <div class="containerEvent">
         {{-- {{$esdeveniment}} --}}
-        <div class="textEvent">
+        <div class="infoEvent">
             <h1>{{ $esdeveniment->nom }}</h1>
-            <h6>{{ $esdeveniment->descripcio }}</h6>
+            <h4>{{ $esdeveniment->descripcio }}</h4>
+        </div>
+        <div class="textEvent">
             <form action="{{ route('detallesLocal', ['id' => $esdeveniment->id]) }}" method="get" class="detallesLocal"
                 id="detallesLocal">
-                <p><strong>Local:</strong> {{ $esdeveniment->recinte->lloc }}<button type="submit">Ver Local</button></p>
+                <p><strong>Local:</strong> {{ $esdeveniment->recinte->lloc }}</p>
+                <button type="submit" class="btn btn-blue">Ver Local</button>
             </form>
 
             <form action="{{ route('confirmacioCompra') }}" method="post" class="ComprarEntrada" id="ComprarEntrada"
-                enctype="multipart/form-data">
+                enctype="multipart/form-data" style="justify-self: normal">
                 @csrf
                 <input type="hidden" id="detallesEvents" name='detallesEvents' value='{{$esdeveniment->nom}}'>
-                <label for="session" class="form-label">Sesiones:</label>
+                <div class="inlineDiv">
+                  <label for="session" class="form-label" id="fechaSesion"><strong>Sesiones:</strong></label>
+                  <button id="buttonSesion" class="btn btn-blue" style="display: none;">Cambiar sesión</button>
+              </div>
                 @if (count($fechas) == 1)
                     <div class="form-group">
 
@@ -25,7 +31,7 @@
                             <p>{{ $fecha->data }}</p>
                         @endforeach
                         @php
-                        $fechaSola=true;
+                            $fechaSola = true;
                         @endphp
                     </div>
                 @else
@@ -33,8 +39,8 @@
                 @endif
 
                 <div class="form-group" id="entradas" style="display:none;">
-                    <label id="preu" class="form-label">Tipus Entradas:</label>
-                    {{-- @if (count($entradas)==1)
+                    <label id="preu" class="form-label">Escoge el tipo de entrada:</label>
+                    {{-- @if (count($entradas) == 1)
                     @foreach ($fechas as $fecha)
                         <select class="form-select" id="{{ $fecha->id }}" name="preu" style="display:none;">
                             <option value="" disabled selected>Entradas</option>
@@ -49,7 +55,8 @@
                     @endforeach
                     @else --}}
                     @foreach ($fechas as $fecha)
-                        <select class="form-select" id="{{ $fecha->id }}" name="preu" style="display:none;">
+                        <select class="form-select" id="{{ $fecha->id }}" name="preu"
+                            style="display:none; margin-bottom:15%;">
                             <option value="" disabled selected>Entradas</option>
                             @foreach ($entradas as $entrada)
                                 @if ($entrada->sessios_id == $fecha->id)
@@ -61,14 +68,16 @@
                         </select>
                     @endforeach
                     {{-- @endif --}}
-                    
 
-                    <label for="cantidad" class="form-label" id="escogerCantidad">Escoge el Ticket y la cantidad:</label>
+
+                    <label for="cantidad" class="form-label" id="escogerCantidad">Escoge la cantidad:</label>
                     <div class="form-group" id="errorCantidad" style="display:none;">
                         <p id="mensajeError" class="msg-error"></p>
                     </div>
-                    <input type="number" id="cantidad" name="cantidad" min="1" max="10" value="2" />
-                    <button type="button" id="reservarEntrada">Añadir Tickets</button>
+                    <div style="margin-bottom: 8%">
+                        <input type="number" id="cantidad" name="cantidad" min="1" max="10" value="2" />
+                        <button type="button" id="reservarEntrada" class="btn btn-blue">Añadir Tickets</button>
+                    </div>
 
                     <div class="form-group" id="listaEntradas" style="display:none;">
                         <label for="cantidad" class="form-label">Lista de Tickets:</label>
@@ -76,14 +85,12 @@
 
                         </div>
                     </div>
-                    <div class="form-group">
-                      <p id="precioTotal" class="form-label">Total: 0€ </p>
-                  </div>
-
-                  <input type="hidden" id="arrayEntradas" name='arrayEntradas'>
-                  <input type="hidden" id="inputTotal" name='inputTotal'>
-                  <input type="hidden" id="inputSession" name='inputSession'>
-                  <button type="button" id="bottonCompra">Confirmar Compra</button>
+                  <div class="form-group inlineDiv">
+                    <p id="precioTotal" class="form-label">Total: 0€ </p>
+                    <input type="hidden" id="arrayEntradas" class='arrayEntradas'>
+                    <input type="hidden" id="inputTotal" name='inputTotal'>
+                    <button type="submit" id="bottonCompra" class="btn btn-orange">Realizar Compra</button>
+                </div>
                 </div>
             </form>
 
@@ -103,33 +110,43 @@
     <script>
         const fechasSessiones = @json($fechas);
         const entradaPrecio = @json($entradas);
-        const fechaSola=@json($fechaSola);
+        const fechaSola = @json($fechaSola);
         // Ordenar el array utilizando la función de comparación
         fechasSessiones.sort(compararFechas);
-        if(fechaSola){
-          sessionSelect(fechasSessiones[0]);
-          console.log(1);
-        }else{
-          document.addEventListener('DOMContentLoaded', function() {
-            let buenas;
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                headerToolbar: {
-                    left: 'prev,next',
-                    center: 'title',
-                    right: 'dayGridMonth,dayGridWeek'
-                },
-                selectable: true,
-                events: crearEventos(fechasSessiones),
-                eventClick: function(event) {
-                    let sessionId = event.event.title.split(" ");
-                    sessionSelect(fechasSessiones[(parseInt(sessionId[0]) - 1)]);
-                }
+        if (fechaSola) {
+            sessionSelect(fechasSessiones[0]);
+            console.log(1);
+        } else {
+            document.addEventListener('DOMContentLoaded', function() {
+                let buenas;
+                var calendarEl = document.getElementById('calendar');
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    headerToolbar: {
+                        left: 'prev,next',
+                        center: 'title',
+                        right: 'dayGridMonth,dayGridWeek'
+                    },
+                    selectable: true,
+                    events: crearEventos(fechasSessiones),
+                    eventClick: function(event) {
+                        let sessionId = event.event.title.split(" ");
+                        sessionSelect(fechasSessiones[(parseInt(sessionId[0]) - 1)]);
+                        document.getElementById('calendar').style.display = 'none';
+                        document.getElementById('fechaSesion').innerHTML =
+                            `<strong>Sesion:</strong> ${fechasSessiones[(parseInt(sessionId[0]) - 1)].data}`;
+                        document.getElementById('buttonSesion').style.display = 'block';
+                    }
+                });
+                calendar.render();
             });
-            calendar.render();
-        });
+            document.getElementById('buttonSesion').addEventListener('click',function (e) {
+                e.preventDefault();
+                document.getElementById('calendar').style.display = 'block';
+                document.getElementById('fechaSesion').innerHTML =
+                    `Sesiones:`;
+                document.getElementById('buttonSesion').style.display = 'none';
+            })
         }
-        
     </script>
 @endsection

@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('title', 'resultados')
+@section('metadades','Entra en ShowTickt para poder comprar tickets a los mejores eventos disponibles.')
 
 @section('content')
     <div class="container">

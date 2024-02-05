@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('title', 'Crear Opinión')
+@section('metadades','Añade tu opinión sobre el evento para que los demás sepan que tal te ha ido.')
 
 @section('content')
     <div id="content-container">

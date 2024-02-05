@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('title', 'Recuperar')
+@section('metadades','Reccupera tu cuenta con tan solo poner tu email.')
 
 @section('content')
     <div class="login">

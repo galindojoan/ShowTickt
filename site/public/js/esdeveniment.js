@@ -175,7 +175,6 @@ function sessionSelect(ArraySession) {
             );
         });
     sessiones = ArraySession;
-    document.getElementById('inputSession').value=sessiones;
 }
 function ActivarEntrada() {
   document.getElementById(contadorSession).style.display = "block";

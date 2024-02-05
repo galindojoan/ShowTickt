@@ -5,7 +5,7 @@
 
 
 <?php $__env->startSection('content'); ?>
-    <div id="nousCamps" style="display: block;">
+    <form action="<?php echo e(route('recinte-nou')); ?>" method="GET" id="nousCamps" style="display: block;">
         <div class="form-group">
             <label for="nova_nom" class="form-label">Nombre del Local</label>
             <input type="text" class="form-controller" id="nova_nom" name="nova_nom" value="<?php echo e(old('nova_nom')); ?>">
@@ -81,15 +81,37 @@
                 </div>
             </div>
         </div>
-
+        <div id="errorDiv" class="errorDiv" style="display: none;">
+            <div id="errorContent">
+                <div class="error-message" id="error-message"></div>
+            </div>
+        </div>
         <input type="hidden" name="nova_user_id" value="<?php echo e(session('user_id')); ?>">
         <button type="submit" id="addAddress" class="btn btn-blue">Añadir nueva dirección</button>
 
-    </div>
+    </form>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>
     <script>
+        function mostrarMissatge(campo, missatge) {
+            // Mostrar el mensaje de error junto al campo correspondiente
+            var errorDiv = document.getElementById('errorDiv' + campo);
+            var errorContent = document.getElementById('errorContent');
+            var errorCampo = document.getElementById('error-' + campo);
+            var errorForm = document.getElementById('errorDiv');
+            var errorMessage = document.getElementById('error-message');
+
+            errorCampo.innerHTML = missatge;
+            errorMessage.innerHTML = "El formulario contiene errores!";
+            errorForm.style.display = 'block';
+            errorDiv.style.display = 'block';
+        }
+
+        function ocultarMissatge(campo) {
+            var errorDiv = document.getElementById('errorDiv' + campo);
+            errorDiv.style.display = 'none';
+        };
         function validarCamposVacios() {
             if (nousCamps.style.display === 'block') {
                 var novaNom = document.getElementById('nova_nom').value.trim();
@@ -158,13 +180,14 @@
                 ocultarMissatge('postal');
             }
 
-            if (parseInt(novaCapacitat) < 1) {
-                mostrarMissatge('capacitat', 'La capacidad del local debe ser de almenos 1 persona.')
-                return false;
-            } else {
-                ocultarMissatge('capacitat');
-            }
+            return true;
         }
+        document.querySelector('#addAddress').addEventListener('click', function(e){
+            e.preventDefault();
+            if (validarCamposVacios()) {
+                document.getElementById('nousCamps').submit();
+            }
+        }) 
     </script>
 
 <?php $__env->stopSection(); ?>

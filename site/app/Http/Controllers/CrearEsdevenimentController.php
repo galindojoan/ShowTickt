@@ -53,7 +53,7 @@ class CrearEsdevenimentController extends Controller
 
     public function store(Request $request)
     {
-        $recinteId = $this->getRecinteId($request);
+        $recinteId = $request->input('recinte');
 
         try {
             $esdeveniment = $this->createEsdeveniment($request, $recinteId);
@@ -71,11 +71,6 @@ class CrearEsdevenimentController extends Controller
 
     private function getRecinteId(Request $request)
     {
-        if ($request->filled('recinte') && $request->input('recinte') != '') {
-            // Si se ha seleccionado un recinto existente
-            return $request->input('recinte');
-        }
-
         // Si se ha seleccionado crear una nueva dirección
         $carrer = $request->input('nova_carrer');
         $numero = $request->input('nova_numero');
@@ -148,5 +143,10 @@ class CrearEsdevenimentController extends Controller
                 'sessios_id' => $sessioId,
             ]);
         }
+    }
+    public function crearRecinte(Request $request){
+        $this->getRecinteId($request);
+        Log::info('Recinto nuevo creado.');
+        return redirect('crear-esdeveniment');
     }
 }

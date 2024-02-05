@@ -58,6 +58,7 @@ Route::post('/crear-esdeveniment.store', [CrearEsdevenimentController::class, 's
 Route::post('/verificar-carrer', [CrearEsdevenimentController::class, 'verificarCarrer'])->name('verficiar-carrer')->middleware('check');
 
 Route::get('crear-recinte',[CrearEsdevenimentController::class, 'recintePage'])->name('crear-recinte')->middleware('check');
+Route::get('recinte-nou',[CrearEsdevenimentController::class, 'crearRecinte'])->name('recinte-nou')->middleware('check');
 
 Route::get('/administrar-esdeveniments', [AdministrarEsdevenimentsController::class, 'index'])->name('administrar-esdeveniments')->middleware('check');
 Route::post('/administrar-esdeveniments', [AdministrarEsdevenimentsController::class, 'index'])->name('administrar-esdeveniments')->middleware('check');

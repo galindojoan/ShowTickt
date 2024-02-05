@@ -794,11 +794,10 @@ a {
 
     .ComprarEntrada {
         #fechaSesion {
-    .ComprarEntrada {
-        #fechaSesion {
             margin-bottom: 15%;
         }
     }
+    
     .form-label {
         margin-bottom: 0px;
     }
@@ -963,9 +962,6 @@ a {
     /* Sombra de la tarjeta */
 }
 
-.opinion-content {
-}
-
 /*Ver Eventos fin*/
 @media screen and (max-width: 300px) {
     .titulo {
@@ -1023,7 +1019,6 @@ a {
                 font-size: 19px;
             }
         }
-
     }
 
     .linkPromotor {
@@ -1043,6 +1038,7 @@ a {
         grid-template-rows: auto auto auto;
         grid-template-columns: auto;
     }
+}
 }
 
 @media screen and (max-width: 1000px) {

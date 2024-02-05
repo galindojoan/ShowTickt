@@ -3,76 +3,113 @@
 @section('title', 'Confirmar compra')
 
 @section('content')
-    <h1>{{ $nomEvent }}</h1>
-    {{$sessionArray}}
-    <h5>Resumen De la Compra:</h5>
-    <div id="resumenCompra">
-        <p id="fecha">Fecha:</p>
-        <p id="hora">Horas:</p>
-        <div id="resumPrecio" class="ticketCompra">
-            <p>Nombre</p>
-            <p>cantidad</p>
-            <p>Precio</p>
-            <p>Total</p>
-        </div>
-        {{-- @foreach ($sessionArray as $session) --}}
-            @foreach ($entradaArray as $entrada)
-                <div class="ticketCompra">
-                    <p>{{ $entrada->nom }}</p>
-                    <p>{{ $entrada->cantidad }}</p>
-                    <p>{{ $entrada->precio }}€</p>
-                    <p>{{ $entrada->precio * $entrada->cantidad }}€</p>
-                </div>
-            @endforeach
-        {{-- @endforeach --}}
-    </div>
-    <p id="hora">Total: {{ $total }}€</p>
-    </div>
-    <form action="{{ route('confirmacioCompra') }}" method="post" class="ComprarEntrada" id="ComprarEntrada">
-        @if (1 == 2)
-            <div class="form-group">
-                <label for="nova_carrer" class="form-label">Nombre de la calle</label>
-                <input type="text" class="form-controller" id="nova_carrer" name="nova_carrer"
-                    value="{{ old('nova_carrer') }}">
-                <div id="errorDivcarrer" class="errorDiv" style="display: none;">
-                    <div id="errorContent">
-                        <div class="error-message" id="error-carrer"></div>
-                    </div>
-                </div>
-            </div>
-        @else
-            <div class="form-group">
-                <label for="nova_carrer" class="form-label">Nombre de la calle</label>
-                <input type="text" class="form-controller" id="nova_carrer" name="nova_carrer"
-                    value="{{ old('nova_carrer') }}">
-                <div id="errorDivcarrer" class="errorDiv" style="display: none;">
-                    <div id="errorContent">
-                        <div class="error-message" id="error-carrer"></div>
-                    </div>
-                </div>
-            </div>
-        @endif
-        <div class="form-group">
+<div id="content-container">
+  <center><h1>Resumen De la Compra:</h1></center>
+  <div class="resumenCompra">
+    <h5>Evento: {{ $nomEvent }}</h5>
+      <p id="fecha">Fecha:</p>
+      <p id="hora">Horas:</p>
+      <div class="ticketCompra">
+          <p>Nombre</p>
+          <p>cantidad</p>
+          <p>Precio</p>
+          <p>Total</p>
+      </div>
+      @foreach ($entradaArray as $entrada)
+          <div class="ticketCompra">
+              <p>{{ $entrada->nom }}</p>
+              <p>{{ $entrada->cantidad }}</p>
+              <p>{{ $entrada->precio }}€</p>
+              <p>{{ $entrada->precio * $entrada->cantidad }}€</p>
+          </div>
+      @endforeach
+      <p id="total">Total: {{ $total }}€</p>
+  </div>
+  <form action="{{ route('confirmacioCompra') }}" method="post" class="addEvent" id="ComprarEntrada">
+      <div class="form-group" id="error" style="display:none;">
+          <p id="mensajeError" class="msg-error"></p>
+      </div>
+      @if ($sessionArray->nominal == true)
+          <div class="form-group" id="divNominal">
+              <label for="nova_carrer" class="form-label">Nom</label>
+              <input type="text" class="form-controller" id="NomComprador" name="NomComprador">
+              <label for="nova_carrer" class="form-label">DNI</label>
+              <input type="text" class="form-controller" id="DNIComprador" name="DNIComprador">
+              <label for="nova_carrer" class="form-label">Telefon</label>
+              <input type="number" class="form-controller" id="telefonComprador" name="telefonComprador">
+          </div>
+          <div>
+            <button type="button" class="btn btn-add" id="añadirAsistente">Añadir mas asistentes</button>
+          </div>
+      @else
+          <div class="form-group">
+              <label for="nova_carrer" class="form-label">Nom</label>
+              <input type="text" class="form-controller" id="NomComprador" name="NomComprador">
+              <label for="nova_carrer" class="form-label">DNI</label>
+              <input type="text" class="form-controller" id="DNIComprador" name="DNIComprador">
+              <label for="nova_carrer" class="form-label">Telefon</label>
+              <input type="tel" class="form-controller" id="telefonComprador" name="telefonComprador">
+              <button type="button" class="btn btn-add" id="añadirAsistente" style='display:none;'>Añadir mas
+                  asistentes</button>
+          </div>
+      @endif
+      <div class="form-group">
           <label for="email" class="form-label">Mail:</label>
           <input type="email" class="form-controller" id="email" name="email">
       </div>
-      
-        <button type="submit" id="bottonCompra">Finalizar Compra</button>
-    </form>
-    {{-- <form action="{{ route('mostrar-esdeveniment', ['id' => $sessionArray->esdeveniments_id]) }}" id="vueltaAtras">
 
-    </form> --}}
+      <button type="button" id="bottonCompra">Finalizar Compra</button>
+  </form>
+</div>
+    
+    <form action="{{ route('mostrar-esdeveniment', ['id' => $sessionArray->esdeveniments_id]) }}" id="vueltaAtras">
+
+    </form>
 @endsection
 @section('scripts')
     <script>
+        let esError = true;
         const verFecha = document.getElementById("fecha");
         const verHora = document.getElementById("hora");
+        const MasAsistents = document.getElementById("añadirAsistente");
+        const divNominal = document.getElementById("divNominal");
+        const divError = document.getElementById("error");
+        const mensajeError = document.getElementById("mensajeError");
+        const comprar = document.getElementById("bottonCompra");
         const sessionArray = @json($sessionArray);
         const entradaArray = @json($entradaArray);
 
-        setTimeout(function () {
-                document.getElementById("vueltaAtras").submit();
-            }, (10 * 60 * 1000));
+        function ErroresdelTelefono() {
+            document.querySelectorAll('#telefonComprador').forEach(element => {
+                element.addEventListener('keyup', function() {
+                    var telefonoInput = this.value;
+                    if (!/^\d+$/.test(telefonoInput)) {
+                        mensajeError.textContent =
+                            'El número de teléfono solo puede contener dígitos numéricos.';
+                        divError.style.display = "block";
+                        esError = true;
+                        setTimeout(function() {
+                            divError.style.display = "none";
+                        }, 3000);
+                    } else if (telefonoInput.length > 9) {
+                        mensajeError.textContent =
+                            'El número de teléfono no puede tener más de 10 dígitos.';
+                        divError.style.display = "block";
+                        setTimeout(function() {
+                            divError.style.display = "none";
+                        }, 3000);
+                        esError = true;
+                    } else {
+                        esError = false;
+                    }
+
+                });
+            });
+        }
+        ErroresdelTelefono();
+        setTimeout(function() {
+            document.getElementById("vueltaAtras").submit();
+        }, (10 * 60 * 1000));
 
         function pad(numero) {
             return numero < 10 ? "0" + numero : numero;
@@ -92,8 +129,40 @@
             const minuto = pad(Horas.getMinutes());
             return `${hora}:${minuto}`;
         }
-        verFecha.textContent = `Fecha: ${fecha(sessionArray[0].data)}`;
-        verHora.textContent = `Hora: ${hora(sessionArray[0].data)}`;
+        verFecha.textContent = `Fecha: ${fecha(sessionArray.data)}`;
+        verHora.textContent = `Hora: ${hora(sessionArray.data)}`;
 
+        MasAsistents.addEventListener('click', function() {
+            var nuevoTipoEntrada = document.createElement('div');
+            nuevoTipoEntrada.innerHTML = `
+<div class="tipo-entrada">
+  <label for="nova_carrer" class="form-label">Nom</label>
+                <input type="text" class="form-controller" id="NomComprador" name="NomComprador">
+                <label for="nova_carrer" class="form-label">DNI</label>
+                <input type="text" class="form-controller" id="DNIComprador" name="DNIComprador">
+                <label for="nova_carrer" class="form-label">Telefon</label>
+                <input type="number" class="form-controller" id="telefonComprador" name="telefonComprador">
+</div>
+
+    `;
+
+            divNominal.appendChild(nuevoTipoEntrada);
+            ErroresdelTelefono();
+        });
+
+
+        comprar.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (esError) {
+                mensajeError.textContent = 'El número de teléfono tiene Errores O no esta';
+                divError.style.display = "block";
+                setTimeout(function() {
+                    divError.style.display = "none";
+                }, 3000);
+            } else {
+              document.getElementById("ComprarEntrada").submit();
+            }
+        })
+        
     </script>
 @endsection

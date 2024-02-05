@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('title', 'Añadir Sesion')
+@section('metadades','Edita una sesión de tu evento para que los clientes vean los datos actualizados.')
 
 @section('content')
     <div id="content-container">

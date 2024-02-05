@@ -17,11 +17,11 @@
             <form action="<?php echo e(route('confirmacioCompra')); ?>" method="post" class="ComprarEntrada" id="ComprarEntrada"
                 enctype="multipart/form-data" style="justify-self: normal">
                 <?php echo csrf_field(); ?>
-                <input type="hidden" id="detallesEvents" name='detallesEvents' value='<?php echo e($esdeveniment); ?>'>
+                <input type="hidden" id="detallesEvents" name='detallesEvents' value='<?php echo e($esdeveniment->nom); ?>'>
                 <div class="inlineDiv">
-                    <label for="session" class="form-label" id="fechaSesion"><strong>Sesiones:</strong></label>
-                    <button id="buttonSesion" class="btn btn-blue" style="display: none;">Cambiar sesión</button>
-                </div>
+                  <label for="session" class="form-label" id="fechaSesion"><strong>Sesiones:</strong></label>
+                  <button id="buttonSesion" class="btn btn-blue" style="display: none;">Cambiar sesión</button>
+              </div>
                 <?php if(count($fechas) == 1): ?>
                     <div class="form-group">
 
@@ -70,12 +70,12 @@
 
                         </div>
                     </div>
-                    <div class="form-group inlineDiv">
-                        <p id="precioTotal" class="form-label">Total: 0€ </p>
-                        <input type="hidden" id="arrayEntradas" class='arrayEntradas'>
-                        <input type="hidden" id="inputTotal" name='inputTotal'>
-                        <button type="submit" id="bottonCompra" class="btn btn-orange">Realizar Compra</button>
-                    </div>
+                  <div class="form-group inlineDiv">
+                    <p id="precioTotal" class="form-label">Total: 0€ </p>
+                    <input type="hidden" id="arrayEntradas" class='arrayEntradas'>
+                    <input type="hidden" id="inputTotal" name='inputTotal'>
+                    <button type="submit" id="bottonCompra" class="btn btn-orange">Realizar Compra</button>
+                </div>
                 </div>
             </form>
 
@@ -116,11 +116,12 @@
                     events: crearEventos(fechasSessiones),
                     eventClick: function(event) {
                         let sessionId = event.event.title.split(" ");
-                        sessionSelect(fechasSessiones[(parseInt(sessionId[0]) - 1)]);
                         document.getElementById('calendar').style.display = 'none';
                         document.getElementById('fechaSesion').innerHTML =
                             `<strong>Sesion:</strong> ${fechasSessiones[(parseInt(sessionId[0]) - 1)].data}`;
                         document.getElementById('buttonSesion').style.display = 'block';
+                        sessionSelect(fechasSessiones[(parseInt(sessionId[0]) - 1)]);
+
                     }
                 });
                 calendar.render();

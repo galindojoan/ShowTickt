@@ -1,6 +1,8 @@
 @extends('layouts.master')
 
 @section('title', 'crear')
+@section('metadades','Añade un nuevo local a la base de datos para poder añadirla al momento de crear tu evento.')
+
 
 @section('content')
     <div id="nousCamps" style="display: none;">

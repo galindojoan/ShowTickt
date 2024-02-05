@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('title', 'Home')
+@section('metadades','Entra en ShowTickt para poder comprar tickets a los mejores eventos disponibles.')
 
 @section('content')
     @if ($events->isEmpty())

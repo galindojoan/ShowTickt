@@ -22,6 +22,9 @@ class CrearEsdevenimentController extends Controller
 
         return view('crearEsdeveniment', compact('categories', 'recintes', 'noRecintes'));
     }
+    public function recintePage(){
+        return view('crearRecinte');
+    }
 
     public function verificarCarrer($carrer, $numero)
     {

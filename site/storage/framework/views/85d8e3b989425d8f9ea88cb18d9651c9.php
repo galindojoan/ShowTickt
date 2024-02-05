@@ -1,7 +1,7 @@
 
 
 <?php $__env->startSection('title', 'Login'); ?>
-<?php $__env->startSection('metadades', 'Administra todos los eventos que hayas creados, modificalos, eliminalos, ponlos en oculto o públicalos.'); ?>
+<?php $__env->startSection('metadades', 'Inicia sesión en tu cuenta para poder crear eventos nuevos o modificar los existentes.'); ?>
 
 
 <?php $__env->startSection('content'); ?>

@@ -70,17 +70,17 @@
                         <a href="{{ route('mostrar-esdeveniment', ['id' => $esdeveniment->id]) }}" class="event-link">
                             <div class="event-card">
                                 <div class="event-details">
-                                    <p>{{ $esdeveniment->nom }}</p>
+                                    <h1>{{ $esdeveniment->nom }}</h1>
                                     @if ($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->data !== null)
-                                        <p>{{ $esdeveniment->sesions->first()->data }}</p>
+                                        <h3>{{ $esdeveniment->sesions->first()->data }}</h3>
                                     @else
-                                    <p>No hay sesiones</p>
+                                    <h3>No hay sesiones</h3>
                                     @endif
-                                        <p>{{ $esdeveniment->recinte->lloc }}</p>
+                                        <h4>{{ $esdeveniment->recinte->lloc }}</h4>
                                         @if ($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->entrades->isNotEmpty())
-                                            <p>{{ $esdeveniment->sesions->first()->entrades->first()->preu }} €</p>
+                                            <h2>{{ $esdeveniment->sesions->first()->entrades->first()->preu }} €</h2>
                                         @else
-                                        <p>Entradas Agotadas</p>
+                                        <h2>Entradas Agotadas</h2>
                                         @endif
                                 </div>
                                 <img src="{{ Storage::url($esdeveniment->imatge) }}" alt="Imatge de l'esdeveniment">

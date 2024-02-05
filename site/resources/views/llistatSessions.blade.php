@@ -16,7 +16,7 @@
                             <p>{{ $sessio->esdeveniment->nom }}</p>
                             <p>{{ $sessio->data }}</p>
                             @if ($sessio->entrades->isNotEmpty())
-                                <p>{{ $sessio->entrades->first()->preu }} €</p>
+                                <p>Entradas disponibles: {{ $sessio->entrades->sum('quantitat') }}</p>
                             @else
                                 <p>Sin entradas</p>
                             @endif

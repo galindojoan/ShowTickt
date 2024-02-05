@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('title', 'Añadir Sesion')
+@section('metadades','Añade otra fecha a un evento ya creado.')
 
 @section('content')
 <div id="content-container">

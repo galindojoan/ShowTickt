@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('title', 'resultados')
+@section('metadades', 'Administra todos los eventos que hayas creados, modificalos, eliminalos, ponlos en oculto o públicalos.')
 
 @section('content')
     @if ($esdeveniments->isEmpty())

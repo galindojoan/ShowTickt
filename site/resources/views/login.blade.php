@@ -1,6 +1,8 @@
 @extends('layouts.master')
 
 @section('title', 'Login')
+@section('metadades', 'Inicia sesión en tu cuenta para poder crear eventos nuevos o modificar los existentes.')
+
 
 @section('content')
 <div class="login">

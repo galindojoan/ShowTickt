@@ -1,6 +1,8 @@
 
 
 <?php $__env->startSection('title', 'Login'); ?>
+<?php $__env->startSection('metadades', 'Administra todos los eventos que hayas creados, modificalos, eliminalos, ponlos en oculto o públicalos.'); ?>
+
 
 <?php $__env->startSection('content'); ?>
 <div class="login">

@@ -312,6 +312,11 @@ footer #footerHome:hover:active {
   font-size: 17px;
 }
 
+.ticketCompra {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
 .ahref {
   border: none;
   width: min-content;

@@ -76,20 +76,20 @@ class Categoria extends Model
 
             if ($cerca) {
                 $query->where(function ($query) use ($cerca, $categoryId) {
-                    $query->whereRaw('LOWER(nom) LIKE ?', ["%" . strtolower($cerca) . "%"])
+                    $query->whereRaw("LOWER(unaccent(nom)) LIKE LOWER(unaccent(?))", ["%" . $cerca . "%"])
                         ->where('categoria_id', $categoryId);
                 })
                     ->orWhereHas('recinte', function ($query) use ($cerca, $categoryId) {
-                        $query->whereRaw('LOWER(lloc) LIKE ?', ["%" . strtolower($cerca) . "%"])
+                        $query->whereRaw("LOWER(unaccent(lloc)) LIKE LOWER(unaccent(?))", ["%" . $cerca . "%"])
                             ->where('categoria_id', $categoryId);
                     });
             }
         } else {
             if ($cerca) {
                 $query->where(function ($query) use ($cerca) {
-                    $query->whereRaw('LOWER(nom) LIKE ?', ["%" . strtolower($cerca) . "%"])
+                    $query->whereRaw("LOWER(unaccent(nom)) LIKE LOWER(unaccent(?))", ["%" . $cerca . "%"])
                         ->orWhereHas('recinte', function ($query) use ($cerca) {
-                            $query->whereRaw('LOWER(lloc) LIKE ?', ["%" . strtolower($cerca) . "%"]);
+                            $query->whereRaw("LOWER(unaccent(lloc)) LIKE LOWER(unaccent(?))", ["%" . $cerca . "%"]);
                         });
                 });
             }

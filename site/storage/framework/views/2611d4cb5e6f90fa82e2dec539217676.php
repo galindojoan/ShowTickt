@@ -11,7 +11,7 @@
             <form action="<?php echo e(route('detallesLocal', ['id' => $esdeveniment->id])); ?>" method="get" class="detallesLocal"
                 id="detallesLocal">
                 <p><strong>Local:</strong> <?php echo e($esdeveniment->recinte->lloc); ?></p>
-                <button type="submit" class="btn btn-add">Ver Local</button>
+                <button type="submit" class="btn btn-blue">Ver Local</button>
             </form>
 
             <form action="<?php echo e(route('confirmacioCompra')); ?>" method="post" class="ComprarEntrada" id="ComprarEntrada"
@@ -20,7 +20,7 @@
                 <input type="hidden" id="detallesEvents" name='detallesEvents' value='<?php echo e($esdeveniment); ?>'>
                 <div class="inlineDiv">
                     <label for="session" class="form-label" id="fechaSesion"><strong>Sesiones:</strong></label>
-                    <button id="buttonSesion" class="btn btn-add" style="display: none;">Cambiar sesión</button>
+                    <button id="buttonSesion" class="btn btn-blue" style="display: none;">Cambiar sesión</button>
                 </div>
                 <?php if(count($fechas) == 1): ?>
                     <div class="form-group">
@@ -61,7 +61,7 @@
                     </div>
                     <div style="margin-bottom: 8%">
                         <input type="number" id="cantidad" name="cantidad" min="1" max="10" value="2" />
-                        <button type="button" id="reservarEntrada" class="btn btn-add">Añadir Tickets</button>
+                        <button type="button" id="reservarEntrada" class="btn btn-blue">Añadir Tickets</button>
                     </div>
 
                     <div class="form-group" id="listaEntradas" style="display:none;">
@@ -74,7 +74,7 @@
                         <p id="precioTotal" class="form-label">Total: 0€ </p>
                         <input type="hidden" id="arrayEntradas" class='arrayEntradas'>
                         <input type="hidden" id="inputTotal" name='inputTotal'>
-                        <button type="submit" id="bottonCompra" class="boton">Confirmar Compra</button>
+                        <button type="submit" id="bottonCompra" class="btn btn-orange">Realizar Compra</button>
                     </div>
                 </div>
             </form>

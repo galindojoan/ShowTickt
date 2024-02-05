@@ -24,9 +24,9 @@
             <div id="tiposEntradas">
                 <!-- Contenido dinámico para los tipos de entradas -->
             </div>
-            <div class="button-entrada">
-                <button type="button" class="btn btn-add" id="agregarTipoEntrada">Agregar Tipo de Entrada</button>
-                <button type="button" class="btn btn-eliminar" id="eliminarTipoEntrada"
+            <div class="button-container">
+                <button type="button" class="btn btn-blue" id="agregarTipoEntrada">Agregar Tipo de Entrada</button>
+                <button type="button" class="btn btn-red" id="eliminarTipoEntrada"
                     style="display: none;">Eliminar
                     Entrada</button>
             </div>
@@ -61,7 +61,7 @@
             </div>
         </div>
 
-        <button type="button" class="btn btn-add" id="validarYCrear">Añadir Sesión</button>
+        <button type="button" class="btn btn-blue" id="validarYCrear">Añadir Sesión</button>
 
     </form>
 </div>

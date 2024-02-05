@@ -91,108 +91,55 @@ footer {
 
 /*BOTONES*/
 
-@mixin btns {
-    background-color: inherit;
-    height: fit-content;
-    border: 0;
-    border-radius: 20%;
-    margin-left: -42px;
-    padding: 5px;
-    vertical-align: middle;
-}
-.boton {
-    color: #000;
-    background-color: #ff5e00;
+.btn {
+    cursor: pointer;
     border-radius: 5px;
     border: none;
-    padding: 3px;
-    padding-left: 15px;
-    padding-right: 15px;
-    font-weight: 700;
+    padding: 5px 15px 5px 15px;
     font-size: 15px;
+    font-weight: 700;
     margin: 2%;
-
-    &:hover {
-        cursor: pointer;
-        background-color: #f2ab7e;
-    }
-
-    &:active {
-        background-color: #ff5e00;
-    }
-}
-
-.button-entrada {
-    display: flex;
-    justify-content: space-between;
-    /* Coloca los elementos al principio y al final del contenedor */
-    margin-top: 10px;
-}
-
-/* Estilos para los botones */
-.btn {
-    padding: 10px 20px;
-    font-size: 18px;
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-
-    &-add {
+    &-blue {
         background-color: #007bff;
         color: #fff;
-
-        &-add:hover {
+        &:hover {
             background-color: #0056b3;
             /* Cambia el color de fondo al pasar el mouse */
             color: #fff;
             /* Cambia el color del texto al pasar el mouse */
         }
     }
-
-    &-primary {
-        @include btns;
-
+    &-icon {
+        background-color: inherit;
+        height: fit-content;
+        border: 0;
+        border-radius: 20%;
+        margin-left: -42px;
+        padding: 5px;
+        vertical-align: middle;
         &:hover {
             background-color: white;
         }
     }
-
-    &-secondary {
-        background-color: #6c757d;
-        color: #fff;
-    }
-
-    &-cancelar {
-        background-color: #dc3545;
-        /* Rojo */
-        color: #fff;
-
-        /* Estilos para el hover de btn-cancelar */
+    &-orange {
+        color: #000;
+        background-color: #ff5e00;
+        font-size: 13px;
         &:hover {
-            background-color: #ff3333;
-            /* Cambia el color de fondo al pasar el mouse */
-            color: #fff;
-            /* Cambia el color del texto al pasar el mouse */
+            cursor: pointer;
+            background-color: #f2ab7e;
+        }    
+        &:active {
+            background-color: #ff5e00;
         }
     }
-
-    &-eliminar {
-        background-color: #dc3545;
-        /* Rojo */
-        color: #fff;
-
-        &:hover {
-            background-color: #c82333;
-            /* Rojo oscuro al pasar el ratón */
-        }
-    }
-    &-entrada{
+    &-red {
         background-color: #C40C0C;
+        /* Rojo */
         color: #fff;
-        &:hover{
-            background-color: #c82333;
+
+        &:hover {
+            background-color: #880815;
         }
     }
 }
@@ -204,15 +151,6 @@ footer {
     grid-gap: 20%;
     grid-template-columns: auto auto auto;
 }
-
-.custom-button {
-    background-color: #3490dc;
-    color: #ffffff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-}
-
 .buttons {
     display: flex;
     justify-content: space-around;
@@ -517,27 +455,6 @@ input[class="form-control"] {
     height: 15px;
 }
 
-.linkPromotor {
-    color: #000;
-    border: none;
-    border-radius: 5px;
-    margin: 0px;
-    padding: 5px;
-    font-weight: 700;
-    font-size: 17px;
-    transition: color 0.3s ease;
-    box-shadow: 0 5px 1px rgba(0, 0, 0, 0.1);
-
-    &:hover {
-        cursor: pointer;
-        transform: scale(1.05);
-    }
-
-    &:active {
-        transform: scale(0.9);
-    }
-}
-
 .pagination .page-link.small {
     font-size: 3em;
     /* Ajusta el tamaño del texto */
@@ -840,11 +757,6 @@ a {
     grid-column: 1/2;
     justify-items: center;
     .btn{
-        padding: 7px;
-        margin: 16px;
-        margin-top: 16px;
-        margin-bottom: 10px;
-        font-size: 13px;
         &-entrada{
             height: fit-content;
             border: none;

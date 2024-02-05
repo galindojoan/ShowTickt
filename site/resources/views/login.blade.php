@@ -18,7 +18,7 @@
                 <input type="password" name="password" id="password" placeholder="Contraseña" required>
                 <a href="recuperar">Contraseña olvidada?</a>
             </div>
-            <input type="submit" value="Acceder" class="boton">
+            <input type="submit" value="Acceder" class="btn btn-orange">
         </form>
     </div>
 </div>

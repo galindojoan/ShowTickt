@@ -89,7 +89,7 @@
                     </div>
                   <div class="form-group inlineDiv">
                     <p id="precioTotal" class="form-label">Total: 0€ </p>
-                    <input type="hidden" id="arrayEntradas" class='arrayEntradas'>
+                    <input type="hidden" id="arrayEntradas" name='arrayEntradas'>
                     <input type="hidden" id="inputTotal" name='inputTotal'>
                     <button type="submit" id="bottonCompra" class="btn btn-orange">Realizar Compra</button>
                 </div>

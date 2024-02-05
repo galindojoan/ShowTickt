@@ -1,4 +1,5 @@
 <?php $__env->startSection('title', 'Editar Evento'); ?>
+<?php $__env->startSection('metadades','Edita tu evento para actualizar correctamente los datos de este.'); ?>
 
 <?php $__env->startSection('content'); ?>
     <div class="containerEvent">

@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('title', 'crear')
+@section('metadades','Crea un evento nuevo.')
 
 @section('content')
     <div id="content-container">

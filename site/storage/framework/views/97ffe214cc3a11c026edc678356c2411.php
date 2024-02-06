@@ -116,11 +116,12 @@
                     events: crearEventos(fechasSessiones),
                     eventClick: function(event) {
                         let sessionId = event.event.title.split(" ");
-                        sessionSelect(fechasSessiones[(parseInt(sessionId[0]) - 1)]);
                         document.getElementById('calendar').style.display = 'none';
                         document.getElementById('fechaSesion').innerHTML =
                             `<strong>Sesion:</strong> ${fechasSessiones[(parseInt(sessionId[0]) - 1)].data}`;
                         document.getElementById('buttonSesion').style.display = 'block';
+                        sessionSelect(fechasSessiones[(parseInt(sessionId[0]) - 1)]);
+
                     }
                 });
                 calendar.render();

@@ -3,65 +3,67 @@
 @section('title', 'Confirmar compra')
 
 @section('content')
-<div id="content-container">
-  <center><h1>Resumen De la Compra:</h1></center>
-  <div class="resumenCompra">
-    <h5>Evento: {{ $nomEvent }}</h5>
-      <p id="fecha">Fecha:</p>
-      <p id="hora">Horas:</p>
-      <div class="ticketCompra">
-          <p>Nombre</p>
-          <p>cantidad</p>
-          <p>Precio</p>
-          <p>Total</p>
-      </div>
-      @foreach ($entradaArray as $entrada)
-          <div class="ticketCompra">
-              <p>{{ $entrada->nom }}</p>
-              <p>{{ $entrada->cantidad }}</p>
-              <p>{{ $entrada->precio }}€</p>
-              <p>{{ $entrada->precio * $entrada->cantidad }}€</p>
-          </div>
-      @endforeach
-      <p id="total">Total: {{ $total }}€</p>
-  </div>
-  <form action="{{ route('confirmacioCompra') }}" method="post" class="addEvent" id="ComprarEntrada">
-      <div class="form-group" id="error" style="display:none;">
-          <p id="mensajeError" class="msg-error"></p>
-      </div>
-      @if ($sessionArray->nominal == true)
-          <div class="form-group" id="divNominal">
-              <label for="nova_carrer" class="form-label">Nom</label>
-              <input type="text" class="form-controller" id="NomComprador" name="NomComprador">
-              <label for="nova_carrer" class="form-label">DNI</label>
-              <input type="text" class="form-controller" id="DNIComprador" name="DNIComprador">
-              <label for="nova_carrer" class="form-label">Telefon</label>
-              <input type="number" class="form-controller" id="telefonComprador" name="telefonComprador">
-          </div>
-          <div>
-            <button type="button" class="btn btn-add" id="añadirAsistente">Añadir mas asistentes</button>
-          </div>
-      @else
-          <div class="form-group">
-              <label for="nova_carrer" class="form-label">Nom</label>
-              <input type="text" class="form-controller" id="NomComprador" name="NomComprador">
-              <label for="nova_carrer" class="form-label">DNI</label>
-              <input type="text" class="form-controller" id="DNIComprador" name="DNIComprador">
-              <label for="nova_carrer" class="form-label">Telefon</label>
-              <input type="tel" class="form-controller" id="telefonComprador" name="telefonComprador">
-              <button type="button" class="btn btn-add" id="añadirAsistente" style='display:none;'>Añadir mas
-                  asistentes</button>
-          </div>
-      @endif
-      <div class="form-group">
-          <label for="email" class="form-label">Mail:</label>
-          <input type="email" class="form-controller" id="email" name="email">
-      </div>
+    <div id="content-container">
+        <center>
+            <h1>Resumen De la Compra:</h1>
+        </center>
+        <div class="resumenCompra">
+            <h5>Evento: {{ $nomEvent }}</h5>
+            <p id="fecha">Fecha:</p>
+            <p id="hora">Horas:</p>
+            <div class="ticketCompra">
+                <p>Nombre</p>
+                <p>cantidad</p>
+                <p>Precio</p>
+                <p>Total</p>
+            </div>
+            @foreach ($entradaArray as $entrada)
+                <div class="ticketCompra">
+                    <p>{{ $entrada->nom }}</p>
+                    <p>{{ $entrada->cantidad }}</p>
+                    <p>{{ $entrada->precio }}€</p>
+                    <p>{{ $entrada->precio * $entrada->cantidad }}€</p>
+                </div>
+            @endforeach
+            <p id="total">Total: {{ $total }}€</p>
+        </div>
+        <form action="{{ route('confirmacioCompra') }}" method="post" class="addEvent" id="ComprarEntrada">
+            <div class="form-group" id="error" style="display:none;">
+                <p id="mensajeError" class="msg-error"></p>
+            </div>
+            @if ($sessionArray->nominal == true)
+                @foreach ($entradaArray as $entrada)
+                {{$entrada->nom}}
+                    @for ($i = 1; $i <= $entrada->cantidad; $i++)
+                        <div class="form-group" id="divNominal">
+                            <label for="nova_carrer" class="form-label">Nom</label>
+                            <input type="text" class="form-controller" id="NomComprador" name="NomComprador">
+                            <label for="nova_carrer" class="form-label">DNI</label>
+                            <input type="text" class="form-controller" id="DNIComprador" name="DNIComprador">
+                            <label for="nova_carrer" class="form-label">Telefon</label>
+                            <input type="number" class="form-controller" id="telefonComprador" name="telefonComprador">
+                        </div>
+                    @endfor
+                @endforeach
+            @else
+                <div class="form-group">
+                    <label for="nova_carrer" class="form-label">Nom</label>
+                    <input type="text" class="form-controller" id="NomComprador" name="NomComprador">
+                    <label for="nova_carrer" class="form-label">DNI</label>
+                    <input type="text" class="form-controller" id="DNIComprador" name="DNIComprador">
+                    <label for="nova_carrer" class="form-label">Telefon</label>
+                    <input type="tel" class="form-controller" id="telefonComprador" name="telefonComprador">
+                </div>
+            @endif
+            <div class="form-group">
+                <label for="email" class="form-label">Mail:</label>
+                <input type="email" class="form-controller" id="email" name="email">
+            </div>
 
-      <button type="button" id="bottonCompra">Finalizar Compra</button>
-  </form>
-</div>
-    
+            <button type="button" id="bottonCompra" class="btn btn-blue">Finalizar Compra</button>
+        </form>
+    </div>
+
     <form action="{{ route('mostrar-esdeveniment', ['id' => $sessionArray->esdeveniments_id]) }}" id="vueltaAtras">
 
     </form>
@@ -132,24 +134,6 @@
         verFecha.textContent = `Fecha: ${fecha(sessionArray.data)}`;
         verHora.textContent = `Hora: ${hora(sessionArray.data)}`;
 
-        MasAsistents.addEventListener('click', function() {
-            var nuevoTipoEntrada = document.createElement('div');
-            nuevoTipoEntrada.innerHTML = `
-<div class="tipo-entrada">
-  <label for="nova_carrer" class="form-label">Nom</label>
-                <input type="text" class="form-controller" id="NomComprador" name="NomComprador">
-                <label for="nova_carrer" class="form-label">DNI</label>
-                <input type="text" class="form-controller" id="DNIComprador" name="DNIComprador">
-                <label for="nova_carrer" class="form-label">Telefon</label>
-                <input type="number" class="form-controller" id="telefonComprador" name="telefonComprador">
-</div>
-
-    `;
-
-            divNominal.appendChild(nuevoTipoEntrada);
-            ErroresdelTelefono();
-        });
-
 
         comprar.addEventListener('click', function(e) {
             e.preventDefault();
@@ -160,9 +144,8 @@
                     divError.style.display = "none";
                 }, 3000);
             } else {
-              document.getElementById("ComprarEntrada").submit();
+                document.getElementById("ComprarEntrada").submit();
             }
         })
-        
     </script>
 @endsection

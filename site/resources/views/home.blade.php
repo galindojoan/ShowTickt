@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('title', 'Home')
+@section('metadades','Entra en ShowTickt para poder comprar tickets a los mejores eventos disponibles.')
 
 @section('content')
     @if ($events->isEmpty())
@@ -68,23 +69,8 @@
                             $cont++;
                         @endphp
                         <a href="{{ route('mostrar-esdeveniment', ['id' => $esdeveniment->id]) }}" class="event-link">
-                            <div class="event-card">
-                                <div class="event-details">
-                                    <p>{{ $esdeveniment->nom }}</p>
-                                    @if ($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->data !== null)
-                                        <p>{{ $esdeveniment->sesions->first()->data }}</p>
-                                    @else
-                                    <p>No hay sesiones</p>
-                                    @endif
-                                        <p>{{ $esdeveniment->recinte->lloc }}</p>
-                                        @if ($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->entrades->isNotEmpty())
-                                            <p>{{ $esdeveniment->sesions->first()->entrades->first()->preu }} €</p>
-                                        @else
-                                        <p>Entradas Agotadas</p>
-                                        @endif
-                                </div>
-                                <img src="{{ Storage::url($esdeveniment->imatge) }}" alt="Imatge de l'esdeveniment">
-                            </div>
+                            {{-- Incluir el componente de tarjeta de evento --}}
+                            @include('components.event-card', ['esdeveniment' => $esdeveniment])
                         </a>
                     @endif
                 @endforeach

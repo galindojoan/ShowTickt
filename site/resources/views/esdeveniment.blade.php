@@ -1,6 +1,8 @@
 @extends('layouts.master')
 
 @section('title', 'Detalles del Evento')
+@section('metadades','Mira los detalles sobre el evento {{$esdeveniment->nom}} y adquiere sus entradas.')
+@section('metaimages','{{$esdeveniment->imatge}}')
 
 @section('content')
     <div class="containerEvent">
@@ -19,11 +21,11 @@
             <form action="{{ route('confirmacioCompra') }}" method="post" class="ComprarEntrada" id="ComprarEntrada"
                 enctype="multipart/form-data" style="justify-self: normal">
                 @csrf
-                <input type="hidden" id="detallesEvents" name='detallesEvents' value='{{ $esdeveniment }}'>
+                <input type="hidden" id="detallesEvents" name='detallesEvents' value='{{$esdeveniment->nom}}'>
                 <div class="inlineDiv">
-                    <label for="session" class="form-label" id="fechaSesion"><strong>Sesiones:</strong></label>
-                    <button id="buttonSesion" class="btn btn-blue" style="display: none;">Cambiar sesión</button>
-                </div>
+                  <label for="session" class="form-label" id="fechaSesion"><strong>Sesiones:</strong></label>
+                  <button id="buttonSesion" class="btn btn-blue" style="display: none;">Cambiar sesión</button>
+              </div>
                 @if (count($fechas) == 1)
                     <div class="form-group">
 
@@ -85,12 +87,12 @@
 
                         </div>
                     </div>
-                    <div class="form-group inlineDiv">
-                        <p id="precioTotal" class="form-label">Total: 0€ </p>
-                        <input type="hidden" id="arrayEntradas" class='arrayEntradas'>
-                        <input type="hidden" id="inputTotal" name='inputTotal'>
-                        <button type="submit" id="bottonCompra" class="btn btn-orange">Realizar Compra</button>
-                    </div>
+                  <div class="form-group inlineDiv">
+                    <p id="precioTotal" class="form-label">Total: 0€ </p>
+                    <input type="hidden" id="arrayEntradas" name='arrayEntradas'>
+                    <input type="hidden" id="inputTotal" name='inputTotal'>
+                    <button type="submit" id="bottonCompra" class="btn btn-orange">Realizar Compra</button>
+                </div>
                 </div>
             </form>
 
@@ -131,11 +133,12 @@
                     events: crearEventos(fechasSessiones),
                     eventClick: function(event) {
                         let sessionId = event.event.title.split(" ");
-                        sessionSelect(fechasSessiones[(parseInt(sessionId[0]) - 1)]);
                         document.getElementById('calendar').style.display = 'none';
                         document.getElementById('fechaSesion').innerHTML =
                             `<strong>Sesion:</strong> ${fechasSessiones[(parseInt(sessionId[0]) - 1)].data}`;
                         document.getElementById('buttonSesion').style.display = 'block';
+                        sessionSelect(fechasSessiones[(parseInt(sessionId[0]) - 1)]);
+
                     }
                 });
                 calendar.render();

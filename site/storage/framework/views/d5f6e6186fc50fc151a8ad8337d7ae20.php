@@ -36,7 +36,7 @@
                     <!-- Campo de entrada oculto para la categoría -->
                     <input type="hidden" name="category" value="<?php echo e($categoryId); ?>">
                     <input type="text" name="q" class="form-control" placeholder="Buscar">
-                    <button type="submit" class="btn-primary"><svg xmlns="http://www.w3.org/2000/svg" height="16"
+                    <button type="submit" class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" height="16"
                             width="16"
                             viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
                             <path fill="#1e91d9"
@@ -49,7 +49,7 @@
 
             <?php else: ?><?php echo e(route('login')); ?> <?php endif; ?>">
                 <?php echo csrf_field(); ?>
-                <input class="linkPromotor" type="submit" value="PROMOTORES">
+                <input class="btn btn-orange" type="submit" value="PROMOTORES">
             </form>
         </div>
 
@@ -67,23 +67,8 @@
                             $cont++;
                         ?>
                         <a href="<?php echo e(route('mostrar-esdeveniment', ['id' => $esdeveniment->id])); ?>" class="event-link">
-                            <div class="event-card">
-                                <div class="event-details">
-                                    <p><?php echo e($esdeveniment->nom); ?></p>
-                                    <?php if($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->data !== null): ?>
-                                        <p><?php echo e($esdeveniment->sesions->first()->data); ?></p>
-                                    <?php else: ?>
-                                    <p>No hay sesiones</p>
-                                    <?php endif; ?>
-                                        <p><?php echo e($esdeveniment->recinte->lloc); ?></p>
-                                        <?php if($esdeveniment->sesions->isNotEmpty() && $esdeveniment->sesions->first()->entrades->isNotEmpty()): ?>
-                                            <p><?php echo e($esdeveniment->sesions->first()->entrades->first()->preu); ?> €</p>
-                                        <?php else: ?>
-                                        <p>Entradas Agotadas</p>
-                                        <?php endif; ?>
-                                </div>
-                                <img src="<?php echo e(Storage::url($esdeveniment->imatge)); ?>" alt="Imatge de l'esdeveniment">
-                            </div>
+                            
+                            <?php echo $__env->make('components.event-card', ['esdeveniment' => $esdeveniment], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                         </a>
                     <?php endif; ?>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

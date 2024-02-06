@@ -43,7 +43,7 @@ class PasswordController extends Controller
                 Log::error('Error en el envio de mail por contraseña olvidada - Usuario: '. $username .', Error:'. $e->getMessage());
             }
         }else{
-            return redirect('recuperar')->withErrors(array('error' => 'No existe esa cuenta.'));
+            return redirect('recuperar')->withErrors(array('error' => 'Se ha producido un error.'));
         }
     }
     public function cambiarPassword(Request $request){

@@ -5,13 +5,13 @@
 @section('content')
     <div id="content-container">
         <center>
-            <h1>Resumen De la Compra:</h1>
+            <h1>Resumen de la compra:</h1>
         </center>
         <div class="resumenCompra">
-            <h5>Evento: {{ $nomEvent }}</h5>
+            <h3>Evento: {{ $nomEvent }}</h3>
             <p id="fecha">Fecha:</p>
             <p id="hora">Horas:</p>
-            <div class="ticketCompra">
+            <div class="ticketCompra" style="background-color: rgb(228, 228, 228)">
                 <p>Nombre</p>
                 <p>cantidad</p>
                 <p>Precio</p>
@@ -28,20 +28,22 @@
             <p id="total">Total: {{ $total }}€</p>
         </div>
         <form action="{{ route('confirmacioCompra') }}" method="post" class="addEvent" id="ComprarEntrada">
-            <div class="form-group" id="error" style="display:none;">
-                <p id="mensajeError" class="msg-error"></p>
-            </div>
+            
             @if ($sessionArray->nominal == true)
                 @foreach ($entradaArray as $entrada)
-                {{$entrada->nom}}
+                <h3>{{$entrada->nom}}</h3>
                     @for ($i = 1; $i <= $entrada->cantidad; $i++)
+                    <div class="form-group" id="error" style="display:none;">
+                      <p id="mensajeError" class="msg-error"></p>
+                  </div>
                         <div class="form-group" id="divNominal">
                             <label for="nova_carrer" class="form-label">Nom</label>
                             <input type="text" class="form-controller" id="NomComprador" name="NomComprador">
                             <label for="nova_carrer" class="form-label">DNI</label>
                             <input type="text" class="form-controller" id="DNIComprador" name="DNIComprador">
                             <label for="nova_carrer" class="form-label">Telefon</label>
-                            <input type="number" class="form-controller" id="telefonComprador" name="telefonComprador">
+                            <input type="tel" pattern="[0-9]{10}" class="form-controller" id="telefonComprador" name="telefonComprador" 
+                            maxlength="9" required>
                         </div>
                     @endfor
                 @endforeach
@@ -52,9 +54,10 @@
                     <label for="nova_carrer" class="form-label">DNI</label>
                     <input type="text" class="form-controller" id="DNIComprador" name="DNIComprador">
                     <label for="nova_carrer" class="form-label">Telefon</label>
-                    <input type="tel" class="form-controller" id="telefonComprador" name="telefonComprador">
+                    <input type="tel" class="form-controller" pattern="[0-9]{10}" maxlength="9" id="telefonComprador" name="telefonComprador">
                 </div>
             @endif
+            <br><br>
             <div class="form-group">
                 <label for="email" class="form-label">Mail:</label>
                 <input type="email" class="form-controller" id="email" name="email">

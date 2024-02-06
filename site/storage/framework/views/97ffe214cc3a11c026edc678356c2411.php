@@ -1,4 +1,6 @@
 <?php $__env->startSection('title', 'Detalles del Evento'); ?>
+<?php $__env->startSection('metadades','Mira los detalles sobre el evento <?php echo e($esdeveniment->nom); ?> y adquiere sus entradas.'); ?>
+<?php $__env->startSection('metaimages','<?php echo e($esdeveniment->imatge); ?>'); ?>
 
 <?php $__env->startSection('content'); ?>
     <div class="containerEvent">

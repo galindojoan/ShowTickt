@@ -357,12 +357,40 @@ footer {
         }
     }
 }
-
-.ticketCompra {
+.ticket{
+  &-compra{
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr 1fr;
     justify-items: center;
     border: 1px solid #ccc;
+  }
+  &-datos{
+    max-width: 600px;
+    margin: auto;
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: 1fr;
+    border: 1.7px solid darkgray;
+    border-radius: 6px;
+    padding: 5%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    align-content: space-evenly;
+    min-height: 75vh;
+  }
+  &-tabla{
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  &-error{
+    background-color: #ffb3b3;
+    padding: 5px;
+    padding-left: 20px;
+    margin: 10px 0;
+    border: 1px solid #e74c3c;
+    border-radius: 5px;
+    height: max-content;
+    width:calc(100% - 41px);
+  }
 }
 
 .resumenCompra {
@@ -375,6 +403,7 @@ footer {
     border-radius: 6px;
     padding: 5%;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    margin-bottom: 3%;
 }
 
 .ahref {
@@ -976,7 +1005,7 @@ a {
         width: 60px;
     }
 
-    .login-input>input {
+    .login-input > input {
         width: 70vw;
     }
 }
@@ -1048,9 +1077,7 @@ a {
     }
 }
 
-
 @media screen and (max-width: 1000px) {
-
     .event-cards {
         height: auto;
     }

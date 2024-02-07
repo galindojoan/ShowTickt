@@ -73,9 +73,7 @@ Al tener ya el repositorio descargado, en la carpeta de site deberás de ejecuta
 composer install
 cp .env.example .env
 php artisan key:generate
-composer require railsware/mailtrap-php symfony/http-client nyholm/psr7 #Para el envio de mails
-composer require larswiegers/laravel-maps guzzlehttp/guzzle #Para los mapas indicando el local de los eventos
-npm install fullcalendar fullcalendar-scheduler #Para el calendario que se ve al visualizar los eventos
+npm install fullcalendar fullcalendar-scheduler #Para instalar las API del calendario que se ve al visualizar los eventos
 ----
 
 Con esto ya funcionaria el laravel, y para tener la base de datos tendremos que tener docker

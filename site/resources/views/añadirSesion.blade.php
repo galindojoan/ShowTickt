@@ -68,12 +68,6 @@
                 </div>
             </div>
 
-
-            <div class="form-group">
-                <label for="entradaNominal" class="form-label">Entradas Nominales</label>
-                <input type="checkbox" id="entradaNominal" name="entradaNominal">
-            </div>
-
             <!-- Afegir a la part inferior del teu document -->
             <div id="errorDiv" style="display: none;">
                 <div id="errorContent">
@@ -119,6 +113,13 @@
 
 <label for="entrades-preu" class="form-label">Precio</label>
 <input type="text" class="form-controller" name="entrades-preu[]" required>
+
+<label for="entradaNominal" class="form-label">Entradas Nominales</label>
+                        <input type="hidden" value="False" name="entradaNominalCheck[]" id="entradaNominalCheck">
+                        <input type="checkbox" id="entradaNominal" name="entradaNominal[]"
+                            @if (old('entradaNominal')) checked @endif>
+
+
 <div id="errorDivpreu" class="errorDiv" style="display: none;">
                 <div id="errorContent">
     <div class="error-message" id="error-preu"></div>
@@ -141,6 +142,17 @@
                 // Mostrar el botón de eliminar si hay al menos un tipo de entrada
                 var eliminarTipoEntradaButton = document.getElementById('eliminarTipoEntrada');
                 eliminarTipoEntradaButton.style.display = 'block';
+
+                document.querySelectorAll('#entradaNominal').forEach(element => {
+                    element.addEventListener('click', function(e) {
+                        let parent = element.parentNode;
+                        if (element.checked) {
+                            parent.querySelector('#entradaNominalCheck').value = 'True';
+                        } else {
+                            parent.querySelector('#entradaNominalCheck').value = 'False';
+                        }
+                    })
+                });
             });
 
             // Eliminar Último Tipo de Entrada

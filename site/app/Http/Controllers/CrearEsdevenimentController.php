@@ -144,7 +144,6 @@ class CrearEsdevenimentController extends Controller
             'data' => $request->input('data_hora'),
             'aforament' => $request->input('aforament_maxim'),
             'tancament' => $request->input('dataHoraPersonalitzada'),
-            'nominal' => $request->has('entradaNominal'),
             'esdeveniments_id' => $esdevenimentId,
         ]);
 
@@ -156,16 +155,20 @@ class CrearEsdevenimentController extends Controller
         $noms = $request->input('entrades-nom');
         $preus = $request->input('entrades-preu');
         $quantitats = $request->input('entrades-quantitat');
+        $nominal = $request->input('entradaNominalCheck');
 
         // Procesar los datos según sea necesario
         for ($i = 0; $i < count($noms); $i++) {
+            // $entradaNominal = isset($nominal[$i]) ? true : false;
             Entrada::create([
                 'nom' => $noms[$i],
                 'preu' => $preus[$i],
                 'quantitat' => $quantitats[$i],
+                'nominal' => $nominal[$i],
                 'sessios_id' => $sessioId,
             ]);
         }
+
     }
     public function crearRecinte(Request $request)
     {

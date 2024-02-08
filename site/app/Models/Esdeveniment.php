@@ -109,4 +109,7 @@ class Esdeveniment extends Model
             ->groupBy('esdeveniments.id', 'sessios.data', 'entradas.preu')
             ->paginate(config('app.items_per_page', 6));
     }
+    public static function getEventById($id){
+        return DB::table('esdeveniment')->where('id','=',$id)->first();
+    }
 }

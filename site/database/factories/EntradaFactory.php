@@ -20,6 +20,7 @@ class EntradaFactory extends Factory
             'nom' => $this->faker->name,
             'preu' => $this->faker->randomFloat(2, 10, 1000),
             'quantitat' => $this->faker->randomNumber(3),
+            'nominal' => $this->faker->boolean(),
         ];
     }
 }

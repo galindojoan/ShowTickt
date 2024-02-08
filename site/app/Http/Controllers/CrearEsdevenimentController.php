@@ -7,6 +7,7 @@ use App\Models\Categoria;
 use App\Models\Recinte;
 use App\Models\Sessio;
 use App\Models\Entrada;
+use App\Models\EsdevenimentImatge;
 use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -58,6 +59,7 @@ class CrearEsdevenimentController extends Controller
 
         try {
             $esdeveniment = $this->createEsdeveniment($request, $recinteId);
+            $this->createEsdevenimentImatge($request, $esdeveniment->id);
             $sessioId = $this->createSessio($request, $esdeveniment->id);
             $this->createEntrades($request, $sessioId);
 
@@ -103,25 +105,37 @@ class CrearEsdevenimentController extends Controller
 
     private function createEsdeveniment(Request $request, $recinteId)
     {
-        $imatge = [];
-        if ($request->hasFile('imatge')) {
-            foreach ($request->file('imatge') as $imatge) {
-                $nomImatge = time() . '_' . $imatge->getClientOriginalName();
-                $imatge->storeAs('images', $nomImatge);
-                $imatge[] = $nomImatge;
-            }
-        }
         //$nombreUnico = time() . '_' . $request->file('imatge')->getClientOriginalName();
 
-        return Esdeveniment::create([
+        $esdeveniment = Esdeveniment::create([
             'nom' => $request->input('titol'),
             'categoria_id' => $request->input('categoria'),
             'recinte_id' => $recinteId,
-            'imatge' => $imatge,
             'descripcio' => $request->input('descripcio'),
             'ocult' => $request->has('ocultarEsdeveniment'),
             'user_id' => $request->input('user_id'),
         ]);
+
+        return $esdeveniment;
+    }
+
+    private function createEsdevenimentImatge(Request $request, $esdevenimentId)
+    {
+        $imatge = [];
+        if ($request->hasFile('imatge')) {
+            foreach ($request->file('imatge') as $file) {
+                $nomImatge = time() . '_' . $file->getClientOriginalName();
+                $file->storeAs('images', $nomImatge);
+                $imatge[] = $nomImatge;
+            }
+        }
+
+        foreach ($imatge as $image) {
+            EsdevenimentImatge::create([
+                'esdeveniments_id' => $esdevenimentId,
+                'imatge' => $image,
+            ]);
+        }
     }
 
     private function createSessio(Request $request, $esdevenimentId)

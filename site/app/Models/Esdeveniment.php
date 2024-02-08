@@ -10,7 +10,7 @@ class Esdeveniment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nom', 'descripcio', 'imatge', 'ocult', 'recinte_id', 'categoria_id', 'user_id'];
+    protected $fillable = ['nom', 'descripcio', 'ocult', 'recinte_id', 'categoria_id', 'user_id'];
 
     public function recinte()
     {
@@ -35,6 +35,11 @@ class Esdeveniment extends Model
     public function opinions()
     {
         return $this->hasMany(Opinion::class, 'esdeveniments_id');
+    }
+
+    public function imatge()
+    {
+        return $this->hasMany(EsdevenimentImatge::class, 'esdeveniments_id');
     }
 
     public static function getAdminEvents($userId)

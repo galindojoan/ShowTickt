@@ -1,4 +1,6 @@
 <?php $__env->startSection('title', 'Detalles del Evento'); ?>
+<?php $__env->startSection('metadades','Mira los detalles sobre el evento <?php echo e($esdeveniment->nom); ?> y adquiere sus entradas.'); ?>
+<?php $__env->startSection('metaimages','<?php echo e($esdeveniment->imatge); ?>'); ?>
 
 <?php $__env->startSection('content'); ?>
     <div class="containerEvent">
@@ -116,11 +118,12 @@
                     events: crearEventos(fechasSessiones),
                     eventClick: function(event) {
                         let sessionId = event.event.title.split(" ");
-                        sessionSelect(fechasSessiones[(parseInt(sessionId[0]) - 1)]);
                         document.getElementById('calendar').style.display = 'none';
                         document.getElementById('fechaSesion').innerHTML =
                             `<strong>Sesion:</strong> ${fechasSessiones[(parseInt(sessionId[0]) - 1)].data}`;
                         document.getElementById('buttonSesion').style.display = 'block';
+                        sessionSelect(fechasSessiones[(parseInt(sessionId[0]) - 1)]);
+
                     }
                 });
                 calendar.render();

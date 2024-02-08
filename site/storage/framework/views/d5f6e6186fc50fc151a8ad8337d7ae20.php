@@ -1,4 +1,5 @@
 <?php $__env->startSection('title', 'Home'); ?>
+<?php $__env->startSection('metadades','Entra en ShowTickt para poder comprar tickets a los mejores eventos disponibles.'); ?>
 
 <?php $__env->startSection('content'); ?>
     <?php if($events->isEmpty()): ?>

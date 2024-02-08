@@ -22,7 +22,8 @@ class CrearEsdevenimentController extends Controller
 
         return view('crearEsdeveniment', compact('categories', 'recintes', 'noRecintes'));
     }
-    public function recintePage(){
+    public function recintePage()
+    {
         return view('crearRecinte');
     }
 
@@ -102,13 +103,21 @@ class CrearEsdevenimentController extends Controller
 
     private function createEsdeveniment(Request $request, $recinteId)
     {
-        $nombreUnico = time() . '_' . $request->file('imatge')->getClientOriginalName();
+        $imatge = [];
+        if ($request->hasFile('imatge')) {
+            foreach ($request->file('imatge') as $imatge) {
+                $nomImatge = time() . '_' . $imatge->getClientOriginalName();
+                $imatge->storeAs('images', $nomImatge);
+                $imatge[] = $nomImatge;
+            }
+        }
+        //$nombreUnico = time() . '_' . $request->file('imatge')->getClientOriginalName();
 
         return Esdeveniment::create([
             'nom' => $request->input('titol'),
             'categoria_id' => $request->input('categoria'),
             'recinte_id' => $recinteId,
-            'imatge' => $request->file('imatge')->storeAs('images', $nombreUnico),
+            'imatge' => $imatge,
             'descripcio' => $request->input('descripcio'),
             'ocult' => $request->has('ocultarEsdeveniment'),
             'user_id' => $request->input('user_id'),
@@ -144,7 +153,8 @@ class CrearEsdevenimentController extends Controller
             ]);
         }
     }
-    public function crearRecinte(Request $request){
+    public function crearRecinte(Request $request)
+    {
         $this->getRecinteId($request);
         Log::info('Recinto nuevo creado.');
         return redirect('crear-esdeveniment');

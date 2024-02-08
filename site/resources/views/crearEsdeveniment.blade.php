@@ -65,8 +65,8 @@
 
             <div class="form-group">
                 <label for="imatge" class="form-label">Imagen principal del evento</label>
-                <input type="file" class="form-controller" id="imatge" name="imatge" accept="image/*"
-                    value="{{ old('imatge') }}" required>
+                <input type="file" class="form-controller" id="imatge" name="imatge[]" accept="image/*"
+                    value="{{ old('imatge') }}" multiple required>
                 <div id="errorDivimatge" class="errorDiv" style="display: none;">
                     <div id="errorContent">
                         <div class="error-message" id="error-imatge"></div>

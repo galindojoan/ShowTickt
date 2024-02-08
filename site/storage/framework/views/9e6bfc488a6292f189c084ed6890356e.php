@@ -15,6 +15,6 @@
             <h2>Entradas Agotadas</h2>
         <?php endif; ?>
     </div>
-    <img src="<?php echo e(Storage::url($esdeveniment->imatge)); ?>" alt="Imatge de l'esdeveniment">
+    <img src="<?php echo e(Storage::url($esdeveniment->imatge)); ?>" alt="Imatge de l'esdeveniment" loading="lazy">
 </div>
 <?php /**PATH C:\Users\alexg\OneDrive\Documentos\Projecte 2\gr6-arrua-galindo-jumelle\site\resources\views/components/event-card.blade.php ENDPATH**/ ?>

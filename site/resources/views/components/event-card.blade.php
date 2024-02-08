@@ -15,5 +15,5 @@
             <h2>Entradas Agotadas</h2>
         @endif
     </div>
-    <img src="{{ Storage::url($esdeveniment->imatge) }}" alt="Imatge de l'esdeveniment">
+    <img src="{{ Storage::url($esdeveniment->imatge) }}" alt="Imatge de l'esdeveniment" loading="lazy">
 </div>

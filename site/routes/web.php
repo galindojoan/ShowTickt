@@ -77,6 +77,8 @@ Route::get('/peticionCambiar',[PasswordController::class, 'cambiarPassword'])->n
 Route::post('/peticionCambiar',[PasswordController::class, 'cambiarPassword'])->name('peticionCambiar');
 
 Route::post('/confirmacio',[CompraController::class, 'compra'])->name('confirmacioCompra');
+Route::post('/procesCompra',[CompraController::class, 'procesPagament'])->name('procesCompra');
+Route::post('/finCompra',[CompraController::class, 'finalDelPagament'])->name('finCompra');
 
 Route::get('/llistat-sessions', [LlistatSessionsController::class, 'index'])->name('llistat-sessions')->middleware('check');
 Route::post('/llistat-sessions', [LlistatSessionsController::class, 'index'])->name('llistat-sessions')->middleware('check');

@@ -29,8 +29,9 @@
             </div>
             <p id="total">Total: <?php echo e($total); ?>€</p>
         </div>
-        <form action="<?php echo e(route('confirmacioCompra')); ?>" method="post" class="ticket-datos" id="ComprarEntrada">
-
+        <form action="<?php echo e(route('procesCompra')); ?>" method="post" class="ticket-datos" id="ComprarEntrada">
+          <?php echo csrf_field(); ?>
+          <input type="hidden" name="total" value="<?php echo e($total); ?>">
             <?php if($sessionArray->nominal == true): ?>
                 <?php $__currentLoopData = $entradaArray; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $entrada): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <h3><?php echo e($entrada->nom); ?></h3>
@@ -75,7 +76,7 @@
     </div>
 
     <form action="<?php echo e(route('mostrar-esdeveniment', ['id' => $sessionArray->esdeveniments_id])); ?>" id="vueltaAtras">
-
+      <?php echo csrf_field(); ?>
     </form>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('scripts'); ?>

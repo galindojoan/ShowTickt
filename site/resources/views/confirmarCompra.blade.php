@@ -29,8 +29,9 @@
             </div>
             <p id="total">Total: {{ $total }}€</p>
         </div>
-        <form action="{{ route('confirmacioCompra') }}" method="post" class="ticket-datos" id="ComprarEntrada">
-
+        <form action="{{ route('procesCompra') }}" method="post" class="ticket-datos" id="ComprarEntrada">
+          @csrf
+          <input type="hidden" name="total" value="{{$total}}">
             @if ($sessionArray->nominal == true)
                 @foreach ($entradaArray as $entrada)
                     <h3>{{ $entrada->nom }}</h3>
@@ -75,7 +76,7 @@
     </div>
 
     <form action="{{ route('mostrar-esdeveniment', ['id' => $sessionArray->esdeveniments_id]) }}" id="vueltaAtras">
-
+      @csrf
     </form>
 @endsection
 @section('scripts')

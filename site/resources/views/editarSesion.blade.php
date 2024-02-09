@@ -1,12 +1,11 @@
 @extends('layouts.master')
 
 @section('title', 'Añadir Sesion')
-@section('metadades','Edita una sesión de tu evento para que los clientes vean los datos actualizados.')
+@section('metadades', 'Edita una sesión de tu evento para que los clientes vean los datos actualizados.')
 
 @section('content')
     <div id="content-container">
-        <form action="{{ route('cambiarSesion') }}" method="post" class="addEvent" id="addEvent"
-            enctype="multipart/form-data">
+        <form action="{{ route('cambiarSesion') }}" method="post" class="addEvent" id="addEvent" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="event-id" value="{{ $id }}">
             <input type="hidden" name="fecha-id" value="{{ $sessioId }}">
@@ -29,13 +28,26 @@
                     @foreach ($entradas as $entrada)
                         <div class="tipo-entrada">
                             <label for="entrades-nom" class="form-label">Nombre del Tipo</label>
-                            <input type="text" maxlength="20" class="form-controller" name="entrades-nom[]" required="" value="{{$entrada->nom}}">
+                            <input type="text" maxlength="20" class="form-controller" name="entrades-nom[]"
+                                required="" value="{{ $entrada->nom }}">
 
                             <label for="entrades-preu" class="form-label">Precio</label>
-                            <input type="text" class="form-controller" name="entrades-preu[]" required="" value="{{$entrada->preu}}">
+                            <input type="text" class="form-controller" name="entrades-preu[]" required=""
+                                value="{{ $entrada->preu }}">
+
+                            <label for="entradaNominal" class="form-label">Entradas Nominales</label>
+                            <input type="hidden"
+                                value="
+                            @if ($entrada->nominal == true) True 
+                            @else 
+                            False @endif"
+                                name="entradaNominalCheck[]" id="entradaNominalCheck">
+                            <input type="checkbox" id="entradaNominal" name="entradaNominal[]"
+                                @if ($entrada->nominal == true) checked @endif>
 
                             <label for="entrades-quantitat" class="form-label">Cantidad disponible</label>
-                            <input type="number" class="form-controller" name="entrades-quantitat[]" required="" value="{{$entrada->quantitat}}">
+                            <input type="number" class="form-controller" name="entrades-quantitat[]" required=""
+                                value="{{ $entrada->quantitat }}">
                         </div>
                     @endforeach
                     <!-- Contenido dinámico para los tipos de entradas -->
@@ -53,12 +65,6 @@
                     <input type="datetime-local" class="form-controller" id="dataHoraPersonalitzada"
                         value="{{ $sessiones->tancament }}" name="dataHoraPersonalitzada">
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label for="entradaNominal" class="form-label">Entradas Nominales</label>
-                <input type="checkbox" id="entradaNominal" name="entradaNominal"
-                    @if ($sessiones->nominal == true) checked @endif>
             </div>
 
             <!-- Afegir a la part inferior del teu document -->
@@ -84,6 +90,21 @@
             var dataHoraPersonalitzadaInput = document.getElementById('dataHoraPersonalitzada');
             var dataHoraEsdevenimentInput = document.getElementById('data_hora');
 
+            function checkboxCheck() {
+                document.querySelectorAll('#entradaNominal').forEach(element => {
+                element.addEventListener('click', function(e) {
+                    let parent = element.parentNode;
+                    if (element.checked) {
+                        parent.querySelector('#entradaNominalCheck').value = 'True';
+                    } else {
+                        parent.querySelector('#entradaNominalCheck').value = 'False';
+                    }
+                })
+            });
+            }
+
+            checkboxCheck();
+
             agregarTipoEntrada.addEventListener('click', function() {
                 var nuevoTipoEntrada = document.createElement('div');
                 var index = document.querySelectorAll('.tipo-entrada').length + 1;
@@ -96,6 +117,12 @@
 <label for="entrades-preu" class="form-label">Precio</label>
 <input type="text" class="form-controller" name="entrades-preu[]" required>
 
+
+<label for="entradaNominal" class="form-label">Entradas Nominales</label>
+                        <input type="hidden" value="False" name="entradaNominalCheck[]" id="entradaNominalCheck">
+                        <input type="checkbox" id="entradaNominal" name="entradaNominal[]"
+                            @if (old('entradaNominal')) checked @endif>
+
 <label for="entrades-quantitat" class="form-label">Cantidad disponible</label>
 <input type="number" class="form-controller" name="entrades-quantitat[]" required>
 </div>
@@ -107,7 +134,10 @@
                 // Mostrar el botón de eliminar si hay al menos un tipo de entrada
                 var eliminarTipoEntradaButton = document.getElementById('eliminarTipoEntrada');
                 eliminarTipoEntradaButton.style.display = 'block';
+                checkboxCheck();
             });
+
+            
 
             // Eliminar Último Tipo de Entrada
             eliminarTipoEntrada.addEventListener('click', function() {

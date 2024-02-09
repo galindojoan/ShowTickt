@@ -15,5 +15,10 @@
             <h2>Entradas Agotadas</h2>
         @endif
     </div>
-    <img src="{{ Storage::url($esdeveniment->imatge) }}" alt="Imatge de l'esdeveniment">
+    @if ($esdeveniment->imatge->isNotEmpty())
+        <img src="{{ Storage::url('public/images/' . $esdeveniment->imatge->first()->imatge) }}"
+            alt="Imatge de l'esdeveniment" loading="lazy">
+    @else
+        <img src="https://via.placeholder.com/640x480.png/00dd22?text=imagenEvento" alt="Imatge de l'esdeveniment" loading="lazy">
+    @endif
 </div>

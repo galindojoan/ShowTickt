@@ -6,6 +6,7 @@ require_once base_path('app/redsysHMAC256_API_PHP_7.0.0/apiRedsys.php');
 require_once base_path('app/rest_API_PHP/initRedsysApi.php');
 // use App\
 use RESTConstants;
+use App\Models\Esdeveniment;
 use App\Models\Sessio;
 use Illuminate\Http\Request;
 use RESTInitialRequestService;
@@ -161,5 +162,12 @@ class CompraController extends Controller
 		default:
 			echo "<h1>Aqui no debemos de entrar!!!</h1>";
 	}
+}
+public function creacioPdf(Request $request){
+  $event = Esdeveniment::getEventById($request->input('id'));
+  $entrades = $request->input('arrayEntradas');
+  $pdf = app('dompdf.wrapper');
+  $pdf->loadView('entradas', compact('event','entrades'));
+  return $pdf->download('entradas.pdf');
 }
 }

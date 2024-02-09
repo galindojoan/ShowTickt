@@ -73,7 +73,6 @@ class EditarEsdevenimentController extends Controller
                 'data' => $request->input('data_hora'),
                 'tancament' => $request->input('dataHoraPersonalitzada'),
                 'aforament' => $request->input('aforament_maxim'),
-                'nominal' => $request->has('entradaNominal'),
                 'esdeveniments_id' => $esdevenimentId,
             ]);
             $sessio->save();
@@ -86,6 +85,7 @@ class EditarEsdevenimentController extends Controller
             $noms = $request->input('entrades-nom');
             $preus = $request->input('entrades-preu');
             $quantitats = $request->input('entrades-quantitat');
+            $nominal = $request->input('entradaNominalCheck');
 
             // Procesar los datos según sea necesario
             for ($i = 0; $i < count($noms); $i++) {
@@ -93,6 +93,7 @@ class EditarEsdevenimentController extends Controller
                     'nom' => $noms[$i],
                     'preu' => $preus[$i],
                     'quantitat' => $quantitats[$i],
+                    'nominal' => $nominal[$i],
                     'sessios_id' => $sessioId,
                 ]);
 
@@ -131,7 +132,6 @@ class EditarEsdevenimentController extends Controller
                     'data' => $request->input('data_hora'),
                     'tancament' => $request->input('dataHoraPersonalitzada'),
                     'aforament' => $request->input('aforament_maxim'),
-                    'nominal' => $request->has('entradaNominal'),
                 ]);
 
             $entradas = Entrada::where("entradas.sessios_id", "=", $sessioId)->get();
@@ -139,6 +139,7 @@ class EditarEsdevenimentController extends Controller
             $noms = $request->input('entrades-nom');
             $preus = $request->input('entrades-preu');
             $quantitats = $request->input('entrades-quantitat');
+            $nominal = $request->input('entradaNominalCheck');
 
             // Procesar los datos según sea necesario
             if (count($noms) == count($entradas)) {
@@ -148,6 +149,7 @@ class EditarEsdevenimentController extends Controller
                             'nom' => $noms[$i],
                             'preu' => $preus[$i],
                             'quantitat' => $quantitats[$i],
+                            'nominal' => $nominal[$i],
                             'sessios_id' => $sessioId,
                         ]);
                 }
@@ -158,6 +160,7 @@ class EditarEsdevenimentController extends Controller
                             'nom' => $noms[$i],
                             'preu' => $preus[$i],
                             'quantitat' => $quantitats[$i],
+                            'nominal' => $nominal[$i],
                             'sessios_id' => $sessioId,
                         ]);
                 }
@@ -166,6 +169,7 @@ class EditarEsdevenimentController extends Controller
                         'nom' => $noms[$i],
                         'preu' => $preus[$i],
                         'quantitat' => $quantitats[$i],
+                        'nominal' => $nominal[$i],
                         'sessios_id' => $sessioId,
                     ]);
 
@@ -178,6 +182,7 @@ class EditarEsdevenimentController extends Controller
                             'nom' => $noms[$i],
                             'preu' => $preus[$i],
                             'quantitat' => $quantitats[$i],
+                            'nominal' => $nominal[$i],
                             'sessios_id' => $sessioId,
                         ]);
                 }

@@ -9,7 +9,7 @@ class Entrada extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nom', 'preu', 'quantitat', 'sessios_id'];
+    protected $fillable = ['nom', 'preu', 'quantitat', 'nominal', 'sessios_id'];
 
     public function sessio()
     {

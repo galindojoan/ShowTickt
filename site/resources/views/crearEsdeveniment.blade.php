@@ -65,8 +65,8 @@
 
             <div class="form-group">
                 <label for="imatge" class="form-label">Imagen principal del evento</label>
-                <input type="file" class="form-controller" id="imatge" name="imatge" accept="image/*"
-                    value="{{ old('imatge') }}" required>
+                <input type="file" class="form-controller" id="imatge" name="imatge[]" accept="image/*"
+                    value="{{ old('imatge') }}" multiple required>
                 <div id="errorDivimatge" class="errorDiv" style="display: none;">
                     <div id="errorContent">
                         <div class="error-message" id="error-imatge"></div>
@@ -160,12 +160,6 @@
                 <label for="ocultarEsdeveniment" class="form-label">Evento Oculto</label>
                 <input type="checkbox" id="ocultarEsdeveniment" name="ocultarEsdeveniment"
                     @if (old('ocultarEsdeveniment')) checked @endif>
-            </div>
-
-            <div class="form-group">
-                <label for="entradaNominal" class="form-label">Entradas Nominales</label>
-                <input type="checkbox" id="entradaNominal" name="entradaNominal"
-                    @if (old('entradaNominal')) checked @endif>
             </div>
 
             <div id="errorDiv" class="errorDiv" style="display: none;">
@@ -475,9 +469,14 @@
                         <div class="error-message" id="error-nomEntrada"></div>
                         </div>
                         </div>
-
                         <label for="entrades-preu" class="form-label">Precio</label>
                         <input type="text" class="form-controller" name="entrades-preu[]" required>
+
+                        <label for="entradaNominal" class="form-label">Entradas Nominales</label>
+                        <input type="hidden" value="False" name="entradaNominalCheck[]" id="entradaNominalCheck">
+                        <input type="checkbox" id="entradaNominal" name="entradaNominal[]"
+                            @if (old('entradaNominal')) checked @endif>
+
                         <div id="errorDivpreu" class="errorDiv" style="display: none;">
                                     <div id="errorContent">
                         <div class="error-message" id="error-preu"></div>
@@ -498,7 +497,19 @@
                 // Mostrar el botón de eliminar si hay al menos un tipo de entrada
                 var eliminarTipoEntradaButton = document.getElementById('eliminarTipoEntrada');
                 eliminarTipoEntradaButton.style.display = 'block';
+
+                document.querySelectorAll('#entradaNominal').forEach(element => {
+                    element.addEventListener('click', function(e) {
+                        let parent = element.parentNode;
+                        if (element.checked) {
+                            parent.querySelector('#entradaNominalCheck').value = 'True';
+                        } else {
+                            parent.querySelector('#entradaNominalCheck').value = 'False';
+                        }
+                    })
+                });
             });
+
 
             // Eliminar Último Tipo de Entrada
             eliminarTipoEntrada.addEventListener('click', function() {

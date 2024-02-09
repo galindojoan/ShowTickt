@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nom');
             $table->decimal('preu', 8, 2);
             $table->integer('quantitat');
+            $table->boolean('nominal')->default(false);
             $table->foreignId('sessios_id')->constrained('sessios');
             $table->timestamps();
         });

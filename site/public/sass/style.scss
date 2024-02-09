@@ -357,40 +357,44 @@ footer {
         }
     }
 }
-.ticket{
-  &-compra{
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr;
-    justify-items: center;
-    border: 1px solid #ccc;
-  }
-  &-datos{
-    max-width: 600px;
-    margin: auto;
-    background-color: #fff;
-    display: grid;
-    grid-template-columns: 1fr;
-    border: 1.7px solid darkgray;
-    border-radius: 6px;
-    padding: 5%;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    align-content: space-evenly;
-    min-height: 75vh;
-  }
-  &-tabla{
-    margin-top: 30px;
-    margin-bottom: 30px;
-  }
-  &-error{
-    background-color: #ffb3b3;
-    padding: 5px;
-    padding-left: 20px;
-    margin: 10px 0;
-    border: 1px solid #e74c3c;
-    border-radius: 5px;
-    height: max-content;
-    width:calc(100% - 41px);
-  }
+
+.ticket {
+    &-compra {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr 1fr;
+        justify-items: center;
+        border: 1px solid #ccc;
+    }
+
+    &-datos {
+        max-width: 600px;
+        margin: auto;
+        background-color: #fff;
+        display: grid;
+        grid-template-columns: 1fr;
+        border: 1.7px solid darkgray;
+        border-radius: 6px;
+        padding: 5%;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        align-content: space-evenly;
+        min-height: 75vh;
+    }
+
+    &-tabla {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    &-error {
+        background-color: #ffb3b3;
+        padding: 5px;
+        padding-left: 20px;
+        margin: 10px 0;
+        border: 1px solid #e74c3c;
+        border-radius: 5px;
+        height: max-content;
+        width: calc(100% - 41px);
+    }
 }
 
 .resumenCompra {
@@ -793,6 +797,7 @@ a {
     grid-template-columns: 1fr 1fr;
     align-items: start;
     justify-items: center;
+    margin: 20px;
 }
 
 .infoEvent {
@@ -847,6 +852,47 @@ a {
 .imagenesEventos {
     margin: 5%;
 }
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    margin: 30px;
+    text-align: center;
+}
+
+.mySlides {
+    width: 100%; /* Ensure the image takes full width of the container */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: fill;
+}
+
+.left-button,
+.right-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust background color as desired */
+    color: white; /* Adjust text color as desired */
+    padding: 10px 15px; /* Adjust padding as desired */
+    border: none;
+    cursor: pointer;
+}
+
+.left-button:hover,
+.right-button:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Color de fondo en hover */
+    color: #ffffff; /* Color de texto en hover */
+}
+
+.left-button {
+    left: 0;
+}
+
+.right-button {
+    right: 0;
+}
+
+
 
 #imagenEvento {
     width: 100%;
@@ -1005,7 +1051,7 @@ a {
         width: 60px;
     }
 
-    .login-input > input {
+    .login-input>input {
         width: 70vw;
     }
 }
@@ -1028,6 +1074,7 @@ a {
     .containerEvent {
         grid-template-rows: 0.5fr 0.5fr;
         grid-template-columns: 1fr;
+        margin: 20px;
     }
 
     .textEvent {

@@ -1,8 +1,8 @@
 @extends('layouts.master')
 
 @section('title', 'Detalles del Evento')
-@section('metadades')'Mira los detalles sobre el evento {{$esdeveniment->nom}} y adquiere sus entradas.'@endsection
-@section('metaimages')'{{$esdeveniment->imatge}}'@endsection
+@section('metadades')'Mira los detalles sobre el evento {{ $esdeveniment->nom }} y adquiere sus entradas.'@endsection
+@section('metaimages')'{{ $esdeveniment->imatge }}'@endsection
 
 @section('content')
     <div class="containerEvent">
@@ -21,11 +21,11 @@
             <form action="{{ route('confirmacioCompra') }}" method="post" class="ComprarEntrada" id="ComprarEntrada"
                 enctype="multipart/form-data" style="justify-self: normal">
                 @csrf
-                <input type="hidden" id="detallesEvents" name='detallesEvents' value='{{$esdeveniment->nom}}'>
+                <input type="hidden" id="detallesEvents" name='detallesEvents' value='{{ $esdeveniment->nom }}'>
                 <div class="inlineDiv">
-                  <label for="session" class="form-label" id="fechaSesion"><strong>Sesiones:</strong></label>
-                  <button id="buttonSesion" class="btn btn-blue" style="display: none;">Cambiar sesión</button>
-              </div>
+                    <label for="session" class="form-label" id="fechaSesion"><strong>Sesiones:</strong></label>
+                    <button id="buttonSesion" class="btn btn-blue" style="display: none;">Cambiar sesión</button>
+                </div>
                 @if (count($fechas) == 1)
                     <div class="form-group">
 
@@ -87,19 +87,28 @@
 
                         </div>
                     </div>
-                  <div class="form-group inlineDiv">
-                    <p id="precioTotal" class="form-label">Total: 0€ </p>
-                    <input type="hidden" id="arrayEntradas" name='arrayEntradas'>
-                    <input type="hidden" id="inputTotal" name='inputTotal'>
-                    <button type="submit" id="bottonCompra" class="btn btn-orange">Realizar Compra</button>
-                </div>
+                    <div class="form-group inlineDiv">
+                        <p id="precioTotal" class="form-label">Total: 0€ </p>
+                        <input type="hidden" id="arrayEntradas" name='arrayEntradas'>
+                        <input type="hidden" id="inputTotal" name='inputTotal'>
+                        <button type="submit" id="bottonCompra" class="btn btn-orange">Realizar Compra</button>
+                    </div>
                 </div>
             </form>
 
         </div>
-        <div class="imagenesEventos">
-            <img src="{{ Storage::url($esdeveniment->imatge) }}" alt="Imatge de l'esdeveniment" class="event-imagen">
+        <div class="slider-container">
+            @foreach ($esdeveniment->imatge as $index => $imatge)
+                <img class="mySlides" src="{{ Storage::url('public/images/' . $imatge->imatge) }}"
+                    alt="Imatge de l'esdeveniment">
+            @endforeach
+
+            <button class="btn btn-blue left-button" onclick="plusDivs(-1)">&#10094;</button>
+            <button class="btn btn-blue right-button" onclick="plusDivs(+1)">&#10095;</button>
         </div>
+    </div>
+
+
 
     </div>
 @endsection
@@ -109,10 +118,36 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+
+    <script>
+        var slideIndex = 1;
+        showDivs(slideIndex);
+
+        function plusDivs(n) {
+            showDivs(slideIndex += n);
+        }
+
+        function showDivs(n) {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            if (n > x.length) {
+                slideIndex = 1
+            }
+            if (n < 1) {
+                slideIndex = x.length
+            };
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            x[slideIndex - 1].style.display = "block";
+        }
+    </script>
+
     <script>
         const fechasSessiones = @json($fechas);
         const entradaPrecio = @json($entradas);
         const fechaSola = @json($fechaSola);
+
         // Ordenar el array utilizando la función de comparación
         fechasSessiones.sort(compararFechas);
         if (fechaSola) {
@@ -143,7 +178,7 @@
                 });
                 calendar.render();
             });
-            document.getElementById('buttonSesion').addEventListener('click',function (e) {
+            document.getElementById('buttonSesion').addEventListener('click', function(e) {
                 e.preventDefault();
                 document.getElementById('calendar').style.display = 'block';
                 document.getElementById('fechaSesion').innerHTML =

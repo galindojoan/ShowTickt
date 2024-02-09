@@ -16,7 +16,6 @@ class CreateSessioTable extends Migration
             $table->dateTime("data");
             $table->dateTime("tancament");
             $table->integer('aforament');
-            $table->boolean('nominal')->default(false);
             $table->foreignId('esdeveniments_id')->constrained('esdeveniments');
             $table->timestamps();
         });

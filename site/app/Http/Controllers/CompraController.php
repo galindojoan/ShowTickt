@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 require_once base_path('app/redsysHMAC256_API_PHP_7.0.0/apiRedsys.php');
-require_once base_path('app/rest_API_PHP/initRedsysApi.php');
+require_once base_path('app/rest_API_PHP/ApiRedsysREST/initRedsysApi.php');
 // use App\
 use RESTConstants;
 use App\Models\Esdeveniment;

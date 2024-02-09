@@ -42,20 +42,6 @@
 
                 <div class="form-group" id="entradas" style="display:none;">
                     <label id="preu" class="form-label">Escoge el tipo de entrada:</label>
-                    {{-- @if (count($entradas) == 1)
-                    @foreach ($fechas as $fecha)
-                        <select class="form-select" id="{{ $fecha->id }}" name="preu" style="display:none;">
-                            <option value="" disabled selected>Entradas</option>
-                            @foreach ($entradas as $entrada)
-                                @if ($entrada->sessios_id == $fecha->id)
-                                    <label
-                                        value="{{ $entrada->preu }},{{ $entrada->quantitat }},{{ $entrada->nom }},{{ $entrada->id }}">
-                                        {{ $entrada->nom }} {{ $entrada->preu }}€ </label>
-                                @endif
-                            @endforeach
-                        </select>
-                    @endforeach
-                    @else --}}
                     @foreach ($fechas as $fecha)
                         <select class="form-select" id="{{ $fecha->id }}" name="preu"
                             style="display:none; margin-bottom:15%;">
@@ -63,7 +49,7 @@
                             @foreach ($entradas as $entrada)
                                 @if ($entrada->sessios_id == $fecha->id)
                                     <option
-                                        value="{{ $entrada->preu }},{{ $entrada->quantitat }},{{ $entrada->nom }},{{ $entrada->id }}">
+                                        value="{{ $entrada->preu }},{{ $entrada->quantitat }},{{ $entrada->nom }},{{ $entrada->id }},{{$entrada->nominal}}">
                                         {{ $entrada->nom }} {{ $entrada->preu }}€ </option>
                                 @endif
                             @endforeach

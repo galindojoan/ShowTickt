@@ -48,7 +48,7 @@
                                 </a>
                             </div>
                         </div>
-                        <img src="{{ Storage::url($sessio->esdeveniment->imatge) }}" alt="Imatge de l'esdeveniment">
+                        <img src="{{ Storage::url('public/images/' . $sessio->esdeveniment->imatge->first()->imatge) }}" alt="Imatge de l'esdeveniment" loading="lazy">
                     </div>
                 </div>
             @endforeach

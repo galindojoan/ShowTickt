@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="<?php echo $__env->yieldContent('metadades'); ?>" >
+    <meta name="image" content="<?php echo $__env->yieldContent('metaimages'); ?>">
     <link rel="shortcut icon" href="<?php echo e(asset('imagen/logo-definitivo.ico')); ?>" type="image/x-icon">
     <link rel="stylesheet" href="<?php echo e(asset('css/style.css')); ?>"> 
     <title><?php echo $__env->yieldContent('title'); ?></title>

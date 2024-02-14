@@ -1,5 +1,5 @@
 <?php $__env->startSection('title', 'Editar Evento'); ?>
-<?php $__env->startSection('metadades','Edita tu evento para actualizar correctamente los datos de este.'); ?>
+<?php $__env->startSection('metadades', 'Edita tu evento para actualizar correctamente los datos de este.'); ?>
 
 <?php $__env->startSection('content'); ?>
     <div class="containerEvent">
@@ -43,8 +43,14 @@
                 <button type="submit" class="btn btn-orange">Añadir Opinion</button>
             </form>
         </div>
-        <div class="imagenesEventos">
-            <img src="<?php echo e(Storage::url($esdeveniment->imatge)); ?>" alt="Imatge de l'esdeveniment" class="event-imagen">
+        <div class="slider-container">
+            <?php $__currentLoopData = $esdeveniment->imatge; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $imatge): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <img class="mySlides" src="<?php echo e(Storage::url('public/images/' . $imatge->imatge)); ?>"
+                    alt="Imatge de l'esdeveniment">
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+            <button class="btn btn-blue left-button" onclick="plusDivs(-1)">&#10094;</button>
+            <button class="btn btn-blue right-button" onclick="plusDivs(+1)">&#10095;</button>
         </div>
     </div>
     <div class="opinion-cards">
@@ -64,6 +70,30 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>
+
+    <script>
+        var slideIndex = 1;
+        showDivs(slideIndex);
+
+        function plusDivs(n) {
+            showDivs(slideIndex += n);
+        }
+
+        function showDivs(n) {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            if (n > x.length) {
+                slideIndex = 1
+            }
+            if (n < 1) {
+                slideIndex = x.length
+            };
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            x[slideIndex - 1].style.display = "block";
+        }
+    </script>
     <script>
         const fechasDiv = document.querySelector('#fechaDiv');
         const buttonFechas = document.querySelector('#fechaButton');

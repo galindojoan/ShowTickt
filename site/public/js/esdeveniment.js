@@ -217,6 +217,7 @@ buttonEntrada.addEventListener("click", function (e) {
                     parseInt(maxEntradas.max) - parseInt(maxEntradas.value)
                 ),
                 precio:precio,
+                nominal:entradas[4],
             };
             if (entradasArray.length > 0) {
                 FinEach = true;

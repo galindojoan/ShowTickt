@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title', 'Editar Evento')
-@section('metadades','Edita tu evento para actualizar correctamente los datos de este.')
+@section('metadades', 'Edita tu evento para actualizar correctamente los datos de este.')
 
 @section('content')
     <div class="containerEvent">
@@ -45,8 +45,14 @@
                 <button type="submit" class="btn btn-orange">Añadir Opinion</button>
             </form>
         </div>
-        <div class="imagenesEventos">
-            <img src="{{ Storage::url($esdeveniment->imatge) }}" alt="Imatge de l'esdeveniment" class="event-imagen">
+        <div class="slider-container">
+            @foreach ($esdeveniment->imatge as $index => $imatge)
+                <img class="mySlides" src="{{ Storage::url('public/images/' . $imatge->imatge) }}"
+                    alt="Imatge de l'esdeveniment">
+            @endforeach
+
+            <button class="btn btn-blue left-button" onclick="plusDivs(-1)">&#10094;</button>
+            <button class="btn btn-blue right-button" onclick="plusDivs(+1)">&#10095;</button>
         </div>
     </div>
     <div class="opinion-cards">
@@ -66,6 +72,30 @@
 @endsection
 
 @section('scripts')
+
+    <script>
+        var slideIndex = 1;
+        showDivs(slideIndex);
+
+        function plusDivs(n) {
+            showDivs(slideIndex += n);
+        }
+
+        function showDivs(n) {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            if (n > x.length) {
+                slideIndex = 1
+            }
+            if (n < 1) {
+                slideIndex = x.length
+            };
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            x[slideIndex - 1].style.display = "block";
+        }
+    </script>
     <script>
         const fechasDiv = document.querySelector('#fechaDiv');
         const buttonFechas = document.querySelector('#fechaButton');

@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             CategoriesTableSeeder::class,
             RecintesTableSeeder::class,
             EsdevenimentsTableSeeder::class,
+            EsdevenimentImatgesSeeder::class,
             SessioTableSeeder::class,
             EntradaTableSeeder::class,
         ]);

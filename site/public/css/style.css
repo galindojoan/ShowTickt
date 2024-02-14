@@ -726,6 +726,7 @@ a {
   grid-template-columns: 1fr 1fr;
   align-items: start;
   justify-items: center;
+  margin: 20px;
 }
 
 .infoEvent {
@@ -770,6 +771,45 @@ a {
 
 .imagenesEventos {
   margin: 5%;
+}
+
+.slider-container {
+  position: relative;
+  width: 100%;
+  margin: 30px;
+  text-align: center;
+}
+
+.mySlides {
+  width: 100%; /* Ensure the image takes full width of the container */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: fill;
+}
+
+.left-button,
+.right-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust background color as desired */
+  color: white; /* Adjust text color as desired */
+  padding: 10px 15px; /* Adjust padding as desired */
+  border: none;
+  cursor: pointer;
+}
+
+.left-button:hover,
+.right-button:hover {
+  background-color: rgba(0, 0, 0, 0.8); /* Color de fondo en hover */
+  color: #ffffff; /* Color de texto en hover */
+}
+
+.left-button {
+  left: 0;
+}
+
+.right-button {
+  right: 0;
 }
 
 #imagenEvento {
@@ -936,6 +976,7 @@ a {
   .containerEvent {
     grid-template-rows: 0.5fr 0.5fr;
     grid-template-columns: 1fr;
+    margin: 20px;
   }
   .textEvent {
     grid-column: 1/3;

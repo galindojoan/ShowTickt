@@ -272,5 +272,7 @@ document.getElementById("bottonCompra").addEventListener("click", function (e) {
   e.preventDefault();
 document.getElementById("arrayEntradas").value = JSON.stringify(entradasArray);
 document.getElementById("inputTotal").value = precioTotal;
-document.getElementById("ComprarEntrada").submit();
+if(entradasArray.length>0){
+  document.getElementById("ComprarEntrada").submit();
+}
 });

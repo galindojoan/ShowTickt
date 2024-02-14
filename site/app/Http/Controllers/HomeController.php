@@ -33,6 +33,24 @@ class HomeController extends Controller
 
     return view('home', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount', 'events', 'categoriesWith3'));
   }
+  public function msgTicket($compra)
+  {
+    $pag = Config::get('app.items_per_page', 100);
+    $categoryId = ''; // Establece un valor predeterminado
+
+    $esdeveniments = Esdeveniment::with(['recinte'])
+      // Ordenar por fecha descendente
+      ->paginate($pag);
+
+    $events = Esdeveniment::getAllEvents($pag);
+
+    $categories = Categoria::all();
+    $categoriesWithEventCount = (new Categoria())->getCategoriesWithEventCount();
+
+    $categoriesWith3 = Categoria::getCategoriesWith3();
+
+    return view('home', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount', 'events', 'categoriesWith3','compra'));
+  }
 
   public function cerca(Request $request)
   {

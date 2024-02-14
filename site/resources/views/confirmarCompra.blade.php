@@ -29,7 +29,14 @@
             </div>
             <p id="total">Total: {{ $total }}€</p>
         </div>
-        <form action="{{ route('procesCompra') }}" method="post" class="ticket-datos" id="ComprarEntrada">
+        @if ($total==0)
+        <p>No hace falta pagar las Entradas</p>
+        <form action="{{route('comprasGratis')}}" method="post" class="ticket-datos" id="ComprarEntrada">
+        @else
+        <p>Hay que pagar las Entradas</p>
+        <form action="{{route('redsys')}}" method="post" class="ticket-datos" id="ComprarEntrada">
+        @endif
+        
             @csrf
             <input type="hidden" name="total" value="{{ $total }}">
                 @foreach ($entradaArray as $entrada)
@@ -72,10 +79,10 @@
                 <label for="email" class="form-label">Mail</label>
                 <input type="email" class="form-controller" id="email" name="email">
             </div>
+            <input type="hidden" class="form-controller" id="ArrayEntradas" name="ArrayEntradas">
             <button type="button" id="bottonCompra" class="btn btn-blue" style="height: 32px;">Finalizar Compra</button>
         </form>
     </div>
-
     <form action="{{ route('mostrar-esdeveniment', ['id' => $sessionArray->esdeveniments_id]) }}" id="vueltaAtras">
         @csrf
     </form>
@@ -252,6 +259,7 @@
         comprar.addEventListener('click', function(e) {
             e.preventDefault();
             if (mirarTodosLosErrores()) {
+              document.getElementById("ArrayEntradas").value=JSON.stringify(entradaArray);
                 document.getElementById("ComprarEntrada").submit();
             }
         })

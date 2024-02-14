@@ -6,11 +6,18 @@ require_once base_path('app/redsysHMAC256_API_PHP_7.0.0/apiRedsys.php');
 require_once base_path('app/rest_API_PHP/ApiRedsysREST/initRedsysApi.php');
 // use App\
 use RESTConstants;
-use App\Models\Esdeveniment;
 use App\Models\Sessio;
+use App\Models\Entrada;
+use App\Models\Categoria;
+use App\Models\Esdeveniment;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use RESTInitialRequestService;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Config;
 
 class CompraController extends Controller
 {
@@ -22,9 +29,19 @@ class CompraController extends Controller
     $sessionArray = Sessio::getSessionbyID($entradaArray[0]->contadorSession);
     return view('confirmarCompra', compact('nomEvent', 'entradaArray', 'sessionArray', 'total'));
   }
-  public function procesPagament(Request $request)
+  public function creacioPdf(Request $request)
   {
-    $challengeRequest = new \RESTAuthenticationRequestMessage();
+    $event = Esdeveniment::getEventById($request->input('id'));
+    $entrades = $request->input('arrayEntradas');
+    $pdf = app('dompdf.wrapper');
+    $pdf->loadView('entradas', compact('event', 'entrades'));
+    return $pdf->download('entradas.pdf');
+  }
+
+  public function redsysDades(Request $request)
+  {
+    Session::put('ArrayEntradas', json_decode($request->input('ArrayEntradas')));
+
     $precioTotal = $request->input("total");
     $amount = (int)$precioTotal * 100;
     $id = time();
@@ -33,6 +50,9 @@ class CompraController extends Controller
     $trans = '0';
     $terminal = '001';
     $url = '';
+
+    $urlOK = route('finCompra');
+    $urlKO = route('errorCompra');
 
     $miObj = new \RedsysAPI;
     $miObj->setParameter("DS_MERCHANT_AMOUNT", $amount);
@@ -44,130 +64,98 @@ class CompraController extends Controller
     $miObj->setParameter("DS_MERCHANT_MERCHANTURL", $url);
     $miObj->setParameter("DS_MERCHANT_DIRECTPAYMENT", "true");
     $miObj->setParameter("DS_REDSYS_ENVIROMENT", "true");
+    $miObj->setParameter("DS_MERCHANT_URLOK", $urlOK);
+    $miObj->setParameter("DS_MERCHANT_URLKO", $urlKO);
 
     $params = $miObj->createMerchantParameters();
     $signature = $miObj->createMerchantSignature('sq7HjrUOBfKmC576ILgskD5srU870gJ7');
-
-    return view('targeta', compact('params', 'signature'));
-    //Controler nuevo
-    //$validate=$request->validate([''])
-    //$expiration
-    //   "DS_MERCHANT_CVV2": "123",
-    // "DS_MERCHANT_EXPIRYDATE": "fechaExpired (año mes)",
-    // "DS_MERCHANT_PAN": "targeta credito",
+    $response = new Response();
+        $response->setContent("
+            <form action='https://sis-t.redsys.es:25443/sis/realizarPago' method='post' id='redsys'>
+                <input type='hidden' name='Ds_SignatureVersion' value='HMAC_SHA256_V1'>
+                <input type='hidden' name='Ds_MerchantParameters' value='{$params}'/>
+                <input type='hidden' name='Ds_Signature' value='{$signature}'/>
+            </form>
+            <script>document.getElementById('redsys').submit();</script>
+        ");
+        return $response;
   }
   public function finalDelPagament(Request $request)
   {
-    // $validate = $request->validate([
-    //   'tarjetaCredito' => 'required|credit_card_number',
-    //   'fechaCaducidad' => 'required|regex:/^(0[1-9]|1[0-2])\/[0-9]{2}$/',
-    //   'cvv' => 'required|numeric|min:100|max:999',
-    // ]);
-    // dd($validate);
-    $miObj = new \RedsysAPI; 
-    var_dump($request->input());
+    $miObj = new \RedsysAPI;
     $params = json_decode(base64_decode($request->input("Ds_MerchantParameters")));
     $version = $request->input("Ds_SignatureVersion");
     $signatureRecibida = $request->input("Ds_Signature");
-    var_dump($params);
-    $datos=$request->input("Ds_MerchantParameters");
+    $datos = $request->input("Ds_MerchantParameters");
     // var_dump($codigoRespuesta);
     $decodec = $miObj->decodeMerchantParameters($datos);
     // dd($decodec);
-			$kc = 'sq7HjrUOBfKmC576ILgskD5srU870gJ7'; //Clave recuperada de CANALES
-			$firma = $miObj->createMerchantSignatureNotif($kc,$datos);
-		
-			if ($firma == $signatureRecibida){
-				echo "FIRMA OK";
-			} else {
-				echo "FIRMA KO";
-			}
+    $kc = 'sq7HjrUOBfKmC576ILgskD5srU870gJ7'; //Clave recuperada de CANALES
+    $firma = $miObj->createMerchantSignatureNotif($kc, $datos);
+
+    if ($firma == $signatureRecibida) {
+      $Entradas = Session::get('ArrayEntradas');
+      foreach ($Entradas as $entrada) {
+        Entrada::where('entradas.id', '=', $entrada->contadorEntrada)
+                ->update([
+                    'quantitat' => $entrada->Maxcantidad,
+                ]);
+      }
+      
+      return redirect()->route('compraAceptada');
+    } else {
+      echo "FIRMA KO";
+    }
   }
-  function initialOperationV2($orderID) {
-		
-    $protocolVersion = "";
-    $threeDSServerTransID = "";
-	$threeDSMethodURL = "";
+  public function entradasGratis(Request $request){
+    $Entradas=json_decode($request->input('ArrayEntradas'));
+    foreach ($Entradas as $entrada) {
+      Entrada::where('entradas.id', '=', $entrada->contadorEntrada)
+              ->update([
+                  'quantitat' => $entrada->Maxcantidad,
+              ]);
+    }
     
-    $cardDataInfoRequest = new \RESTInitialRequestMessage();
-	
-	// Operation mandatory data
-	$cardDataInfoRequest->setAmount("123"); // i.e. 1,23 (decimal point depends on currency code)
-	$cardDataInfoRequest->setCurrency("978"); // ISO-4217 numeric currency code
-	$cardDataInfoRequest->setMerchant("999008881");
-	$cardDataInfoRequest->setTerminal("20");
-	$cardDataInfoRequest->setOrder($orderID);
-	$cardDataInfoRequest->setTransactionType(RESTConstants::$AUTHORIZATION);
-    
-    //Card Data information
-    $cardDataInfoRequest->setCardNumber("4918019199883839");
-    $cardDataInfoRequest->setCardExpiryDate("3412");
-    $cardDataInfoRequest->setCvv2("123");
-	// Other optional parameters example can be added by "addParameter" method
-	$cardDataInfoRequest->addParameter("DS_MERCHANT_PRODUCTDESCRIPTION", "Prueba de pago InSite con 3DSecure");
-		
-	//Method to ask about card information data
-	$cardDataInfoRequest->demandCardData();
+    return redirect()->route('compraAceptada');
+  }
+  public function viewFinalCompra(Request $request)
+  {
+    Session::forget('ArrayEntradas');
+    $compra=true;
+    $pag = Config::get('app.items_per_page', 100);
+    $categoryId = ''; // Establece un valor predeterminado
 
-	// Service setting (Signature and Environment)
-	$signatureKey = "sq7HjrUOBfKmC576ILgskD5srU870gJ7";
-	//$signatureKey = "Mk9m98IfEblmPfrpsawt7BmxObt98Jev";
+    $esdeveniments = Esdeveniment::with(['recinte'])
+      // Ordenar por fecha descendente
+      ->paginate($pag);
 
-	$service = new RESTInitialRequestService($signatureKey, RESTConstants::$ENV_SANDBOX);
-	
-	//Printing SendMessage
-	echo "<h1>INITIAL: Mensaje a enviar</h1>";
-	var_dump($cardDataInfoRequest);
-	var_dump($service);
+    $events = Esdeveniment::getAllEvents($pag);
 
-	//Send the operation and catch the response
-	$response = $service->sendOperation($cardDataInfoRequest);
+    $categories = Categoria::all();
+    $categoriesWithEventCount = (new Categoria())->getCategoriesWithEventCount();
 
-	// Response analysis
-	echo "<h1>INITIAL: Respuesta recibida</h1>";
-	var_dump($response);
-		
-	//Method the gives the request Result (OK/KO/AUT)
-	switch ($response->getResult()) {
+    $categoriesWith3 = Categoria::getCategoriesWith3();
 
-		case RESTConstants::$RESP_LITERAL_OK:
-			//In this case the operation was ok and PSD2= "N", so authentication is not needed but its possible to make authentication
-			echo "<h1>Operation was OK</h1>";
-			//In this case the commerce can choose which kind of operation want to use
-			//directPaymentOperation (example of this operation in InsiteExampleDirectPayment.java)
-			//or authenticationOperationV2 (recommended)
-			authenticationOperationV2($cardDataInfoRequest, $protocolVersion, $threeDSServerTransID, $threeDSMethodURL);
-		break;
+    return view('home', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount', 'events', 'categoriesWith3','compra'));
+  }
+  
+  public function errorCompra(Request $request)
+  {
+    Session::forget('ArrayEntradas');
+    $compra=false;
+    $pag = Config::get('app.items_per_page', 100);
+    $categoryId = ''; // Establece un valor predeterminado
 
-		case RESTConstants::$RESP_LITERAL_AUT: 
-			//In this case the operation was ok and PSD2= "Y" and return the protocolVersion parameter
-			echo "<h1>Operation requires authentication</h1>";
-			//Method to catch the threeDSInfo value
-			$threeDSInfo = $response->getThreeDSInfo();
-			//Method to catch the protocolVersion (Required for authentication Request)
-            $protocolVersion = $response->protocolVersionAnalysis();
-            //Because the protocolVersion in this example is 2.X.0, its required to catch two mandatory Parameters in the response
-            $threeDSServerTransID = $response->getThreeDSServerTransID();
-            $threeDSMethodURL = $response->getThreeDSMethodURL();
-            
-            //Ones we catch the parameters, we must make the authenticationRequest
-			authenticationOperationV2($cardDataInfoRequest, $protocolVersion, $threeDSServerTransID, $threeDSMethodURL);
-		break;
-		
-		case RESTConstants::$RESP_LITERAL_KO: 
-			//Operation error
-			echo "<h1>Operation was not OK</h1>";
-		break;
-		
-		default:
-			echo "<h1>Aqui no debemos de entrar!!!</h1>";
-	}
-}
-public function creacioPdf(Request $request){
-  $event = Esdeveniment::getEventById($request->input('id'));
-  $entrades = $request->input('arrayEntradas');
-  $pdf = app('dompdf.wrapper');
-  $pdf->loadView('entradas', compact('event','entrades'));
-  return $pdf->download('entradas.pdf');
-}
+    $esdeveniments = Esdeveniment::with(['recinte'])
+      // Ordenar por fecha descendente
+      ->paginate($pag);
+
+    $events = Esdeveniment::getAllEvents($pag);
+    $categories = Categoria::all();
+    $categoriesWithEventCount = (new Categoria())->getCategoriesWithEventCount();
+
+    $categoriesWith3 = Categoria::getCategoriesWith3();
+
+    return view('home', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount', 'events', 'categoriesWith3','compra'));
+  }
 }

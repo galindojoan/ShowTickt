@@ -344,7 +344,7 @@
                     ocultarMissatge('nomEntrada');
                 }
 
-                if (precioInput.value === '' || isNaN(precioInput.value) || parseFloat(precioInput.value) <= 0) {
+                if (precioInput.value === '' || isNaN(precioInput.value) || parseFloat(precioInput.value) < 0) {
                     mostrarMissatge('preu', 'El precio debe ser un valor numérico mayor que 0.');
                     return false;
                 } else {
@@ -359,7 +359,7 @@
                     ocultarMissatge('preu');
                 }
 
-                if (cantidadInput.value !== '' && (isNaN(cantidadInput.value) || parseInt(cantidadInput.value) <= 0)) {
+                if (cantidadInput.value !== '' && (isNaN(cantidadInput.value) || parseInt(cantidadInput.value) < 0)) {
                     mostrarMissatge('quantitat',
                         'La cantidad disponible debe ser un valor numérico mayor que 0.');
                     return false;

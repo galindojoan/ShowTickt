@@ -15,12 +15,17 @@
                 <input type="text" name="fechaCaducidad" maxlength="5">
                 <label>CVV</label>
                 <input type="number" name="cvv" maxlength="3">
-                <input type="hidden" name="Ds_SignatureVersion" value="HMAC_SHA256_V1">
-                <input type="hidden" name="Ds_MerchantParameters" value="<?php echo e($params); ?>">
-                <input type="hidden" name="Ds_Signature" value="<?php echo e($signature); ?>">
+                
             </div>
             <button type="submit" id="buttonCompra" class="btn btn-orange">Acceder</button>
         </form>
+        <form name="from" action="https://sis-t.redsys.es:25443/sis/realizarPago" method="POST">
+          <?php echo csrf_field(); ?>
+          <input type="hidden" name="Ds_SignatureVersion" value="HMAC_SHA256_V1">
+                <input type="hidden" name="Ds_MerchantParameters" value="<?php echo e($params); ?>">
+                <input type="hidden" name="Ds_Signature" value="<?php echo e($signature); ?>">
+          <button type="submit" id="bottonCompra" class="btn btn-blue" style="height: 32px;">redsys</button>
+      </form>
       </div>
   </div>
 <?php $__env->stopSection(); ?>

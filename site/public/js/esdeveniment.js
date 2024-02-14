@@ -217,6 +217,7 @@ buttonEntrada.addEventListener("click", function (e) {
                     parseInt(maxEntradas.max) - parseInt(maxEntradas.value)
                 ),
                 precio:precio,
+                nominal:entradas[4],
             };
             if (entradasArray.length > 0) {
                 FinEach = true;
@@ -271,5 +272,7 @@ document.getElementById("bottonCompra").addEventListener("click", function (e) {
   e.preventDefault();
 document.getElementById("arrayEntradas").value = JSON.stringify(entradasArray);
 document.getElementById("inputTotal").value = precioTotal;
-document.getElementById("ComprarEntrada").submit();
+if(entradasArray.length>0){
+  document.getElementById("ComprarEntrada").submit();
+}
 });

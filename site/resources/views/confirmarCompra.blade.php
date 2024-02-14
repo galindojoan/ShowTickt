@@ -29,53 +29,62 @@
             </div>
             <p id="total">Total: {{ $total }}€</p>
         </div>
-        <form action="{{ route('confirmacioCompra') }}" method="post" class="ticket-datos" id="ComprarEntrada">
-
-            @if ($sessionArray->nominal == true)
+        @if ($total==0)
+        <p>No hace falta pagar las Entradas</p>
+        <form action="{{route('comprasGratis')}}" method="post" class="ticket-datos" id="ComprarEntrada">
+        @else
+        <p>Hay que pagar las Entradas</p>
+        <form action="{{route('redsys')}}" method="post" class="ticket-datos" id="ComprarEntrada">
+        @endif
+        
+            @csrf
+            <input type="hidden" name="total" value="{{ $total }}">
                 @foreach ($entradaArray as $entrada)
                     <h3>{{ $entrada->nom }}</h3>
-                    @for ($i = 1; $i <= $entrada->cantidad; $i++)
-                        <div class="errorDiv" id="error" style="display:none;">
-                            <p id="mensajeError" class="msg-error"></p>
-                        </div>
-                        <div class="form-group" id="divNominal">
-                            <label for="nova_carrer" class="form-label">Nom</label>
-                            <input type="text" class="form-controller" id="NomComprador" name="NomComprador"
-                                maxlength="50">
-                            <label for="nova_carrer" class="form-label">DNI/NIE</label>
-                            <input type="text" class="form-controller" id="DNIComprador" name="DNIComprador" maxlength="9">
-                            <label for="nova_carrer" class="form-label">Numero de Telefono</label>
-                            <input type="tel" pattern="[0-9]{10}" class="form-controller" id="telefonComprador"
-                                name="telefonComprador" maxlength="9" required>
-                        </div>
-                        <br>
-                    @endfor
+                    @if ($entrada->nominal == 1)
+                        @for ($i = 1; $i <= $entrada->cantidad; $i++)
+                            <div class="errorDiv" id="error" style="display:none;">
+                                <p id="mensajeError" class="msg-error"></p>
+                            </div>
+                            <div class="form-group" id="divNominal">
+                                <label for="nova_carrer" class="form-label">Nom</label>
+                                <input type="text" class="form-controller" id="NomComprador" name="NomComprador"
+                                    maxlength="50">
+                                <label for="nova_carrer" class="form-label">DNI/NIE</label>
+                                <input type="text" class="form-controller" id="DNIComprador" name="DNIComprador"
+                                    maxlength="9">
+                                <label for="nova_carrer" class="form-label">Numero de Telefono</label>
+                                <input type="tel" pattern="[0-9]{10}" class="form-controller" id="telefonComprador"
+                                    name="telefonComprador" maxlength="9" required>
+                            </div>
+                            <br>
+                        @endfor
+                    @else
+                    <div class="errorDiv" id="error" style="display:none;">
+                      <p id="mensajeError"></p>
+                  </div>
+                  <div class="form-group">
+                      <label for="nova_carrer" class="form-label">Nom</label>
+                      <input type="text" class="form-controller" id="NomComprador" name="NomComprador" maxlength="50">
+                      <label for="nova_carrer" class="form-label">DNI/NIE</label>
+                      <input type="text" class="form-controller" id="DNIComprador" name="DNIComprador" maxlength="9">
+                      <label for="nova_carrer" class="form-label">Numero de Telefono</label>
+                      <input type="tel" class="form-controller" pattern="[0-9]{10}" maxlength="9" id="telefonComprador"
+                          name="telefonComprador">
+                  </div>
+                    @endif
                 @endforeach
-            @else
-                <div class="errorDiv" id="error" style="display:none;">
-                    <p id="mensajeError"></p>
-                </div>
-                <div class="form-group">
-                    <label for="nova_carrer" class="form-label">Nom</label>
-                    <input type="text" class="form-controller" id="NomComprador" name="NomComprador" maxlength="50">
-                    <label for="nova_carrer" class="form-label">DNI/NIE</label>
-                    <input type="text" class="form-controller" id="DNIComprador" name="DNIComprador" maxlength="9">
-                    <label for="nova_carrer" class="form-label">Numero de Telefono</label>
-                    <input type="tel" class="form-controller" pattern="[0-9]{10}" maxlength="9" id="telefonComprador"
-                        name="telefonComprador">
-                </div>
-            @endif
 
             <div class="form-group" style="margin-top: 5%;">
                 <label for="email" class="form-label">Mail</label>
                 <input type="email" class="form-controller" id="email" name="email">
             </div>
+            <input type="hidden" class="form-controller" id="ArrayEntradas" name="ArrayEntradas">
             <button type="button" id="bottonCompra" class="btn btn-blue" style="height: 32px;">Finalizar Compra</button>
         </form>
     </div>
-
     <form action="{{ route('mostrar-esdeveniment', ['id' => $sessionArray->esdeveniments_id]) }}" id="vueltaAtras">
-
+        @csrf
     </form>
 @endsection
 @section('scripts')
@@ -137,8 +146,9 @@
                         let entradaP = document.createElement("p");
                         entradaP.textContent = `El DNI tiene mas caracter de lo permitido`;
                         DivEntrada.appendChild(entradaP);
-                    }else if(!/^\d{8}[A-Za-z]$/.test(element.value) && !/^[XYZ]\d{7,8}[A-Z]$/.test(element.value)){
-                      const DivEntrada = document.createElement("div");
+                    } else if (!/^\d{8}[A-Za-z]$/.test(element.value) && !/^[XYZ]\d{7,8}[A-Z]$/.test(element
+                        .value)) {
+                        const DivEntrada = document.createElement("div");
                         DivEntrada.classList.add("ticket-error");
                         element.insertAdjacentElement("beforebegin", DivEntrada);
                         let entradaP = document.createElement("p");
@@ -156,7 +166,7 @@
             });
             telefono.forEach(element => {
                 if (element.value) {
-                    if (element.value.length >9) {
+                    if (element.value.length > 9) {
                         const DivEntrada = document.createElement("div");
                         DivEntrada.classList.add("ticket-error");
                         element.insertAdjacentElement("beforebegin", DivEntrada);
@@ -249,6 +259,7 @@
         comprar.addEventListener('click', function(e) {
             e.preventDefault();
             if (mirarTodosLosErrores()) {
+              document.getElementById("ArrayEntradas").value=JSON.stringify(entradaArray);
                 document.getElementById("ComprarEntrada").submit();
             }
         })

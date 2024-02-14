@@ -346,6 +346,28 @@ footer #footerHome:hover:active {
   height: max-content;
   width: calc(100% - 41px);
 }
+.ticket-verdad {
+  padding: 5%;
+  background-color: #c1ffb3;
+  padding: 5px;
+  padding-left: 20px;
+  margin: 10px 0;
+  border: 1px solid #8a9986;
+  border-radius: 5px;
+  height: max-content;
+  width: calc(100% - 41px);
+}
+
+#valorTicket {
+  margin: 2%;
+  width: max-content;
+  align-self: center;
+  justify-items: center;
+}
+#valorTicket p {
+  width: 40vw;
+  margin-left: 10px;
+}
 
 .resumenCompra {
   max-width: 600px;

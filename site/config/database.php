@@ -77,6 +77,20 @@ return [
             'search_path' => 'public',
             'sslmode' => 'prefer',
         ],
+        'imageDB' => [
+            'driver' => 'pgsql',
+            'url' => env('DATABASE_IMAGE_URL'),
+            'host' => env('DB_IMAGE_HOST', '127.0.0.1'),
+            'port' => env('DB_IMAGE_PORT', '5445'),
+            'database' => env('DB_IMAGE_DATABASE', 'image'),
+            'username' => env('DB_IMAGE_USERNAME', 'forge'),
+            'password' => env('DB_IMAGE_PASSWORD', '1234'),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'search_path' => 'public',
+            'sslmode' => 'prefer',
+        ],
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',

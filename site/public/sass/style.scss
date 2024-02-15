@@ -843,14 +843,45 @@ a {
 
     .detallesLocal {
         display: grid;
-        grid-template-columns: 1fr 0.7fr;
+        grid-template-columns: 1fr 1fr;
         align-items: center;
         justify-self: start;
+        justify-items: end;
     }
+    .añadirTickets {
+      display: grid;
+      grid-template-columns: 0.5fr 1fr;
+      margin-top: 6%;
+      margin-bottom: 8%;
+      justify-items: start;
+  }
+  .tiposTickets {
+    width: calc(100% - 16px); // Resta el doble del relleno (8px a cada lado)
+    max-width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #474747;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top:6%;
+    margin-bottom:10%;
+}
+.espacioEventos {
+  margin-top:6%;
+}
+#precioTotal{
+  justify-self: start;
+}
+.DivsConBotonesDerecho {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: baseline;
+  justify-items: center;
+}
 
     .ComprarEntrada {
         #fechaSesion {
-            margin-bottom: 15%;
+            margin-bottom: 10%;
         }
     }
 

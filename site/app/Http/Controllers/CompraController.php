@@ -110,6 +110,7 @@ class CompraController extends Controller
   public function entradasGratis(Request $request){
     $Entradas=json_decode($request->input('ArrayEntradas'));
     foreach ($Entradas as $entrada) {
+
       Entrada::where('entradas.id', '=', $entrada->contadorEntrada)
               ->update([
                   'quantitat' => $entrada->Maxcantidad,

@@ -76,7 +76,7 @@
                 </div>
             </div>
 
-            <button type="button" class="btn btn-add" id="validarYGuardar">Guardar Opinión</button>
+            <button type="button" class="btn btn-blue" id="validarYGuardar">Guardar Opinión</button>
         </form>
     </div>
     <script>

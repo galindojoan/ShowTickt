@@ -203,7 +203,7 @@
                 if (fechaHoraEvento < fechaHoraActual) {
                     const DivEntrada = document.createElement("div");
                     DivEntrada.classList.add("ticket-error");
-                    fechaHoraInput.insertAdjacentElement("beforebegin", DivEntrada);
+                    dataHoraEsdevenimentInput.insertAdjacentElement("beforebegin", DivEntrada);
                     let entradaP = document.createElement("p");
                     entradaP.textContent =
                         `La fecha y hora de inicio del evento no puede ser anterior a la fecha y hora actual.`;

@@ -12,39 +12,37 @@
             <h4>{{ $esdeveniment->descripcio }}</h4>
         </div>
         <div class="textEvent">
-            <form action="{{ route('detallesLocal', ['id' => $esdeveniment->id]) }}" method="get" class="detallesLocal"
+            <form action="{{ route('detallesLocal', ['id' => $esdeveniment->id]) }}" method="get" class="detallesLocal espacioEventos"
                 id="detallesLocal">
                 <p><strong>Local:</strong> {{ $esdeveniment->recinte->lloc }}</p>
                 <button type="submit" class="btn btn-blue">Ver Local</button>
             </form>
 
-            <form action="{{ route('confirmacioCompra') }}" method="post" class="ComprarEntrada" id="ComprarEntrada"
+            <form action="{{ route('confirmacioCompra') }}" method="post" class="ComprarEntrada espacioEventos" id="ComprarEntrada"
                 enctype="multipart/form-data" style="justify-self: normal">
                 @csrf
                 <input type="hidden" id="detallesEvents" name='detallesEvents' value='{{ $esdeveniment->nom }}'>
-                <div class="inlineDiv">
-                    <label for="session" class="form-label" id="fechaSesion"><strong>Sesiones:</strong></label>
-                    <button id="buttonSesion" class="btn btn-blue" style="display: none;">Cambiar sesión</button>
-                </div>
-                @if (count($fechas) == 1)
-                    <div class="form-group">
 
+                @if (count($fechas) == 1)
                         @foreach ($fechas as $fecha)
-                            <p>{{ $fecha->data }}</p>
+                        <label for="session" class="form-label espacioEventos" id="fechaSesion"><strong>Sesiones:</strong> {{ $fecha->data }}</label>
                         @endforeach
                         @php
                             $fechaSola = true;
                         @endphp
-                    </div>
                 @else
+                <div class="espacioEventos">
+                  <label for="session" class="form-label" id="fechaSesion"><strong>Sesiones:</strong></label>
+                  <button id="buttonSesion" class="btn btn-blue" style="display: none;">Cambiar sesión</button>
+              </div>
                     <div id="calendar"></div>
                 @endif
 
-                <div class="form-group" id="entradas" style="display:none;">
+                <div class="form-group espacioEventos" id="entradas" style="display:none;">
                     <label id="preu" class="form-label">Escoge el tipo de entrada:</label>
                     @foreach ($fechas as $fecha)
-                        <select class="form-select" id="{{ $fecha->id }}" name="preu"
-                            style="display:none; margin-bottom:15%;">
+                        <select class="tiposTickets" id="{{ $fecha->id }}" name="preu"
+                            style="display:none;">
                             <option value="" disabled selected>Entradas</option>
                             @foreach ($entradas as $entrada)
                                 @if ($entrada->sessios_id == $fecha->id)
@@ -62,18 +60,19 @@
                     <div class="form-group" id="errorCantidad" style="display:none;">
                         <p id="mensajeError" class="msg-error"></p>
                     </div>
-                    <div style="margin-bottom: 8%">
-                        <input type="number" id="cantidad" name="cantidad" min="1" max="10" value="2" />
+                    <div class="añadirTickets">
+                        <input type="number" id="cantidad" name="cantidad" min="1" max="10" value="1" />
                         <button type="button" id="reservarEntrada" class="btn btn-blue">Añadir Tickets</button>
                     </div>
 
                     <div class="form-group" id="listaEntradas" style="display:none;">
-                        <label for="cantidad" class="form-label">Lista de Tickets:</label>
+                        <label for="cantidad" class="form-label ">Lista de Tickets:</label>
+                        <br>
                         <div id="containerList">
 
                         </div>
                     </div>
-                    <div class="form-group inlineDiv">
+                    <div class="form-group DivsConBotonesDerecho">
                         <p id="precioTotal" class="form-label">Total: 0€ </p>
                         <input type="hidden" id="arrayEntradas" name='arrayEntradas'>
                         <input type="hidden" id="inputTotal" name='inputTotal'>
@@ -155,6 +154,7 @@
                     eventClick: function(event) {
                         let sessionId = event.event.title.split(" ");
                         document.getElementById('calendar').style.display = 'none';
+                        document.getElementById('fechaSesion').parentNode.classList.add("DivsConBotonesDerecho");
                         document.getElementById('fechaSesion').innerHTML =
                             `<strong>Sesion:</strong> ${fechasSessiones[(parseInt(sessionId[0]) - 1)].data}`;
                         document.getElementById('buttonSesion').style.display = 'block';
@@ -168,7 +168,8 @@
                 e.preventDefault();
                 document.getElementById('calendar').style.display = 'block';
                 document.getElementById('fechaSesion').innerHTML =
-                    `Sesiones:`;
+                    `<strong>Sesiones:</strong>`;
+                    document.getElementById('fechaSesion').parentNode.classList.remove("DivsConBotonesDerecho");
                 document.getElementById('buttonSesion').style.display = 'none';
             })
         }

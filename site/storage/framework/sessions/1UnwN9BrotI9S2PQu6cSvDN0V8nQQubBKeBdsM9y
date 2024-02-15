@@ -1,5 +1,0 @@
-<<<<<<< HEAD:site/storage/framework/sessions/1UnwN9BrotI9S2PQu6cSvDN0V8nQQubBKeBdsM9y
-a:5:{s:6:"_token";s:40:"Xo5bXXHughGETm0Pdk6BB0IaruIgTYELSyKiNcaC";s:9:"_previous";a:1:{s:3:"url";s:40:"http://localhost:8000/crear-esdeveniment";}s:6:"_flash";a:2:{s:3:"old";a:0:{}s:3:"new";a:0:{}}s:3:"key";s:9:"promotor1";s:7:"user_id";i:1;}
-=======
-a:5:{s:6:"_token";s:40:"38544HLiKsX2W3P12KhelCdOJ4WnVdNbSMzJ5N6u";s:9:"_previous";a:1:{s:3:"url";s:37:"http://localhost:8000/esdeveniment/17";}s:6:"_flash";a:2:{s:3:"old";a:0:{}s:3:"new";a:0:{}}s:3:"key";s:9:"promotor1";s:7:"user_id";i:1;}
->>>>>>> b9a63010f5c873054e64f2648cce1a84d328ffc4:site/storage/framework/sessions/3yv6hohiDGTaLxZurfqq7QWU1m6NcMcUa7GtrzlF

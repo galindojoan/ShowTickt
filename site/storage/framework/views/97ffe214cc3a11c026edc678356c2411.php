@@ -10,39 +10,37 @@
             <h4><?php echo e($esdeveniment->descripcio); ?></h4>
         </div>
         <div class="textEvent">
-            <form action="<?php echo e(route('detallesLocal', ['id' => $esdeveniment->id])); ?>" method="get" class="detallesLocal"
+            <form action="<?php echo e(route('detallesLocal', ['id' => $esdeveniment->id])); ?>" method="get" class="detallesLocal espacioEventos"
                 id="detallesLocal">
                 <p><strong>Local:</strong> <?php echo e($esdeveniment->recinte->lloc); ?></p>
                 <button type="submit" class="btn btn-blue">Ver Local</button>
             </form>
 
-            <form action="<?php echo e(route('confirmacioCompra')); ?>" method="post" class="ComprarEntrada" id="ComprarEntrada"
+            <form action="<?php echo e(route('confirmacioCompra')); ?>" method="post" class="ComprarEntrada espacioEventos" id="ComprarEntrada"
                 enctype="multipart/form-data" style="justify-self: normal">
                 <?php echo csrf_field(); ?>
                 <input type="hidden" id="detallesEvents" name='detallesEvents' value='<?php echo e($esdeveniment->nom); ?>'>
-                <div class="inlineDiv">
-                    <label for="session" class="form-label" id="fechaSesion"><strong>Sesiones:</strong></label>
-                    <button id="buttonSesion" class="btn btn-blue" style="display: none;">Cambiar sesión</button>
-                </div>
-                <?php if(count($fechas) == 1): ?>
-                    <div class="form-group">
 
+                <?php if(count($fechas) == 1): ?>
                         <?php $__currentLoopData = $fechas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fecha): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <p><?php echo e($fecha->data); ?></p>
+                        <label for="session" class="form-label espacioEventos" id="fechaSesion"><strong>Sesiones:</strong> <?php echo e($fecha->data); ?></label>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         <?php
                             $fechaSola = true;
                         ?>
-                    </div>
                 <?php else: ?>
+                <div class="espacioEventos">
+                  <label for="session" class="form-label" id="fechaSesion"><strong>Sesiones:</strong></label>
+                  <button id="buttonSesion" class="btn btn-blue" style="display: none;">Cambiar sesión</button>
+              </div>
                     <div id="calendar"></div>
                 <?php endif; ?>
 
-                <div class="form-group" id="entradas" style="display:none;">
+                <div class="form-group espacioEventos" id="entradas" style="display:none;">
                     <label id="preu" class="form-label">Escoge el tipo de entrada:</label>
                     <?php $__currentLoopData = $fechas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fecha): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <select class="form-select" id="<?php echo e($fecha->id); ?>" name="preu"
-                            style="display:none; margin-bottom:15%;">
+                        <select class="tiposTickets" id="<?php echo e($fecha->id); ?>" name="preu"
+                            style="display:none;">
                             <option value="" disabled selected>Entradas</option>
                             <?php $__currentLoopData = $entradas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $entrada): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <?php if($entrada->sessios_id == $fecha->id): ?>
@@ -60,18 +58,19 @@
                     <div class="form-group" id="errorCantidad" style="display:none;">
                         <p id="mensajeError" class="msg-error"></p>
                     </div>
-                    <div style="margin-bottom: 8%">
-                        <input type="number" id="cantidad" name="cantidad" min="1" max="10" value="2" />
+                    <div class="añadirTickets">
+                        <input type="number" id="cantidad" name="cantidad" min="1" max="10" value="1" />
                         <button type="button" id="reservarEntrada" class="btn btn-blue">Añadir Tickets</button>
                     </div>
 
                     <div class="form-group" id="listaEntradas" style="display:none;">
-                        <label for="cantidad" class="form-label">Lista de Tickets:</label>
+                        <label for="cantidad" class="form-label ">Lista de Tickets:</label>
+                        <br>
                         <div id="containerList">
 
                         </div>
                     </div>
-                    <div class="form-group inlineDiv">
+                    <div class="form-group DivsConBotonesDerecho">
                         <p id="precioTotal" class="form-label">Total: 0€ </p>
                         <input type="hidden" id="arrayEntradas" name='arrayEntradas'>
                         <input type="hidden" id="inputTotal" name='inputTotal'>
@@ -153,6 +152,7 @@
                     eventClick: function(event) {
                         let sessionId = event.event.title.split(" ");
                         document.getElementById('calendar').style.display = 'none';
+                        document.getElementById('fechaSesion').parentNode.classList.add("DivsConBotonesDerecho");
                         document.getElementById('fechaSesion').innerHTML =
                             `<strong>Sesion:</strong> ${fechasSessiones[(parseInt(sessionId[0]) - 1)].data}`;
                         document.getElementById('buttonSesion').style.display = 'block';
@@ -166,7 +166,8 @@
                 e.preventDefault();
                 document.getElementById('calendar').style.display = 'block';
                 document.getElementById('fechaSesion').innerHTML =
-                    `Sesiones:`;
+                    `<strong>Sesiones:</strong>`;
+                    document.getElementById('fechaSesion').parentNode.classList.remove("DivsConBotonesDerecho");
                 document.getElementById('buttonSesion').style.display = 'none';
             })
         }

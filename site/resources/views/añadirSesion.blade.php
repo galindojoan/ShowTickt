@@ -270,7 +270,7 @@
 
                 });
                 preu.forEach(element => {
-                    if (element.value === '' || isNaN(element.value) || parseFloat(element.value) <=
+                    if (element.value === '' || isNaN(element.value) || parseFloat(element.value) <
                         0) {
                         const DivEntrada = document.createElement("div");
                         DivEntrada.classList.add("ticket-error");

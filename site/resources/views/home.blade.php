@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title', 'Home')
-@section('metadades','Entra en ShowTickt para poder comprar tickets a los mejores eventos disponibles.')
+@section('metadades', 'Entra en ShowTickt para poder comprar tickets a los mejores eventos disponibles.')
 
 @section('content')
     @if ($events->isEmpty())
@@ -37,7 +37,7 @@
             <form action="{{ route('cerca') }}" method="get" class="form form-cerca" id="cerca">
                 <div class="input-group">
                     <!-- Campo de entrada oculto para la categoría -->
-                    <input type="hidden" name="category" value="{{ $categoryId }}">
+                    <input type="hidden" name="category" value="{{ $categoryId }}" >
                     <input type="text" name="q" class="form-control" placeholder="Buscar">
                     <button type="submit" class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" height="16"
                             width="16"
@@ -54,6 +54,17 @@
                 <input class="btn btn-orange" type="submit" value="PROMOTORES">
             </form>
         </div>
+        @if (isset($compra))
+            @if ($compra == true)
+                <div class="ticket-verdad" id="valorTicket">
+                    <p>Entrada comprada con Exito</p>
+                </div>
+            @else
+                <div class="ticket-error" id="valorTicket">
+                    <p>Hubo un fallo al comprar la entrada</p>
+                </div>
+            @endif
+        @endif
 
 
 
@@ -87,4 +98,11 @@
     @endif
 
     {{-- <div class="pages">{{ $esdeveniments->links('pagination::bootstrap-5') }}</div> --}}
+@endsection
+@section('scripts')
+    <script>
+        setTimeout(function() {
+            document.getElementById("valorTicket").style.display ="none";
+        }, 5000);
+    </script>
 @endsection

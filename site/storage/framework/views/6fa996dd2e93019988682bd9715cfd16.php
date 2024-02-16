@@ -1,4 +1,6 @@
 <?php $__env->startSection('title', 'Detalles del Evento'); ?>
+<?php $__env->startSection('metadades'); ?>'Mira los detalles sobre el evento <?php echo e($esdeveniment->nom); ?> y adquiere sus entradas.'<?php $__env->stopSection(); ?>
+<?php $__env->startSection('metaimages'); ?>'<?php echo e($esdeveniment->imatge); ?>'<?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
     <div class="containerEvent">
@@ -19,9 +21,9 @@
                 <?php echo csrf_field(); ?>
                 <input type="hidden" id="detallesEvents" name='detallesEvents' value='<?php echo e($esdeveniment->nom); ?>'>
                 <div class="inlineDiv">
-                  <label for="session" class="form-label" id="fechaSesion"><strong>Sesiones:</strong></label>
-                  <button id="buttonSesion" class="btn btn-blue" style="display: none;">Cambiar sesión</button>
-              </div>
+                    <label for="session" class="form-label" id="fechaSesion"><strong>Sesiones:</strong></label>
+                    <button id="buttonSesion" class="btn btn-blue" style="display: none;">Cambiar sesión</button>
+                </div>
                 <?php if(count($fechas) == 1): ?>
                     <div class="form-group">
 
@@ -70,19 +72,28 @@
 
                         </div>
                     </div>
-                  <div class="form-group inlineDiv">
-                    <p id="precioTotal" class="form-label">Total: 0€ </p>
-                    <input type="hidden" id="arrayEntradas" class='arrayEntradas'>
-                    <input type="hidden" id="inputTotal" name='inputTotal'>
-                    <button type="submit" id="bottonCompra" class="btn btn-orange">Realizar Compra</button>
-                </div>
+                    <div class="form-group inlineDiv">
+                        <p id="precioTotal" class="form-label">Total: 0€ </p>
+                        <input type="hidden" id="arrayEntradas" name='arrayEntradas'>
+                        <input type="hidden" id="inputTotal" name='inputTotal'>
+                        <button type="submit" id="bottonCompra" class="btn btn-orange">Realizar Compra</button>
+                    </div>
                 </div>
             </form>
 
         </div>
-        <div class="imagenesEventos">
-            <img src="<?php echo e(Storage::url($esdeveniment->imatge)); ?>" alt="Imatge de l'esdeveniment" class="event-imagen">
+        <div class="slider-container">
+            <?php $__currentLoopData = $esdeveniment->imatge; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $imatge): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <img class="mySlides" src="<?php echo e(Storage::url('public/images/' . $imatge->imatge)); ?>"
+                    alt="Imatge de l'esdeveniment">
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+            <button class="btn btn-blue left-button" onclick="plusDivs(-1)">&#10094;</button>
+            <button class="btn btn-blue right-button" onclick="plusDivs(+1)">&#10095;</button>
         </div>
+    </div>
+
+
 
     </div>
 <?php $__env->stopSection(); ?>
@@ -92,10 +103,36 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+
+    <script>
+        var slideIndex = 1;
+        showDivs(slideIndex);
+
+        function plusDivs(n) {
+            showDivs(slideIndex += n);
+        }
+
+        function showDivs(n) {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            if (n > x.length) {
+                slideIndex = 1
+            }
+            if (n < 1) {
+                slideIndex = x.length
+            };
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            x[slideIndex - 1].style.display = "block";
+        }
+    </script>
+
     <script>
         const fechasSessiones = <?php echo json_encode($fechas, 15, 512) ?>;
         const entradaPrecio = <?php echo json_encode($entradas, 15, 512) ?>;
         const fechaSola = <?php echo json_encode($fechaSola, 15, 512) ?>;
+
         // Ordenar el array utilizando la función de comparación
         fechasSessiones.sort(compararFechas);
         if (fechaSola) {
@@ -116,16 +153,17 @@
                     events: crearEventos(fechasSessiones),
                     eventClick: function(event) {
                         let sessionId = event.event.title.split(" ");
-                        sessionSelect(fechasSessiones[(parseInt(sessionId[0]) - 1)]);
                         document.getElementById('calendar').style.display = 'none';
                         document.getElementById('fechaSesion').innerHTML =
                             `<strong>Sesion:</strong> ${fechasSessiones[(parseInt(sessionId[0]) - 1)].data}`;
                         document.getElementById('buttonSesion').style.display = 'block';
+                        sessionSelect(fechasSessiones[(parseInt(sessionId[0]) - 1)]);
+
                     }
                 });
                 calendar.render();
             });
-            document.getElementById('buttonSesion').addEventListener('click',function (e) {
+            document.getElementById('buttonSesion').addEventListener('click', function(e) {
                 e.preventDefault();
                 document.getElementById('calendar').style.display = 'block';
                 document.getElementById('fechaSesion').innerHTML =

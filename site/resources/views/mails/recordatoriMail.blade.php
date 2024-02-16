@@ -8,6 +8,6 @@ margin: 15px;">
     <p>Venimos a avisarte que el evento {{$evento->name}} va a realizarse el día de mañana.</p>
     <p>Por si aún no has descargado tus entradas, entra en el siguiente link.</p>
     <p>{{$link}}</p><br><br>
-    <p>Saludos, ShowTickt</p>
+    <p>Saludos, <strong>ShowTickt</strong></p>
 </body>
 

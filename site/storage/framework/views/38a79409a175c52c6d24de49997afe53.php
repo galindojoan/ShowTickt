@@ -1,6 +1,5 @@
-
-
 <?php $__env->startSection('title', 'Crear Opinión'); ?>
+<?php $__env->startSection('metadades','Añade tu opinión sobre el evento para que los demás sepan que tal te ha ido.'); ?>
 
 <?php $__env->startSection('content'); ?>
     <div id="content-container">
@@ -75,7 +74,7 @@
                 </div>
             </div>
 
-            <button type="button" class="btn btn-add" id="validarYGuardar">Guardar Opinión</button>
+            <button type="button" class="btn btn-blue" id="validarYGuardar">Guardar Opinión</button>
         </form>
     </div>
     <script>

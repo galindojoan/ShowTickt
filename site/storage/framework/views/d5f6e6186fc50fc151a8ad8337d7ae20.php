@@ -1,4 +1,5 @@
 <?php $__env->startSection('title', 'Home'); ?>
+<?php $__env->startSection('metadades', 'Entra en ShowTickt para poder comprar tickets a los mejores eventos disponibles.'); ?>
 
 <?php $__env->startSection('content'); ?>
     <?php if($events->isEmpty()): ?>
@@ -34,7 +35,7 @@
             <form action="<?php echo e(route('cerca')); ?>" method="get" class="form form-cerca" id="cerca">
                 <div class="input-group">
                     <!-- Campo de entrada oculto para la categoría -->
-                    <input type="hidden" name="category" value="<?php echo e($categoryId); ?>">
+                    <input type="hidden" name="category" value="<?php echo e($categoryId); ?>" >
                     <input type="text" name="q" class="form-control" placeholder="Buscar">
                     <button type="submit" class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" height="16"
                             width="16"
@@ -52,6 +53,17 @@
                 <input class="btn btn-orange" type="submit" value="PROMOTORES">
             </form>
         </div>
+        <?php if(isset($compra)): ?>
+            <?php if($compra == true): ?>
+                <div class="ticket-verdad" id="valorTicket">
+                    <p>Entrada comprada con Exito</p>
+                </div>
+            <?php else: ?>
+                <div class="ticket-error" id="valorTicket">
+                    <p>Hubo un fallo al comprar la entrada</p>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
 
 
 
@@ -85,6 +97,13 @@
     <?php endif; ?>
 
     
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('scripts'); ?>
+    <script>
+        setTimeout(function() {
+            document.getElementById("valorTicket").style.display ="none";
+        }, 5000);
+    </script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\alexg\OneDrive\Documentos\Projecte 2\gr6-arrua-galindo-jumelle\site\resources\views/home.blade.php ENDPATH**/ ?>

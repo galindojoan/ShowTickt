@@ -33,6 +33,8 @@ Route::get('/cerca', [HomeController::class, 'cerca'])->name('cerca');
 
 Route::get('/resultados', [HomeController::class, 'cerca'])->name('resultados');
 
+Route::get('/home/{compra}', [HomeController::class, 'msgTicket'])->name('Homes');
+
 Route::get('/esdeveniment/{id}', [EsdevenimentController::class, 'show'])->name('mostrar-esdeveniment');
 
 Route::get('/editarEsdeveniment/{id}', [EditarEsdevenimentController::class, 'editar'])->name('editar-esdeveniment');
@@ -76,7 +78,15 @@ Route::post('/cambiarPassword',[PasswordController::class, 'pagePassword'])->nam
 Route::get('/peticionCambiar',[PasswordController::class, 'cambiarPassword'])->name('peticionCambiar');
 Route::post('/peticionCambiar',[PasswordController::class, 'cambiarPassword'])->name('peticionCambiar');
 
+
 Route::post('/confirmacio',[CompraController::class, 'compra'])->name('confirmacioCompra');
+Route::post('/procesCompra',[CompraController::class, 'procesPagament'])->name('procesCompra');
+Route::post('/redsys',[CompraController::class, 'redsysDades'])->name('redsys');
+Route::post('/comprasGratis',[CompraController::class, 'entradasGratis'])->name('comprasGratis');
+Route::get('/finCompra',[CompraController::class, 'finalDelPagament'])->name('finCompra');
+Route::get('/compraAceptada',[CompraController::class, 'viewFinalCompra'])->name('compraAceptada');
+Route::get('/errorCompra',[CompraController::class, 'errorCompra'])->name('errorCompra');
+
 
 Route::get('/llistat-sessions', [LlistatSessionsController::class, 'index'])->name('llistat-sessions')->middleware('check');
 Route::post('/llistat-sessions', [LlistatSessionsController::class, 'index'])->name('llistat-sessions')->middleware('check');

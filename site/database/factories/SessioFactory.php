@@ -15,7 +15,6 @@ class SessioFactory extends Factory
             'data' => $this->faker->dateTime,
             'tancament' => $this->faker->dateTime,
             'aforament' => $this->faker->randomNumber(3),
-            'nominal' => $this->faker->boolean(),
         ];
     }
 }

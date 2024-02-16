@@ -1,5 +1,5 @@
 <?php $__env->startSection('title', 'crear'); ?>
-<?php $__env->startSection('metadades','Crea un evento nuevo.'); ?>
+<?php $__env->startSection('metadades', 'Crea un evento nuevo.'); ?>
 
 <?php $__env->startSection('content'); ?>
     <div id="content-container">
@@ -13,11 +13,6 @@
                 <label for="titol" class="form-label">Título del evento</label>
                 <input type="text" maxlength="20" class="form-controller" id="titol" name="titol"
                     value="<?php echo e(old('titol')); ?>" required>
-                <div id="errorDivtitol" class="errorDiv" style="display: none;">
-                    <div id="errorContent">
-                        <div class="error-message" id="error-titol"></div>
-                    </div>
-                </div>
             </div>
 
             <div class="form-group">
@@ -43,11 +38,6 @@
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <?php endif; ?>
                 </select>
-                <div id="errorDivrecinte" class="errorDiv" style="display: none;">
-                    <div id="errorContent">
-                        <div class="error-message" id="error-recinte"></div>
-                    </div>
-                </div>
             </div>
 
             <?php if(session('error')): ?>
@@ -56,53 +46,34 @@
 
                 </div>
             <?php endif; ?>
-            
+
             <div class="form-group">
-                <button type="button" id="mostrarNovaAdreca" class="btn btn-add">Añadir nueva dirección</button>
+                <a href="<?php echo e(route('crear-recinte')); ?>" id="mostrarNovaAdreca" class="btn btn-blue">Añadir nueva
+                    dirección</a>
             </div>
 
             <div class="form-group">
                 <label for="imatge" class="form-label">Imagen principal del evento</label>
-                <input type="file" class="form-controller" id="imatge" name="imatge" accept="image/*"
-                    value="<?php echo e(old('imatge')); ?>" required>
-                <div id="errorDivimatge" class="errorDiv" style="display: none;">
-                    <div id="errorContent">
-                        <div class="error-message" id="error-imatge"></div>
-                    </div>
-                </div>
+                <input type="file" class="form-controller" id="imatge" name="imatge[]" accept="image/*"
+                    value="<?php echo e(old('imatge')); ?>" multiple required>
             </div>
 
             <div class="form-group">
                 <label for="descripcio" class="form-label">Descripción del evento</label>
                 <textarea type="textarea" class="form-controller" maxlength="640" id="descripcio" name="descripcio" rows="3"
                     required><?php echo e(old('descripcio')); ?></textarea>
-                <div id="errorDivdescripcio" class="errorDiv" style="display: none;">
-                    <div id="errorContent">
-                        <div class="error-message" id="error-descripcio"></div>
-                    </div>
-                </div>
             </div>
 
             <div class="form-group">
                 <label for="data_hora" class="form-label">Fecha y hora de la celebración</label>
                 <input type="datetime-local" class="form-controller" id="data_hora" name="data_hora"
                     value="<?php echo e(old('data_hora')); ?>" required>
-                <div id="errorDivdata" class="errorDiv" style="display: none;">
-                    <div id="errorContent">
-                        <div class="error-message" id="error-data"></div>
-                    </div>
-                </div>
             </div>
 
             <div class="form-group">
                 <label for="aforament_maxim" class="form-label">Aforo máximo</label>
                 <input type="number" class="form-controller" id="aforament_maxim" name="aforament_maxim"
                     value="<?php echo e(old('aforament_maxim')); ?>" required>
-                <div id="errorDivaforo" style="display: none;">
-                    <div id="errorContent">
-                        <div class="error-message" id="error-aforo"></div>
-                    </div>
-                </div>
             </div>
 
             <!-- Tipos de Entradas -->
@@ -111,17 +82,9 @@
                 <div id="tiposEntradas">
                     <!-- Contenido dinámico para los tipos de entradas -->
                 </div>
-                <div id="errorDiventrada" class="errorDiv" style="display: none;">
-                    <div id="errorContent">
-                        <div class="error-message" id="error-entrada"></div>
-                    </div>
-                </div>
-                <div class="button-entrada">
-                    <button type="button" class="btn btn-add" id="agregarTipoEntrada">Agregar Tipo de
-                        Entrada</button>
-                    <button type="button" class="btn btn-eliminar" id="eliminarTipoEntrada"
-                        style="display: none;">Eliminar
-                        Entrada</button>
+                <div class="button-container">
+                    <button type="button" class="btn btn-blue" id="agregarTipoEntrada">Agregar Tipo de Entrada</button>
+                    <button type="button" class="btn btn-red" id="eliminarTipoEntrada" style="display: none;">Eliminar Entrada</button>
                 </div>
             </div>
 
@@ -146,11 +109,6 @@
                     <label for="dataHoraPersonalitzada" class="form-label">Fecha y hora del cierre</label>
                     <input type="datetime-local" class="form-controller" id="dataHoraPersonalitzada"
                         name="dataHoraPersonalitzada" value="<?php echo e(old('dataHoraPersonalitzada')); ?>">
-                    <div id="errorDivtancament" class="errorDiv" style="display: none;">
-                        <div id="errorContent">
-                            <div class="error-message" id="error-tancament"></div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -160,91 +118,372 @@
                     <?php if(old('ocultarEsdeveniment')): ?> checked <?php endif; ?>>
             </div>
 
-            <div class="form-group">
-                <label for="entradaNominal" class="form-label">Entradas Nominales</label>
-                <input type="checkbox" id="entradaNominal" name="entradaNominal"
-                    <?php if(old('entradaNominal')): ?> checked <?php endif; ?>>
-            </div>
-
-            <div id="errorDiv" class="errorDiv" style="display: none;">
-                <div id="errorContent">
-                    <div class="error-message" id="error-message"></div>
-                </div>
-            </div>
-
-            <button type="button" class="btn btn-add" id="validarYCrear">Crear Evento</button>
+            <button type="button" class="btn btn-blue" id="validarYCrear">Crear Evento</button>
 
         </form>
     </div>
     <script>
+        let recinteSelect = document.getElementById('recinteSelect');
+        let tiposEntradas = document.getElementById('tiposEntradas');
+        let agregarTipoEntrada = document.getElementById('agregarTipoEntrada');
+        let tancamentVendaSelect = document.getElementById('tancamentVenda');
+        let personalitzatTancamentDiv = document.getElementById('personalitzatTancament');
+        let dataHoraPersonalitzadaInput = document.getElementById('dataHoraPersonalitzada');
+        let dataHoraEsdevenimentInput = document.getElementById('data_hora');
+        let titol = document.getElementById('titol');
+        let nousCamps = document.getElementById('nousCamps');
+        let imatgeInput = document.getElementById('imatge');
+        let descripcionInput = document.getElementById('descripcio');
+        let fechaHoraInput = document.getElementById('data_hora');
+        let aforoInput = document.getElementById('aforament_maxim');
+
+        function establirValorPerDefecte() {
+            var tancamentValue = tancamentVendaSelect.value;
+
+            if (tancamentValue === 'personalitzat') {
+                personalitzatTancamentDiv.style.display = 'block';
+            } else {
+                personalitzatTancamentDiv.style.display = 'none';
+
+                if (tancamentValue === '1hora' || tancamentValue === '2hores') {
+                    // Calcula la data de tancament ajustant-hi les hores segons l'opció seleccionada
+                    var dataEsdeveniment = new Date(dataHoraEsdevenimentInput.value);
+                    var horesAbans = (tancamentValue === '1hora') ? 1 : 2;
+                    var dataTancament = new Date(dataEsdeveniment.getTime() - (horesAbans - 1) * 60 * 60 *
+                        1000);
+
+                    // Formateja la data de tancament com a string per a l'input datetime-local
+                    var dataTancamentString = dataTancament.toISOString().slice(0, -8);
+                    dataHoraPersonalitzadaInput.value = dataTancamentString;
+                } else {
+                    // Assigna la data de tancament en base a la selecció
+                    dataHoraPersonalitzadaInput.value = dataHoraEsdevenimentInput.value;
+                }
+            }
+        }
+        // Funció per validar la data de tancament
+        function validarDataTancament() {
+            var dataEsdeveniment = new Date(dataHoraEsdevenimentInput.value);
+            var dataTancament = new Date(dataHoraPersonalitzadaInput.value);
+
+            // Comprova si la data de tancament és anterior o igual a la data de l'esdeveniment
+            return dataTancament <= dataEsdeveniment;
+        }
+
+        function validarCamposVacios() {
+            if (document.querySelectorAll(".ticket-error").length > 0) {
+                document.querySelectorAll(".ticket-error").forEach(element => {
+                    element.remove();
+                });
+            }
+
+            if (titol.value === '') {
+                const DivEntrada = document.createElement("div");
+                DivEntrada.classList.add("ticket-error");
+                titol.insertAdjacentElement("beforebegin", DivEntrada);
+                let entradaP = document.createElement("p");
+                entradaP.textContent = `El título del evento es un campo obligatorio.`;
+                DivEntrada.appendChild(entradaP);
+            } else if (titol.length > 20) {
+                const DivEntrada = document.createElement("div");
+                DivEntrada.classList.add("ticket-error");
+                titol.insertAdjacentElement("beforebegin", DivEntrada);
+                let entradaP = document.createElement("p");
+                entradaP.textContent = `El título del evento no puede tener más de 20 caracteres.`;
+                DivEntrada.appendChild(entradaP);
+            }
+
+            if (imatgeInput.files.length === 0) {
+                const DivEntrada = document.createElement("div");
+                DivEntrada.classList.add("ticket-error");
+                imatgeInput.insertAdjacentElement("beforebegin", DivEntrada);
+                let entradaP = document.createElement("p");
+                entradaP.textContent = `Debe seleccionar una imagen para el evento.`;
+                DivEntrada.appendChild(entradaP);
+            } else if (imatgeInput.files.length > 0) {
+                var allowedTypes = ['image/jpeg', 'image/png', 'image/bmp', 'image/webp',
+                    'image/jpg'
+                ]; // Tipos de archivo permitidos
+                var selectedFileType = imatgeInput.files[0].type;
+
+                // Verificar si el tipo de archivo está permitido
+                if (allowedTypes.indexOf(selectedFileType) === -1) {
+                    const DivEntrada = document.createElement("div");
+                    DivEntrada.classList.add("ticket-error");
+                    imatgeInput.insertAdjacentElement("beforebegin", DivEntrada);
+                    let entradaP = document.createElement("p");
+                    entradaP.textContent =
+                        `El archivo seleccionado no es una imagen válida. Por favor, elige un archivo JPEG, PNG, BMP o WebP.`;
+                    DivEntrada.appendChild(entradaP);
+                    // Limpiar el campo de imatge
+                    imatgeInput.value = '';
+                }
+            }
+
+            if (descripcionInput.value === '') {
+                const DivEntrada = document.createElement("div");
+                DivEntrada.classList.add("ticket-error");
+                descripcionInput.insertAdjacentElement("beforebegin", DivEntrada);
+                let entradaP = document.createElement("p");
+                entradaP.textContent = `La descripción del evento no puede estar vacía.`;
+                DivEntrada.appendChild(entradaP);
+            } else if (descripcionInput.length > 640) {
+                const DivEntrada = document.createElement("div");
+                DivEntrada.classList.add("ticket-error");
+                descripcionInput.insertAdjacentElement("beforebegin", DivEntrada);
+                let entradaP = document.createElement("p");
+                entradaP.textContent = `La descripción del evento debe tener un máximo de 640 caracteres.`;
+                DivEntrada.appendChild(entradaP);
+            }
+
+            if (fechaHoraInput.value === '') {
+                const DivEntrada = document.createElement("div");
+                DivEntrada.classList.add("ticket-error");
+                fechaHoraInput.insertAdjacentElement("beforebegin", DivEntrada);
+                let entradaP = document.createElement("p");
+                entradaP.textContent = `El campo de fecha y hora de la celebración no puede estar vacío.`;
+                DivEntrada.appendChild(entradaP);
+            }
+
+            var fechaHoraActual = new Date();
+            // Obtener la fecha y hora del evento
+            var fechaHoraEvento = new Date(dataHoraEsdevenimentInput.value);
+
+            // Verificar que la fecha del evento no sea anterior a la fecha y hora actual
+            if (fechaHoraEvento < fechaHoraActual) {
+                const DivEntrada = document.createElement("div");
+                DivEntrada.classList.add("ticket-error");
+                dataHoraEsdevenimentInput.insertAdjacentElement("beforebegin", DivEntrada);
+                let entradaP = document.createElement("p");
+                entradaP.textContent =
+                    `La fecha y hora de inicio del evento no puede ser anterior a la fecha y hora actual.`;
+                DivEntrada.appendChild(entradaP);
+            }
+
+            if (aforoInput.value === '') {
+                const DivEntrada = document.createElement("div");
+                DivEntrada.classList.add("ticket-error");
+                aforoInput.insertAdjacentElement("beforebegin", DivEntrada);
+                let entradaP = document.createElement("p");
+                entradaP.textContent = `El campo de aforo máximo no puede estar vacío.`;
+                DivEntrada.appendChild(entradaP);
+            } else if (isNaN(aforoInput.value)) {
+                const DivEntrada = document.createElement("div");
+                DivEntrada.classList.add("ticket-error");
+                aforoInput.insertAdjacentElement("beforebegin", DivEntrada);
+                let entradaP = document.createElement("p");
+                entradaP.textContent = `El valor del aforo máximo debe ser numérico.`;
+                DivEntrada.appendChild(entradaP);
+            } else if (parseInt(aforoInput.value) < 1) {
+                const DivEntrada = document.createElement("div");
+                DivEntrada.classList.add("ticket-error");
+                aforoInput.insertAdjacentElement("beforebegin", DivEntrada);
+                let entradaP = document.createElement("p");
+                entradaP.textContent = `El aforo debe ser de almenos 1 persona.`;
+                DivEntrada.appendChild(entradaP);
+            }
+            // Obtener la lista de entradas
+            var entradas = document.querySelectorAll('.tipo-entrada');
+            var butonElement = document.querySelector('#validarYCrear');
+
+            // Verificar que haya al menos una entrada
+            if (entradas.length === 0) {
+                const DivEntrada = document.createElement("div");
+                DivEntrada.classList.add("ticket-error");
+                butonElement.insertAdjacentElement("beforebegin", DivEntrada);
+                let entradaP = document.createElement("p");
+                entradaP.textContent = `Debe agregar al menos una entrada antes de crear el evento.`;
+                DivEntrada.appendChild(entradaP);
+            }
+
+            const nombre = document.querySelectorAll("#entradesNom");
+            const preu = document.querySelectorAll("#entradesPreu");
+            const quantitat = document.querySelectorAll("#entradesQuantitat");
+
+            nombre.forEach(element => {
+                if (element.value === '') {
+                    const DivEntrada = document.createElement("div");
+                    DivEntrada.classList.add("ticket-error");
+                    element.insertAdjacentElement("beforebegin", DivEntrada);
+                    let entradaP = document.createElement("p");
+                    entradaP.textContent = `El nombre del tipo de entrada no puede estar vacío.`;
+                    DivEntrada.appendChild(entradaP);
+                } else if (element.value.length > 20) {
+                    const DivEntrada = document.createElement("div");
+                    DivEntrada.classList.add("ticket-error");
+                    element.insertAdjacentElement("beforebegin", DivEntrada);
+                    let entradaP = document.createElement("p");
+                    entradaP.textContent =
+                        `El nombre del tipo de entrada debe tener máximo 20 caracteres.`;
+                    DivEntrada.appendChild(entradaP);
+                }
+
+            });
+
+            preu.forEach(element => {
+                if (element.value === '' || isNaN(element.value) || parseFloat(element.value) <=
+                    0) {
+                    const DivEntrada = document.createElement("div");
+                    DivEntrada.classList.add("ticket-error");
+                    element.insertAdjacentElement("beforebegin", DivEntrada);
+                    let entradaP = document.createElement("p");
+                    entradaP.textContent = `El precio debe ser un valor numérico mayor que 0.`;
+                    DivEntrada.appendChild(entradaP);
+                } else if (parseFloat(element.value) > 1000) {
+                    const DivEntrada = document.createElement("div");
+                    DivEntrada.classList.add("ticket-error");
+                    element.insertAdjacentElement("beforebegin", DivEntrada);
+                    let entradaP = document.createElement("p");
+                    entradaP.textContent = `El precio no puede ser superior a 1.000.€`;
+                    DivEntrada.appendChild(entradaP);
+                }
+            });
+
+            quantitat.forEach(element => {
+                if (element.value === '' || isNaN(element.value) || parseInt(element.value) <=
+                    0) {
+                    const DivEntrada = document.createElement("div");
+                    DivEntrada.classList.add("ticket-error");
+                    element.insertAdjacentElement("beforebegin", DivEntrada);
+                    let entradaP = document.createElement("p");
+                    entradaP.textContent =
+                        `La cantidad disponible debe ser un valor numérico mayor que 0.`;
+                    DivEntrada.appendChild(entradaP);
+                }
+            });
+
+            if (tancamentVendaSelect.value === 'personalitzat' && personalitzatTancamentDiv.style.display !==
+                'none') {
+                if (dataHoraPersonalitzadaInput.value === '') {
+                    const DivEntrada = document.createElement("div");
+                    DivEntrada.classList.add("ticket-error");
+                    dataHoraPersonalitzadaInput.insertAdjacentElement("beforebegin", DivEntrada);
+                    let entradaP = document.createElement("p");
+                    entradaP.textContent = `La fecha y hora personalizada no puede estar vacía.`;
+                    DivEntrada.appendChild(entradaP);
+                }
+
+                var fechaHoraActual = new Date();
+                // Obtener la fecha y hora del evento
+                var fechaHoraCierre = new Date(dataHoraPersonalitzadaInput.value);
+
+                // Verificar que la fecha del evento no sea anterior a la fecha y hora actual
+                if (fechaHoraCierre < fechaHoraActual) {
+                    const DivEntrada = document.createElement("div");
+                    DivEntrada.classList.add("ticket-error");
+                    dataHoraPersonalitzadaInput.insertAdjacentElement("beforebegin", DivEntrada);
+                    let entradaP = document.createElement("p");
+                    entradaP.textContent =
+                        `La fecha y hora de cierre de ventas del evento no puede ser anterior a la fecha y hora actual.`;
+                    DivEntrada.appendChild(entradaP);
+                }
+            }
+
+            if (!validarDataTancament()) {
+                const DivEntrada = document.createElement("div");
+                DivEntrada.classList.add("ticket-error");
+                dataHoraPersonalitzadaInput.insertAdjacentElement("beforebegin", DivEntrada);
+                let entradaP = document.createElement("p");
+                entradaP.textContent =
+                    `La fecha de cierre de ventas debe ser anterior o igual a la fecha de inicio.`;
+                DivEntrada.appendChild(entradaP);
+            }
+
+            if (document.querySelectorAll(".ticket-error").length > 0) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function verificarQuantitats() {
+            var entradas = document.querySelectorAll('.tipo-entrada');
+            var aforamentMaxim = parseInt(document.getElementById('aforament_maxim').value);
+            var totalQuantitats = 0;
+
+            for (var i = 0; i < entradas.length; i++) {
+                var entrada = entradas[i];
+                var quantitatInput = entrada.querySelector('[name="entrades-quantitat[]"]');
+                var quantitat = parseInt(quantitatInput.value);
+
+                // Assigna l'aforament màxim si el camp quantitat està buit
+                if (isNaN(quantitat) || quantitat <= 0) {
+                    quantitatInput.value = aforamentMaxim;
+                    quantitat = aforamentMaxim;
+                }
+
+                totalQuantitats += quantitat;
+
+                // Verifica que la quantitat no superi la capacitat total del local
+                if (quantitat > aforamentMaxim) {
+                    const DivEntrada = document.createElement("div");
+                    DivEntrada.classList.add("ticket-error");
+                    quantitatInput.insertAdjacentElement("afterend", DivEntrada);
+                    let entradaP = document.createElement("p");
+                    entradaP.textContent =
+                        `La cantidad disponible para este tipo de entrada no puede superar la capacidad total del local.`;
+                    DivEntrada.appendChild(entradaP);
+                    return false;
+                }
+            }
+
+            // Verifica que el total de quantitats disponibles no superi l'aforament màxim
+            if (totalQuantitats > aforamentMaxim) {
+                const DivEntrada = document.createElement("div");
+                DivEntrada.classList.add("ticket-error");
+                quantitatInput.insertAdjacentElement("afterend", DivEntrada);
+                let entradaP = document.createElement("p");
+                entradaP.textContent =
+                    `La suma total de cantidades de entradas disponibles no puede superar el aforo máximo.`;
+                DivEntrada.appendChild(entradaP);
+                return false; // Evitar l'enviament del formulari
+            }
+
+            // Si tot està bé, permet l'enviament del formulari
+            return true;
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
-            var recinteSelect = document.getElementById('recinteSelect');
-            var nousCamps = document.getElementById('nousCamps');
-            var cancelarBoto = document.getElementById('cancelarBoto');
-            var novaAdrecaBoto = document.getElementById('mostrarNovaAdreca');
-            var tiposEntradas = document.getElementById('tiposEntradas');
-            var agregarTipoEntrada = document.getElementById('agregarTipoEntrada');
-            var tancamentVendaSelect = document.getElementById('tancamentVenda');
-            var personalitzatTancamentDiv = document.getElementById('personalitzatTancament');
-            var dataHoraPersonalitzadaInput = document.getElementById('dataHoraPersonalitzada');
-            var dataHoraEsdevenimentInput = document.getElementById('data_hora');
-
-            // Afegir un esdeveniment d'escolta al botó "Afegir Nova Adreça"
-            document.getElementById('mostrarNovaAdreca').addEventListener('click', function() {
-                recinteSelect.value = ''; // Estableix el valor del select com a buit
-                recinteSelect.style.display = 'none'; // Oculta el select
-                nousCamps.style.display = 'block'; // Mostra els nous camps
-                cancelarBoto.style.display = 'block'; // Mostra el botó de cancelar
-                novaAdrecaBoto.style.display = 'none';
-            });
-
-            // Afegir un esdeveniment d'escolta al botó "Cancelar"
-            cancelarBoto.addEventListener('click', function() {
-                recinteSelect.style.display = 'block'; // Mostra el select
-                nousCamps.style.display = 'none'; // Oculta els nous camps
-                cancelarBoto.style.display = 'none'; // Oculta el botó de cancelar
-                novaAdrecaBoto.style.display = 'block';
-            });
-
             agregarTipoEntrada.addEventListener('click', function() {
                 var nuevoTipoEntrada = document.createElement('div');
                 var index = document.querySelectorAll('.tipo-entrada').length + 1;
 
                 nuevoTipoEntrada.innerHTML = `
-<div class="tipo-entrada">
-    <label for="entrades-nom" class="form-label">Nombre del Tipo</label>
-    <input type="text" maxlength="20" class="form-controller" name="entrades-nom[]" required>
-    <div id="errorDivnomEntrada" class="errorDiv" style="display: none;">
-                <div id="errorContent">
-    <div class="error-message" id="error-nomEntrada"></div>
-    </div>
-    </div>
+                    <div class="tipo-entrada">
+                        <label for="entrades-nom" class="form-label">Nombre del Tipo</label>
+                        <input type="text" maxlength="20" class="form-controller" id="entradesNom" name="entrades-nom[]" required>
 
-    <label for="entrades-preu" class="form-label">Precio</label>
-    <input type="text" class="form-controller" name="entrades-preu[]" required>
-    <div id="errorDivpreu" class="errorDiv" style="display: none;">
-                <div id="errorContent">
-    <div class="error-message" id="error-preu"></div>
-    </div>
-    </div>
+                        <label for="entrades-preu" class="form-label">Precio</label>
+                        <input type="text" class="form-controller" id="entradesPreu" name="entrades-preu[]" required>
 
-    <label for="entrades-quantitat" class="form-label">Cantidad disponible</label>
-    <input type="number" class="form-controller" name="entrades-quantitat[]" required>
-    <div id="errorDivquantitat" class="errorDiv" style="display: none;">
-                <div id="errorContent">
-    <div class="error-message" id="error-quantitat"></div>
-    </div>
-    </div>
-</div>
+                        <label for="entrades-quantitat" class="form-label">Cantidad disponible</label>
+                        <input type="number" class="form-controller" id="entradesQuantitat" name="entrades-quantitat[]" required>
 
-    `;
+                        <label for="entradaNominal" class="form-label">Entradas Nominales</label>
+                        <input type="hidden" value="False" name="entradaNominalCheck[]" id="entradaNominalCheck">
+                        <input type="checkbox" id="entradaNominal" name="entradaNominal[]"
+                            <?php if(old('entradaNominal')): ?> checked <?php endif; ?>>
+                        </div>
+                    </div>`;
 
                 tiposEntradas.appendChild(nuevoTipoEntrada);
 
                 // Mostrar el botón de eliminar si hay al menos un tipo de entrada
                 var eliminarTipoEntradaButton = document.getElementById('eliminarTipoEntrada');
                 eliminarTipoEntradaButton.style.display = 'block';
+
+                document.querySelectorAll('#entradaNominal').forEach(element => {
+                    element.addEventListener('click', function(e) {
+                        let parent = element.parentNode;
+                        if (element.checked) {
+                            parent.querySelector('#entradaNominalCheck').value = 'True';
+                        } else {
+                            parent.querySelector('#entradaNominalCheck').value = 'False';
+                        }
+                    })
+                });
             });
+
 
             // Eliminar Último Tipo de Entrada
             eliminarTipoEntrada.addEventListener('click', function() {
@@ -253,6 +492,7 @@
 
                 // Obtener la lista de tipos de entrada
                 var tiposEntradas = tiposEntradasContainer.querySelectorAll('.tipo-entrada');
+                var eliminarElement = document.querySelector('#entradesQuantitat');
 
                 // Verificar que haya al menos un tipo de entrada para eliminar
                 if (tiposEntradas.length > 1) {
@@ -265,428 +505,31 @@
 
                 // Ocultar el botón de eliminar si no hay más tipos de entrada
                 if (tiposEntradas.length <= 1) {
-                    mostrarMissatge('entrada', 'Debe haber al menos un tipo de entrada.');
-                } else {
-                    ocultarMissatge('entrada');
+                    const DivEntrada = document.createElement("div");
+                    DivEntrada.classList.add("ticket-error");
+                    eliminarElement.insertAdjacentElement("afterend", DivEntrada);
+                    let entradaP = document.createElement("p");
+                    entradaP.textContent = `Debe haber al menos un tipo de entrada.`;
+                    DivEntrada.appendChild(entradaP);
                 }
             });
 
-
-            function establirValorPerDefecte() {
-                var tancamentValue = tancamentVendaSelect.value;
-
-                if (tancamentValue === 'personalitzat') {
-                    personalitzatTancamentDiv.style.display = 'block';
-                } else {
-                    personalitzatTancamentDiv.style.display = 'none';
-
-                    if (tancamentValue === '1hora' || tancamentValue === '2hores') {
-                        // Calcula la data de tancament ajustant-hi les hores segons l'opció seleccionada
-                        var dataEsdeveniment = new Date(dataHoraEsdevenimentInput.value);
-                        var horesAbans = (tancamentValue === '1hora') ? 1 : 2;
-                        var dataTancament = new Date(dataEsdeveniment.getTime() - (horesAbans - 1) * 60 * 60 *
-                            1000);
-
-                        // Formateja la data de tancament com a string per a l'input datetime-local
-                        var dataTancamentString = dataTancament.toISOString().slice(0, -8);
-                        dataHoraPersonalitzadaInput.value = dataTancamentString;
-                    } else {
-                        // Assigna la data de tancament en base a la selecció
-                        dataHoraPersonalitzadaInput.value = dataHoraEsdevenimentInput.value;
-                    }
-                }
-            }
-
             tancamentVendaSelect.addEventListener('change', establirValorPerDefecte);
 
-            // Funció per validar la data de tancament
-            function validarDataTancament() {
-                var dataEsdeveniment = new Date(dataHoraEsdevenimentInput.value);
-                var dataTancament = new Date(dataHoraPersonalitzadaInput.value);
 
-                // Comprova si la data de tancament és anterior o igual a la data de l'esdeveniment
-                return dataTancament <= dataEsdeveniment;
-            }
-
-            function validarCamposVacios() {
-                var titol = document.getElementById('titol').value.trim();
-                var recinteSelect = document.getElementById('recinteSelect');
-                var nousCamps = document.getElementById('nousCamps');
-                var imatgeInput = document.getElementById('imatge');
-                var descripcionInput = document.getElementById('descripcio');
-                var descripcionValue = descripcionInput.value.trim();
-                var fechaHoraInput = document.getElementById('data_hora');
-                var fechaHoraValue = fechaHoraInput.value.trim();
-                var aforoInput = document.getElementById('aforament_maxim');
-                var aforoValue = aforoInput.value.trim();
-                var tancamentVendaSelect = document.getElementById('tancamentVenda');
-                var personalitzatTancamentDiv = document.getElementById('personalitzatTancament');
-                var dataHoraPersonalitzadaInput = document.getElementById('dataHoraPersonalitzada');
-
-                if (titol === '') {
-                    mostrarMissatge('titol', 'El título del evento es un campo obligatorio');
-                    return false;
-                } else {
-                    ocultarMissatge('titol');
-                }
-
-                if (titol.length > 20) {
-                    mostrarMissatge('titol', 'El título del evento no puede tener más de 20 caracteres.');
-                    return false;
-                } else {
-                    ocultarMissatge('titol');
-                }
-
-                if (recinteSelect.value === '' && nousCamps.style.display !== 'block') {
-                    mostrarMissatge('recinte',
-                        'Debe seleccionar un recinto existente o agregar una nueva dirección.');
-                    return false;
-                } else {
-                    ocultarMissatge('recinte');
-                }
-
-                if (nousCamps.style.display === 'block') {
-                    var novaNom = document.getElementById('nova_nom').value.trim();
-                    var novaProvincia = document.getElementById('nova_provincia').value.trim();
-                    var novaCiutat = document.getElementById('nova_ciutat').value.trim();
-                    var novaCodiPostal = document.getElementById('nova_codi_postal').value.trim();
-                    var novaCapacitat = document.getElementById('nova_capacitat').value.trim();
-
-                    // Validar que el código postal sea numérico
-                    if (isNaN(novaCodiPostal)) {
-                        mostrarMissatge('postal', 'El código postal debe ser un valor numérico.');
-                        return false;
-                    } else {
-                        ocultarMissatge('postal');
-                    }
-
-                    // Validar que la capacidad sea numérica
-                    if (isNaN(novaCapacitat)) {
-                        mostrarMissatge('capacitat', 'El aforo debe ser un valor numérico.');
-                        return false;
-                    } else {
-                        ocultarMissatge('capacitat');
-                    }
-
-                    if (novaNom === '') {
-                        mostrarMissatge('nomLocal', 'Introduce el nombre del local.');
-                        return false;
-                    } else {
-                        ocultarMissatge('nomLocal');
-                    }
-
-                    if (novaProvincia === '') {
-                        mostrarMissatge('provincia', 'Debes incluir la provincia del recinto.');
-                        return false;
-                    } else {
-                        ocultarMissatge('provincia');
-                    }
-
-                    if (novaCiutat === '') {
-                        mostrarMissatge('ciutat', 'Debes introducir la ciudad del recinto.');
-                        return false;
-                    } else {
-                        ocultarMissatge('ciutat');
-                    }
-
-                    if (novaCodiPostal === '') {
-                        mostrarMissatge('postal', 'El codigo postal es un campo obligatorio.');
-                        return false;
-                    } else {
-                        ocultarMissatge('postal');
-                    }
-
-                    if (novaCapacitat === '') {
-                        mostrarMissatge('capacitat', 'Debes indicar la capacidad del recinto.');
-                        return false;
-                    } else {
-                        ocultarMissatge('capacitat');
-                    }
-
-                    // Validar que el código postal tenga el formato adecuado (5 dígitos)
-                    var codiPostalRegExp = /^\d{5}$/;
-                    if (!codiPostalRegExp.test(novaCodiPostal)) {
-                        mostrarMissatge('postal', 'El código postal debe tener 5 dígitos.');
-                        return false;
-                    } else {
-                        ocultarMissatge('postal');
-                    }
-
-                    if (parseInt(novaCapacitat) < 1) {
-                        mostrarMissatge('capacitat', 'La capacidad del local debe ser de almenos 1 persona.')
-                        return false;
-                    } else {
-                        ocultarMissatge('capacitat');
-                    }
-                }
-
-                if (imatgeInput.files.length === 0) {
-                    mostrarMissatge('imatge', 'Debe seleccionar una imagen para el evento.');
-                    return false;
-                } else {
-                    ocultarMissatge('imatge');
-                }
-
-                if (imatgeInput.files.length > 0) {
-                    var allowedTypes = ['image/jpeg', 'image/png', 'image/bmp', 'image/webp',
-                        'image/jpg'
-                    ]; // Tipos de archivo permitidos
-                    var selectedFileType = imatgeInput.files[0].type;
-
-                    // Verificar si el tipo de archivo está permitido
-                    if (allowedTypes.indexOf(selectedFileType) === -1) {
-                        mostrarMissatge('imatge',
-                            'El archivo seleccionado no es una imagen válida. Por favor, elige un archivo JPEG, PNG, BMP o WebP.'
-                        );
-                        // Limpiar el campo de imatge
-                        imatgeInput.value = '';
-                        return false;
-                    } else {
-                        ocultarMissatge('imatge');
-                    }
-                }
-
-                if (descripcionValue === '') {
-                    mostrarMissatge('descripcio', 'La descripción del evento no puede estar vacía.');
-                    return false;
-                } else {
-                    ocultarMissatge('descripcio');
-                }
-
-                if (descripcionValue.length > 640) {
-                    mostrarMissatge('descripcio',
-                        'La descripción del evento debe tener un máximo de 640 caracteres.');
-                    return false;
-                } else {
-                    ocultarMissatge('descripcio');
-                }
-
-                if (fechaHoraValue === '') {
-                    mostrarMissatge('data', 'El campo de fecha y hora de la celebración no puede estar vacío.');
-                    return false;
-                } else {
-                    ocultarMissatge('data');
-                }
-
-                var fechaHoraActual = new Date();
-                // Obtener la fecha y hora del evento
-                var fechaHoraEvento = new Date(dataHoraEsdevenimentInput.value);
-
-                // Verificar que la fecha del evento no sea anterior a la fecha y hora actual
-                if (fechaHoraEvento < fechaHoraActual) {
-                    mostrarMissatge('data',
-                        'La fecha y hora de inicio del evento no puede ser anterior a la fecha y hora actual.');
-                    return false;
-                } else {
-                    ocultarMissatge('data');
-                }
-
-                if (aforoValue === '') {
-                    mostrarMissatge('aforo', 'El campo de aforo máximo no puede estar vacío.');
-                    return false;
-                } else {
-                    ocultarMissatge('aforo');
-                }
-
-                // Obtener el valor del campo novaCapacitat
-                var novaCapacitatInput = document.getElementById('nova_capacitat');
-                var novaCapacitatValue = novaCapacitatInput.value.trim();
-
-                // Verificar que novaCapacitat no esté vacío
-                if (novaCapacitatValue !== '') {
-
-                    // Verificar que el aforo máximo no supere el valor de novaCapacitat
-                    if (aforoValue > parseInt(novaCapacitatValue)) {
-                        mostrarMissatge('aforo', 'El aforo máximo no puede superar la capacidad del local.');
-                        return false; // Evitar el envío del formulario
-                    } else {
-                        ocultarMissatge('aforo');
-                    }
-                }
-
-                if (isNaN(aforoValue)) {
-                    mostrarMissatge('aforo', 'El valor del aforo máximo debe ser numérico.');
-                    return false;
-                } else {
-                    ocultarMissatge('aforo');
-                }
-
-                if (parseInt(aforoValue) < 1) {
-                    mostrarMissatge('aforo', 'El aforo debe ser de almenos 1 persona.')
-                    return false;
-                } else {
-                    ocultarMissatge('aforo');
-                }
-
-                var entradas = document.querySelectorAll('.tipo-entrada');
-
-                for (var i = 0; i < entradas.length; i++) {
-                    var entrada = entradas[i];
-                    var nombreInput = entrada.querySelector('[name="entrades-nom[]"]');
-                    var precioInput = entrada.querySelector('[name="entrades-preu[]"]');
-                    var cantidadInput = entrada.querySelector('[name="entrades-quantitat[]"]');
-                    var nombreValue = nombreInput.value.trim();
-                    var precioValue = precioInput.value.trim();
-                    var cantidadValue = cantidadInput.value.trim();
-                    if (nombreValue === '') {
-                        mostrarMissatge('nomEntrada',
-                            'El nombre del tipo de entrada no puede estar vacío.')
-                        return false;
-                    } else {
-                        ocultarMissatge('nomEntrada');
-                    }
-
-                    if (nombreValue.length > 20) {
-                        'nomEntrada',
-                        mostrarMissatge('El nombre del tipo de entrada debe tener máximo 20 caracteres.')
-                        return false;
-                    }
-                    else {
-                        ocultarMissatge('nomEntrada');
-                    }
-
-                    if (precioValue === '' || isNaN(precioValue) || parseFloat(precioValue) <= 0) {
-                        mostrarMissatge('preu', 'El precio debe ser un valor numérico mayor que 0.');
-                        return false;
-                    } else {
-                        ocultarMissatge('preu');
-                    }
-
-                    // Validar que el precio no supere el límite
-                    if (parseFloat(precioValue) > 1000) {
-                        mostrarMissatge('preu', 'El precio no puede ser superior a 1.000.€');
-                        return false;
-                    } else {
-                        ocultarMissatge('preu');
-                    }
-
-                    if (cantidadValue !== '' && (isNaN(cantidadValue) || parseInt(cantidadValue) <= 0)) {
-                        mostrarMissatge('quantitat',
-                            'La cantidad disponible debe ser un valor numérico mayor que 0.');
-                        return false;
-                    } else {
-                        ocultarMissatge('quantitat');
-                    }
-                }
-
-                if (tancamentVendaSelect.value === 'personalitzat' && personalitzatTancamentDiv.style.display !==
-                    'none') {
-                    var dataHoraPersonalitzadaValue = dataHoraPersonalitzadaInput.value.trim();
-                    if (dataHoraPersonalitzadaValue === '') {
-                        mostrarMissatge('tancament', 'La fecha y hora personalizada no puede estar vacía.');
-                        return false;
-                    } else {
-                        ocultarMissatge('tancament');
-                    }
-                    var fechaHoraActual = new Date();
-                    // Obtener la fecha y hora del evento
-                    var fechaHoraCierre = new Date(dataHoraPersonalitzadaInput.value);
-
-                    // Verificar que la fecha del evento no sea anterior a la fecha y hora actual
-                    if (fechaHoraCierre < fechaHoraActual) {
-                        mostrarMissatge('tancament',
-                            'La fecha y hora de cierre de ventas del evento no puede ser anterior a la fecha y hora actual.'
-                        );
-                        return false;
-                    } else {
-                        ocultarMissatge('tancament');
-                    }
-                }
-
-                return true;
-            }
 
             validarYCrear.addEventListener('click', function() {
                 establirValorPerDefecte();
 
                 if (validarCamposVacios()) {
-                    // Obtener la lista de entradas
-                    var entradas = document.querySelectorAll('.tipo-entrada');
-
-                    // Verificar que haya al menos una entrada
-                    if (entradas.length === 0) {
-                        mostrarMissatge('entrada',
-                            'Debe agregar al menos una entrada antes de crear el evento.');
-                    } else {
-                        ocultarMissatge('entrada');
-                        // Realitzar les validacions addicionals
-                        if (verificarQuantitats()) {
-                            // Si tot està bé, enviar el formulari
-                            if (validarDataTancament()) {
-                                document.getElementById('addEvent').submit();
-                            } else {
-                                mostrarMissatge('tancament',
-                                    'La fecha de cierre de ventas debe ser anterior o igual a la fecha de inicio.'
-                                );
-                            }
-                        }
+                    // Realitzar les validacions addicionals
+                    if (verificarQuantitats()) {
+                        // Si tot està bé, enviar el formulari
+                        document.getElementById('addEvent').submit();
                     }
+
                 }
             });
-
-
-            function verificarQuantitats() {
-                var entradas = document.querySelectorAll('.tipo-entrada');
-                var aforamentMaxim = parseInt(document.getElementById('aforament_maxim').value);
-                var totalQuantitats = 0;
-
-                for (var i = 0; i < entradas.length; i++) {
-                    var entrada = entradas[i];
-                    var quantitatInput = entrada.querySelector('[name="entrades-quantitat[]"]');
-                    var quantitat = parseInt(quantitatInput.value);
-
-                    // Assigna l'aforament màxim si el camp quantitat està buit
-                    if (isNaN(quantitat) || quantitat <= 0) {
-                        quantitatInput.value = aforamentMaxim;
-                        quantitat = aforamentMaxim;
-                    }
-
-                    totalQuantitats += quantitat;
-
-                    // Verifica que la quantitat no superi la capacitat total del local
-                    if (quantitat > aforamentMaxim) {
-                        mostrarMissatge('quantitat',
-                            'La cantidad disponible para este tipo de entrada no puede superar la capacidad total del local.'
-                        );
-                        return false; // Evitar l'enviament del formulari
-                    } else {
-                        ocultarMissatge('quantitat');
-                    }
-                }
-
-                // Verifica que el total de quantitats disponibles no superi l'aforament màxim
-                if (totalQuantitats > aforamentMaxim) {
-                    mostrarMissatge('quantitat',
-                        'La suma total de cantidades de entradas disponibles no puede superar el aforo máximo.'
-                    );
-                    return false; // Evitar l'enviament del formulari
-                } else {
-                    ocultarMissatge('quantitat');
-                }
-
-                // Si tot està bé, permet l'enviament del formulari
-                return true;
-            }
-
-            function mostrarMissatge(campo, missatge) {
-                // Mostrar el mensaje de error junto al campo correspondiente
-                var errorDiv = document.getElementById('errorDiv' + campo);
-                var errorContent = document.getElementById('errorContent');
-                var errorCampo = document.getElementById('error-' + campo);
-                var errorForm = document.getElementById('errorDiv');
-                var errorMessage = document.getElementById('error-message');
-
-                errorCampo.innerHTML = missatge;
-                errorMessage.innerHTML = "El formulario contiene errores!";
-                errorForm.style.display = 'block';
-                errorDiv.style.display = 'block';
-            }
-
-            function ocultarMissatge(campo) {
-                var errorDiv = document.getElementById('errorDiv' + campo);
-                errorDiv.style.display = 'none';
-            }
-
         });
     </script>
 <?php $__env->stopSection(); ?>

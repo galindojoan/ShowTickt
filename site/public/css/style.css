@@ -771,12 +771,43 @@ a {
 }
 .textEvent .detallesLocal {
   display: grid;
-  grid-template-columns: 1fr 0.7fr;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   justify-self: start;
+  justify-items: end;
+}
+.textEvent .añadirTickets {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
+  margin-top: 6%;
+  margin-bottom: 8%;
+  justify-items: start;
+}
+.textEvent .tiposTickets {
+  width: calc(100% - 16px);
+  max-width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #474747;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6%;
+  margin-bottom: 10%;
+}
+.textEvent .espacioEventos {
+  margin-top: 6%;
+}
+.textEvent #precioTotal {
+  justify-self: start;
+}
+.textEvent .DivsConBotonesDerecho {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: baseline;
+  justify-items: center;
 }
 .textEvent .ComprarEntrada #fechaSesion {
-  margin-bottom: 15%;
+  margin-bottom: 10%;
 }
 .textEvent .form-label {
   margin-bottom: 0px;

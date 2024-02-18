@@ -1,4 +1,5 @@
 <?php $__env->startSection('title', 'Recuperar'); ?>
+<?php $__env->startSection('metadades','Reccupera tu cuenta con tan solo poner tu email.'); ?>
 
 <?php $__env->startSection('content'); ?>
     <div class="login">

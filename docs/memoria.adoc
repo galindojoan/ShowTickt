@@ -10,7 +10,8 @@
 
 == Introducción
 
-Los miembros del proyecto somos Brian Tobias Arrua, Galindo Palacio Joan y Camilo Jumelle. Este proyecto tratará de realizar una aplicación que 
+Los miembros del proyecto somos Brian Tobias Arrua, Galindo Palacio Joan y Camilo Jumelle. Este proyecto tratará de realizar una aplicación que venderá entradas para eventos de varios
+tipos, este proyecto incluye una sección de promotores donde el promotor deberá ir añadiendo y adminsitrando los eventos a vender.
 
 
 == Requisitos del proyecto
@@ -213,6 +214,17 @@ Los ** enlaces ** serán de la siguiente forma:
 
 
 image::images/GuiaEstils/enlaces.png[]
+
+=== MetaDades y compartición a las redes sociales
+
+Para poder controlar el compartir de las páginas de nuestra aplicación hemos añadido un meta de descripcion para que se coloque una breve descripción de lo que la página realiza
+o muestra, y si la página es muestra algún evento a vender o demás mostrara también la imagen principal de este evento.
+
+[source, html]
+----
+<meta name="description" content="descripción de la página" >
+<meta name="image" content="imagen de evento si es que la página tiene">
+----
 
 
 == Confección del manual de instalación/distribución de la aplicación

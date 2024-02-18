@@ -320,13 +320,10 @@
             }
 
             var entradas = document.querySelectorAll('.tipo-entrada');
-            console.log('no ');
             for (let i = 0; i < entradas.length; i++) {
                 let entrada = entradas[i];
                 let nombreInput = entrada.querySelector('[name="entrades-nom[]"]');
-                console.log('precio');
                 let precioInput = entrada.querySelector('[name="entrades-preu[]"]');
-                console.log(precioInput);
                 let cantidadInput = entrada.querySelector('[name="entrades-quantitat[]"]');
                 if (nombreInput.value === '') {
                     mostrarMissatge('nomEntrada',

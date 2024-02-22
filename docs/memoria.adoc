@@ -90,6 +90,30 @@ El dilluns ens vam posar a fer bé les correccions del divendres, hem canviat la
 
 I en el dimarts ens hem posat finalment a fer la funció s'ha oblidat la contrasenya, hem realitzat un mini disseny molt simple per fer les proves i hem creat un compte en MailTrap per poder fer l’enviament d'emails. Hem fet uns simples controllers per l’enviament però ens falta molta feina en aquesta funció. A més hem finalitzat la funció de crear un esdeveniment, ja havíem tingut finalitzada la part d'adreces i ara tanquem la feina amb les entrades.
 
+**17/01**
+
+El dia disset havíem acabat la bitàcola i havíem començat la part del sprint 3 de mostrar els esdeveniments al públic sigui promotor, administrador o sigui anònim, aquest dia ens havíem encarregat que els esdeveniments es mostrin les seves imatges, nom, sessió i entrades. Però encara falta, ja que l'aplicació era bàsica, també havíem canviat la pàgina d'home perquè es mostri millor, perquè no sortia bé les diferents categories i també hem canviat el Figma que és el disseny perquè sigui igual al que teníem, perquè fen en la programació no sortia tan bé, perquè el disseny no estava posat amb les verdaderes mides, quan havien posat el disseny amb les verdaderes mides sortia de la mateixa forma que la web.
+
+**18/01**
+
+El dia divuit havíem fet la pàgina de resum llistat de sessions obertes que et mira totes les sessions, com les seves respectives entrades que tenen els esdeveniments, aquesta pàgina es mostra ordenades, però la data més actual a la més lluny, també aquesta pàgina mostra el títol, la data i les entrades.
+Aquest dia també hem afegit la pàgina administrar esdeveniments que aquesta pàgina s'encarrega de mostrar una llista d'esdeveniments amb la seva informació bàsica d'aquestes i l'opció de poder editar-lo.
+També havíem revisat si l'isard que és l'aplicació on els professors revisen les pàgines, l'aplicació ens funcionava bé i tot estava correcte.
+
+**19/01**
+
+El dia dinou ens havíem encarregat de posar les millores finals abans de la revisió setmanal i ens havíem encarregat d'acabar les últimes vistes de l'isard per assegurar.
+Després de la revisió ens vam adonar que encara ens faltava coses en l'isard com que mostra un error que no et permet seguir utilitzen la pàgina perquè el tipus de bytes que mostra la pàgina és superior en permetre, i que no podies donar-li a res de què tingui un enllaç perquè estava mal posat l'enllaç que es carrega, ja que es carregava un que no era la nostra, i per això no funcionava, aquest dia només ens havíem encarregat d'això.
+
+*22/01**
+
+El dia dilluns en van encarregar de les millores que el professor ens havien mencionat, però només era estilós de la pàgina, ja que havia mort que encara faltava espai i també estava molts textos junts quan haurien d'estar separat i també vam arreglar el tema de l'isard del divendres que encara donava errors al final vam poder actualitzar l'isard, però només ens faltava l'error dels bytes superior a l'ha posat, perquè encara no trobem la resposta aquest dia
+
+**23/01**
+
+El dia dimarts havíem acabat la penúltima part del sprint que és l'afegit múltiples sessions dels esdeveniments que és una pàgina on pots canviar totes les entrades d'aquesta sessió, és a dir pots editar una entrada o esborrar o afegir una entrada més en aquesta sessió.
+Editar les entrades sé en càrrega de canviar la data i l'hora de la celebració i l'aforament màxim i el tipus d'entrada igual que el preu o l'aforament màxim en les entrades.
+També pots veure el lloc on està el recinte o pot comprar una Entrada
 
 == Diseño
     

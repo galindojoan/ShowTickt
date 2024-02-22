@@ -11,6 +11,7 @@ use App\Models\EsdevenimentImatge;
 use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class CrearEsdevenimentController extends Controller
@@ -125,6 +126,17 @@ class CrearEsdevenimentController extends Controller
                 $imatge[] = $nomImatge;
             }
         }
+        // $imatge = [];
+        // if ($request->hasFile('imatge')) {
+        //     foreach ($request->file('imatge') as $file) {
+        //         Http::post(url('/api/image'),[
+        //             'imatge' => [
+        //                 'name' => $file->getClientOriginalName(),
+        //                 'path' => $file->getRealPath(),
+        //             ]
+        //         ]);
+        //     }
+        // }
 
         foreach ($imatge as $image) {
             EsdevenimentImatge::create([

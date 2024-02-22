@@ -7,13 +7,12 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations. 
      */
     public function up(): void
     {
         Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->string('urlUnica');
             $table->string('imageMovil');
             $table->string('imageTablet');
             $table->string('imageOrdenador');

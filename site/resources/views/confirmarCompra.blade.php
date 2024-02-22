@@ -29,10 +29,10 @@
             </div>
             <p id="total">Total: {{ $total }}€</p>
         </div>
-        @if ($total == 0)
-            <form action="{{ route('comprasGratis') }}" method="post" class="ticket-datos" id="ComprarEntrada">
+        @if ($total != 0 && env('PASARELA_PAGAMENT') == true)
+            <form action="{{ route('redsys') }}" method="post" class="ticket-datos" id="ComprarEntrada">
             @else
-                <form action="{{ route('redsys') }}" method="post" class="ticket-datos" id="ComprarEntrada">
+                <form action="{{ route('comprasGratis') }}" method="post" class="ticket-datos" id="ComprarEntrada">
         @endif
 
         @csrf
@@ -76,11 +76,6 @@
             <input type="email" class="form-controller" id="email" name="email">
         </div>
         <input type="hidden" class="form-controller" id="ArrayEntradas" name="ArrayEntradas">
-        @if ($total == 0)
-            <p>No hace falta pagar las Entradas</p>
-        @else
-            <p>Hay que pagar las Entradas</p>
-        @endif
         <button type="button" id="bottonCompra" class="btn btn-blue" style="height: 32px;">Finalizar Compra</button>
         </form>
     </div>

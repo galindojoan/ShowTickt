@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use GuzzleHttp\Client;
 use App\Models\Esdeveniment;
 use Illuminate\Http\Request;
@@ -27,8 +28,8 @@ class EsdevenimentController extends Controller
       ->where('esdeveniments.id', '=', $id)
       ->get();
     $preuTotal = 0;
-    $fechaSola=false;
-    return view('esdeveniment', compact('esdeveniment', 'fechas', 'entradas', 'preuTotal','fechaSola'));
+    $fechaSola = false;
+    return view('esdeveniment', compact('esdeveniment', 'fechas', 'entradas', 'preuTotal', 'fechaSola'));
   }
   public function local($id)
   {
@@ -36,28 +37,23 @@ class EsdevenimentController extends Controller
       ->select('recintes.*')
       ->where('esdeveniments.id', '=', $id)
       ->first();
-      $provincia = str_replace(' ', '+', $esdeveniment->provincia);
-      $lloc = str_replace(' ', '+', $esdeveniment->lloc);
-      
-      $direccion = $provincia . '+' . $lloc;
+    $provincia = str_replace(' ', '+', $esdeveniment->provincia);
+    $lloc = str_replace(' ', '+', $esdeveniment->lloc);
+
+    $direccion = $provincia . '+' . $lloc;
 
     $client = new Client();
-    try {
-        $response = $client->get('https://nominatim.openstreetmap.org/search?q='. $direccion.'&format=json', [
-            'verify' => false,
-        ]);
+    $response = $client->get('https://nominatim.openstreetmap.org/search?q=' . $direccion . '&format=json', [
+      'verify' => false,
+    ]);
 
-        $data = json_decode($response->getBody(), true);
+    $data = json_decode($response->getBody(), true);
 
-        if (!empty($data)) {
-          $lat = $data[0]['lat'] ?? null;
-          $long = $data[0]['lon'] ?? null;
-        } 
-    } catch (\Exception $e) {
-        $lat = null;
-        $long = null;
+    if (!empty($data)) {
+      $lat = $data[0]['lat'] ?? null;
+      $long = $data[0]['lon'] ?? null;
     }
 
-    return view('detallesLocal', compact('esdeveniment','lat','long'));
+    return view('detallesLocal', compact('esdeveniment', 'lat', 'long'));
   }
 }

@@ -57,17 +57,13 @@ class CrearEsdevenimentController extends Controller
     {
         $recinteId = $request->input('recinte');
 
-        try {
-            $esdeveniment = $this->createEsdeveniment($request, $recinteId);
-            $this->createEsdevenimentImatge($request, $esdeveniment->id);
-            $sessioId = $this->createSessio($request, $esdeveniment->id);
-            $this->createEntrades($request, $sessioId);
+        $esdeveniment = $this->createEsdeveniment($request, $recinteId);
+        $this->createEsdevenimentImatge($request, $esdeveniment->id);
+        $sessioId = $this->createSessio($request, $esdeveniment->id);
+        $this->createEntrades($request, $sessioId);
 
-            Log::info('Evento nuevo creado con la id: ' . $esdeveniment->id);
-        } catch (Exception $e) {
-            Log::error('Fallo al intentar crear un nuevo evento. Mensaje de error: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'Error al crear el evento.')->withInput();
-        }
+        Log::info('Evento nuevo creado con la id: ' . $esdeveniment->id);
+
 
         return redirect()->route('homePromotor')->with('success', 'Evento creado exitosamente');
     }
@@ -168,7 +164,6 @@ class CrearEsdevenimentController extends Controller
                 'sessios_id' => $sessioId,
             ]);
         }
-
     }
     public function crearRecinte(Request $request)
     {

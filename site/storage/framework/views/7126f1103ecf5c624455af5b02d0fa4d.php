@@ -1,4 +1,5 @@
 <?php $__env->startSection('title', 'local'); ?>
+<?php $__env->startSection('metadades','Observa en un mapa en donde se ubica el local del evento que estas interesado.'); ?>
 
 <?php $__env->startSection('content'); ?>
     <div class="containerEvent">

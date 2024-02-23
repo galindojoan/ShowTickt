@@ -11,6 +11,7 @@ use App\Models\EsdevenimentImatge;
 use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class CrearEsdevenimentController extends Controller
@@ -57,17 +58,13 @@ class CrearEsdevenimentController extends Controller
     {
         $recinteId = $request->input('recinte');
 
-        try {
-            $esdeveniment = $this->createEsdeveniment($request, $recinteId);
-            $this->createEsdevenimentImatge($request, $esdeveniment->id);
-            $sessioId = $this->createSessio($request, $esdeveniment->id);
-            $this->createEntrades($request, $sessioId);
+        $esdeveniment = $this->createEsdeveniment($request, $recinteId);
+        $this->createEsdevenimentImatge($request, $esdeveniment->id);
+        $sessioId = $this->createSessio($request, $esdeveniment->id);
+        $this->createEntrades($request, $sessioId);
 
-            Log::info('Evento nuevo creado con la id: ' . $esdeveniment->id);
-        } catch (Exception $e) {
-            Log::error('Fallo al intentar crear un nuevo evento. Mensaje de error: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'Error al crear el evento.')->withInput();
-        }
+        Log::info('Evento nuevo creado con la id: ' . $esdeveniment->id);
+
 
         return redirect()->route('homePromotor')->with('success', 'Evento creado exitosamente');
     }
@@ -129,6 +126,17 @@ class CrearEsdevenimentController extends Controller
                 $imatge[] = $nomImatge;
             }
         }
+        // $imatge = [];
+        // if ($request->hasFile('imatge')) {
+        //     foreach ($request->file('imatge') as $file) {
+        //         Http::post(url('/api/image'),[
+        //             'imatge' => [
+        //                 'name' => $file->getClientOriginalName(),
+        //                 'path' => $file->getRealPath(),
+        //             ]
+        //         ]);
+        //     }
+        // }
 
         foreach ($imatge as $image) {
             EsdevenimentImatge::create([
@@ -168,7 +176,6 @@ class CrearEsdevenimentController extends Controller
                 'sessios_id' => $sessioId,
             ]);
         }
-
     }
     public function crearRecinte(Request $request)
     {

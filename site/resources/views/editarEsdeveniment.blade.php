@@ -7,15 +7,17 @@
     <div class="containerEvent">
         <div class="textEvent">
             <h1>{{ $esdeveniment->nom }}</h1>
-            @if ($estado == true)
-            <div id="estado" class="estadoSesion msg-valido">
-                <p>Session Abierta con exito</p>
-            </div>
-        @else
-            <div id="estado" class="estadoSesion msg-error">
-                <p>Session Cerrada con exito</p>
-            </div>
-        @endif
+            @if (isset($estado))
+                @if ($estado == true)
+                    <div id="estado" class="estadoSesion msg-valido">
+                        <p>Sesión Abierta con éxito</p>
+                    </div>
+                @else
+                    <div id="estado" class="estadoSesion msg-error">
+                        <p>Sesión Cerrada con éxito</p>
+                    </div>
+                @endif
+            @endif
             <button id="fechaButton">Fechas
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="10"
                     width="10"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
@@ -135,8 +137,8 @@
             fechasDiv.style.display = 'none';
             buttonFechas.style.display = 'block';
         })
-        setTimeout(function () {
-          document.getElementById("estado").style.display = "none";
+        setTimeout(function() {
+            document.getElementById("estado").style.display = "none";
         }, 5000);
     </script>
 @endsection

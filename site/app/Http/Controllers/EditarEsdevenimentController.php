@@ -23,39 +23,7 @@ class EditarEsdevenimentController extends Controller
             ->where('esdeveniments.id', '=', $id)
             ->get();
 
-
-        // Obtener opiniones asociadas al evento
-        $opiniones = Opinion::where('esdeveniment_id', $id)->get();
-
-        foreach ($opiniones as $opinion) {
-            $opinion->emocio = $this->getEmoji($opinion->emocio);
-            $opinion->estrellas = $this->convertirPuntuacionAEstrellas($opinion->puntuacio);
-        }
-
-        return view('editarEsdeveniment', compact('esdeveniment', 'fechas', 'opiniones'));
-    }
-
-    private function getEmoji($emocio)
-    {
-        $emojis = [
-            '1' => '😠',
-            '2' => '😞',
-            '3' => '😐',
-            '4' => '😊',
-            '5' => '😃',
-        ];
-
-        return $emojis[$emocio] ?? '';
-    }
-
-    private function convertirPuntuacionAEstrellas($puntuacion)
-    {
-        $estrellas = '';
-        for ($i = 1; $i <= 5; $i++) {
-            $clase = ($i <= $puntuacion) ? 'star selected' : 'star';
-            $estrellas .= "<span class=\"$clase\" data-rating=\"$i\">&#9733;</span>";
-        }
-        return $estrellas;
+        return view('editarEsdeveniment', compact('esdeveniment', 'fechas'));
     }
 
     public function newSessionPage(Request $request)

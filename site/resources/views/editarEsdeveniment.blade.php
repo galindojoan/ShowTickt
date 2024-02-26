@@ -55,19 +55,6 @@
             <button class="btn btn-blue right-button" onclick="plusDivs(+1)">&#10095;</button>
         </div>
     </div>
-    <div class="opinion-cards">
-        @foreach ($opiniones as $opinion)
-            <div class="opinion-card">
-                <div class="opinion-content">
-                    <p>Nombre: {{ $opinion->nom }}</p>
-                    <p>Valoración: {!! $opinion->emocio !!}</p>
-                    <p>Puntuación: {!! $opinion->estrellas !!}</p>
-                    <p>Titulo: {{ $opinion->titol }}</p>
-                    <p>Comentario: {{ $opinion->comentari }}</p>
-                </div>
-            </div>
-        @endforeach
-    </div>
 
 @endsection
 

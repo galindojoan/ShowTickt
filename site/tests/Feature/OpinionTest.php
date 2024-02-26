@@ -74,6 +74,6 @@ class OpinionTest extends TestCase
         ];
         // Simula el envío de un formulario con datos válidos
         $response = $this->actingAs($user)->withSession(['key' => $user->id])->post('crearOpinion.store', $form);
-        $response->assertRedirect('/homePromotor');
+        $response->assertRedirect('/esdeveniment/'.$esdeveniment1->id);
     }
 }

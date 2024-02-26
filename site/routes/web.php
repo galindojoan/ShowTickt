@@ -31,6 +31,7 @@ use App\Http\Controllers\AdministrarEsdevenimentsController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/cerca', [HomeController::class, 'cerca'])->name('cerca');
+Route::post('/cerca', [HomeController::class, 'cerca'])->name('cerca');
 
 Route::get('/resultados', [HomeController::class, 'cerca'])->name('resultados');
 

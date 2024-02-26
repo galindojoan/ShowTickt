@@ -41,7 +41,7 @@ class OpinionController extends Controller
 
         $opinio->save();
 
-        return redirect()->route('homePromotor')->with('success', 'Opinion creada correctamente');
+        return redirect()->route('mostrar-esdeveniment', [$esdevenimentId])->with('success', 'Opinion creada correctamente');
     }
 
 }

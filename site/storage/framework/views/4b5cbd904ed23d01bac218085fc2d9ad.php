@@ -53,19 +53,6 @@
             <button class="btn btn-blue right-button" onclick="plusDivs(+1)">&#10095;</button>
         </div>
     </div>
-    <div class="opinion-cards">
-        <?php $__currentLoopData = $opiniones; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $opinion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <div class="opinion-card">
-                <div class="opinion-content">
-                    <p>Nombre: <?php echo e($opinion->nom); ?></p>
-                    <p>Valoración: <?php echo $opinion->emocio; ?></p>
-                    <p>Puntuación: <?php echo $opinion->estrellas; ?></p>
-                    <p>Titulo: <?php echo e($opinion->titol); ?></p>
-                    <p>Comentario: <?php echo e($opinion->comentari); ?></p>
-                </div>
-            </div>
-        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-    </div>
 
 <?php $__env->stopSection(); ?>
 

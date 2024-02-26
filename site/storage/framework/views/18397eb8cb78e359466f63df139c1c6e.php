@@ -72,7 +72,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-add" id="validarYCrear">Cambiar Sesión</button>
+            <button type="submit" class="btn btn-blue" id="validarYCrear">Cambiar Sesión</button>
 
         </form>
     </div>

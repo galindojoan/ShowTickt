@@ -6,6 +6,7 @@
 
 @section('content')
     <div class="containerEvent">
+      
         {{-- {{$esdeveniment}} --}}
         <div class="infoEvent">
             <h1>{{ $esdeveniment->nom }}</h1>
@@ -37,6 +38,9 @@
               </div>
                     <div id="calendar"></div>
                 @endif
+                <div id="estado" class="msg-error" style="display:none">
+                  <p>Session cerrada</p>
+              </div>
 
                 <div class="form-group espacioEventos" id="entradas" style="display:none;">
                     <label id="preu" class="form-label">Escoge el tipo de entrada:</label>

@@ -4,8 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CompraController;
+use App\Http\Controllers\OpinionController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\v1\ValidateController;
 use App\Http\Controllers\EsdevenimentController;
 use App\Http\Controllers\LlistatSessionsController;
 use App\Http\Controllers\LlistatsEntradesController;
@@ -14,7 +16,6 @@ use App\Http\Controllers\EditarEsdevenimentController;
 use App\Http\Controllers\DetallsEsdevenimentController;
 use App\Http\Controllers\AdministrarEsdevenimentController;
 use App\Http\Controllers\AdministrarEsdevenimentsController;
-use App\Http\Controllers\OpinionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,7 +104,11 @@ Route::post('/crearOpinion.store', [OpinionController::class,'store'])->name('cr
 
 Route::get('/editarSesion',[EditarEsdevenimentController::class,'updateSesionPage'])->name('editarSesion')->middleware('check');
 
+Route::post('/cerrarSesion',[EditarEsdevenimentController::class,'cerrarSesion'])->name('cerrarSesion')->middleware('check');
+Route::post('/abrirSesion',[EditarEsdevenimentController::class,'abrirSesion'])->name('abrirSesion')->middleware('check');
+
 Route::post('/peticionSesion',[EditarEsdevenimentController::class,'newSesion'])->name('peticionSesion')->middleware('check');
 Route::post('/cambiarSesion',[EditarEsdevenimentController::class,'updateSesion'])->name('cambiarSesion')->middleware('check');
 
 Route::get('/local/{id}',[EsdevenimentController::class, 'local'])->name('detallesLocal');
+Route::get('/ValidateSession', [ValidateController::class, 'index'])->name('ValidateSession');

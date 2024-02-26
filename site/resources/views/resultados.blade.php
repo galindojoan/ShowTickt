@@ -46,7 +46,7 @@
             action="@if (session('key')) {{ route('homePromotor') }}
             @else{{ route('login') }} @endif">
             @csrf
-            <input class="linkPromotor" type="submit" value="PROMOTORES">
+            <input class="btn btn-orange" type="submit" value="PROMOTORES">
         </form>
     </div>
 

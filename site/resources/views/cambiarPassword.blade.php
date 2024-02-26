@@ -13,7 +13,7 @@
         <form action="{{route('peticionCambiar')}}" method="post" class="login-form">
         @csrf
             <div class="login-input">
-                <input type="hidden" name="userId" value="{{$_GET['user']}}">
+                <input type="hidden" name="userId" value="{{ $userId }}">
                 <input type="password" name="password" id="password" placeholder="Nueva contraseña" required>
             </div>
             <input type="submit" value="Cambiar" class="boton">

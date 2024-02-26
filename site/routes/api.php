@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\v1\ValidateController;
 use App\Http\Controllers\Api\ServeiImatgeController;
 
 /*
@@ -24,3 +25,6 @@ Route::get('/image/{id}', [ServeiImatgeController::class, 'show']);
 Route::post('/image', [ServeiImatgeController::class, 'store']);
 Route::put('/image', [ServeiImatgeController::class, 'update']);
 Route::delete('/image/{id}', [ServeiImatgeController::class, 'destroy']);
+
+// Route::get('/ValidateSession', [ValidateController::class, 'index'])->name('ValidateSession');
+// Route::post('/ValidateSession', [ValidateController::class, 'index'])->name('ValidateSession');

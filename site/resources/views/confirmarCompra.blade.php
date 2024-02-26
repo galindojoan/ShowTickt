@@ -29,10 +29,10 @@
             </div>
             <p id="total">Total: {{ $total }}€</p>
         </div>
-        @if ($total == 0)
-            <form action="{{ route('comprasGratis') }}" method="post" class="ticket-datos" id="ComprarEntrada">
+        @if ($total != 0 && env('PASARELA_PAGAMENT') == true)
+            <form action="{{ route('redsys') }}" method="post" class="ticket-datos" id="ComprarEntrada">
             @else
-                <form action="{{ route('redsys') }}" method="post" class="ticket-datos" id="ComprarEntrada">
+                <form action="{{ route('comprasGratis') }}" method="post" class="ticket-datos" id="ComprarEntrada">
         @endif
 
         @csrf

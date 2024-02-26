@@ -6,6 +6,7 @@
 
 @section('content')
     <div class="containerEvent">
+      
         {{-- {{$esdeveniment}} --}}
         <div class="infoEvent">
             <h1>{{ $esdeveniment->nom }}</h1>
@@ -18,36 +19,39 @@
                 <button type="submit" class="btn btn-blue">Ver Local</button>
             </form>
 
-            <form action="{{ route('confirmacioCompra') }}" method="post" class="ComprarEntrada espacioEventos" id="ComprarEntrada"
-                enctype="multipart/form-data" style="justify-self: normal">
+            <form action="{{ route('confirmacioCompra') }}" method="post" class="ComprarEntrada espacioEventos"
+                id="ComprarEntrada" enctype="multipart/form-data" style="justify-self: normal">
                 @csrf
                 <input type="hidden" id="nameEvent" name='nameEvent' value='{{ $esdeveniment->nom }}'>
                 <input type="hidden" id="idEvent" name='idEvent' value='{{ $esdeveniment->id }}'>
                 @if (count($fechas) == 1)
-                        @foreach ($fechas as $fecha)
-                        <label for="session" class="form-label espacioEventos" id="fechaSesion"><strong>Sesiones:</strong> {{ $fecha->data }}</label>
-                        @endforeach
-                        @php
-                            $fechaSola = true;
-                        @endphp
+                    @foreach ($fechas as $fecha)
+                        <label for="session" class="form-label espacioEventos" id="fechaSesion"><strong>Sesiones:</strong>
+                            {{ $fecha->data }}</label>
+                    @endforeach
+                    @php
+                        $fechaSola = true;
+                    @endphp
                 @else
-                <div class="espacioEventos">
-                  <label for="session" class="form-label" id="fechaSesion"><strong>Sesiones:</strong></label>
-                  <button id="buttonSesion" class="btn btn-blue" style="display: none;">Cambiar sesión</button>
-              </div>
+                    <div class="espacioEventos">
+                        <label for="session" class="form-label" id="fechaSesion"><strong>Sesiones:</strong></label>
+                        <button id="buttonSesion" class="btn btn-blue" style="display: none;">Cambiar sesión</button>
+                    </div>
                     <div id="calendar"></div>
                 @endif
+                <div id="estado" class="msg-error" style="display:none">
+                  <p>Session cerrada</p>
+              </div>
 
                 <div class="form-group espacioEventos" id="entradas" style="display:none;">
                     <label id="preu" class="form-label">Escoge el tipo de entrada:</label>
                     @foreach ($fechas as $fecha)
-                        <select class="tiposTickets" id="{{ $fecha->id }}" name="preu"
-                            style="display:none;">
+                        <select class="tiposTickets" id="{{ $fecha->id }}" name="preu" style="display:none;">
                             <option value="" disabled selected>Entradas</option>
                             @foreach ($entradas as $entrada)
                                 @if ($entrada->sessios_id == $fecha->id)
                                     <option
-                                        value="{{ $entrada->preu }},{{ $entrada->quantitat }},{{ $entrada->nom }},{{ $entrada->id }},{{$entrada->nominal}}">
+                                        value="{{ $entrada->preu }},{{ $entrada->quantitat }},{{ $entrada->nom }},{{ $entrada->id }},{{ $entrada->nominal }}">
                                         {{ $entrada->nom }} {{ $entrada->preu }}€ </option>
                                 @endif
                             @endforeach
@@ -92,9 +96,18 @@
             <button class="btn btn-blue right-button" onclick="plusDivs(+1)">&#10095;</button>
         </div>
     </div>
-
-
-
+    <div class="opinion-cards">
+        @foreach ($opiniones as $opinion)
+            <div class="opinion-card">
+                <div class="opinion-content">
+                    <p>Nombre: {{ $opinion->nom }}</p>
+                    <p>Valoración: {!! $opinion->emocio !!}</p>
+                    <p>Puntuación: {!! $opinion->estrellas !!}</p>
+                    <p>Titulo: {{ $opinion->titol }}</p>
+                    <p>Comentario: {{ $opinion->comentari }}</p>
+                </div>
+            </div>
+        @endforeach
     </div>
 @endsection
 
@@ -154,7 +167,8 @@
                     eventClick: function(event) {
                         let sessionId = event.event.title.split(" ");
                         document.getElementById('calendar').style.display = 'none';
-                        document.getElementById('fechaSesion').parentNode.classList.add("DivsConBotonesDerecho");
+                        document.getElementById('fechaSesion').parentNode.classList.add(
+                            "DivsConBotonesDerecho");
                         document.getElementById('fechaSesion').innerHTML =
                             `<strong>Sesion:</strong> ${fechasSessiones[(parseInt(sessionId[0]) - 1)].data}`;
                         document.getElementById('buttonSesion').style.display = 'block';
@@ -169,7 +183,7 @@
                 document.getElementById('calendar').style.display = 'block';
                 document.getElementById('fechaSesion').innerHTML =
                     `<strong>Sesiones:</strong>`;
-                    document.getElementById('fechaSesion').parentNode.classList.remove("DivsConBotonesDerecho");
+                document.getElementById('fechaSesion').parentNode.classList.remove("DivsConBotonesDerecho");
                 document.getElementById('buttonSesion').style.display = 'none';
             })
         }

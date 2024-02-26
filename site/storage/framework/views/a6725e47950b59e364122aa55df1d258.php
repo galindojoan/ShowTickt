@@ -168,7 +168,7 @@
             } else if (isNaN(novaCapacitat)) {
                 const DivEntrada = document.createElement("div");
                 DivEntrada.classList.add("ticket-error");
-                capacitatElement.insertAdjacentElement("beforebegin", DivEntrada);
+                numeroElement.insertAdjacentElement("beforebegin", DivEntrada);
                 let entradaP = document.createElement("p");
                 entradaP.textContent = `El numero de calle debe ser un valor numérico.`;
                 DivEntrada.appendChild(entradaP);

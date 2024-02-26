@@ -8,6 +8,7 @@
                     <a href="<?php echo e(route('administrar-esdeveniments')); ?>" class="btn btn-blue">Administrar Eventos</a>
                     <a href="<?php echo e(route('llistat-sessions' )); ?>" class="btn btn-blue">Listado de sesiones</a>
                     <a href="<?php echo e(route('crear-esdeveniment')); ?>" class="btn btn-blue">Crear Evento</a>
+                    <a href="<?php echo e(route('crear-esdeveniment')); ?>" class="btn btn-blue">Descargar validacion de tickets</a>
                 </div>
             <?php endif; ?>
         </div>

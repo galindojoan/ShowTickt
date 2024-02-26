@@ -4,6 +4,7 @@
 
 <?php $__env->startSection('content'); ?>
     <div class="containerEvent">
+      
         
         <div class="infoEvent">
             <h1><?php echo e($esdeveniment->nom); ?></h1>
@@ -35,6 +36,9 @@
               </div>
                     <div id="calendar"></div>
                 <?php endif; ?>
+                <div id="estado" class="msg-error" style="display:none">
+                  <p>Session cerrada</p>
+              </div>
 
                 <div class="form-group espacioEventos" id="entradas" style="display:none;">
                     <label id="preu" class="form-label">Escoge el tipo de entrada:</label>

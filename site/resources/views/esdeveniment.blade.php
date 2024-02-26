@@ -2,7 +2,7 @@
 
 @section('title', 'Detalles del Evento')
 @section('metadades')'Mira los detalles sobre el evento {{ $esdeveniment->nom }} y adquiere sus entradas.'@endsection
-@section('metaimages')'{{ $esdeveniment->imatge }}'@endsection
+{{-- @section('metaimages')'{{ $esdeveniment->imatge }}'@endsection --}}
 
 @section('content')
     <div class="containerEvent">
@@ -14,15 +14,15 @@
         <div class="textEvent">
             <form action="{{ route('detallesLocal', ['id' => $esdeveniment->id]) }}" method="get" class="detallesLocal espacioEventos"
                 id="detallesLocal">
-                <p><strong>Local:</strong> {{ $esdeveniment->recinte->lloc }}</p>
+                <p><strong>Local:</strong> {{ $esdeveniment->lloc }}</p>
                 <button type="submit" class="btn btn-blue">Ver Local</button>
             </form>
 
             <form action="{{ route('confirmacioCompra') }}" method="post" class="ComprarEntrada espacioEventos" id="ComprarEntrada"
                 enctype="multipart/form-data" style="justify-self: normal">
                 @csrf
-                <input type="hidden" id="detallesEvents" name='detallesEvents' value='{{ $esdeveniment->nom }}'>
-
+                <input type="hidden" id="nameEvent" name='nameEvent' value='{{ $esdeveniment->nom }}'>
+                <input type="hidden" id="idEvent" name='idEvent' value='{{ $esdeveniment->id }}'>
                 @if (count($fechas) == 1)
                         @foreach ($fechas as $fecha)
                         <label for="session" class="form-label espacioEventos" id="fechaSesion"><strong>Sesiones:</strong> {{ $fecha->data }}</label>

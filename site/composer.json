@@ -6,7 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
-        "barryvdh/laravel-dompdf": "^2.0",
+        "bacon/bacon-qr-code": "^2.0",
+        "elibyy/tcpdf-laravel": "*",
         "guzzlehttp/guzzle": "^7.8",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
@@ -14,7 +15,6 @@
         "larswiegers/laravel-maps": "^0.17.0",
         "nyholm/psr7": "^1.8",
         "railsware/mailtrap-php": "^1.7",
-        "simplesoftwareio/simple-qrcode": "^4.2",
         "symfony/http-client": "^7.0"
     },
     "require-dev": {

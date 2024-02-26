@@ -38,10 +38,12 @@ class PasswordController extends Controller
                 $data = ['username' => $username, 'urlGenerada' => $url];
                 Mail::to($email)->send(new CorreoRecuperar($data));                
                 Log::info('Mail enviado exitosamente por contraseña olvidada - Usuario: '. $username);
-                return redirect('login')->withErrors(array('vali' => 'Correo enviado con éxito, revisa tu bandeja de entrada.'));
+                return redirect('login')->withErrors(array('vali' => 'Correo enviado si su mail esta enlazado con una cuenta.'));
             } catch (Exception $e) {
                 Log::error('Error en el envio de mail por contraseña olvidada - Usuario: '. $username .', Error:'. $e->getMessage());
             }
+        }elseif($email!=$user){
+            return redirect('login')->withErrors(array('vali' => 'Correo enviado si su mail esta enlazado con una cuenta.'));
         }else{
             return redirect('recuperar')->withErrors(array('error' => 'Se ha producido un error.'));
         }

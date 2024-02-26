@@ -5,42 +5,46 @@ namespace App\Http\Controllers;
 require_once base_path('app/redsysHMAC256_API_PHP_7.0.0/apiRedsys.php');
 require_once base_path('app/rest_API_PHP/ApiRedsysREST/initRedsysApi.php');
 // use App\
+use Exception;
 use RESTConstants;
+use App\Models\Compra;
 use App\Models\Sessio;
 use App\Models\Entrada;
+use Elibyy\TCPDF\TCPDF;
 use App\Models\Categoria;
+use App\Mail\CorreoEntrades;
 use App\Models\Esdeveniment;
 use Illuminate\Http\Request;
+use App\Models\CompraEntrada;
 use Illuminate\Http\Response;
-use RESTInitialRequestService;
+use BaconQrCode\Encoder\QrCode;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Session;
-use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Session;
+
 
 class CompraController extends Controller
 {
   public function compra(Request $request)
   {
-    $nomEvent = $request->input('detallesEvents');
+    $nomEvent = $request->input('nameEvent');
     $total = $request->input('inputTotal');
     $entradaArray = json_decode($request->input('arrayEntradas'));
     $sessionArray = Sessio::getSessionbyID($entradaArray[0]->contadorSession);
-    return view('confirmarCompra', compact('nomEvent', 'entradaArray', 'sessionArray', 'total'));
-  }
-  public function creacioPdf(Request $request)
-  {
-    $event = Esdeveniment::getEventById($request->input('id'));
-    $entrades = $request->input('arrayEntradas');
-    $pdf = app('dompdf.wrapper');
-    $pdf->loadView('entradas', compact('event', 'entrades'));
-    return $pdf->download('entradas.pdf');
-  }
+    $idEvent = $request->input('idEvent');
 
+    return view('confirmarCompra', compact('nomEvent', 'entradaArray', 'sessionArray', 'total', 'idEvent'));
+  }
   public function redsysDades(Request $request)
   {
     Session::put('ArrayEntradas', json_decode($request->input('ArrayEntradas')));
+    Session::put('email', $request->input('emailEscogido'));
+    Session::put('idEvent', json_decode($request->input('idEvent')));
+    Session::put('sessio', json_decode($request->input('sessioEscogida')));
+
 
     $precioTotal = $request->input("total");
     $amount = (int)$precioTotal * 100;
@@ -70,7 +74,7 @@ class CompraController extends Controller
     $params = $miObj->createMerchantParameters();
     $signature = $miObj->createMerchantSignature('sq7HjrUOBfKmC576ILgskD5srU870gJ7');
     $response = new Response();
-        $response->setContent("
+    $response->setContent("
             <form action='https://sis-t.redsys.es:25443/sis/realizarPago' method='post' id='redsys'>
                 <input type='hidden' name='Ds_SignatureVersion' value='HMAC_SHA256_V1'>
                 <input type='hidden' name='Ds_MerchantParameters' value='{$params}'/>
@@ -78,7 +82,7 @@ class CompraController extends Controller
             </form>
             <script>document.getElementById('redsys').submit();</script>
         ");
-        return $response;
+    return $response;
   }
   public function finalDelPagament(Request $request)
   {
@@ -97,32 +101,42 @@ class CompraController extends Controller
       $Entradas = Session::get('ArrayEntradas');
       foreach ($Entradas as $entrada) {
         Entrada::where('entradas.id', '=', $entrada->contadorEntrada)
-                ->update([
-                    'quantitat' => $entrada->Maxcantidad,
-                ]);
+          ->update([
+            'quantitat' => $entrada->Maxcantidad,
+          ]);
       }
-      
+
       return redirect()->route('compraAceptada');
     } else {
       echo "FIRMA KO";
     }
   }
-  public function entradasGratis(Request $request){
-    $Entradas=json_decode($request->input('ArrayEntradas'));
+  public function entradasGratis(Request $request)
+  {
+    $Entradas = json_decode($request->input('ArrayEntradas'));
     foreach ($Entradas as $entrada) {
 
       Entrada::where('entradas.id', '=', $entrada->contadorEntrada)
-              ->update([
-                  'quantitat' => $entrada->Maxcantidad,
-              ]);
+        ->update([
+          'quantitat' => $entrada->Maxcantidad,
+        ]);
     }
-    
+
     return redirect()->route('compraAceptada');
+  }
+  function generarCodigo($longitud)
+  {
+    $key = '';
+    $pattern = '1234567890abcdefghijklmnopqrstuvwxyz';
+    $max = strlen($pattern) - 1;
+    for ($i = 0; $i < $longitud; $i++) {
+      $key .= $pattern[mt_rand(0, $max)];
+    };
+    return $key;
   }
   public function viewFinalCompra(Request $request)
   {
-    Session::forget('ArrayEntradas');
-    $compra=true;
+    $compra = true;
     $pag = Config::get('app.items_per_page', 100);
     $categoryId = ''; // Establece un valor predeterminado
 
@@ -137,13 +151,73 @@ class CompraController extends Controller
 
     $categoriesWith3 = Categoria::getCategoriesWith3();
 
-    return view('home', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount', 'events', 'categoriesWith3','compra'));
+    try {
+      $email = Session::get('email');
+      $evento = Esdeveniment::getEventById(Session::get('idEvent'));
+      $entrades = Session::get('ArrayEntradas');
+      $sessio = Session::get('sessio');
+      $recinte = Esdeveniment::getFirstEventLocal(Session::get('idEvent'));
+      $lloc = $recinte->lloc;
+      foreach ($entrades as $entrada) {
+        $num = $this->generarCodigo(10);
+        $false = false;
+        while (!$false) {
+          if (CompraEntrada::isNumeroIdentificadorUnique($num)) {
+            $entrada->numeroIdentificador =  $num;
+            $false = true; 
+            break;
+          }else {
+            $num = $this->generarCodigo(10);
+          }
+        }
+        
+      }
+      Log::info('Variables.');
+
+      $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+      $pdf->SetCreator('ShowTickt');
+      $pdf->SetTitle('Entradas');
+      $image = '<img style="text-align:center;" src="'.public_path('imagen/logo-blanco.png').'" width="100" alt="logo">';
+      $titol = '<h1 style="font-size: 40px; text-align:center;">ShowTickt</h1>';
+      
+      $pdf->AddPage('L','A4');
+      $y = $pdf->getY();
+      $pdf->writeHTMLCell(40, 0, '', $y, $image, 0, 0, 0, true, 'C', true);
+      $pdf->writeHTMLCell(80, 0, '', '', $titol, 0, 1, 0, true, 'C', true);
+
+      $data = view('pdfs.entradas', ['event' => $evento, 'entrades' => $entrades, 'sessio' => $sessio->data, 'lloc' => $lloc])->render();
+      $pdf->writeHTML($data, true, false, true, false, '');
+      $pdfContent = $pdf->Output('', 'S');
+      Log::info('PDF creado correctamente.');
+
+      Mail::to($email)->send(new CorreoEntrades($evento, $sessio, $pdfContent));
+
+      Log::info('Se ha enviado el mail con los entradas con éxito.');
+
+      $compra = Compra::create(['sessios_id'=> $sessio->id,'quantitat'=>count($entrades),'mailComprador' => $email,]);
+      foreach ($entrades as $entrada) {
+        $entradesComprades = CompraEntrada::create([
+          'nomComprador'=>$entrada->nomComprador,
+          'dni' => $entrada->dniComprador,
+          'tel' => $entrada->telComprador,
+          'numeroIdentificador' => $entrada->numeroIdentificador,
+          'entrada_id' =>$entrada->contadorEntrada,
+          'compra_id' => $compra->id,
+        ]);        
+      }
+      Session::forget('email', 'ArrayEntradas', 'idEvent', 'sessio');
+    } catch (Exception $e) {
+      Log::error('Error al mandar el mail o al crear el pdf de la compra. Error: ' . $e->getMessage());
+      Session::forget('email', 'ArrayEntradas', 'idEvent', 'sessio');
+    }
+
+    return view('home', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount', 'events', 'categoriesWith3', 'compra'));
   }
-  
+
   public function errorCompra(Request $request)
   {
     Session::forget('ArrayEntradas');
-    $compra=false;
+    $compra = false;
     $pag = Config::get('app.items_per_page', 100);
     $categoryId = ''; // Establece un valor predeterminado
 
@@ -157,6 +231,6 @@ class CompraController extends Controller
 
     $categoriesWith3 = Categoria::getCategoriesWith3();
 
-    return view('home', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount', 'events', 'categoriesWith3','compra'));
+    return view('home', compact('esdeveniments', 'categories', 'categoryId', 'categoriesWithEventCount', 'events', 'categoriesWith3', 'compra'));
   }
 }

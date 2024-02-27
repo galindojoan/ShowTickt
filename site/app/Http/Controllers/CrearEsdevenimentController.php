@@ -153,6 +153,7 @@ class CrearEsdevenimentController extends Controller
             'aforament' => $request->input('aforament_maxim'),
             'tancament' => $request->input('dataHoraPersonalitzada'),
             'esdeveniments_id' => $esdevenimentId,
+            'estado' => true,
         ]);
 
         return $sessio->id;

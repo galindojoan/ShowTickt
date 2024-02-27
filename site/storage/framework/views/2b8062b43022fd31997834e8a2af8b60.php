@@ -46,7 +46,7 @@
                                 </a>
                             </div>
                         </div>
-                        <img src="<?php echo e(Storage::url($sessio->esdeveniment->imatge)); ?>" alt="Imatge de l'esdeveniment">
+                        <img src="<?php echo e(Storage::url('public/images/' . $sessio->esdeveniment->imatge->first()->imatge)); ?>" alt="Imatge de l'esdeveniment" loading="lazy">
                     </div>
                 </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

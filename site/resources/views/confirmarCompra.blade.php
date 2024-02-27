@@ -46,11 +46,11 @@
                     </div>
                     <div class="form-group" id="divNominal">
                         <label for="nova_carrer" class="form-label">Nom</label>
-                        <input type="text" class="form-controller" id="NomComprador" name="NomComprador" maxlength="50">
+                        <input type="text" class="form-controller NomComprador" id="NomComprador[]" name="NomComprador" maxlength="50">
                         <label for="nova_carrer" class="form-label">DNI/NIE</label>
-                        <input type="text" class="form-controller" id="DNIComprador" name="DNIComprador" maxlength="9">
-                        <label for="nova_carrer" class="form-label">Numero de Telefono</label>
-                        <input type="tel" pattern="[0-9]{10}" class="form-controller" id="telefonComprador"
+                        <input type="text" class="form-controller DNIComprador" id="DNIComprador[]" name="DNIComprador" maxlength="9">
+                        <label for="nova_carrer" class="form-label">Número de Teléfono</label>
+                        <input type="tel" pattern="[0-9]{10}" class="form-controller telComprador" id="telefonComprador"
                             name="telefonComprador" maxlength="9" required>
                     </div>
                     <br>
@@ -61,11 +61,11 @@
                 </div>
                 <div class="form-group">
                     <label for="nova_carrer" class="form-label">Nom</label>
-                    <input type="text" class="form-controller" id="NomComprador" name="NomComprador" maxlength="50">
+                    <input type="text" class="form-controller NomComprador" id="NomComprador[]" name="NomComprador" maxlength="50">
                     <label for="nova_carrer" class="form-label">DNI/NIE</label>
-                    <input type="text" class="form-controller" id="DNIComprador" name="DNIComprador" maxlength="9">
-                    <label for="nova_carrer" class="form-label">Numero de Telefono</label>
-                    <input type="tel" class="form-controller" pattern="[0-9]{10}" maxlength="9" id="telefonComprador"
+                    <input type="text" class="form-controller DNIComprador" id="DNIComprador[]" name="DNIComprador" maxlength="9">
+                    <label for="nova_carrer" class="form-label">Número de Teléfono</label>
+                    <input type="tel" class="form-controller telComprador" pattern="[0-9]{10}" maxlength="9" id="telefonComprador"
                         name="telefonComprador">
                 </div>
             @endif
@@ -76,6 +76,14 @@
             <input type="email" class="form-controller" id="email" name="email">
         </div>
         <input type="hidden" class="form-controller" id="ArrayEntradas" name="ArrayEntradas">
+        <input type="hidden" class="form-controller" id="idEvent" name="idEvent" value="{{ $idEvent }}">
+        <input type="hidden" class="form-controller" name="sessioEscogida" id="sessioEscogida">
+        <input type="hidden" name="emailEscogido" id="emailEscogido" class="form-controller">
+        @if ($total == 0)
+            <p>No hace falta pagar las Entradas</p>
+        @else
+            <p>Hay que pagar las Entradas</p>
+        @endif
         <button type="button" id="bottonCompra" class="btn btn-blue" style="height: 32px;">Finalizar Compra</button>
         </form>
     </div>
@@ -102,9 +110,9 @@
                     element.remove();
                 });
             }
-            const nombre = document.querySelectorAll("#NomComprador");
-            const dni = document.querySelectorAll("#DNIComprador");
-            const telefono = document.querySelectorAll("#telefonComprador");
+            const nombre = document.querySelectorAll(".NomComprador");
+            const dni = document.querySelectorAll(".DNIComprador");
+            const telefono = document.querySelectorAll("#telefonComprador");            
 
             nombre.forEach(element => {
                 if (element.value) {
@@ -255,7 +263,18 @@
         comprar.addEventListener('click', function(e) {
             e.preventDefault();
             if (mirarTodosLosErrores()) {
+                const nombre = document.querySelectorAll(".NomComprador");
+                const dni = document.querySelectorAll('.DNIComprador');
+                const tel = document.querySelectorAll('.telComprador');
+                for (let i = 0; i < entradaArray.length; i++) {
+                    const element = entradaArray[i];
+                    element.nomComprador = nombre[i].value;
+                    element.dniComprador = dni[i].value;
+                    element.telComprador = tel[i].value;
+                }
+                document.getElementById("sessioEscogida").value = JSON.stringify(sessionArray);
                 document.getElementById("ArrayEntradas").value = JSON.stringify(entradaArray);
+                document.getElementById("emailEscogido").value = document.getElementById("email").value;
                 document.getElementById("ComprarEntrada").submit();
             }
         })

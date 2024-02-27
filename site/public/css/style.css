@@ -921,7 +921,7 @@ a {
 }
 #fechaDiv .fecha {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto auto auto;
   align-items: center;
 }
 #fechaDiv .fecha button {
@@ -933,6 +933,17 @@ a {
 #fechaDiv .fecha button:hover {
   background-color: #dcd;
   border-radius: 5px;
+}
+
+.SessionEditar {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+}
+
+.estadoSesion {
+  border-radius: 5px;
+  position: relative;
 }
 
 #fechaButton {

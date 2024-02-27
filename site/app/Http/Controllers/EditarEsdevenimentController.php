@@ -74,6 +74,7 @@ class EditarEsdevenimentController extends Controller
         'tancament' => $request->input('dataHoraPersonalitzada'),
         'aforament' => $request->input('aforament_maxim'),
         'esdeveniments_id' => $esdevenimentId,
+        'estado' => true,
       ]);
       $sessio->save();
 

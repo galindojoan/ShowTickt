@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Config;
 use Database\Seeders\EsdevenimentsTableSeeder;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Http\Middleware\CacheImages;
 
 class HomeController extends Controller
 {

@@ -65,6 +65,7 @@ footer {
   background-color: black;
   min-height: 70px;
   color: white;
+  flex-wrap: wrap;
 }
 footer #footerHome {
   padding: 10px;
@@ -1012,6 +1013,11 @@ a {
   /* Espaciado interno de la tarjeta */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   /* Sombra de la tarjeta */
+}
+
+.footer-button {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 /*Ver Eventos fin*/

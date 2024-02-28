@@ -16,10 +16,25 @@
         <?php endif; ?>
     </div>
     <?php if($esdeveniment->imatge->isNotEmpty()): ?>
-        <img src="<?php echo e(Storage::url('public/images/' . $esdeveniment->imatge->first()->imatge)); ?>"
-            alt="Imatge de l'esdeveniment" loading="lazy">
+        <?php
+        $imagePath = Storage::url('public/images/' . $esdeveniment->imatge->first()->imatge);
+        $imageFullPath = storage_path('app/public/images/' . $esdeveniment->imatge->first()->imatge);
+        $lastModified = filemtime($imageFullPath);
+        $lastModifiedTime = gmdate('D, d M Y H:i:s', $lastModified) . ' GMT';
+        $expirationTime = gmdate('D, d M Y H:i:s', strtotime('+2 months')) . ' GMT';
+        
+        // Configura les capçaleres de control de la memòria cau
+        header("Last-Modified: $lastModifiedTime");
+        header("Expires: $expirationTime");
+        header('Cache-Control: public, max-age=15552000');
+        
+        
+        ?>
+        <img src="<?php echo e($imagePath); ?>" alt="Imatge de l'esdeveniment" loading="lazy"
+            cache-control="public, max-age=15552000">
     <?php else: ?>
-        <img src="https://via.placeholder.com/640x480.png/00dd22?text=imagenEvento" alt="Imatge de l'esdeveniment" loading="lazy">
+        <img src="https://via.placeholder.com/640x480.png/00dd22?text=imagenEvento" alt="Imatge de l'esdeveniment"
+            loading="lazy">
     <?php endif; ?>
 </div>
 <?php /**PATH C:\Users\alexg\OneDrive\Documentos\Projecte 2\gr6-arrua-galindo-jumelle\site\resources\views/components/event-card.blade.php ENDPATH**/ ?>

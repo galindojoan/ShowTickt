@@ -5,15 +5,17 @@
     <div class="containerEvent">
         <div class="textEvent">
             <h1><?php echo e($esdeveniment->nom); ?></h1>
-            <?php if($estado == true): ?>
-            <div id="estado" class="estadoSesion msg-valido">
-                <p>Session Abierta con exito</p>
-            </div>
-        <?php else: ?>
-            <div id="estado" class="estadoSesion msg-error">
-                <p>Session Cerrada con exito</p>
-            </div>
-        <?php endif; ?>
+            <?php if(isset($estado)): ?>
+                <?php if($estado == true): ?>
+                    <div id="estado" class="estadoSesion msg-valido">
+                        <p>Sesión Abierta con éxito</p>
+                    </div>
+                <?php else: ?>
+                    <div id="estado" class="estadoSesion msg-error">
+                        <p>Sesión Cerrada con éxito</p>
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
             <button id="fechaButton">Fechas
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="10"
                     width="10"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
@@ -92,19 +94,6 @@
             <button class="btn btn-blue right-button" onclick="plusDivs(+1)">&#10095;</button>
         </div>
     </div>
-    <div class="opinion-cards">
-        <?php $__currentLoopData = $opiniones; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $opinion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <div class="opinion-card">
-                <div class="opinion-content">
-                    <p>Nombre: <?php echo e($opinion->nom); ?></p>
-                    <p>Valoración: <?php echo $opinion->emocio; ?></p>
-                    <p>Puntuación: <?php echo $opinion->estrellas; ?></p>
-                    <p>Titulo: <?php echo e($opinion->titol); ?></p>
-                    <p>Comentario: <?php echo e($opinion->comentari); ?></p>
-                </div>
-            </div>
-        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-    </div>
 
 <?php $__env->stopSection(); ?>
 
@@ -146,9 +135,9 @@
             fechasDiv.style.display = 'none';
             buttonFechas.style.display = 'block';
         })
-        setTimeout(function () {
-          document.getElementById("estado").style.display = "none";
-        }, 3000);
+        setTimeout(function() {
+            document.getElementById("estado").style.display = "none";
+        }, 5000);
     </script>
 <?php $__env->stopSection(); ?>
 

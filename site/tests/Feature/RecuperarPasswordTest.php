@@ -69,7 +69,7 @@ class RecuperarPasswordTest extends TestCase
 
         // Test when email does not exist
         $response = $this->post('/recuperar-form', ['email' => 'nonexistent@example.com']);
-        $response->assertRedirect('/recuperar');
+        $response->assertRedirect('/login');
     }
 
     public function test_cambiar_password()

@@ -45,7 +45,7 @@
 
             <?php else: ?><?php echo e(route('login')); ?> <?php endif; ?>">
             <?php echo csrf_field(); ?>
-            <input class="linkPromotor" type="submit" value="PROMOTORES">
+            <input class="btn btn-orange" type="submit" value="PROMOTORES">
         </form>
     </div>
 

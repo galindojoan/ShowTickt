@@ -1,6 +1,5 @@
-
-
 <?php $__env->startSection('title', 'local'); ?>
+<?php $__env->startSection('metadades','Observa en un mapa en donde se ubica el local del evento que estas interesado.'); ?>
 
 <?php $__env->startSection('content'); ?>
     <div class="containerEvent">
@@ -14,7 +13,7 @@
     <div class="mapaLocal">
       <?php if (isset($component)) { $__componentOriginal28e4e112271cfb1b754f610097af82da = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal28e4e112271cfb1b754f610097af82da = $attributes; } ?>
-<?php $component = Larswiegers\LaravelMaps\Components\Leaflet::resolve(['centerPoint' => ['lat' => 52.16, 'long' => 5]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component = Larswiegers\LaravelMaps\Components\Leaflet::resolve(['centerPoint' => ['lat' => $lat, 'long' => $long]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
 <?php $component->withName('maps-leaflet'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>

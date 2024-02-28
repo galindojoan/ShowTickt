@@ -19,25 +19,25 @@ tipos, este proyecto incluye una sección de promotores donde el promotor deber�
 === Diagrama entitat relacio
 **La siguiente imagen es el primer diseño de la base de datos**
 
-image::images/BD/primerDiagrama.png[] 
+image::images\BD\primerDiagrama.png[] 
 
 
 **Esta imagen es un redieño del primer diagrama**
 
 Hicimos este cambio principalmente por que en el primero no especificamos cual era la tabla fuerte y la tabla debil en "Esdeveniment, categoria y recinte"
 
-image::images/BD/segonDiagrama.png[] 
+image::images\BD\segonDiagrama.png[] 
 
 **Este es el Diagrama Actualizado**
 
 Añadimos las tablas de usuario, y colocamos bien sus atributos. 
 
-image::images/BD/quartDiagrama.png[]
+image::images\BD\quartDiagrama.png[]
 
 === Diagrama per classes
+
 **Este es el primer diagrama de la base de datos modelo por clases**
 
-////
 [plantuml,file="diagramaBD"]
 ....
 class esdeveniments{
@@ -83,10 +83,9 @@ sessio  "1"--"n"  compra
 compra "1"-"n" entrada:\t  
 
 ....
-////
 
 
-image::images/diagramaBD.png[] 
+image:diagramaBD.png[]
 
 
 **Explicación de las clases**
@@ -110,12 +109,12 @@ image::images/diagramaBD.png[]
 Para la página seguimos elegimos la siguiente ** paleta de colores ** , hemos decidido estos ya que llaman la atención
  y el contraste con el negro (que sera el color del texto) no obliga al usuario a forzar la vista.
  
-image::images/GuiaEstils/paletaDeColores.png[]
+image::images\GuiaEstils\paletaDeColores.png[]
 
 La ** tipografía ** elegida fue 'Nunito' se selecciono por su fácilidad lectora
 
 
-image::images/GuiaEstils/tipografia.png[]
+image::images\GuiaEstils\tipografia.png[]
 
 
 Los ** iconos ** elegidos son los siguientes: +
@@ -123,19 +122,19 @@ Los ** iconos ** elegidos son los siguientes: +
 El icono para busquedas
 
 
-image::images/GuiaEstils/iconoBusqueda.png[]
+image::images\GuiaEstils\iconoBusqueda.png[]
 
 
 Los ** botones ** serán de este estilo: 
 
 
-image::images/GuiaEstils/botones.png[]
+image::images\GuiaEstils\botones.png[]
 
 
 Los ** enlaces ** serán de la siguiente forma: 
 
 
-image::images/GuiaEstils/enlaces.png[]
+image::images\GuiaEstils\enlaces.png[]
 
 === MetaDades y compartición a las redes sociales
 
@@ -155,7 +154,11 @@ o muestra, y si la página es muestra algún evento a vender o demás mostrara t
 == Confección del manual de usuario integrado en la aplicación
 
 
-== Linias futuras
+== Etiquetas utilizadas
+** [underline]#Descripcion:# Hemos utilizado esta etiqueta para hacer una breve descripcion en la pagina que te encuentras.
+** [underline]#Imagen:# Esta etiqueta se utiliza en los diferentes eventos, ya que tienen imagen y lo utilizamos como imagen promocional
+
+
 
 == Concluciones 
 

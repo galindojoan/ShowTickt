@@ -20,11 +20,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/image', [ServeiImatgeController::class, 'index']);
-Route::get('/image/{id}', [ServeiImatgeController::class, 'show']);
-Route::post('/image', [ServeiImatgeController::class, 'store']);
-Route::put('/image', [ServeiImatgeController::class, 'update']);
-Route::delete('/image/{id}', [ServeiImatgeController::class, 'destroy']);
+Route::prefix('api')->group(function () {
+  Route::get('/image', [ServeiImatgeController::class, 'index']);
+  Route::get('/image/{id}', [ServeiImatgeController::class, 'show']);
+  Route::post('/image', [ServeiImatgeController::class, 'store']);
+  Route::put('/image', [ServeiImatgeController::class, 'update']);
+  Route::delete('/image/{id}', [ServeiImatgeController::class, 'destroy']);
+});
 
-// Route::get('/ValidateSession', [ValidateController::class, 'index'])->name('ValidateSession');
-// Route::post('/ValidateSession', [ValidateController::class, 'index'])->name('ValidateSession');
+Route::prefix('v1')->group(function () {
+  Route::get('/ValidateSession', [ValidateController::class, 'index'])->name('ValidateSession');
+});

@@ -112,4 +112,3 @@ Route::post('/peticionSesion',[EditarEsdevenimentController::class,'newSesion'])
 Route::post('/cambiarSesion',[EditarEsdevenimentController::class,'updateSesion'])->name('cambiarSesion')->middleware('check');
 
 Route::get('/local/{id}',[EsdevenimentController::class, 'local'])->name('detallesLocal');
-Route::get('/ValidateSession', [ValidateController::class, 'index'])->name('ValidateSession');

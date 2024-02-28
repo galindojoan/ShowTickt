@@ -2,19 +2,20 @@
 
 @section('title', 'Detalles del Evento')
 @section('metadades')'Mira los detalles sobre el evento {{ $esdeveniment->nom }} y adquiere sus entradas.'@endsection
-{{-- @section('metaimages')'{{ $esdeveniment->imatge }}'@endsection --}}
+@section('metaimages')'@foreach ($esdeveniment->imatge as $index => $imatge)
+    {{Storage::url('public/images/'.$imatge->imatge)}}
+@endforeach'@endsection
 
 @section('content')
     <div class="containerEvent">
-      
-        {{-- {{$esdeveniment}} --}}
+
         <div class="infoEvent">
             <h1>{{ $esdeveniment->nom }}</h1>
             <h4>{{ $esdeveniment->descripcio }}</h4>
         </div>
         <div class="textEvent">
-            <form action="{{ route('detallesLocal', ['id' => $esdeveniment->id]) }}" method="get" class="detallesLocal espacioEventos"
-                id="detallesLocal">
+            <form action="{{ route('detallesLocal', ['id' => $esdeveniment->id]) }}" method="get"
+                class="detallesLocal espacioEventos" id="detallesLocal">
                 <p><strong>Local:</strong> {{ $esdeveniment->lloc }}</p>
                 <button type="submit" class="btn btn-blue">Ver Local</button>
             </form>
@@ -40,8 +41,8 @@
                     <div id="calendar"></div>
                 @endif
                 <div id="estado" class="msg-error" style="display:none">
-                  <p>Session cerrada</p>
-              </div>
+                    <p>Session cerrada</p>
+                </div>
 
                 <div class="form-group espacioEventos" id="entradas" style="display:none;">
                     <label id="preu" class="form-label">Escoge el tipo de entrada:</label>

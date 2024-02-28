@@ -8,11 +8,11 @@
             <?php if(isset($estado)): ?>
                 <?php if($estado == true): ?>
                     <div id="estado" class="estadoSesion msg-valido">
-                        <p>Session Abierta con exito</p>
+                        <p>Sesión Abierta con éxito</p>
                     </div>
                 <?php else: ?>
                     <div id="estado" class="estadoSesion msg-error">
-                        <p>Session Cerrada con exito</p>
+                        <p>Sesión Cerrada con éxito</p>
                     </div>
                 <?php endif; ?>
             <?php endif; ?>

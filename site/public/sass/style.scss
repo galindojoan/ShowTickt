@@ -68,6 +68,7 @@ footer {
     background-color: black;
     min-height: 70px;
     color: white;
+    flex-wrap: wrap;
 
     #footerHome {
         padding: 10px;
@@ -1106,6 +1107,11 @@ a {
     /* Sombra de la tarjeta */
 }
 
+.footer-button {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 /*Ver Eventos fin*/
 @media screen and (max-width: 300px) {
     .titulo {
@@ -1133,6 +1139,7 @@ a {
             margin: 10px;
         }
     }
+
 }
 
 @media screen and (max-width: 800px) {

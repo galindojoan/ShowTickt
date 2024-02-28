@@ -38,4 +38,13 @@ class Sessio extends Model
             ->where('sessios.id', '=', $SessionId)
             ->first();
     }
+    public static function getRecinteFromSessio($id){
+        return self::join('esdeveniments', 'sessios.esdeveniments_id', '=', 'esdeveniments.id')
+            ->join('recintes', 'recintes.id', '=', 'esdeveniments.recinte_id')
+            ->select('recintes.*')
+            ->where('sessios.id', $id)
+            ->first();
+    }
+    
+    
 }

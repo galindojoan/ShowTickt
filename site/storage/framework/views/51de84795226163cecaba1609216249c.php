@@ -27,10 +27,10 @@
             </div>
             <p id="total">Total: <?php echo e($total); ?>€</p>
         </div>
-        <?php if($total == 0): ?>
-            <form action="<?php echo e(route('comprasGratis')); ?>" method="post" class="ticket-datos" id="ComprarEntrada">
+        <?php if($total != 0 && env('PASARELA_PAGAMENT') == true): ?>
+            <form action="<?php echo e(route('redsys')); ?>" method="post" class="ticket-datos" id="ComprarEntrada">
             <?php else: ?>
-                <form action="<?php echo e(route('redsys')); ?>" method="post" class="ticket-datos" id="ComprarEntrada">
+                <form action="<?php echo e(route('comprasGratis')); ?>" method="post" class="ticket-datos" id="ComprarEntrada">
         <?php endif; ?>
 
         <?php echo csrf_field(); ?>

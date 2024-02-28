@@ -16,4 +16,13 @@ class CompraEntrada extends Model
         $count = DB::table('compra_entradas')->where('numeroIdentificador', $num)->count();
         return $count === 0;
     }
+    public function entrada()
+    {
+        return $this->belongsTo(Entrada::class, 'entrada_id');
+    }
+    public static function getEntrades($id){
+        return self::with('entrada') 
+            ->where('compra_id', $id)
+            ->get();
+    }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nomComprador');
             $table->string('dni');
             $table->integer('tel');
-            $table->string('numeroIdenficador');
+            $table->string('numeroIdentificador');
             $table->integer('compra_id');
             $table->integer('entrada_id');
 

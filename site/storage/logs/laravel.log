@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [2024-02-26 18:50:55] local.INFO: Los eventos han salido con exito  
 [2024-02-26 18:51:00] local.ERROR: Undefined variable $estado {"view":{"view":"C:\\Users\\jumel\\OneDrive\\Escritorio\\gr6-arrua-galindo-jumelle\\site\\resources\\views\\editarEsdeveniment.blade.php","data":{"errors":"<pre class=sf-dump id=sf-dump-1692677928 data-indent-pad=\"  \"><span class=sf-dump-note>Illuminate\\Support\\ViewErrorBag</span> {<a class=sf-dump-ref>#360</a><samp data-depth=1 class=sf-dump-expanded>
   #<span class=sf-dump-protected title=\"Protected property\">bags</span>: []
@@ -4010,3 +4011,5 @@ Did you mean this?
 #56 C:\\Users\\domin\\Escritorio\\gr6-arrua-galindo-jumelle\\site\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(16): require_once('C:\\\\Users\\\\domin\\\\...')
 #57 {main}
 "} 
+=======
+>>>>>>> 0c09879ac0bc51c5b937a293cea307b5408a7fdb

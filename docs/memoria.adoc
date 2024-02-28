@@ -151,6 +151,7 @@ o muestra, y si la página es muestra algún evento a vender o demás mostrara t
 
 == Confección del manual de instalación/distribución de la aplicación
 
+include::isard.adoc[]
 
 == Confección del manual de usuario integrado en la aplicación
 

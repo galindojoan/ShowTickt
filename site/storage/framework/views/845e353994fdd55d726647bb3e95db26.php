@@ -1,6 +1,5 @@
-
-
 <?php $__env->startSection('title', 'Cambiar contraseña'); ?>
+<?php $__env->startSection('metadades','Cambia la contraseña de tu cuenta.'); ?>
 
 <?php $__env->startSection('content'); ?>
 <div class="login">
@@ -12,7 +11,7 @@
         <form action="<?php echo e(route('peticionCambiar')); ?>" method="post" class="login-form">
         <?php echo csrf_field(); ?>
             <div class="login-input">
-                <input type="hidden" name="userId" value="<?php echo e($_GET['user']); ?>">
+                <input type="hidden" name="userId" value="<?php echo e($userId); ?>">
                 <input type="password" name="password" id="password" placeholder="Nueva contraseña" required>
             </div>
             <input type="submit" value="Cambiar" class="boton">

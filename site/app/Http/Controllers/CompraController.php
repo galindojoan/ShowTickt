@@ -43,11 +43,14 @@ class CompraController extends Controller
     Session::put('ArrayEntradas', json_decode($request->input('ArrayEntradas')));
     Session::put('email', $request->input('emailEscogido'));
     Session::put('idEvent', json_decode($request->input('idEvent')));
+
+
     Session::put('sessio', json_decode($request->input('sessioEscogida')));
 
 
     $precioTotal = $request->input("total");
-    $amount = (int)$precioTotal * 100;
+    $amountWInt = $precioTotal * 100;
+    $amount = (int)$amountWInt;
     $id = time();
     $fuc = '999008881';
     $moneda = '978';
@@ -157,7 +160,7 @@ class CompraController extends Controller
       $entrades = Session::get('ArrayEntradas');
       $sessio = Session::get('sessio');
       $recinte = Esdeveniment::getFirstEventLocal(Session::get('idEvent'));
-      $lloc = $recinte->lloc;
+      $lloc = $recinte->provincia.', '.$recinte->lloc.', '.$recinte->codi_postal.', '.$recinte->carrer.', '.$recinte->numero;
       foreach ($entrades as $entrada) {
         $num = $this->generarCodigo(10);
         $false = false;
@@ -205,6 +208,7 @@ class CompraController extends Controller
           'compra_id' => $compra->id,
         ]);        
       }
+      Log::info('Guardada la compra en la bd.');
       Session::forget('email', 'ArrayEntradas', 'idEvent', 'sessio');
     } catch (Exception $e) {
       Log::error('Error al mandar el mail o al crear el pdf de la compra. Error: ' . $e->getMessage());

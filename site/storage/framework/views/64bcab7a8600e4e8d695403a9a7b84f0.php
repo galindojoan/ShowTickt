@@ -520,12 +520,12 @@
 
             validarYCrear.addEventListener('click', function() {
                 establirValorPerDefecte();
-                        document.getElementById('addEvent').submit();
 
                 if (validarCamposVacios()) {
                     // Realitzar les validacions addicionals
                     if (verificarQuantitats()) {
                         // Si tot està bé, enviar el formulari
+                        document.getElementById('addEvent').submit();
                     }
 
                 }

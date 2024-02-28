@@ -17,7 +17,8 @@ return new class extends Migration
             $table->decimal('preu', 8, 2);
             $table->integer('quantitat');
             $table->boolean('nominal')->default(false);
-            $table->foreignId('sessios_id')->constrained('sessios');
+            $table->integer('sessios_id');
+            $table->foreign('sessios_id')->references('id')->on('sessios');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('entrada');
+        Schema::dropIfExists('entradas');
     }
 };

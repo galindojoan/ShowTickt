@@ -16,6 +16,8 @@ use App\Http\Controllers\EditarEsdevenimentController;
 use App\Http\Controllers\DetallsEsdevenimentController;
 use App\Http\Controllers\AdministrarEsdevenimentController;
 use App\Http\Controllers\AdministrarEsdevenimentsController;
+use App\Http\Controllers\ExportarEntradasController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -112,3 +114,4 @@ Route::post('/peticionSesion',[EditarEsdevenimentController::class,'newSesion'])
 Route::post('/cambiarSesion',[EditarEsdevenimentController::class,'updateSesion'])->name('cambiarSesion')->middleware('check');
 
 Route::get('/local/{id}',[EsdevenimentController::class, 'local'])->name('detallesLocal');
+Route::get('/exportar-entrades/{sessioId}', [ExportarEntradasController::class, 'exportarCSV'])->name('exportar-entrades')->middleware('check');

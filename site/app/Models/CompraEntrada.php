@@ -20,6 +20,12 @@ class CompraEntrada extends Model
     {
         return $this->belongsTo(Entrada::class, 'entrada_id');
     }
+
+
+    public function compras()
+    {
+        return $this->belongsTo(Compra::class, 'compra_id');
+    }
     public static function getEntrades($id){
         return self::with('entrada') 
             ->where('compra_id', $id)

@@ -15,4 +15,9 @@ class Entrada extends Model
     {
         return $this->belongsTo(Sessio::class, 'sessios_id');
     }
+
+    public function compraEntrada()
+    {
+        return $this->hasMany(CompraEntrada::class, 'entrada_id');
+    }
 }

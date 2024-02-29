@@ -72,6 +72,6 @@ class CompraTest extends TestCase
         'total' => 100,
       ]
     );
-    $response->assertOK();
+    $response->assertRedirect('/confirmacio');
   }
 }

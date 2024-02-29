@@ -17,69 +17,25 @@ class CorreoRecordatori extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user, $evento, $link;
+    public $evento, $pdfContent;
     /**
      * Create a new message instance.
      */
-    public function __construct($user, $evento,$link)
+    public function __construct($evento,$pdfContent)
     {
-        $this->user = $user;
         $this->evento =$evento;
-        $this->link =$link;
+        $this->pdfContent =$pdfContent;
     }
 
     /**
      * Get the message envelope.
      */
-    public function envelope(): Envelope
+    public function build()
     {
-        return new Envelope(
-            subject: 'Recordatorio evento',
-            using: [
-                function (Email $email) {
-                    // Headers
-                    $email->getHeaders()
-                        ->addTextHeader('X-Message-Source', 'example.com')
-                        ->add(new UnstructuredHeader('X-Mailer', 'Mailtrap PHP Client'))
-                    ;
-
-                    // Custom Variables
-                    $email->getHeaders()
-                        ->add(new CustomVariableHeader('user_id', '45982'))
-                        ->add(new CustomVariableHeader('batch_id', 'PSJ-12'))
-                    ;
-
-                    // Category (should be only one)
-                    $email->getHeaders()
-                        ->add(new CategoryHeader('Integration Test'))
-                    ;
-                },
-            ]
-        );
-    }
-
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
-        return new Content(
-            view: 'mail.recordatoriMail',
-            with: ([
-                'user' => $this->user,
-                'evento' => $this->evento,
-                'link' => $this->link,
-            ])
-        );
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
+        return $this->subject('Correo Entrades')
+                    ->view('mails.recordatoriMail')
+                    ->attachData($this->pdfContent, 'entradas.pdf', [
+                        'mime' => 'application/pdf',
+                    ]);
     }
 }

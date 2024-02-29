@@ -1,18 +1,20 @@
 <?php $__env->startSection('title', 'Detalles del Evento'); ?>
 <?php $__env->startSection('metadades'); ?>'Mira los detalles sobre el evento <?php echo e($esdeveniment->nom); ?> y adquiere sus entradas.'<?php $__env->stopSection(); ?>
+<?php $__env->startSection('metaimages'); ?>'<?php $__currentLoopData = $esdeveniment->imatge; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $imatge): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    <?php echo e(Storage::url('public/images/'.$imatge->imatge)); ?>
 
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>'<?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
     <div class="containerEvent">
-      
-        
+
         <div class="infoEvent">
             <h1><?php echo e($esdeveniment->nom); ?></h1>
             <h4><?php echo e($esdeveniment->descripcio); ?></h4>
         </div>
         <div class="textEvent">
-            <form action="<?php echo e(route('detallesLocal', ['id' => $esdeveniment->id])); ?>" method="get" class="detallesLocal espacioEventos"
-                id="detallesLocal">
+            <form action="<?php echo e(route('detallesLocal', ['id' => $esdeveniment->id])); ?>" method="get"
+                class="detallesLocal espacioEventos" id="detallesLocal">
                 <p><strong>Local:</strong> <?php echo e($esdeveniment->lloc); ?></p>
                 <button type="submit" class="btn btn-blue">Ver Local</button>
             </form>
@@ -38,8 +40,8 @@
                     <div id="calendar"></div>
                 <?php endif; ?>
                 <div id="estado" class="msg-error" style="display:none">
-                  <p>Session cerrada</p>
-              </div>
+                    <p>Session cerrada</p>
+                </div>
 
                 <div class="form-group espacioEventos" id="entradas" style="display:none;">
                     <label id="preu" class="form-label">Escoge el tipo de entrada:</label>

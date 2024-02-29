@@ -1,1 +1,1 @@
-a:5:{s:6:"_token";s:40:"ZLhkSOJhI7N5T10TaUp7sHPWF89B0ixvB6X1Gxv8";s:9:"_previous";a:1:{s:3:"url";s:21:"http://127.0.0.1:8080";}s:6:"_flash";a:2:{s:3:"old";a:0:{}s:3:"new";a:0:{}}s:3:"key";s:9:"promotor1";s:7:"user_id";i:1;}
+a:5:{s:6:"_token";s:40:"ZLhkSOJhI7N5T10TaUp7sHPWF89B0ixvB6X1Gxv8";s:9:"_previous";a:1:{s:3:"url";s:50:"http://127.0.0.1:8080/session?sesionOpcion=profile";}s:6:"_flash";a:2:{s:3:"old";a:0:{}s:3:"new";a:0:{}}s:3:"key";s:9:"promotor1";s:7:"user_id";i:1;}

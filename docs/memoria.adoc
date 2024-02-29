@@ -1,12 +1,10 @@
-= ShowTickt
+= ShowTickt: Memoria
 :Author: Brian Tobias Arrua, Joan Galindo, Camilo Jumelle
 :doctype: book
 :encoding: utf-8
 :lang: ca
 :toc: right
 :numbered:
-
-= Memoria del proyecto
 
 == Introducción
 
@@ -36,67 +34,137 @@ image::images\BD\quartDiagrama.png[]
 
 === Diagrama per classes
 
-**Este es el primer diagrama de la base de datos modelo por clases**
+**Este es el Diagrama Actualizado**
 
+Añadimos las tablas de opinion para guarda las opiniones de los clientes y la de compra, Compra_Entradas
+
+image::images\BD\UltimoDiagrama.png[]
+
+=== Diagrama per classes
+
+**Este es el diagrama definitivo de la base de datos modelo por clases**
+
+////
 [plantuml,file="diagramaBD"]
 ....
-class esdeveniments{
+class Categoria{
+id:int
+tipus:string
+esdeveniments()
+getCategoriesWithEventCount()
+getCategoriesWith3()
+getFilteredEvents()
+}
+
+class Compra{
+sessios_id:int
+quantitat:int
+mailComprador:string
+}
+
+class CompraEntrada{
+compra_id:int
+nomComprador:int
+dni:string
+numeroIdentificador:int
+tel:int
+entrada_id:int
+isNumeroIdentificadorUnique()
+entrada()
+getEntrades()
+}
+
+class Entrada{
+nom:string
+preu:decimal
+quantitat:int
+nominal:boolean
+sessios_id:int
+sessio()
+}
+
+class Esdeveniments{
  id:int
  nom:string
- dia:date
- imatge:string
+ descripcio:string
+ recinte_id:int
+ categoria_id:int
+ user_id:int
  preu:decimal
  recinte()
  categoria()
-}
-    class categories{
-id:int
-tipus:enum[social,cultural,esportiu,altres]
-esdeveniments()
+ user()
+ sesions()
+ opinions()
+ imatge()
+ getAdminEvents()
+ getAllEvents()
+ getOrderedEvents()
+ getEventById()
+ getFirstEventLocal()
+ getSessiosEvent()
+ getEntradesEvent()
 }
 
-class recintes{
-id:int
+class Opinion{
+esdeveniment_id:int
 nom:string
-lloc:string
-esdeveniments()
-}   
-class sessio{
-
+emocio:int
+puntuacio:int
+titol:string
+comentari:string
+esdeveniment()
 }
 
-class tipusEntrada{
+class Recinte{
+ id:int
+ nom:string
+ provincia:string
+ lloc:int
+ codi_postal:int
+ capacitat:int
+ carrer:decimal
+ numero:int
+ user_id:int
+ esdeveniments()
+ user()
+ }
 
+
+class Sessio{
+data:timestamp
+tancament:timestamp
+aforament:int
+esdeveniments_id:int
+Estado:boolean
+esdeveniment()
+entrades()
+getUserSessions()
+getSessionbyID()
+getRecinteFromSessio()
 }
-class compra{
+
+class User{
+name:string
+username:string
+email:string
+password:string
+tipus:string
 }
 
-class entrada{
-
-}
-
-esdeveniments "n"-->"1" categories
-esdeveniments "n"-->"1" recintes    
-esdeveniments "1"-"1..n" sessio:\t
-sessio  "1"-"1..n"  tipusEntrada:\t
-sessio  "1"--"n"  compra
-compra "1"-"n" entrada:\t  
-
+User " 1 "--" n " Esdeveniments:\t
+Esdeveniments "n"-down-"1" Categoria:\t
+Esdeveniments "n"-left-"1" Recinte:\t
+Esdeveniments "1"-" 1..n " Sessio:\t
+Esdeveniments " 1 "-up-" n " Opinion:\t
+Sessio  "1"--" 1..n "  Entrada:\t
+Sessio  "1"--"n"  Compra:\t
+Compra  "1"--" 1..n "  CompraEntrada:\t
+Entrada  " 1 "--"n"  CompraEntrada:\t
 ....
-
+////
 
 image:diagramaBD.png[]
-
-
-**Explicación de las clases**
-
-** [underline]#Esdeveniment:# La tabla de esdeveniments es la tabla que nos guarda los diferentes eventos que tenemos en la pagina, donde guardamos el nombre,el dia,la imagen y el precio
-** [underline]#Categoria:# En la tabla de categoria hemos decidido guardar las diferentes categoria de los events
-** [underline]#Recinte:# En la tabla de recinte hemos decidido guardar los recintos de los eventos
-** [underline]#Sessio:# 
-** [underline]#Tipus Entrada:# 
-** [underline]#Compra:# 
-** [underline]#Entrada:# 
 
 === Sketching  
 
@@ -148,14 +216,14 @@ o muestra, y si la página es muestra algún evento a vender o demás mostrara t
 ----
 
 
-== Confección del manual de instalación/distribución de la aplicación
-
 include::isard.adoc[]
+
 
 == Confección del manual de usuario integrado en la aplicación
 
 
 == Etiquetas utilizadas
+
 ** [underline]#Descripcion:# Hemos utilizado esta etiqueta para hacer una breve descripcion en la pagina que te encuentras.
 ** [underline]#Imagen:# Esta etiqueta se utiliza en los diferentes eventos, ya que tienen imagen y lo utilizamos como imagen promocional
 

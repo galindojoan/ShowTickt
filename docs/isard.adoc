@@ -1,6 +1,6 @@
-= Isard
+== Confección del manual de instalación/distribución de la aplicación
 
-== Instalación del servidor
+=== Instalación del servidor
 
 Para poder utilizar la aplicación deberemos de tener instalado lo siguiente
 
@@ -10,7 +10,7 @@ Para poder utilizar la aplicación deberemos de tener instalado lo siguiente
 - PHP 
 - Docker
 
-=== Para instalar composer deberás de realizar los siguientes comandos
+==== Para instalar composer deberás de realizar los siguientes comandos
 
 [source, sh]
 ----
@@ -30,14 +30,14 @@ composer #Para saber que se instalo correctamente
 
 ----
 
-=== Para instalar GIT, PHP y Apache
+==== Para instalar GIT, PHP y Apache
 
 [source, sh]
 ----
 sudo apt-get install git php apache2 -y
 ----
 
-=== Para instalar Docker
+==== Para instalar Docker
 
 [source, sh]
 ----
@@ -56,7 +56,7 @@ echo \ "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docke
 sudo apt-get update
 ----
 
-== Configuración de la aplicación
+=== Configuración de la aplicación
 
 Con git se deberá de traer el repositorio con 
 

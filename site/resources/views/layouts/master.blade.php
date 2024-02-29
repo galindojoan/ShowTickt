@@ -39,17 +39,23 @@
         @yield('content')
     </div>
     <footer>
+        <!-- Boton que redirige a la pagina home dentro del footer -->
         <a id="footerHome" href="{{ route('home') }}">HOME</a>
+        <!-- Boton que redirige a la pagina home promotor dentro del footer -->
         <form method="POST"
             action="@if (session('key')) {{ route('homePromotor') }}
     @else{{ route('login') }} @endif">
             @csrf
             <input class="ahref" type="submit" value="PROMOTORES">
         </form>
+
+        <!-- Boton de compartir que redirige a la pagina de telegram -->
         <div class="footer-button">
             <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-share-url="http://127.0.0.1:8000"
                 data-comment="Visita este enlace!" data-size="large"></script>
         </div>
+
+        <!-- Boton de compartir que redirige a la pagina de twitter (X) -->
         <div class="footer-button"><a class="twitter-share-button"
                 href="https://twitter.com/intent/tweet?text=Visita%20este%20enlace" data-size="large"
                 data-text="Compartir"></a></div>
@@ -67,6 +73,7 @@
         </script>
 
         <!-- Your share button code -->
+        <!-- Boton de compartir que redirige a la pagina de facebook -->
         <div class="footer-button">
             <div class="fb-share-button" data-href="http://127.0.0.1:8000" data-layout="button" data-size="large">
             </div>

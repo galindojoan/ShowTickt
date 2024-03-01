@@ -16,10 +16,14 @@
         <?php endif; ?>
     </div>
     <?php if($esdeveniment->imatge->isNotEmpty()): ?>
-        <img src="<?php echo e(Storage::url('public/images/' . $esdeveniment->imatge->first()->imatge)); ?>"
-            alt="Imatge de l'esdeveniment" loading="lazy">
+        <?php
+        $imagePath = Storage::url('public/images/' . $esdeveniment->imatge->first()->imatge);
+        ?>
+        <img src="<?php echo e($imagePath); ?>" alt="Imatge de l'esdeveniment" loading="lazy"
+            cache-control="public, max-age=15552000">
     <?php else: ?>
-        <img src="https://via.placeholder.com/640x480.png/00dd22?text=imagenEvento" alt="Imatge de l'esdeveniment" loading="lazy">
+        <img src="https://via.placeholder.com/640x480.png/00dd22?text=imagenEvento" alt="Imatge de l'esdeveniment"
+            loading="lazy">
     <?php endif; ?>
 </div>
 <?php /**PATH C:\Users\alexg\OneDrive\Documentos\Projecte 2\gr6-arrua-galindo-jumelle\site\resources\views/components/event-card.blade.php ENDPATH**/ ?>

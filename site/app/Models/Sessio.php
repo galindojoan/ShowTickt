@@ -10,7 +10,7 @@ class Sessio extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['data', 'tancament', 'aforament', 'esdeveniments_id'];
+    protected $fillable = ['data', 'tancament', 'aforament', 'esdeveniments_id','estado'];
 
     public function esdeveniment()
     {
@@ -38,4 +38,13 @@ class Sessio extends Model
             ->where('sessios.id', '=', $SessionId)
             ->first();
     }
+    public static function getRecinteFromSessio($id){
+        return self::join('esdeveniments', 'sessios.esdeveniments_id', '=', 'esdeveniments.id')
+            ->join('recintes', 'recintes.id', '=', 'esdeveniments.recinte_id')
+            ->select('recintes.*')
+            ->where('sessios.id', $id)
+            ->first();
+    }
+    
+    
 }

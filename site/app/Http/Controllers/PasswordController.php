@@ -36,15 +36,20 @@ class PasswordController extends Controller
         $user = DB::table('users')->where('email', $email)->value('email');
 
         if ($email == $user) {
-
-            $username = DB::table('users')->where('email', $email)->value('name');
-            $userId = DB::table('users')->where('email', $email)->value('id');
-            $url = URL::temporarySignedRoute('cambiarPassword', now()->addMinutes(env('MAIL_TIME_LIMIT')), ['user' => $userId]);
-            $data = ['username' => $username, 'urlGenerada' => $url];
-            Mail::to($email)->send(new CorreoRecuperar($data));
-            Log::info('Mail enviado exitosamente por contraseña olvidada - Usuario: ' . $username);
-            return redirect('login')->withErrors(array('vali' => 'Correo enviado con éxito, revisa tu bandeja de entrada.'));
-        } else {
+            try {
+                $username = DB::table('users')->where('email', $email)->value('name');
+                $userId = DB::table('users')->where('email', $email)->value('id');
+                $url = URL::temporarySignedRoute('cambiarPassword', now()->addMinutes(env('MAIL_TIME_LIMIT')),['user' => $userId]);
+                $data = ['username' => $username, 'urlGenerada' => $url];
+                Mail::to($email)->send(new CorreoRecuperar($data));                
+                Log::info('Mail enviado exitosamente por contraseña olvidada - Usuario: '. $username);
+                return redirect('login')->withErrors(array('vali' => 'Correo enviado si su mail esta enlazado con una cuenta.'));
+            } catch (Exception $e) {
+                Log::error('Error en el envio de mail por contraseña olvidada - Usuario: '. $username .', Error:'. $e->getMessage());
+            }
+        }elseif($email!=$user){
+            return redirect('login')->withErrors(array('vali' => 'Correo enviado si su mail esta enlazado con una cuenta.'));
+        }else{
             return redirect('recuperar')->withErrors(array('error' => 'Se ha producido un error.'));
         }
     }

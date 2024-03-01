@@ -316,7 +316,16 @@ document.getElementById("bottonCompra").addEventListener("click", function (e) {
     document.getElementById("arrayEntradas").value =
         JSON.stringify(entradasArray);
     document.getElementById("inputTotal").value = precioTotal;
-    if (entradasArray.length > 0) {
+    if (sessiones.estado===true) {
+      if (entradasArray.length > 0) {
         document.getElementById("ComprarEntrada").submit();
     }
+    }else{
+      document.getElementById("estado").style.display = "block";
+      setTimeout(function () {
+        document.getElementById("estado").style.display = "none";
+      }, 5000);
+    }
+    
+
 });

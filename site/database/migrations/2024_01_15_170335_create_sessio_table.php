@@ -16,7 +16,9 @@ class CreateSessioTable extends Migration
             $table->dateTime("data");
             $table->dateTime("tancament");
             $table->integer('aforament');
-            $table->foreignId('esdeveniments_id')->constrained('esdeveniments');
+            $table->boolean('estado');
+            $table->integer('esdeveniments_id');
+            $table->foreign('esdeveniments_id')->references('id')->on('esdeveniments')->onDelete('cascade');
             $table->timestamps();
         });
     }

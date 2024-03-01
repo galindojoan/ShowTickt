@@ -16,9 +16,13 @@
         @endif
     </div>
     @if ($esdeveniment->imatge->isNotEmpty())
-        <img src="{{ Storage::url('public/images/' . $esdeveniment->imatge->first()->imatge) }}"
-            alt="Imatge de l'esdeveniment" loading="lazy">
+        <?php
+        $imagePath = Storage::url('public/images/' . $esdeveniment->imatge->first()->imatge);
+        ?>
+        <img src="{{ $imagePath }}" alt="Imatge de l'esdeveniment" loading="lazy"
+            cache-control="public, max-age=15552000">
     @else
-        <img src="https://via.placeholder.com/640x480.png/00dd22?text=imagenEvento" alt="Imatge de l'esdeveniment" loading="lazy">
+        <img src="https://via.placeholder.com/640x480.png/00dd22?text=imagenEvento" alt="Imatge de l'esdeveniment"
+            loading="lazy">
     @endif
 </div>

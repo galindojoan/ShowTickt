@@ -1,46 +1,52 @@
 <?php $__env->startSection('title', 'Detalles del Evento'); ?>
 <?php $__env->startSection('metadades'); ?>'Mira los detalles sobre el evento <?php echo e($esdeveniment->nom); ?> y adquiere sus entradas.'<?php $__env->stopSection(); ?>
-<?php $__env->startSection('metaimages'); ?>'<?php echo e($esdeveniment->imatge); ?>'<?php $__env->stopSection(); ?>
+<?php $__env->startSection('metaimages'); ?>'<?php $__currentLoopData = $esdeveniment->imatge; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $imatge): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    <?php echo e(Storage::url('public/images/'.$imatge->imatge)); ?>
+
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>'<?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
     <div class="containerEvent">
-        
+
         <div class="infoEvent">
             <h1><?php echo e($esdeveniment->nom); ?></h1>
             <h4><?php echo e($esdeveniment->descripcio); ?></h4>
         </div>
         <div class="textEvent">
-            <form action="<?php echo e(route('detallesLocal', ['id' => $esdeveniment->id])); ?>" method="get" class="detallesLocal espacioEventos"
-                id="detallesLocal">
-                <p><strong>Local:</strong> <?php echo e($esdeveniment->recinte->lloc); ?></p>
+            <form action="<?php echo e(route('detallesLocal', ['id' => $esdeveniment->id])); ?>" method="get"
+                class="detallesLocal espacioEventos" id="detallesLocal">
+                <p><strong>Local:</strong> <?php echo e($esdeveniment->lloc); ?></p>
                 <button type="submit" class="btn btn-blue">Ver Local</button>
             </form>
 
-            <form action="<?php echo e(route('confirmacioCompra')); ?>" method="post" class="ComprarEntrada espacioEventos" id="ComprarEntrada"
-                enctype="multipart/form-data" style="justify-self: normal">
+            <form action="<?php echo e(route('confirmacioCompra')); ?>" method="post" class="ComprarEntrada espacioEventos"
+                id="ComprarEntrada" enctype="multipart/form-data" style="justify-self: normal">
                 <?php echo csrf_field(); ?>
-                <input type="hidden" id="detallesEvents" name='detallesEvents' value='<?php echo e($esdeveniment->nom); ?>'>
-
+                <input type="hidden" id="nameEvent" name='nameEvent' value='<?php echo e($esdeveniment->nom); ?>'>
+                <input type="hidden" id="idEvent" name='idEvent' value='<?php echo e($esdeveniment->id); ?>'>
                 <?php if(count($fechas) == 1): ?>
-                        <?php $__currentLoopData = $fechas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fecha): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <label for="session" class="form-label espacioEventos" id="fechaSesion"><strong>Sesiones:</strong> <?php echo e($fecha->data); ?></label>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        <?php
-                            $fechaSola = true;
-                        ?>
+                    <?php $__currentLoopData = $fechas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fecha): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <label for="session" class="form-label espacioEventos" id="fechaSesion"><strong>Sesiones:</strong>
+                            <?php echo e($fecha->data); ?></label>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <?php
+                        $fechaSola = true;
+                    ?>
                 <?php else: ?>
-                <div class="espacioEventos">
-                  <label for="session" class="form-label" id="fechaSesion"><strong>Sesiones:</strong></label>
-                  <button id="buttonSesion" class="btn btn-blue" style="display: none;">Cambiar sesión</button>
-              </div>
+                    <div class="espacioEventos">
+                        <label for="session" class="form-label" id="fechaSesion"><strong>Sesiones:</strong></label>
+                        <button id="buttonSesion" class="btn btn-blue" style="display: none;">Cambiar sesión</button>
+                    </div>
                     <div id="calendar"></div>
                 <?php endif; ?>
+                <div id="estado" class="msg-error" style="display:none">
+                    <p>Session cerrada</p>
+                </div>
 
                 <div class="form-group espacioEventos" id="entradas" style="display:none;">
                     <label id="preu" class="form-label">Escoge el tipo de entrada:</label>
                     <?php $__currentLoopData = $fechas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fecha): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <select class="tiposTickets" id="<?php echo e($fecha->id); ?>" name="preu"
-                            style="display:none;">
+                        <select class="tiposTickets" id="<?php echo e($fecha->id); ?>" name="preu" style="display:none;">
                             <option value="" disabled selected>Entradas</option>
                             <?php $__currentLoopData = $entradas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $entrada): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <?php if($entrada->sessios_id == $fecha->id): ?>
@@ -90,9 +96,18 @@
             <button class="btn btn-blue right-button" onclick="plusDivs(+1)">&#10095;</button>
         </div>
     </div>
-
-
-
+    <div class="opinion-cards">
+        <?php $__currentLoopData = $opiniones; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $opinion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <div class="opinion-card">
+                <div class="opinion-content">
+                    <p>Nombre: <?php echo e($opinion->nom); ?></p>
+                    <p>Valoración: <?php echo $opinion->emocio; ?></p>
+                    <p>Puntuación: <?php echo $opinion->estrellas; ?></p>
+                    <p>Titulo: <?php echo e($opinion->titol); ?></p>
+                    <p>Comentario: <?php echo e($opinion->comentari); ?></p>
+                </div>
+            </div>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
 <?php $__env->stopSection(); ?>
 
@@ -152,7 +167,8 @@
                     eventClick: function(event) {
                         let sessionId = event.event.title.split(" ");
                         document.getElementById('calendar').style.display = 'none';
-                        document.getElementById('fechaSesion').parentNode.classList.add("DivsConBotonesDerecho");
+                        document.getElementById('fechaSesion').parentNode.classList.add(
+                            "DivsConBotonesDerecho");
                         document.getElementById('fechaSesion').innerHTML =
                             `<strong>Sesion:</strong> ${fechasSessiones[(parseInt(sessionId[0]) - 1)].data}`;
                         document.getElementById('buttonSesion').style.display = 'block';
@@ -167,7 +183,7 @@
                 document.getElementById('calendar').style.display = 'block';
                 document.getElementById('fechaSesion').innerHTML =
                     `<strong>Sesiones:</strong>`;
-                    document.getElementById('fechaSesion').parentNode.classList.remove("DivsConBotonesDerecho");
+                document.getElementById('fechaSesion').parentNode.classList.remove("DivsConBotonesDerecho");
                 document.getElementById('buttonSesion').style.display = 'none';
             })
         }

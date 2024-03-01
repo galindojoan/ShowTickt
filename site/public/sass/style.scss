@@ -68,6 +68,7 @@ footer {
     background-color: black;
     min-height: 70px;
     color: white;
+    flex-wrap: wrap;
 
     #footerHome {
         padding: 10px;
@@ -168,7 +169,7 @@ footer {
         color: #000;
         display: flex;
         padding: 5px;
-        margin: 10px;
+        margin: 5px;
         align-items: center;
         border-radius: 5px;
         text-decoration: none;
@@ -303,7 +304,7 @@ footer {
         justify-content: center;
         gap: 5%;
         /* Espacio entre tarjetas */
-        height: 65%;
+        height: 80%;
         padding: 10px;
     }
 
@@ -849,35 +850,37 @@ a {
         justify-items: end;
     }
     .añadirTickets {
-      display: grid;
-      grid-template-columns: 0.5fr 1fr;
-      margin-top: 6%;
-      margin-bottom: 8%;
-      justify-items: start;
-  }
-  .tiposTickets {
-    width: calc(100% - 16px); // Resta el doble del relleno (8px a cada lado)
-    max-width: 100%;
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #474747;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-top:6%;
-    margin-bottom:10%;
-}
-.espacioEventos {
-  margin-top:6%;
-}
-#precioTotal{
-  justify-self: start;
-}
-.DivsConBotonesDerecho {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: baseline;
-  justify-items: center;
-}
+        display: grid;
+        grid-template-columns: 0.5fr 1fr;
+        margin-top: 6%;
+        margin-bottom: 8%;
+        justify-items: start;
+    }
+    .tiposTickets {
+        width: calc(
+            100% - 16px
+        ); // Resta el doble del relleno (8px a cada lado)
+        max-width: 100%;
+        padding: 8px;
+        font-size: 16px;
+        border: 1px solid #474747;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 6%;
+        margin-bottom: 10%;
+    }
+    .espacioEventos {
+        margin-top: 6%;
+    }
+    #precioTotal {
+        justify-self: start;
+    }
+    .DivsConBotonesDerecho {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: baseline;
+        justify-items: center;
+    }
 
     .ComprarEntrada {
         #fechaSesion {
@@ -1009,7 +1012,7 @@ a {
 
     .fecha {
         display: grid;
-        grid-template-columns: auto auto;
+        grid-template-columns: auto auto auto;
         align-items: center;
 
         button {
@@ -1024,6 +1027,15 @@ a {
             }
         }
     }
+}
+.SessionEditar {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+}
+.estadoSesion {
+    border-radius: 5px;
+    position: relative;
 }
 
 #fechaButton {
@@ -1095,6 +1107,11 @@ a {
     /* Sombra de la tarjeta */
 }
 
+.footer-button {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 /*Ver Eventos fin*/
 @media screen and (max-width: 300px) {
     .titulo {
@@ -1122,6 +1139,7 @@ a {
             margin: 10px;
         }
     }
+
 }
 
 @media screen and (max-width: 800px) {
@@ -1179,9 +1197,7 @@ a {
 }
 
 @media screen and (max-width: 1000px) {
-    .event-cards {
-        height: auto;
-    }
+    
 
     select[class="form-control"] {
         width: 90%;

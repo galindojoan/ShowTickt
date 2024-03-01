@@ -15,6 +15,7 @@ class HttpsCheck
      */
     public function handle($request, Closure $next)
    {
+    //$request->server("HTTP_HOST")!="127.0.0.1:8000"
        if (!$request->secure() && $request->server("HTTP_HOST")!="127.0.0.1:8000") {
         
            return redirect()->secure($request->getRequestUri());

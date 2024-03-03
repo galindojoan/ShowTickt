@@ -31,7 +31,9 @@ class ExportarEntradasController extends Controller
 
             foreach ($compras as $compra) {
                 foreach ($compra->compraEntrada as $compraEntrada) {
-                    fputcsv($file, [$compraEntrada->nomComprador, $compraEntrada->numeroIdentificador, $compraEntrada->entrada->nom]);
+                    foreach ($compraEntrada->entrada as $entrada) {
+                        fputcsv($file, [$compraEntrada->nomComprador, $compraEntrada->numeroIdentificador, $compraEntrada->entrada->nom]);
+                    }
                 }
             }
 

@@ -13,7 +13,7 @@ class EsdevenimentController extends Controller
 {
   public function show($id)
   {
-    // $esdeveniment = Esdeveniment::findOrFail($id);
+    $event = Esdeveniment::findOrFail($id);
     $esdeveniment = Esdeveniment::getFirstEventLocal($id);
 
     $fechas = Esdeveniment::getSessiosEvent($id);
@@ -29,7 +29,7 @@ class EsdevenimentController extends Controller
       $opinion->estrellas = $this->convertirPuntuacionAEstrellas($opinion->puntuacio);
     }
 
-    return view('esdeveniment', compact('esdeveniment', 'fechas', 'entradas', 'preuTotal', 'fechaSola', 'opiniones'));
+    return view('esdeveniment', compact('esdeveniment', 'fechas', 'entradas', 'preuTotal', 'fechaSola', 'opiniones', 'event'));
   }
 
   private function getEmoji($emocio)

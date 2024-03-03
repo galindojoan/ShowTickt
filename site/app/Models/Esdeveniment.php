@@ -10,38 +10,79 @@ class Esdeveniment extends Model
 {
     use HasFactory;
 
+    /**
+     * Los atributos que se pueden asignar masivamente.
+     *
+     * @var array
+     */
     protected $fillable = ['nom', 'descripcio', 'ocult', 'recinte_id', 'categoria_id', 'user_id'];
 
+    /**
+     * Obtiene el recinto asociado al evento.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function recinte()
     {
         return $this->belongsTo(Recinte::class);
     }
 
+    /**
+     * Obtiene la categoría asociada al evento.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function categoria()
     {
         return $this->belongsTo(Categoria::class);
     }
 
+    /**
+     * Obtiene el usuario asociado al evento.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Obtiene las sesiones asociadas al evento.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function sesions()
     {
         return $this->hasMany(Sessio::class, 'esdeveniments_id');
     }
 
+    /**
+     * Obtiene las opiniones asociadas al evento.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function opinions()
     {
         return $this->hasMany(Opinion::class, 'esdeveniments_id');
     }
 
+    /**
+     * Obtiene las imágenes asociadas al evento.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function imatge()
     {
         return $this->hasMany(EsdevenimentImatge::class, 'esdeveniments_id');
     }
 
+    /**
+     * Obtiene los eventos administrados por un usuario.
+     *
+     * @param int $userId
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
     public static function getAdminEvents($userId)
     {
         return self::with(['recinte'])
@@ -62,6 +103,12 @@ class Esdeveniment extends Model
             ->paginate(6);
     }
 
+    /**
+     * Obtiene todos los eventos paginados.
+     *
+     * @param int $pag
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
     public static function getAllEvents($pag)
     {
         return self::with(['recinte'])
@@ -81,6 +128,12 @@ class Esdeveniment extends Model
             ->paginate($pag);
     }
 
+    /**
+     * Obtiene los eventos ordenados por categoría.
+     *
+     * @param int $categoryId
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
     public static function getOrderedEvents($categoryId)
     {
         return self::join(
@@ -114,22 +167,54 @@ class Esdeveniment extends Model
             ->groupBy('esdeveniments.id', 'sessios.data', 'entradas.preu')
             ->paginate(config('app.items_per_page', 6));
     }
-    public static function getEventById($id){
-        return DB::table('esdeveniments')->where('id','=',$id)->first();
+
+    /**
+     * Obtiene un evento por su ID.
+     *
+     * @param int $id
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Query\Builder|object|null
+     */
+    public static function getEventById($id)
+    {
+        return DB::table('esdeveniments')->where('id', '=', $id)->first();
     }
-    public static function getFirstEventLocal($id){
-        return self::join('recintes','recintes.id','=','esdeveniments.recinte_id')
+
+    /**
+     * Obtiene el primer evento local por su ID.
+     *
+     * @param int $id
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Query\Builder|object|null
+     */
+    public static function getFirstEventLocal($id)
+    {
+        return self::join('recintes', 'recintes.id', '=', 'esdeveniments.recinte_id')
             ->select('recintes.*')
             ->where('esdeveniments.id', '=', $id)
             ->first();
     }
-    public static function getSessiosEvent($id){
+
+    /**
+     * Obtiene las sesiones de un evento por su ID.
+     *
+     * @param int $id
+     * @return \Illuminate\Support\Collection
+     */
+    public static function getSessiosEvent($id)
+    {
         return self::join('sessios', 'sessios.esdeveniments_id', '=', 'esdeveniments.id')
             ->select('sessios.*')
             ->where('esdeveniments.id', '=', $id)
             ->get();
     }
-    public static function getEntradesEvent($id){
+
+    /**
+     * Obtiene las entradas de un evento por su ID.
+     *
+     * @param int $id
+     * @return \Illuminate\Support\Collection
+     */
+    public static function getEntradesEvent($id)
+    {
         return self::join('sessios', 'sessios.esdeveniments_id', '=', 'esdeveniments.id')
             ->join('entradas', 'entradas.sessios_id', '=', 'sessios.id')
             ->select('entradas.*')

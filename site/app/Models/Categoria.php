@@ -14,11 +14,17 @@ class Categoria extends Model
 
     protected $table = 'categories';
 
+    /**
+     * Define la relación de la categoría con los eventos.
+     */
     public function esdeveniments()
     {
         return $this->hasMany(Esdeveniment::class);
     }
 
+    /**
+     * Obtiene todas las categorías con el recuento de eventos asociados.
+     */
     public function getCategoriesWithEventCount()
     {
         return $this->all()->map(function ($category) {
@@ -43,6 +49,9 @@ class Categoria extends Model
         });
     }
 
+    /**
+     * Obtiene las categorías con al menos dos eventos asociados.
+     */
     public static function getCategoriesWith3()
     {
         return DB::table('categories')
@@ -53,6 +62,9 @@ class Categoria extends Model
             ->get();
     }
 
+    /**
+     * Obtiene eventos filtrados por búsqueda y categoría.
+     */
     public static function getFilteredEvents($cerca, $categoryId)
     {
         $query = Esdeveniment::with(['recinte'])

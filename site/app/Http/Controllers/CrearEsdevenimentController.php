@@ -14,8 +14,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * Controlador para la creación de eventos.
+ */
 class CrearEsdevenimentController extends Controller
 {
+    /**
+     * Muestra el formulario para crear un nuevo evento.
+     *
+     * @return \Illuminate\Contracts\View\View
+     */
     public function index()
     {
         $categories = Categoria::all();
@@ -24,11 +32,24 @@ class CrearEsdevenimentController extends Controller
 
         return view('crearEsdeveniment', compact('categories', 'recintes', 'noRecintes'));
     }
+
+    /**
+     * Muestra la página para crear un nuevo recinto.
+     *
+     * @return \Illuminate\Contracts\View\View
+     */
     public function recintePage()
     {
         return view('crearRecinte');
     }
 
+    /**
+     * Verifica la existencia de una calle y número mediante una API externa.
+     *
+     * @param  string  $carrer
+     * @param  string  $numero
+     * @return bool
+     */
     public function verificarCarrer($carrer, $numero)
     {
         $client = new Client();
@@ -54,6 +75,12 @@ class CrearEsdevenimentController extends Controller
         return !empty($data);
     }
 
+    /**
+     * Almacena un nuevo evento en la base de datos.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         $recinteId = $request->input('recinte');
@@ -69,6 +96,12 @@ class CrearEsdevenimentController extends Controller
         return redirect()->route('homePromotor')->with('success', 'Evento creado exitosamente');
     }
 
+    /**
+     * Obtiene el ID del recinto a partir de la solicitud.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return int|null
+     */
     private function getRecinteId(Request $request)
     {
         // Si se ha seleccionado crear una nueva dirección
@@ -100,10 +133,15 @@ class CrearEsdevenimentController extends Controller
         return $recinte->id;
     }
 
+    /**
+     * Crea un nuevo evento en la base de datos.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int|null  $recinteId
+     * @return \App\Models\Esdeveniment
+     */
     private function createEsdeveniment(Request $request, $recinteId)
     {
-        //$nombreUnico = time() . '_' . $request->file('imatge')->getClientOriginalName();
-
         $esdeveniment = Esdeveniment::create([
             'nom' => $request->input('titol'),
             'categoria_id' => $request->input('categoria'),
@@ -116,6 +154,13 @@ class CrearEsdevenimentController extends Controller
         return $esdeveniment;
     }
 
+    /**
+     * Crea una nueva imagen asociada a un evento en la base de datos.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $esdevenimentId
+     * @return void
+     */
     private function createEsdevenimentImatge(Request $request, $esdevenimentId)
     {
         $imatge = [];
@@ -126,17 +171,7 @@ class CrearEsdevenimentController extends Controller
                 $imatge[] = $nomImatge;
             }
         }
-        // $imatge = [];
-        // if ($request->hasFile('imatge')) {
-        //     foreach ($request->file('imatge') as $file) {
-        //         Http::post(url('/api/image'),[
-        //             'imatge' => [
-        //                 'name' => $file->getClientOriginalName(),
-        //                 'path' => $file->getRealPath(),
-        //             ]
-        //         ]);
-        //     }
-        // }
+
 
         foreach ($imatge as $image) {
             EsdevenimentImatge::create([
@@ -146,6 +181,13 @@ class CrearEsdevenimentController extends Controller
         }
     }
 
+    /**
+     * Crea una nueva sesión asociada a un evento en la base de datos.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $esdevenimentId
+     * @return int
+     */
     private function createSessio(Request $request, $esdevenimentId)
     {
         $sessio = Sessio::create([
@@ -159,6 +201,13 @@ class CrearEsdevenimentController extends Controller
         return $sessio->id;
     }
 
+    /**
+     * Crea nuevas entradas asociadas a una sesión en la base de datos.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $sessioId
+     * @return void
+     */
     private function createEntrades(Request $request, $sessioId)
     {
         $noms = $request->input('entrades-nom');
@@ -178,6 +227,13 @@ class CrearEsdevenimentController extends Controller
             ]);
         }
     }
+
+    /**
+     * Almacena un nuevo recinto en la base de datos.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function crearRecinte(Request $request)
     {
         $this->getRecinteId($request);

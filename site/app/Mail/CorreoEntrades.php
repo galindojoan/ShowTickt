@@ -44,11 +44,10 @@ class CorreoEntrades extends Mailable
      */
     public function build()
     {
-        // Retorna el mensaje de correo electrónico con el asunto, la vista y el archivo PDF adjunto
-        return $this->subject('Recordatori evento')
-            ->view('mails.recordatoriMail')
-            ->attachData($this->pdfContent, 'entradas.pdf', [
-                'mime' => 'application/pdf',
-            ]);
+        return $this->subject('Compra Entrades')
+                    ->view('mails.entradesMail')
+                    ->attachData($this->pdfContent, 'entradas.pdf', [
+                        'mime' => 'application/pdf',
+                    ]);
     }
 }

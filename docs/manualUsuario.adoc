@@ -11,6 +11,11 @@ Asegúrate de contar con las siguientes herramientas instaladas en tu sistema an
 - Docker
 - NodeJS
 
+En el archivo php.ini descomentar las extensiones:
+
+- extension=gd
+- extension=pgsql
+
 === Guía de la instalación
 
 ==== Clonado del repositorio y configuración inicial

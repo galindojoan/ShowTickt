@@ -221,6 +221,7 @@ include::isard.adoc[]
 
 == Confección del manual de usuario integrado en la aplicación
 
+include::manualUsuario.adoc[]
 
 == Etiquetas utilizadas
 

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 
-
+// Controlador para gestionar las imágenes
 class ServeiImatgeController extends Controller
 {
     /**
@@ -15,6 +15,7 @@ class ServeiImatgeController extends Controller
      */
     public function index() //GET
     {
+        // Obtiene todas las imágenes de la base de datos y las devuelve como JSON
         $image = Image::on('imageDB')->get();
         return response()->json($image);
     }
@@ -30,21 +31,24 @@ class ServeiImatgeController extends Controller
         $pathImage = $imatge['path'];
         $nomImatge = time() . '_' . $nomOriginal;
 
+        // Procesamiento de la imagen para distintos tamaños
         list($width, $height) = getimagesize($pathImage);
         $ratio = $width / $height;
         $newWidthMovil = 200;
         $newHeightMovil = 200 / $ratio;
         $imageMovil = imagecreatetruecolor($newWidthMovil, $newHeightMovil);
-        $source = imagecreatefromjpeg($pathImage); 
+        $source = imagecreatefromjpeg($pathImage);
         imagecopyresampled($imageMovil, $source, 0, 0, 0, 0, $newWidthMovil, $newHeightMovil, $width, $height);
         imagejpeg($imageMovil, storage_path('app/public/images/' . $nomImatge . '_movil'));
 
+        // Almacenamiento de las imágenes procesadas
         $newWidthTablet = 300;
         $newHeightTablet = 300 / $ratio;
         $imageTablet = imagecreatetruecolor($newWidthTablet, $newHeightTablet);
         imagecopyresampled($imageTablet, $source, 0, 0, 0, 0, $newWidthTablet, $newHeightTablet, $width, $height);
         imagejpeg($imageTablet, storage_path('app/public/images/' . $nomImatge . '_tablet'));
 
+        // Guarda en la base de datos las rutas hacia las imágenes
         $newWidthOrdenador = 400;
         $newHeightOrdenador = 400 / $ratio;
         $imageOrdenador = imagecreatetruecolor($newWidthOrdenador, $newHeightOrdenador);
@@ -67,6 +71,7 @@ class ServeiImatgeController extends Controller
      */
     public function show(string $id) //GET /{id}
     {
+        // Muestra la imagen específica según el ID
         $imagen = Image::on('imageDB')->where('id', $id)->first();
         return response()->json($imagen);
     }
@@ -76,6 +81,7 @@ class ServeiImatgeController extends Controller
      */
     public function update(Request $request, string $id) //PUT
     {
+        // Actualiza la imagen específica según el ID con la información proporcionada
         $imagen = Image::on('imageDB')->where('id', $id)->update([
             'urlUnica' => $request->urlUnica,
             'imageMovil' => $request->imageMovil,
@@ -90,6 +96,7 @@ class ServeiImatgeController extends Controller
      */
     public function destroy(string $id) //DELETE
     {
+        // Elimina la imagen específica según el ID
         $imagen = Image::on('imageDB')->where('id', $id)->delete();
         return response()->json('Eliminado correctamente: ' . $imagen);
     }

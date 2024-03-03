@@ -3,15 +3,15 @@
 @section('title', 'Detalles del Evento')
 @section('metadades')'Mira los detalles sobre el evento {{ $esdeveniment->nom }} y adquiere sus entradas.'@endsection
 @section('metaimages')'@foreach ($esdeveniment->imatge as $index => $imatge)
-    {{Storage::url('public/images/'.$imatge->imatge)}}
+    {{ Storage::url('public/images/' . $imatge->imatge) }}
 @endforeach'@endsection
 
 @section('content')
     <div class="containerEvent">
 
         <div class="infoEvent">
-            <h1>{{ $esdeveniment->nom }}</h1>
-            <h4>{{ $esdeveniment->descripcio }}</h4>
+            <h1>{{ $event->nom }}</h1>
+            <h4>{{ $event->descripcio }}</h4>
         </div>
         <div class="textEvent">
             <form action="{{ route('detallesLocal', ['id' => $esdeveniment->id]) }}" method="get"
@@ -66,7 +66,7 @@
                         <p id="mensajeError" class="msg-error"></p>
                     </div>
                     <div class="añadirTickets">
-                        <input type="number" id="cantidad" name="cantidad" min="1" max="10" value="1" />
+                        <input type="number" id="cantidad" name="cantidad" min="1" max="10" value="1">
                         <button type="button" id="reservarEntrada" class="btn btn-blue">Añadir Tickets</button>
                     </div>
 

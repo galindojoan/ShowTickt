@@ -13,17 +13,20 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
+/**
+ * Clase para enviar correos electrónicos de recuperación de contraseña.
+ */
 class CorreoRecuperar extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    use Queueable, SerializesModels;
-
     public $urlRecuperacion, $usuario;
 
+    /**
+     * Crea una nueva instancia del mensaje.
+     *
+     * @param array $datos Los datos necesarios para construir el correo de recuperación.
+     */
     public function __construct($datos)
     {
         $this->urlRecuperacion = $datos['urlGenerada'];
@@ -31,7 +34,7 @@ class CorreoRecuperar extends Mailable
     }
 
     /**
-     * Get the message envelope.
+     * Define el sobre del mensaje.
      */
     public function envelope(): Envelope
     {
@@ -39,35 +42,32 @@ class CorreoRecuperar extends Mailable
             subject: 'Recuperar Contraseña ShowTickt',
             using: [
                 function (Email $email) {
-                    // Headers
+                    // Cabezeras
                     $email->getHeaders()
                         ->addTextHeader('X-Message-Source', 'example.com')
-                        ->add(new UnstructuredHeader('X-Mailer', 'Mailtrap PHP Client'))
-                    ;
+                        ->add(new UnstructuredHeader('X-Mailer', 'Mailtrap PHP Client'));
 
-                    // Custom Variables
+                    // Variables personalizadas
                     $email->getHeaders()
                         ->add(new CustomVariableHeader('user_id', '45982'))
-                        ->add(new CustomVariableHeader('batch_id', 'PSJ-12'))
-                    ;
+                        ->add(new CustomVariableHeader('batch_id', 'PSJ-12'));
 
-                    // Category (should be only one)
+                    // Categoría (debe ser solo una)
                     $email->getHeaders()
-                        ->add(new CategoryHeader('Integration Test'))
-                    ;
+                        ->add(new CategoryHeader('Integration Test'));
                 },
             ]
         );
     }
 
     /**
-     * Get the message content definition.
+     * Define el contenido del mensaje.
      */
     public function content(): Content
     {
         return new Content(
             view: 'mails.passwordMail',
-            with:([
+            with: ([
                 'url' => $this->urlRecuperacion,
                 'name' => $this->usuario,
             ])
@@ -75,7 +75,7 @@ class CorreoRecuperar extends Mailable
     }
 
     /**
-     * Get the attachments for the message.
+     * Obtiene los archivos adjuntos para el mensaje.
      *
      * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */

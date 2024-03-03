@@ -13,22 +13,29 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Mailtrap\EmailHeader\CustomVariableHeader;
 use Symfony\Component\Mime\Header\UnstructuredHeader;
 
+/**
+ * Clase para enviar correos electrónicos de recordatorio de eventos.
+ */
 class CorreoRecordatori extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $evento, $pdfContent;
+
     /**
-     * Create a new message instance.
+     * Crea una nueva instancia del mensaje.
+     *
+     * @param mixed $evento La información del evento.
+     * @param string $pdfContent El contenido del archivo PDF a adjuntar.
      */
-    public function __construct($evento,$pdfContent)
+    public function __construct($evento, $pdfContent)
     {
-        $this->evento =$evento;
-        $this->pdfContent =$pdfContent;
+        $this->evento = $evento;
+        $this->pdfContent = $pdfContent;
     }
 
     /**
-     * Get the message envelope.
+     * Construye el mensaje de correo electrónico.
      */
     public function build()
     {

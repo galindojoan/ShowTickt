@@ -1,7 +1,7 @@
 <?php $__env->startSection('title', 'Detalles del Evento'); ?>
 <?php $__env->startSection('metadades'); ?>'Mira los detalles sobre el evento <?php echo e($esdeveniment->nom); ?> y adquiere sus entradas.'<?php $__env->stopSection(); ?>
 <?php $__env->startSection('metaimages'); ?>'<?php $__currentLoopData = $esdeveniment->imatge; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $imatge): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-    <?php echo e(Storage::url('public/images/'.$imatge->imatge)); ?>
+    <?php echo e(Storage::url('public/images/' . $imatge->imatge)); ?>
 
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>'<?php $__env->stopSection(); ?>
 
@@ -9,8 +9,8 @@
     <div class="containerEvent">
 
         <div class="infoEvent">
-            <h1><?php echo e($esdeveniment->nom); ?></h1>
-            <h4><?php echo e($esdeveniment->descripcio); ?></h4>
+            <h1><?php echo e($event->nom); ?></h1>
+            <h4><?php echo e($event->descripcio); ?></h4>
         </div>
         <div class="textEvent">
             <form action="<?php echo e(route('detallesLocal', ['id' => $esdeveniment->id])); ?>" method="get"
@@ -65,7 +65,7 @@
                         <p id="mensajeError" class="msg-error"></p>
                     </div>
                     <div class="añadirTickets">
-                        <input type="number" id="cantidad" name="cantidad" min="1" max="10" value="1" />
+                        <input type="number" id="cantidad" name="cantidad" min="1" max="10" value="1">
                         <button type="button" id="reservarEntrada" class="btn btn-blue">Añadir Tickets</button>
                     </div>
 

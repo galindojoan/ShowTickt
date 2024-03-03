@@ -13,13 +13,19 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Mailtrap\EmailHeader\CustomVariableHeader;
 use Symfony\Component\Mime\Header\UnstructuredHeader;
 
+/**
+ * Clase para enviar correos electrónicos solicitando una opinión sobre un evento.
+ */
 class CorreoOpinion extends Mailable
 {
     use Queueable, SerializesModels;
     public $event, $url;
 
     /**
-     * Create a new message instance.
+     * Crea una nueva instancia del mensaje.
+     *
+     * @param mixed $event La información del evento.
+     * @param string $url La URL para enviar la opinión.
      */
     public function __construct($event, $url)
     {
@@ -28,7 +34,7 @@ class CorreoOpinion extends Mailable
     }
 
     /**
-     * Get the message envelope.
+     * Obtiene el sobre del mensaje.
      */
     public function envelope(): Envelope
     {
@@ -36,29 +42,26 @@ class CorreoOpinion extends Mailable
             subject: 'Que tal ha sido el evento?',
             using: [
                 function (Email $email) {
-                    // Headers
+                    // Cabeceras
                     $email->getHeaders()
                         ->addTextHeader('X-Message-Source', 'example.com')
-                        ->add(new UnstructuredHeader('X-Mailer', 'Mailtrap PHP Client'))
-                    ;
+                        ->add(new UnstructuredHeader('X-Mailer', 'Mailtrap PHP Client'));
 
-                    // Custom Variables
+                    // Variables personalizadas
                     $email->getHeaders()
                         ->add(new CustomVariableHeader('user_id', '45982'))
-                        ->add(new CustomVariableHeader('batch_id', 'PSJ-12'))
-                    ;
+                        ->add(new CustomVariableHeader('batch_id', 'PSJ-12'));
 
-                    // Category (should be only one)
+                    // Categoría (debería ser solo una)
                     $email->getHeaders()
-                        ->add(new CategoryHeader('Integration Test'))
-                    ;
+                        ->add(new CategoryHeader('Integration Test'));
                 },
             ]
         );
     }
 
     /**
-     * Get the message content definition.
+     * Obtiene la definición del contenido del mensaje.
      */
     public function content(): Content
     {
@@ -72,7 +75,7 @@ class CorreoOpinion extends Mailable
     }
 
     /**
-     * Get the attachments for the message.
+     * Obtiene los archivos adjuntos para el mensaje.
      *
      * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */

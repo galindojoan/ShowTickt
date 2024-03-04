@@ -166,11 +166,9 @@ Entrada  " 1 "--"n"  CompraEntrada:\t
 
 image:diagramaBD.png[]
 
-=== Sketching  
-
-
 === Mockup de interfaces
 
+https://www.figma.com/file/v89vTGEz3PLNGicO3zc4dF/Grup6ArruaGalindoJumelle?type=design&node-id=0-1&mode=design&t=qFydBUGTWynfTcTP-0[Link al figma]
 
 === Guía de estilos
 
@@ -228,12 +226,31 @@ include::manualUsuario.adoc[]
 ** [underline]#Descripcion:# Hemos utilizado esta etiqueta para hacer una breve descripcion en la pagina que te encuentras.
 ** [underline]#Imagen:# Esta etiqueta se utiliza en los diferentes eventos, ya que tienen imagen y lo utilizamos como imagen promocional
 
+== Linias futuras
+
+Para futuro queremos finalizar tanto la api de imagenes, la cual le falta verse las imagenes, se guardan en la bd pero no se muestran correctamente, como la api de validación de entradas que nos faltaria su totalidad. 
 
 
 == Concluciones 
 
+Con este proyecto se aprendio a planificar tareas, diseñar y desarrollar funcionalidades de una aplicación web, trabajar en equipo, resolver problemas técnicos, y mejorar el diseño y la usabilidad del proyecto a lo largo de múltiples iteraciones.
 
 == Glosario
 
+https://laravel.com/docs
 
-== Presentación del proyecto
+https://www.nigmacode.com
+
+https://stackoverflow.com
+
+https://laracasts.com/discuss
+
+https://www.php.net
+
+https://developer.mozilla.org/en-US/
+
+https://w3schools.com
+
+https://www.digitalocean.com
+
+https://robindirksen.com/blog/

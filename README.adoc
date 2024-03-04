@@ -26,6 +26,12 @@ El nostre grup està compost per: Brian Tobias Arrua, Camilo Jumelle i Joan Gali
 === Portafolis
 ** [underline]#Brian Arrua:# https://github.com/BrianArrua96
 
+** [underline]#Web:# https://porfoliobrian.netlify.app
+
 ** [underline]#Camilo Jumelle:# https://github.com/jumelleCL
 
+** [underline]#Web:# https://jumelle-camilo.netlify.app
+
 ** [underline]#Joan Galindo Palacio:# https://github.com/galindojoan
+
+** [underline]#Web:# https://galindojoan.github.io/pagina-web/
